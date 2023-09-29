@@ -8,5 +8,6 @@ namespace Entidades
 {
     internal class Usuario
     {
+        int codigo;
     }
 }
