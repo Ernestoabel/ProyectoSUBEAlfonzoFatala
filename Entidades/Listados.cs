@@ -19,21 +19,20 @@ namespace Entidades
             listaUsuarios.Add(objeto);
         }
 
-        public static void AgregarUsuarioArgentino()
-        {
-            listaUsuarios.Add(new UsuarioArgentino("Carlos", "Pepe", "30555199", "Carlos@hotmail.com", "1234","1001"));
-        }
-        public static void AgregarUsuarioExtranjero()
-        {
-            listaUsuarios.Add(new UsuarioExtranjero("Carlos", "Pepe", "30555199", "Carlos@hotmail.com", "1234", "5001"));
-        }
 
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
         {
             
-                JsonSerializer serializer = new JsonSerializer();
+            JsonSerializer serializer = new JsonSerializer();
+            string rutaCarpetaArchivos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos");
 
-                using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\usuarios.json"))
+
+            if (!Directory.Exists(rutaCarpetaArchivos))
+            {
+                Directory.CreateDirectory(rutaCarpetaArchivos);
+            }
+
+            using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\usuarios.json"))
                 using (JsonWriter writer = new JsonTextWriter(sw))
                 {
                     serializer.Serialize(writer, lista);
