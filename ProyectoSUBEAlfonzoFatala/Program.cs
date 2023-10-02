@@ -1,3 +1,5 @@
+using Entidades;
+
 namespace ProyectoSUBEAlfonzoFatala
 {
     internal static class Program
@@ -12,6 +14,8 @@ namespace ProyectoSUBEAlfonzoFatala
             // see https://aka.ms/applicationconfiguration.
             ApplicationConfiguration.Initialize();
             Application.Run(new FormInicio());
+            
+            
         }
     }
 }
