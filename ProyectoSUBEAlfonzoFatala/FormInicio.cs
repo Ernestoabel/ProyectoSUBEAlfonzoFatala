@@ -13,9 +13,9 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void button1_Click(object sender, EventArgs e)
         {
-            Usuario nuevoUsuario = new Usuario("Ernesto", "Fatala", "30555191", "ernestoabel@hotmail.com", "1234");
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "30555199", "Carlos@hotmail.com", "1234", "1001");
-            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "30555199", "Carlos@hotmail.com", "1234", "5001");
+            Usuario nuevoUsuario = new Usuario("Ernesto", "Fatala", "30555191", "1234");
+            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "30555199", "1234", "1001");
+            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "30555199", "1234", "5001");
             Listados.AgregarUsuario(nuevoUsuario);
             Listados.AgregarUsuario(nuevoUsuArgentino);
             Listados.AgregarUsuario(nuevoUsuExtrangero);

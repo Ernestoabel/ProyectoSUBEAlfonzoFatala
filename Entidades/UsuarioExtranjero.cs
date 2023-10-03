@@ -13,7 +13,7 @@ namespace Entidades
 
         public string IdSubeExtranjero { get => _idSubeExtranjero; set => _idSubeExtranjero = value; }
 
-        public UsuarioExtranjero(string nombre, string apellido, string dni, string email, string clave, string idSubeExtranjero) : base(nombre, apellido, dni, email, clave)
+        public UsuarioExtranjero(string nombre, string apellido, string dni, string clave, string idSubeExtranjero) : base(nombre, apellido, dni, clave)
         {
             IdSubeExtranjero = idSubeExtranjero;
         }
