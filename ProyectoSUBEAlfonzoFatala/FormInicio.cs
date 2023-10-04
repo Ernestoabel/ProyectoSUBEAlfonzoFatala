@@ -21,5 +21,6 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.AgregarUsuario(nuevoUsuExtrangero);
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
         }
+
     }
 }
