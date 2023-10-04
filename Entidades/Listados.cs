@@ -13,7 +13,7 @@ namespace Entidades
         public static List<UsuarioArgentino> listaUsuariosArgentinos = new List<UsuarioArgentino>();
         public static List<UsuarioExtranjero> listaUsuariosExtranjeros = new List<UsuarioExtranjero>();
 
-       
+
         public static void AgregarUsuario(Usuario objeto)
         {
             listaUsuarios.Add(objeto);
@@ -22,7 +22,7 @@ namespace Entidades
 
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
         {
-            
+
             JsonSerializer serializer = new JsonSerializer();
             string rutaCarpetaArchivos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos");
 
@@ -33,11 +33,11 @@ namespace Entidades
             }
 
             using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\usuarios.json"))
-                using (JsonWriter writer = new JsonTextWriter(sw))
-                {
-                    serializer.Serialize(writer, lista);
-                }
-           
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, lista);
+            }
+
         }
 
 
