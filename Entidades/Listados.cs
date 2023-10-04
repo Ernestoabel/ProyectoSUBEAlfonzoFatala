@@ -1,9 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Newtonsoft.Json;
 
 namespace Entidades
 {
@@ -38,6 +39,31 @@ namespace Entidades
                 serializer.Serialize(writer, lista);
             }
 
+        }
+
+        public static List<Usuario> CargarUsuariosDesdeArchivo()
+        {
+            List<Usuario> usuarios = new List<Usuario>();
+            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos\usuarios.json");
+
+            if (File.Exists(rutaArchivo))
+            {
+                try
+                {
+                    string jsonData = File.ReadAllText(rutaArchivo);
+                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(jsonData);
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Error al deserializar el archivo: " + ex.Message);
+                }
+            }
+            else
+            {
+                Console.WriteLine("El archivo de usuarios no existe.");
+            }
+
+            return usuarios;
         }
 
 
