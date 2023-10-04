@@ -67,9 +67,9 @@
             lblUsuario.Location = new Point(288, 68);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.RightToLeft = RightToLeft.Yes;
-            lblUsuario.Size = new Size(69, 21);
+            lblUsuario.Size = new Size(40, 21);
             lblUsuario.TabIndex = 11;
-            lblUsuario.Text = "Usuario";
+            lblUsuario.Text = "DNI";
             // 
             // txtUsuario
             // 
