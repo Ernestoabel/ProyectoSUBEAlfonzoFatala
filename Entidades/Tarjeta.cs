@@ -9,7 +9,6 @@ namespace Entidades
     public abstract class Tarjeta
     {
 
-
         private int _id;
         private decimal _saldo;
 
@@ -27,5 +26,17 @@ namespace Entidades
 
         public abstract void DesignarId(int UltimoNumeroEnLista);
 
+        public bool RestarSaldo(decimal valor)
+        {
+            if (Saldo >= valor)
+            {
+                Saldo -= valor;
+                return true; // La operación fue exitosa
+            }
+            else
+            {
+                return false; // No hay suficiente saldo
+            }
+        }
     }
 }

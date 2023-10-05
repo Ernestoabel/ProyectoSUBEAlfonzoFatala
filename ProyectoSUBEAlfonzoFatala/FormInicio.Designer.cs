@@ -38,6 +38,7 @@
             consultaTiToolStripMenuItem = new ToolStripMenuItem();
             porDniToolStripMenuItem = new ToolStripMenuItem();
             porNDeSubeToolStripMenuItem = new ToolStripMenuItem();
+            viajesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +57,7 @@
             menuStrip1.BackColor = Color.White;
             menuStrip1.BackgroundImageLayout = ImageLayout.None;
             menuStrip1.Font = new Font("Microsoft YaHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { rEGISTRESEToolStripMenuItem, iNICIARSESIONToolStripMenuItem, cOMPRARToolStripMenuItem, registralaToolStripMenuItem, consultaTiToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { rEGISTRESEToolStripMenuItem, iNICIARSESIONToolStripMenuItem, cOMPRARToolStripMenuItem, registralaToolStripMenuItem, consultaTiToolStripMenuItem, viajesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 29);
@@ -111,6 +112,13 @@
             porNDeSubeToolStripMenuItem.Size = new Size(250, 26);
             porNDeSubeToolStripMenuItem.Text = "Por N° de Sube";
             // 
+            // viajesToolStripMenuItem
+            // 
+            viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
+            viajesToolStripMenuItem.Size = new Size(66, 25);
+            viajesToolStripMenuItem.Text = "Viajes";
+            viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
+            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -141,5 +149,6 @@
         private ToolStripMenuItem consultaTiToolStripMenuItem;
         private ToolStripMenuItem porDniToolStripMenuItem;
         private ToolStripMenuItem porNDeSubeToolStripMenuItem;
+        private ToolStripMenuItem viajesToolStripMenuItem;
     }
 }

@@ -16,7 +16,7 @@ namespace ProyectoSUBEAlfonzoFatala
             Usuario nuevoUsuario = new Usuario("Ernesto", "Fatala", "30555191", "1234");
             TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
             Listados.AgregarTarjetaNacional(tarjeta1001);
-            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001,2000,Listados.ViajeTarjeta5001);
+            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
             Listados.AgregarTarjetaInternacional(tarjeta5001);
             Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
             Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
@@ -28,5 +28,11 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
         }
 
+        private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormViajesPrueba formViaje = new FormViajesPrueba();
+
+            formViaje.Show();
+        }
     }
 }

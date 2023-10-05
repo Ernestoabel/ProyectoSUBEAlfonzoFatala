@@ -27,6 +27,7 @@ namespace Entidades
         public string Dni { get => _dni; set => _dni = value; }
         public string Clave { get => _clave; set => _clave = value; }
 
-        
+
+
     }
 }

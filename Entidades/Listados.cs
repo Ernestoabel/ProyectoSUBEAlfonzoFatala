@@ -17,6 +17,7 @@ namespace Entidades
         public static List<TarjetaInternacional> listaTarjetasIntenacionales = new List<TarjetaInternacional>();
         public static List<Viajes> ViajeTarjeta1001 = new List<Viajes>();
         public static List<Viajes> ViajeTarjeta5001 = new List<Viajes>();
+        public static List<Viajes> listaDeViajes = new List<Viajes>();
 
         public static void AgregarUsuario(Usuario objeto)
         {
@@ -38,15 +39,38 @@ namespace Entidades
         }
         public static void AgregarViajes1001()
         {
-            DateTime fechaHardcodeada = new DateTime(2023, 10, 4, 15, 30, 0);
-            ViajeTarjeta1001.Add(new Viajes(fechaHardcodeada, "Mirage", 28));
+            /*DateTime fechaHardcodeada = new DateTime(2023, 10, 4, 15, 30, 0);
+            ViajeTarjeta1001.Add(new Viajes(fechaHardcodeada, "Mirage", 28));*/
             
+            Viajes manager = new Viajes();
+            manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Autobus", 36);
+            manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Tren", 24);
+            manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Autobus", 63);
+            manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Subte", 38);
+
+            ViajeTarjeta1001 = manager.ObtenerListaDeViajes();
+            
+          
+
         }
+
+        
+
+        // Metodo para traerme los datos de la lista listo
+        // Metodo que sume los datos del valor boleto 
+        // Metodo que Reste al saldo de la tarjeta
+
 
         public static void AgregarViajes5001()
         {
-            DateTime fechaHardcodeada = new DateTime(2023, 10, 4, 15, 30, 0);
-            ViajeTarjeta5001.Add(new Viajes(fechaHardcodeada, "Mirage", 28));
+            Viajes extranjeroUno = new Viajes();
+            extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 20:09:10"), "Autobus",29);
+            extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-01 18:01:50"), "Tren", 21);
+            extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 06:02:30"), "Subte", 31);
+            extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 21:23:05"), "Tren", 42);
+
+            ViajeTarjeta5001 = extranjeroUno.ObtenerListaDeViajes();
+            
 
         }
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
@@ -183,6 +207,9 @@ namespace Entidades
 
             return tarjetas;
         }
+
+
+
 
     }
 }
