@@ -27,7 +27,15 @@ namespace Entidades
         public string Dni { get => _dni; set => _dni = value; }
         public string Clave { get => _clave; set => _clave = value; }
 
-
+        /// <summary>
+        /// Metodo Virtual para validar que el dni sea real
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns></returns>
+        public virtual bool ValidarDni(string dni)
+        {
+            return dni.Length == 8 && dni[0] != '0';
+        }
 
     }
 }

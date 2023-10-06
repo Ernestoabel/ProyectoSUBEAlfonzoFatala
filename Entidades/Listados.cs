@@ -73,6 +73,11 @@ namespace Entidades
             
 
         }
+
+        /// <summary>
+        /// Serializacion de las tres clases de Usuario en un JSON
+        /// </summary>
+        /// <param name="lista"></param>
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
         {
 
@@ -93,6 +98,10 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Deserealizacion de la lista usuarios desde un JSON
+        /// </summary>
+        /// <returns>Retorna la lista de usuarios</returns>
         public static List<Usuario> CargarUsuariosDesdeArchivo()
         {
             List<Usuario> usuarios = new List<Usuario>();
@@ -118,6 +127,10 @@ namespace Entidades
             return usuarios;
         }
 
+        /// <summary>
+        /// Serealizacion de las tarjetas SUBE nacionales en JSON
+        /// </summary>
+        /// <param name="lista"></param>
         public static void GuardarTarjetaNacionalEnArchivo(List<TarjetaNacional> lista)
         {
 
@@ -138,6 +151,10 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Deserealizacion de la lista SUBE de tarjetas nacionales en JSON
+        /// </summary>
+        /// <returns>retorna la lista</returns>
         public static List<TarjetaNacional> CargarTarjetaNacionalsDesdeArchivo()
         {
             List<TarjetaNacional> tarjetas = new List<TarjetaNacional>();
@@ -163,6 +180,10 @@ namespace Entidades
             return tarjetas;
         }
 
+        /// <summary>
+        /// Serealizacion de la lista SUBE tarjetas internacionales en JSON
+        /// </summary>
+        /// <param name="lista"></param>
         public static void GuardarTarjetaInternacionalEnArchivo(List<TarjetaInternacional> lista)
         {
 
@@ -183,6 +204,10 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Deserealizacion de la lista de tarjetas SUBE internacionales en JSON
+        /// </summary>
+        /// <returns></returns>
         public static List<TarjetaInternacional> CargarTarjetaInternacionalDesdeArchivo()
         {
             List<TarjetaInternacional> tarjetas = new List<TarjetaInternacional>();

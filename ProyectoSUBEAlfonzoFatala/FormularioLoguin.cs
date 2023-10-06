@@ -22,7 +22,23 @@ namespace ProyectoSUBEAlfonzoFatala
         
         private void btnIngresar_Click(object sender, EventArgs e)
         {
-          
+            try
+            {
+                
+                string usuario = txtUsuario.Text;
+                string contrasena = txtPassword.Text;
+
+            }
+            catch (NullReferenceException ex)
+            {
+                MessageBox.Show("Por favor, ingrese usuario y contraseña.", "Campos nulos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            catch (Exception ex)
+            {
+                
+                MessageBox.Show("Se produjo un error al intentar iniciar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+
         }
 
         //boton para cerrar la aplicacion

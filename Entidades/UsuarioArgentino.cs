@@ -16,5 +16,14 @@ namespace Entidades
             TarjetaNacional = tarjetaNacional;
         }
 
+        /// <summary>
+        /// Metodo heredado para el DNI sea argentino
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns></returns>
+        public override bool ValidarDni(string dni)
+        {
+            return base.ValidarDni(dni) && int.Parse(dni[0].ToString()) < 9;
+        }
     }
 }

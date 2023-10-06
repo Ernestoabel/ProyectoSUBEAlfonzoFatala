@@ -39,6 +39,7 @@
             porDniToolStripMenuItem = new ToolStripMenuItem();
             porNDeSubeToolStripMenuItem = new ToolStripMenuItem();
             viajesToolStripMenuItem = new ToolStripMenuItem();
+            logueateToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -63,9 +64,11 @@
             menuStrip1.Size = new Size(800, 29);
             menuStrip1.TabIndex = 1;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // rEGISTRESEToolStripMenuItem
             // 
+            rEGISTRESEToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logueateToolStripMenuItem });
             rEGISTRESEToolStripMenuItem.Image = (Image)resources.GetObject("rEGISTRESEToolStripMenuItem.Image");
             rEGISTRESEToolStripMenuItem.Name = "rEGISTRESEToolStripMenuItem";
             rEGISTRESEToolStripMenuItem.Size = new Size(101, 25);
@@ -119,6 +122,13 @@
             viajesToolStripMenuItem.Text = "Viajes";
             viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
             // 
+            // logueateToolStripMenuItem
+            // 
+            logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
+            logueateToolStripMenuItem.Size = new Size(180, 26);
+            logueateToolStripMenuItem.Text = "Logueate";
+            logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
+            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -150,5 +160,6 @@
         private ToolStripMenuItem porDniToolStripMenuItem;
         private ToolStripMenuItem porNDeSubeToolStripMenuItem;
         private ToolStripMenuItem viajesToolStripMenuItem;
+        private ToolStripMenuItem logueateToolStripMenuItem;
     }
 }

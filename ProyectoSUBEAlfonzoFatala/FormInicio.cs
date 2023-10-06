@@ -34,5 +34,17 @@ namespace ProyectoSUBEAlfonzoFatala
 
             formViaje.Show();
         }
+
+        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
+        {
+
+        }
+
+        private void logueateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormularioLoguin formLogin = new FormularioLoguin();
+            formLogin.Show();
+
+        }
     }
 }

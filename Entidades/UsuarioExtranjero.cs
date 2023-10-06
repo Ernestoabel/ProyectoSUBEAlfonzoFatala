@@ -21,6 +21,14 @@ namespace Entidades
             TarjetaInternacional = tarjetaInternacional;
         }
 
-        
+        /// <summary>
+        /// Metodo heredado para validadr que el DNI sea de personas con residencia
+        /// </summary>
+        /// <param name="dni"></param>
+        /// <returns></returns>
+        public override bool ValidarDni(string dni)
+        {
+            return base.ValidarDni(dni) && int.Parse(dni[0].ToString()) > 9;
+        }
     }
 }
