@@ -24,19 +24,55 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             try
             {
+                string dni = txtUsuario.Text;
+                string clave = txtPassword.Text;
+                object usuario = ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(dni);
                 
-                string usuario = txtUsuario.Text;
-                string contrasena = txtPassword.Text;
+                if(string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
+                {
+                    throw new Exception();
+                }
 
-            }
-            catch (NullReferenceException ex)
-            {
-                MessageBox.Show("Por favor, ingrese usuario y contraseña.", "Campos nulos", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                if (usuario != null)
+                {
+                    if (usuario is UsuarioSinTarjeta)
+                    {
+
+                        UsuarioSinTarjeta usuarioLogueado = (UsuarioSinTarjeta)usuario;
+                        if (usuarioLogueado.ValidarClave(clave))
+                        {
+                            MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        
+                    }
+                    else if (usuario is UsuarioArgentino)
+                    {
+                        
+                        UsuarioArgentino usuarioLogueado = (UsuarioArgentino)usuario;
+                        if (usuarioLogueado.ValidarClave(clave))
+                        {
+                            MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                            
+                    }
+                    else if (usuario is UsuarioExtranjero)
+                    {
+                        UsuarioExtranjero usuarioLogueado = (UsuarioExtranjero)usuario;
+                        if (usuarioLogueado.ValidarClave(clave))
+                        {
+                            MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        }
+                        
+                    }
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
             catch (Exception ex)
             {
-                
-                MessageBox.Show("Se produjo un error al intentar iniciar sesión: " + ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Se produjo un error al intentar iniciar sesión", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
@@ -56,7 +92,11 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para ir al formulario de alta de cliente
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            
+            FormularioAltaLoguin formAlta = new FormularioAltaLoguin();
+
+            formAlta.Show();
+            this.Hide();
+
         }
     }
 }

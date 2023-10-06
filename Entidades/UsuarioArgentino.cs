@@ -14,6 +14,7 @@ namespace Entidades
         {
             IdSubeArgentina = idSubeArgentina;
             TarjetaNacional = tarjetaNacional;
+            TieneTarjeta = true;
         }
 
         /// <summary>

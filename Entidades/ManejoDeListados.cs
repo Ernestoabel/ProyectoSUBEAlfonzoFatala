@@ -6,28 +6,32 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class ManejoDeListados
+    public class ManejoDeListados
     {
-        public static Usuario ObtenerUsuarioPorDNI(string dni)
+        public static Usuario ObtenerUsuarioPorDniYTarjeta(string dni)
         {
-            
-            Usuario usuarioEncontrado = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
+            Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
 
-            return usuarioEncontrado;
+            if (usuario != null)
+            {
+                if (!usuario.TieneTarjeta)
+                {
+                    return (UsuarioSinTarjeta)usuario;
+                }
+                else if (usuario.Dni[0] < '9')
+                {
+                    return (UsuarioArgentino)usuario;
+                }
+                else
+                {
+                    return (UsuarioExtranjero)usuario;
+                }
+                    
+            }
+
+            return null;
         }
-        public static UsuarioArgentino ObtenerUsuarioArgentinoPorDNI(string dni)
-        {
 
-            UsuarioArgentino usuarioEncontrado = (UsuarioArgentino)Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
 
-            return usuarioEncontrado;
-        }
-        public static UsuarioExtranjero ObtenerUsuarioExtranjeroPorDNI(string dni)
-        {
-
-            UsuarioExtranjero usuarioEncontrado = (UsuarioExtranjero)Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
-
-            return usuarioEncontrado;
-        }
     }
 }

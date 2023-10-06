@@ -34,6 +34,10 @@
             rdbUsuario = new RadioButton();
             SuspendLayout();
             // 
+            // txtUsuario
+            // 
+            txtUsuario.TextChanged += txtUsuario_TextChanged;
+            // 
             // btnCancelar
             // 
             btnCancelar.BackColor = Color.Gray;

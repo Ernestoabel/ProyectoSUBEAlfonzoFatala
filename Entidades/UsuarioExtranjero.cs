@@ -19,6 +19,7 @@ namespace Entidades
         {
             IdSubeExtranjero = idSubeExtranjero;
             TarjetaInternacional = tarjetaInternacional;
+            TieneTarjeta = true;
         }
 
         /// <summary>
