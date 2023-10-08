@@ -32,14 +32,12 @@
             button1 = new Button();
             menuStrip1 = new MenuStrip();
             rEGISTRESEToolStripMenuItem = new ToolStripMenuItem();
+            logueateToolStripMenuItem = new ToolStripMenuItem();
             iNICIARSESIONToolStripMenuItem = new ToolStripMenuItem();
             cOMPRARToolStripMenuItem = new ToolStripMenuItem();
             registralaToolStripMenuItem = new ToolStripMenuItem();
-            consultaTiToolStripMenuItem = new ToolStripMenuItem();
-            porDniToolStripMenuItem = new ToolStripMenuItem();
-            porNDeSubeToolStripMenuItem = new ToolStripMenuItem();
             viajesToolStripMenuItem = new ToolStripMenuItem();
-            logueateToolStripMenuItem = new ToolStripMenuItem();
+            consultaTiToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -74,6 +72,13 @@
             rEGISTRESEToolStripMenuItem.Size = new Size(101, 25);
             rEGISTRESEToolStripMenuItem.Text = "Mi Sube";
             // 
+            // logueateToolStripMenuItem
+            // 
+            logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
+            logueateToolStripMenuItem.Size = new Size(151, 26);
+            logueateToolStripMenuItem.Text = "Logueate";
+            logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
+            // 
             // iNICIARSESIONToolStripMenuItem
             // 
             iNICIARSESIONToolStripMenuItem.Image = (Image)resources.GetObject("iNICIARSESIONToolStripMenuItem.Image");
@@ -95,26 +100,6 @@
             registralaToolStripMenuItem.Size = new Size(112, 25);
             registralaToolStripMenuItem.Text = "Registrala";
             // 
-            // consultaTiToolStripMenuItem
-            // 
-            consultaTiToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { porDniToolStripMenuItem, porNDeSubeToolStripMenuItem });
-            consultaTiToolStripMenuItem.Image = (Image)resources.GetObject("consultaTiToolStripMenuItem.Image");
-            consultaTiToolStripMenuItem.Name = "consultaTiToolStripMenuItem";
-            consultaTiToolStripMenuItem.Size = new Size(191, 25);
-            consultaTiToolStripMenuItem.Text = "Consulta Titularidad";
-            // 
-            // porDniToolStripMenuItem
-            // 
-            porDniToolStripMenuItem.Name = "porDniToolStripMenuItem";
-            porDniToolStripMenuItem.Size = new Size(250, 26);
-            porDniToolStripMenuItem.Text = "Por N° de Documento";
-            // 
-            // porNDeSubeToolStripMenuItem
-            // 
-            porNDeSubeToolStripMenuItem.Name = "porNDeSubeToolStripMenuItem";
-            porNDeSubeToolStripMenuItem.Size = new Size(250, 26);
-            porNDeSubeToolStripMenuItem.Text = "Por N° de Sube";
-            // 
             // viajesToolStripMenuItem
             // 
             viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
@@ -122,12 +107,13 @@
             viajesToolStripMenuItem.Text = "Viajes";
             viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
             // 
-            // logueateToolStripMenuItem
+            // consultaTiToolStripMenuItem
             // 
-            logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(180, 26);
-            logueateToolStripMenuItem.Text = "Logueate";
-            logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
+            consultaTiToolStripMenuItem.Image = (Image)resources.GetObject("consultaTiToolStripMenuItem.Image");
+            consultaTiToolStripMenuItem.Name = "consultaTiToolStripMenuItem";
+            consultaTiToolStripMenuItem.Size = new Size(191, 25);
+            consultaTiToolStripMenuItem.Text = "Consulta Titularidad";
+            consultaTiToolStripMenuItem.Click += consultaTiToolStripMenuItem_Click;
             // 
             // FormInicio
             // 
@@ -156,10 +142,8 @@
         private ToolStripMenuItem iNICIARSESIONToolStripMenuItem;
         private ToolStripMenuItem cOMPRARToolStripMenuItem;
         private ToolStripMenuItem registralaToolStripMenuItem;
-        private ToolStripMenuItem consultaTiToolStripMenuItem;
-        private ToolStripMenuItem porDniToolStripMenuItem;
-        private ToolStripMenuItem porNDeSubeToolStripMenuItem;
         private ToolStripMenuItem viajesToolStripMenuItem;
         private ToolStripMenuItem logueateToolStripMenuItem;
+        private ToolStripMenuItem consultaTiToolStripMenuItem;
     }
 }
