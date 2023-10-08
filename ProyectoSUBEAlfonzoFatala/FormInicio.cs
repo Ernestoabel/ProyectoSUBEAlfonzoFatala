@@ -1,6 +1,7 @@
 using Entidades;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -9,6 +10,19 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormInicio()
         {
             InitializeComponent();
+        }
+
+        public void MostrarUsuariosEnMessageBox()
+        {
+            StringBuilder mensaje = new StringBuilder("Lista de usuarios:\n");
+
+            foreach (var usuario in Listados.listaUsuarios)
+            {
+                string texto = usuario.ObtenerInformacionUsuario();
+                mensaje.AppendLine(texto);
+            }
+
+            MessageBox.Show(mensaje.ToString(), "Lista de Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,6 +40,15 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.AgregarUsuario(nuevoUsuArgentino);
             Listados.AgregarUsuario(nuevoUsuExtrangero);
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            /*
+            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<Usuario> usuariosCargados = Listados.CargarUsuariosDesdeArchivo();
+            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
+            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            Listados.listaUsuarios = usuariosCargados;
+            */
+            
         }
 
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)

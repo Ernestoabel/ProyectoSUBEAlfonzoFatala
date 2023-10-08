@@ -22,13 +22,13 @@ namespace ProyectoSUBEAlfonzoFatala
         
         private void btnIngresar_Click(object sender, EventArgs e)
         {
+            
             try
             {
                 string dni = txtUsuario.Text;
                 string clave = txtPassword.Text;
                 object usuario = ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(dni);
-                
-                if(string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
+                if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
                 {
                     throw new Exception();
                 }
