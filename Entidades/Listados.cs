@@ -19,6 +19,9 @@ namespace Entidades
         public static List<Viajes> ViajeTarjeta5001 = new List<Viajes>();
         public static List<Viajes> listaDeViajes = new List<Viajes>();
 
+
+        #region Metodos
+
         public static void AgregarUsuario(Usuario objeto)
         {
             listaUsuarios.Add(objeto);
@@ -70,9 +73,9 @@ namespace Entidades
             extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 21:23:05"), "Tren", 42);
 
             ViajeTarjeta5001 = extranjeroUno.ObtenerListaDeViajes();
+        }
             
 
-        }
 
         /// <summary>
         /// Serializacion de las tres clases de Usuario en un JSON
@@ -233,7 +236,7 @@ namespace Entidades
             return tarjetas;
         }
 
-
+        #endregion
 
 
     }
