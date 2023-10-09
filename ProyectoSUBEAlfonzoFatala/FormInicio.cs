@@ -8,7 +8,7 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormInicio : Form
     {
-        
+
         public FormInicio()
         {
             InitializeComponent();
@@ -17,6 +17,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
         FormViajesPrueba formViajes = new FormViajesPrueba();
         FormTitularidad formTitularidad = new FormTitularidad();
+        
+        
 
         public void MostrarUsuariosEnMessageBox()
         {
@@ -59,7 +61,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             formViajes.TopLevel = false;
             formViajes.FormBorderStyle = FormBorderStyle.None;
             formViajes.Dock = DockStyle.Fill;
@@ -90,12 +92,18 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            
+
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
             this.Controls.Add(formTitularidad);
             formTitularidad.Show();
+        }
+
+        private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRegistro formRegistro = new FormRegistro();
+            formRegistro.Show();
         }
     }
 }

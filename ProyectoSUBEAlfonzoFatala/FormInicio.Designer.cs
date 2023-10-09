@@ -36,8 +36,9 @@
             iNICIARSESIONToolStripMenuItem = new ToolStripMenuItem();
             cOMPRARToolStripMenuItem = new ToolStripMenuItem();
             registralaToolStripMenuItem = new ToolStripMenuItem();
-            viajesToolStripMenuItem = new ToolStripMenuItem();
             consultaTiToolStripMenuItem = new ToolStripMenuItem();
+            viajesToolStripMenuItem = new ToolStripMenuItem();
+            registrateToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -66,7 +67,7 @@
             // 
             // rEGISTRESEToolStripMenuItem
             // 
-            rEGISTRESEToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logueateToolStripMenuItem });
+            rEGISTRESEToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logueateToolStripMenuItem, registrateToolStripMenuItem });
             rEGISTRESEToolStripMenuItem.Image = (Image)resources.GetObject("rEGISTRESEToolStripMenuItem.Image");
             rEGISTRESEToolStripMenuItem.Name = "rEGISTRESEToolStripMenuItem";
             rEGISTRESEToolStripMenuItem.Size = new Size(101, 25);
@@ -75,7 +76,7 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(151, 26);
+            logueateToolStripMenuItem.Size = new Size(180, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
             // 
@@ -100,13 +101,6 @@
             registralaToolStripMenuItem.Size = new Size(112, 25);
             registralaToolStripMenuItem.Text = "Registrala";
             // 
-            // viajesToolStripMenuItem
-            // 
-            viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
-            viajesToolStripMenuItem.Size = new Size(66, 25);
-            viajesToolStripMenuItem.Text = "Viajes";
-            viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
-            // 
             // consultaTiToolStripMenuItem
             // 
             consultaTiToolStripMenuItem.Image = (Image)resources.GetObject("consultaTiToolStripMenuItem.Image");
@@ -114,6 +108,20 @@
             consultaTiToolStripMenuItem.Size = new Size(191, 25);
             consultaTiToolStripMenuItem.Text = "Consulta Titularidad";
             consultaTiToolStripMenuItem.Click += consultaTiToolStripMenuItem_Click;
+            // 
+            // viajesToolStripMenuItem
+            // 
+            viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
+            viajesToolStripMenuItem.Size = new Size(66, 25);
+            viajesToolStripMenuItem.Text = "Viajes";
+            viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
+            // 
+            // registrateToolStripMenuItem
+            // 
+            registrateToolStripMenuItem.Name = "registrateToolStripMenuItem";
+            registrateToolStripMenuItem.Size = new Size(180, 26);
+            registrateToolStripMenuItem.Text = "Registrate";
+            registrateToolStripMenuItem.Click += registrateToolStripMenuItem_Click;
             // 
             // FormInicio
             // 
@@ -145,5 +153,6 @@
         private ToolStripMenuItem viajesToolStripMenuItem;
         private ToolStripMenuItem logueateToolStripMenuItem;
         private ToolStripMenuItem consultaTiToolStripMenuItem;
+        private ToolStripMenuItem registrateToolStripMenuItem;
     }
 }

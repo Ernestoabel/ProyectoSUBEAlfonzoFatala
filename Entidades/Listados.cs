@@ -54,7 +54,7 @@ namespace Entidades
 
             ViajeTarjeta1001 = manager.ObtenerListaDeViajes();
 
-          
+            //metodo guardar viajes en json
 
         }
 
