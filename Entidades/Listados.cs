@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using Newtonsoft.Json;
@@ -83,17 +84,17 @@ namespace Entidades
         /// <param name="lista"></param>
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
         {
-
+            
             JsonSerializer serializer = new JsonSerializer();
-            string rutaCarpetaArchivos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos");
-
+            string rutaCarpetaArchivos = @"..\..\..\Archivos";
+            
 
             if (!Directory.Exists(rutaCarpetaArchivos))
             {
                 Directory.CreateDirectory(rutaCarpetaArchivos);
             }
 
-            using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\usuarios.json"))
+            using (StreamWriter sw = new StreamWriter(@"..\..\..\Archivos\usuarios.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, lista);
@@ -107,15 +108,15 @@ namespace Entidades
         /// <returns>Retorna la lista de usuarios</returns>
         public static List<Usuario> CargarUsuariosDesdeArchivo()
         {
-            List<Usuario> usuarios = new List<Usuario>();
-            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos\usuarios.json");
+            List<Usuario> listaUsuarios = new List<Usuario>();
+            string rutaArchivo = @"..\..\..\Archivos\usuarios.json";
 
             if (File.Exists(rutaArchivo))
             {
                 try
                 {
                     string jsonData = File.ReadAllText(rutaArchivo);
-                    usuarios = JsonConvert.DeserializeObject<List<Usuario>>(jsonData);
+                    listaUsuarios = JsonConvert.DeserializeObject<List<Usuario>>(jsonData);
                 }
                 catch (Exception ex)
                 {
@@ -127,7 +128,7 @@ namespace Entidades
                 Console.WriteLine("El archivo de usuarios no existe.");
             }
 
-            return usuarios;
+            return listaUsuarios;
         }
 
         /// <summary>
@@ -138,7 +139,7 @@ namespace Entidades
         {
 
             JsonSerializer serializer = new JsonSerializer();
-            string rutaCarpetaArchivos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos");
+            string rutaCarpetaArchivos = @"..\..\..\Archivos";
 
 
             if (!Directory.Exists(rutaCarpetaArchivos))
@@ -146,7 +147,7 @@ namespace Entidades
                 Directory.CreateDirectory(rutaCarpetaArchivos);
             }
 
-            using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\tarjetaNacional.json"))
+            using (StreamWriter sw = new StreamWriter(@"..\..\..\Archivos\tarjetaNacional.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, lista);
@@ -161,7 +162,7 @@ namespace Entidades
         public static List<TarjetaNacional> CargarTarjetaNacionalsDesdeArchivo()
         {
             List<TarjetaNacional> tarjetas = new List<TarjetaNacional>();
-            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos\tarjetaNacional.json");
+            string rutaArchivo = @"..\..\..\Archivos\tarjetaNacional.json";
 
             if (File.Exists(rutaArchivo))
             {
@@ -191,7 +192,7 @@ namespace Entidades
         {
 
             JsonSerializer serializer = new JsonSerializer();
-            string rutaCarpetaArchivos = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos");
+            string rutaCarpetaArchivos = @"..\..\..\Archivos";
 
 
             if (!Directory.Exists(rutaCarpetaArchivos))
@@ -199,7 +200,7 @@ namespace Entidades
                 Directory.CreateDirectory(rutaCarpetaArchivos);
             }
 
-            using (StreamWriter sw = new StreamWriter(@"..\..\Archivos\tarjetaInternacional.json"))
+            using (StreamWriter sw = new StreamWriter(@"..\..\..\Archivos\tarjetaInternacional.json"))
             using (JsonWriter writer = new JsonTextWriter(sw))
             {
                 serializer.Serialize(writer, lista);
@@ -214,7 +215,7 @@ namespace Entidades
         public static List<TarjetaInternacional> CargarTarjetaInternacionalDesdeArchivo()
         {
             List<TarjetaInternacional> tarjetas = new List<TarjetaInternacional>();
-            string rutaArchivo = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Archivos\tarjetaInternacional.json");
+            string rutaArchivo = @"..\..\..\Archivos\tarjetaInternacional.json";
 
             if (File.Exists(rutaArchivo))
             {

@@ -1,14 +1,34 @@
 using Entidades;
 using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
+using System.Text;
+using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormInicio : Form
     {
+        
         public FormInicio()
         {
             InitializeComponent();
+
+        }
+
+        FormViajesPrueba formViajes = new FormViajesPrueba();
+        FormTitularidad formTitularidad = new FormTitularidad();
+
+        public void MostrarUsuariosEnMessageBox()
+        {
+            StringBuilder mensaje = new StringBuilder("Lista de usuarios:\n");
+
+            foreach (var usuario in Listados.listaUsuarios)
+            {
+                string texto = usuario.ObtenerInformacionUsuario();
+                mensaje.AppendLine(texto);
+            }
+
+            MessageBox.Show(mensaje.ToString(), "Lista de Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -26,17 +46,38 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.AgregarUsuario(nuevoUsuArgentino);
             Listados.AgregarUsuario(nuevoUsuExtrangero);
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            /*
+            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<Usuario> usuariosCargados = Listados.CargarUsuariosDesdeArchivo();
+            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
+            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            Listados.listaUsuarios = usuariosCargados;
+            */
+
         }
 
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormViajesPrueba formLoguin = new FormViajesPrueba();
+            
+            formViajes.TopLevel = false;
+            formViajes.FormBorderStyle = FormBorderStyle.None;
+            formViajes.Dock = DockStyle.Fill;
+            this.Controls.Add(formViajes);
+            formViajes.Show();
 
-            formLoguin.Show();
         }
 
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
+            if (e.ClickedItem != viajesToolStripMenuItem)
+            {
+                formViajes.Hide();
+            }
+            if (e.ClickedItem != consultaTiToolStripMenuItem)
+            {
+                formTitularidad.Hide();
+            }
 
         }
 
@@ -45,6 +86,16 @@ namespace ProyectoSUBEAlfonzoFatala
             FormularioLoguin formLogin = new FormularioLoguin();
             formLogin.Show();
 
+        }
+
+        private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            
+            formTitularidad.TopLevel = false;
+            formTitularidad.FormBorderStyle = FormBorderStyle.None;
+            formTitularidad.Dock = DockStyle.Fill;
+            this.Controls.Add(formTitularidad);
+            formTitularidad.Show();
         }
     }
 }

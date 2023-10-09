@@ -50,5 +50,11 @@ namespace Entidades
             return Clave == clave;
         }
 
+        public string ObtenerInformacionUsuario()
+        {
+            string informacion = $"Nombre: {Nombre}, Apellido: {Apellido}, DNI: {Dni}, Clave: {Clave}, TieneTarjeta: {(TieneTarjeta ? "Sí" : "No")}";
+            return informacion;
+        }
+
     }
 }
