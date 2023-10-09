@@ -13,7 +13,6 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormTitularidad : Form
     {
-        FormInicio inicio = new FormInicio();
         List<object> listaUsuario;
         public object usuarioLogueado;
         public FormTitularidad()

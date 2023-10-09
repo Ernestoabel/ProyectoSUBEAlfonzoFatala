@@ -110,7 +110,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formTitularidad.usuarioLogueado = usuarioLogueado;
+            //formTitularidad.usuarioLogueado = usuarioLogueado;
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
