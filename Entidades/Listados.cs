@@ -52,7 +52,7 @@ namespace Entidades
             manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Subte", 38);
 
             ViajeTarjeta1001 = manager.ObtenerListaDeViajes();
-            
+
           
 
         }
@@ -72,9 +72,9 @@ namespace Entidades
             extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 06:02:30"), "Subte", 31);
             extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 21:23:05"), "Tren", 42);
 
-            ViajeTarjeta5001 = extranjeroUno.ObtenerListaDeViajes();
+            ViajeTarjeta5001 = extranjeroUno.ObtenerListaDeViajes();    
         }
-            
+
 
 
         /// <summary>
