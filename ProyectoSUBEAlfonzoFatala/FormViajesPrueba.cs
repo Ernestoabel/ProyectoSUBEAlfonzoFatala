@@ -56,7 +56,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void FormViajesPrueba_Load(object sender, EventArgs e)
         {
-            
+
             this.listaViajes.Add(new Viajes(DateTime.Parse("2023-09-30 10:30:12"), "Autobus", 36));
             this.listaViajes.Add(new Viajes(DateTime.Parse("2023-07-30 10:40:31"), "Subte", 56));
             this.listaViajes.Add(new Viajes(DateTime.Parse("2023-05-30 09:47:00"), "Tren", 23));

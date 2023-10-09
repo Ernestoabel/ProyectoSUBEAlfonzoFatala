@@ -13,13 +13,15 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormTitularidad : Form
     {
-        List<UsuarioArgentino> listaUsuario;
+        FormInicio inicio = new FormInicio();
+        List<object> listaUsuario;
+        public object usuarioLogueado;
         public FormTitularidad()
         {
             InitializeComponent();
-            this.listaUsuario = new List<UsuarioArgentino>();
+            this.listaUsuario = new List<object>();
         }
-
+        
         private void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
@@ -55,12 +57,18 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void FormTitularidad_Load_1(object sender, EventArgs e)
         {
-            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-            this.listaUsuario.Add(nuevoUsuArgentino);
-            dataGridTitularidad.DataSource = listaUsuario;
-            
-            SetDataGridViewStyle();
+            if (usuarioLogueado != null)
+            {
+                //TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
+                //UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
+                listaUsuario.Add(usuarioLogueado);
+                dataGridTitularidad.DataSource = listaUsuario;
+                SetDataGridViewStyle();
+            }
+            else
+            {
+                MessageBox.Show("No se logeo ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
     }
 }

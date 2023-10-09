@@ -15,6 +15,7 @@ namespace ProyectoSUBEAlfonzoFatala
     //hereda el diseño de un formulario padre
     public partial class FormularioLoguin : LoguinPadre
     {
+        FormInicio inicio = new FormInicio();
         public FormularioLoguin()
         {
             InitializeComponent();
@@ -28,6 +29,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 string dni = txtUsuario.Text;
                 string clave = txtPassword.Text;
                 object usuario = ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(dni);
+                
                 if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
                 {
                     throw new Exception();
@@ -42,8 +44,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        
+                            inicio.TraerUsuario(usuarioLogueado);
+                            this.Close();
+                        }  
                     }
                     else if (usuario is UsuarioArgentino)
                     {
@@ -52,6 +55,8 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            inicio.TraerUsuario(usuarioLogueado);
+                            this.Close();
                         }
                             
                     }
@@ -61,6 +66,8 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            inicio.TraerUsuario(usuarioLogueado);
+                            this.Close();
                         }
                         
                     }

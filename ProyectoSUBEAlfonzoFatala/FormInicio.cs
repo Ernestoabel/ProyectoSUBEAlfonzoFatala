@@ -8,11 +8,29 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormInicio : Form
     {
-
+        Object usuarioLogueado;
         public FormInicio()
         {
             InitializeComponent();
 
+        }
+        public void TraerUsuario(object usuario)
+        {
+            if (usuario is UsuarioSinTarjeta)
+            {
+                usuarioLogueado = usuario as UsuarioSinTarjeta;
+                MessageBox.Show("El usuario es "+ usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (usuario is UsuarioArgentino)
+            {
+                usuarioLogueado = usuario as UsuarioArgentino;
+                MessageBox.Show("El usuario es " + usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else if (usuario is UsuarioExtranjero)
+            {
+                usuarioLogueado = usuario as UsuarioExtranjero;
+                MessageBox.Show("El usuario es " + usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
 
         FormViajesPrueba formViajes = new FormViajesPrueba();
@@ -92,7 +110,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            formTitularidad.usuarioLogueado = usuarioLogueado;
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
