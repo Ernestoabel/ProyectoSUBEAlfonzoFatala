@@ -84,10 +84,10 @@ namespace Entidades
         /// <param name="lista"></param>
         public static void GuardarUsuariosEnArchivo(List<Usuario> lista)
         {
-            
+
             JsonSerializer serializer = new JsonSerializer();
             string rutaCarpetaArchivos = @"..\..\..\Archivos";
-            
+
 
             if (!Directory.Exists(rutaCarpetaArchivos))
             {
@@ -100,35 +100,6 @@ namespace Entidades
                 serializer.Serialize(writer, lista);
             }
 
-        }
-
-        /// <summary>
-        /// Deserealizacion de la lista usuarios desde un JSON
-        /// </summary>
-        /// <returns>Retorna la lista de usuarios</returns>
-        public static List<Usuario> CargarUsuariosDesdeArchivo()
-        {
-            List<Usuario> listaUsuarios = new List<Usuario>();
-            string rutaArchivo = @"..\..\..\Archivos\usuarios.json";
-
-            if (File.Exists(rutaArchivo))
-            {
-                try
-                {
-                    string jsonData = File.ReadAllText(rutaArchivo);
-                    listaUsuarios = JsonConvert.DeserializeObject<List<Usuario>>(jsonData);
-                }
-                catch (Exception ex)
-                {
-                    Console.WriteLine("Error al deserializar el archivo: " + ex.Message);
-                }
-            }
-            else
-            {
-                Console.WriteLine("El archivo de usuarios no existe.");
-            }
-
-            return listaUsuarios;
         }
 
         /// <summary>

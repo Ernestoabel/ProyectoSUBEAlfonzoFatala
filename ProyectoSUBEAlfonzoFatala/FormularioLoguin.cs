@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +12,42 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    //Primer formulario que se inicializa al ejecutar la aplicacion
-    //hereda el diseño de un formulario padre
+
+
+    /// <summary>
+    /// Primer formulario que se inicializa al ejecutar la aplicacion
+    /// hereda el diseño de un formulario padre
+    /// </summary>
     public partial class FormularioLoguin : LoguinPadre
     {
         public FormularioLoguin()
         {
             InitializeComponent();
+            CargarJson();
+        }
+
+        /// <summary>
+        /// Metodo para cargar las listas con datos en los Json
+        /// </summary>
+        private static void CargarJson()
+        {
+            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
+            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
+            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            Listados.listaUsuarios = usuariosCargados;
         }
         
+        /// <summary>
+        /// Evento para el logeo
+        /// Pide dni y clave
+        /// Lo busca en la lista
+        /// Castea segun su clade heredada
+        /// Lo manda al formulario inicio
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             
@@ -28,7 +56,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 string dni = txtUsuario.Text;
                 string clave = txtPassword.Text;
                 object usuario = ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(dni);
-                
                 if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
                 {
                     throw new Exception();
@@ -80,14 +107,18 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Se produjo un error al intentar iniciar sesión", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
-        //boton para cerrar la aplicacion
+        /// <summary>
+        /// evento para cerrar la apliicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -96,6 +127,7 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para llenar el usuario y password con un usuario de la lista
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
+            /*
             UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
             TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
             Listados.AgregarTarjetaNacional(tarjeta1001);
@@ -108,7 +140,9 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.AgregarUsuario(nuevoUsuario);
             Listados.AgregarUsuario(nuevoUsuArgentino);
             Listados.AgregarUsuario(nuevoUsuExtrangero);
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);*/
+            
+            
         }
 
         //boton para ir al formulario de alta de cliente

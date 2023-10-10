@@ -69,23 +69,34 @@ namespace ProyectoSUBEAlfonzoFatala
             dataGridTitularidad.ReadOnly = true;
 
             dataGridTitularidad.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridTitularidad.Columns["TarjetaNacional"].Visible = false;
+            if (usuarioLogueado is UsuarioArgentino)
+            {
+                dataGridTitularidad.Columns["TarjetaNacional"].Visible = false;
+            }
+            else if(usuarioLogueado is UsuarioExtranjero)
+            {
+                dataGridTitularidad.Columns["tarjetaInternacional"].Visible = false;
+            }
+                
         }
 
 
         private void FormTitularidad_Load_1(object sender, EventArgs e)
         {
-            if (usuarioLogueado != null)
+            if (usuarioLogueado == null)
             {
-                //TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-                //UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-                listaUsuario.Add(usuarioLogueado);
-                dataGridTitularidad.DataSource = listaUsuario;
-                SetDataGridViewStyle();
+                MessageBox.Show("No se logeo ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+            }
+            else if (usuarioLogueado is UsuarioSinTarjeta)
+            {
+                MessageBox.Show("Usuario sin trajeta ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                MessageBox.Show("No se logeo ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                listaUsuario.Add(usuarioLogueado);
+                dataGridTitularidad.DataSource = listaUsuario;
+                SetDataGridViewStyle();
             }
         }
     }

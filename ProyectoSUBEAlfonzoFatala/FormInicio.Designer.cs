@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicio));
-            button1 = new Button();
             menuStrip1 = new MenuStrip();
             rEGISTRESEToolStripMenuItem = new ToolStripMenuItem();
             logueateToolStripMenuItem = new ToolStripMenuItem();
@@ -41,16 +40,6 @@
             viajesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(317, 210);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // menuStrip1
             // 
@@ -130,7 +119,6 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
@@ -146,8 +134,6 @@
         }
 
         #endregion
-
-        private Button button1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem rEGISTRESEToolStripMenuItem;
         private ToolStripMenuItem iNICIARSESIONToolStripMenuItem;
