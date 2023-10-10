@@ -29,28 +29,17 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormInicio));
-            button1 = new Button();
             menuStrip1 = new MenuStrip();
             rEGISTRESEToolStripMenuItem = new ToolStripMenuItem();
             logueateToolStripMenuItem = new ToolStripMenuItem();
+            registrateToolStripMenuItem = new ToolStripMenuItem();
             iNICIARSESIONToolStripMenuItem = new ToolStripMenuItem();
             cOMPRARToolStripMenuItem = new ToolStripMenuItem();
             registralaToolStripMenuItem = new ToolStripMenuItem();
             consultaTiToolStripMenuItem = new ToolStripMenuItem();
             viajesToolStripMenuItem = new ToolStripMenuItem();
-            registrateToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
-            // 
-            // button1
-            // 
-            button1.Location = new Point(317, 210);
-            button1.Name = "button1";
-            button1.Size = new Size(75, 23);
-            button1.TabIndex = 0;
-            button1.Text = "button1";
-            button1.UseVisualStyleBackColor = true;
-            button1.Click += button1_Click;
             // 
             // menuStrip1
             // 
@@ -76,9 +65,16 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(180, 26);
+            logueateToolStripMenuItem.Size = new Size(156, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
+            // 
+            // registrateToolStripMenuItem
+            // 
+            registrateToolStripMenuItem.Name = "registrateToolStripMenuItem";
+            registrateToolStripMenuItem.Size = new Size(156, 26);
+            registrateToolStripMenuItem.Text = "Registrate";
+            registrateToolStripMenuItem.Click += registrateToolStripMenuItem_Click;
             // 
             // iNICIARSESIONToolStripMenuItem
             // 
@@ -116,13 +112,6 @@
             viajesToolStripMenuItem.Text = "Viajes";
             viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
             // 
-            // registrateToolStripMenuItem
-            // 
-            registrateToolStripMenuItem.Name = "registrateToolStripMenuItem";
-            registrateToolStripMenuItem.Size = new Size(180, 26);
-            registrateToolStripMenuItem.Text = "Registrate";
-            registrateToolStripMenuItem.Click += registrateToolStripMenuItem_Click;
-            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -130,12 +119,14 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
-            Controls.Add(button1);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
             Name = "FormInicio";
             Text = "Form1";
+            FormClosing += FormInicio_FormClosing;
+            FormClosed += FormInicio_FormClosed;
+            Load += FormInicio_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -143,8 +134,6 @@
         }
 
         #endregion
-
-        private Button button1;
         private MenuStrip menuStrip1;
         private ToolStripMenuItem rEGISTRESEToolStripMenuItem;
         private ToolStripMenuItem iNICIARSESIONToolStripMenuItem;

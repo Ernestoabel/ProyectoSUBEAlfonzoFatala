@@ -1,4 +1,5 @@
 ﻿using Entidades;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -11,15 +12,43 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    //Primer formulario que se inicializa al ejecutar la aplicacion
-    //hereda el diseño de un formulario padre
+
+
+    /// <summary>
+    /// Primer formulario que se inicializa al ejecutar la aplicacion
+    /// hereda el diseño de un formulario padre
+    /// </summary>
     public partial class FormularioLoguin : LoguinPadre
     {
         public FormularioLoguin()
         {
             InitializeComponent();
+            CargarJson();
+        }
+
+        /// <summary>
+        /// Metodo para cargar las listas con datos en los Json
+        /// </summary>
+        private static void CargarJson()
+        {
+            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
+            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
+            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            Listados.listaUsuarios = usuariosCargados;
+            
         }
         
+        /// <summary>
+        /// Evento para el logeo
+        /// Pide dni y clave
+        /// Lo busca en la lista
+        /// Castea segun su clade heredada
+        /// Lo manda al formulario inicio
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnIngresar_Click(object sender, EventArgs e)
         {
             
@@ -42,8 +71,10 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        }
-                        
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
+                        }  
                     }
                     else if (usuario is UsuarioArgentino)
                     {
@@ -52,6 +83,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
                         }
                             
                     }
@@ -61,8 +95,23 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
                         }
                         
+                    }
+                    else if (usuario is UsuarioAdministrador)
+                    {
+                        MessageBox.Show("Administrador", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UsuarioAdministrador usuarioLogueado = (UsuarioAdministrador)usuario;
+                        if (usuarioLogueado.ValidarClave(clave))
+                        {
+                            FormAdministrador admin = new FormAdministrador();
+                            admin.Show();
+                            this.Hide();
+                        }
                     }
                 }
                 else
@@ -70,14 +119,18 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Se produjo un error al intentar iniciar sesión", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
 
         }
 
-        //boton para cerrar la aplicacion
+        /// <summary>
+        /// evento para cerrar la apliicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -86,7 +139,26 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para llenar el usuario y password con un usuario de la lista
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
-            
+            /*
+            UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
+            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
+            Listados.AgregarTarjetaNacional(tarjeta1001);
+            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
+            Listados.AgregarTarjetaInternacional(tarjeta5001);
+            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
+            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
+            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
+            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
+            UsuarioAdministrador nuevoUsuarioAdmin = new UsuarioAdministrador("Juan", "Perez", "10000001", "1234");
+            Listados.AgregarUsuario(nuevoUsuario);
+            Listados.AgregarUsuario(nuevoUsuArgentino);
+            Listados.AgregarUsuario(nuevoUsuExtrangero);
+            Listados.AgregarUsuario(nuevoUsuarioAdmin);
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            */
+            txtUsuario.Text = "000";
+            txtPassword.Text = "1234";
+
         }
 
         //boton para ir al formulario de alta de cliente

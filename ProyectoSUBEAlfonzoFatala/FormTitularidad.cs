@@ -13,11 +13,31 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormTitularidad : Form
     {
-        List<UsuarioArgentino> listaUsuario;
+        List<object> listaUsuario;
+        object usuarioLogueado;
         public FormTitularidad()
         {
             InitializeComponent();
-            this.listaUsuario = new List<UsuarioArgentino>();
+            this.listaUsuario = new List<object>();
+        }
+
+        public void TraerUsuario(object usuario)
+        {
+            if (usuario is UsuarioSinTarjeta)
+            {
+                usuarioLogueado = usuario;
+                
+            }
+            else if (usuario is UsuarioArgentino)
+            {
+                usuarioLogueado = usuario;
+               
+            }
+            else if (usuario is UsuarioExtranjero)
+            {
+                usuarioLogueado = usuario;
+                
+            }
         }
 
         private void SetDataGridViewStyle()
@@ -49,18 +69,35 @@ namespace ProyectoSUBEAlfonzoFatala
             dataGridTitularidad.ReadOnly = true;
 
             dataGridTitularidad.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            dataGridTitularidad.Columns["TarjetaNacional"].Visible = false;
+            if (usuarioLogueado is UsuarioArgentino)
+            {
+                dataGridTitularidad.Columns["TarjetaNacional"].Visible = false;
+            }
+            else if(usuarioLogueado is UsuarioExtranjero)
+            {
+                dataGridTitularidad.Columns["tarjetaInternacional"].Visible = false;
+            }
+                
         }
 
 
         private void FormTitularidad_Load_1(object sender, EventArgs e)
         {
-            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-            this.listaUsuario.Add(nuevoUsuArgentino);
-            dataGridTitularidad.DataSource = listaUsuario;
-            
-            SetDataGridViewStyle();
+            if (usuarioLogueado == null)
+            {
+                MessageBox.Show("No se logeo ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                
+            }
+            else if (usuarioLogueado is UsuarioSinTarjeta)
+            {
+                MessageBox.Show("Usuario sin trajeta ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                listaUsuario.Add(usuarioLogueado);
+                dataGridTitularidad.DataSource = listaUsuario;
+                SetDataGridViewStyle();
+            }
         }
     }
 }

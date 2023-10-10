@@ -2,6 +2,7 @@
 {
     partial class FormViajesPrueba
     {
+
         /// <summary>
         /// Required designer variable.
         /// </summary>
@@ -35,16 +36,16 @@
             // dtgViajes
             // 
             dtgViajes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgViajes.Location = new Point(40, 32);
+            dtgViajes.Location = new Point(12, 42);
             dtgViajes.Name = "dtgViajes";
-            dtgViajes.Size = new Size(658, 361);
+            dtgViajes.Size = new Size(776, 396);
             dtgViajes.TabIndex = 0;
             // 
             // FormViajesPrueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(718, 405);
+            ClientSize = new Size(800, 450);
             Controls.Add(dtgViajes);
             Name = "FormViajesPrueba";
             Text = "FormViajesPrueba";

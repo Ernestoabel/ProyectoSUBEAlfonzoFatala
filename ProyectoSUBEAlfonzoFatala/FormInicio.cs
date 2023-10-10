@@ -3,65 +3,37 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System.Text;
 using System.Windows.Forms;
+using System;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormInicio : Form
     {
-
-        public FormInicio()
-        {
-            InitializeComponent();
-
-        }
-
         FormViajesPrueba formViajes = new FormViajesPrueba();
         FormTitularidad formTitularidad = new FormTitularidad();
-        
-        
+        FormularioLoguin formLogin = new FormularioLoguin();
+        public object usuarioLogueado;
 
-        public void MostrarUsuariosEnMessageBox()
+        /// <summary>
+        /// Formulario parametrizado
+        /// trae el usuario del loguin
+        /// </summary>
+        /// <param name="usuario"></param>
+        public FormInicio(object usuario)
         {
-            StringBuilder mensaje = new StringBuilder("Lista de usuarios:\n");
-
-            foreach (var usuario in Listados.listaUsuarios)
-            {
-                string texto = usuario.ObtenerInformacionUsuario();
-                mensaje.AppendLine(texto);
-            }
-
-            MessageBox.Show(mensaje.ToString(), "Lista de Usuarios", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            InitializeComponent();
+            this.usuarioLogueado = usuario;
         }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
-            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-            Listados.AgregarTarjetaNacional(tarjeta1001);
-            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
-            Listados.AgregarTarjetaInternacional(tarjeta5001);
-            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
-            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
-            Listados.AgregarUsuario(nuevoUsuario);
-            Listados.AgregarUsuario(nuevoUsuArgentino);
-            Listados.AgregarUsuario(nuevoUsuExtrangero);
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-            /*
-            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
-            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
-            List<Usuario> usuariosCargados = Listados.CargarUsuariosDesdeArchivo();
-            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
-            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
-            Listados.listaUsuarios = usuariosCargados;
-            */
-
-        }
-
+        
+        /// <summary>
+        /// evento para traer el fomulario de viajes
+        /// con un metodo para enviar el usuario logueado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            formViajes.TraerUsuario(usuarioLogueado);
             formViajes.TopLevel = false;
             formViajes.FormBorderStyle = FormBorderStyle.None;
             formViajes.Dock = DockStyle.Fill;
@@ -70,6 +42,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// evento para ir cambiando entre formularios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem != viajesToolStripMenuItem)
@@ -83,16 +60,28 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// evento para volver al formulario de logueo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void logueateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormularioLoguin formLogin = new FormularioLoguin();
             formLogin.Show();
+            this.Close();
 
         }
 
+        /// <summary>
+        /// evento para mostrar el formulario de titularidad
+        /// con un metodo para enviar el usuario logueado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+            formTitularidad.TraerUsuario(usuarioLogueado);
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
@@ -106,6 +95,21 @@ namespace ProyectoSUBEAlfonzoFatala
             
             formRegistro.Show();
 
+
+        }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormInicio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formLogin.Show();
+        }
+
+        private void FormInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
 
         }
     }
