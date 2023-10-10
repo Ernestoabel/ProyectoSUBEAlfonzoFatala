@@ -15,7 +15,6 @@ namespace ProyectoSUBEAlfonzoFatala
     //hereda el diseño de un formulario padre
     public partial class FormularioLoguin : LoguinPadre
     {
-        FormInicio inicio = new FormInicio();
         public FormularioLoguin()
         {
             InitializeComponent();
@@ -44,8 +43,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            inicio.TraerUsuario(usuarioLogueado);
-                            this.Close();
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
                         }  
                     }
                     else if (usuario is UsuarioArgentino)
@@ -55,8 +55,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            inicio.TraerUsuario(usuarioLogueado);
-                            this.Close();
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
                         }
                             
                     }
@@ -66,8 +67,10 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            inicio.TraerUsuario(usuarioLogueado);
-                            this.Close();
+                            
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
+                            inicio.Show();
+                            this.Hide();
                         }
                         
                     }
@@ -93,7 +96,19 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para llenar el usuario y password con un usuario de la lista
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
-            
+            UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
+            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
+            Listados.AgregarTarjetaNacional(tarjeta1001);
+            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
+            Listados.AgregarTarjetaInternacional(tarjeta5001);
+            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
+            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
+            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
+            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
+            Listados.AgregarUsuario(nuevoUsuario);
+            Listados.AgregarUsuario(nuevoUsuArgentino);
+            Listados.AgregarUsuario(nuevoUsuExtrangero);
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
         }
 
         //boton para ir al formulario de alta de cliente

@@ -36,9 +36,9 @@
             // dtgViajes
             // 
             dtgViajes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgViajes.Location = new Point(12, 32);
+            dtgViajes.Location = new Point(12, 42);
             dtgViajes.Name = "dtgViajes";
-            dtgViajes.Size = new Size(686, 361);
+            dtgViajes.Size = new Size(776, 396);
             dtgViajes.TabIndex = 0;
             // 
             // FormViajesPrueba

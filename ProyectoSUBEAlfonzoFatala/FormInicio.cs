@@ -3,40 +3,44 @@ using Newtonsoft.Json.Converters;
 using Newtonsoft.Json;
 using System.Text;
 using System.Windows.Forms;
+using System;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormInicio : Form
     {
-        Object usuarioLogueado;
-        public FormInicio()
+        FormViajesPrueba formViajes = new FormViajesPrueba();
+        FormTitularidad formTitularidad = new FormTitularidad();
+        FormularioLoguin formLogin = new FormularioLoguin();
+        public object usuarioLogueado;
+        public FormInicio(object usuario)
         {
             InitializeComponent();
-
+            this.usuarioLogueado = usuario;
         }
+
         public void TraerUsuario(object usuario)
         {
             if (usuario is UsuarioSinTarjeta)
             {
-                usuarioLogueado = usuario as UsuarioSinTarjeta;
-                MessageBox.Show("El usuario es "+ usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                usuarioLogueado = (UsuarioSinTarjeta)usuario;
+                MessageBox.Show("El usuario es " + ((UsuarioSinTarjeta)usuario).Nombre, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (usuario is UsuarioArgentino)
             {
                 usuarioLogueado = usuario as UsuarioArgentino;
-                MessageBox.Show("El usuario es " + usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El usuario es " + ((UsuarioArgentino)usuario).Nombre, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else if (usuario is UsuarioExtranjero)
             {
                 usuarioLogueado = usuario as UsuarioExtranjero;
-                MessageBox.Show("El usuario es " + usuarioLogueado, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("El usuario es " + ((UsuarioExtranjero)usuario).Nombre, "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-        FormViajesPrueba formViajes = new FormViajesPrueba();
-        FormTitularidad formTitularidad = new FormTitularidad();
-        
-        
+
+
+
 
         public void MostrarUsuariosEnMessageBox()
         {
@@ -79,7 +83,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
+            formViajes.TraerUsuario(usuarioLogueado);
             formViajes.TopLevel = false;
             formViajes.FormBorderStyle = FormBorderStyle.None;
             formViajes.Dock = DockStyle.Fill;
@@ -103,14 +107,15 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void logueateToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormularioLoguin formLogin = new FormularioLoguin();
             formLogin.Show();
+            this.Close();
 
         }
 
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //formTitularidad.usuarioLogueado = usuarioLogueado;
+
+            formTitularidad.TraerUsuario(usuarioLogueado);
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
@@ -122,6 +127,21 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             FormRegistro formRegistro = new FormRegistro();
             formRegistro.Show();
+        }
+
+        private void FormInicio_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void FormInicio_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formLogin.Show();
+        }
+
+        private void FormInicio_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            
         }
     }
 }

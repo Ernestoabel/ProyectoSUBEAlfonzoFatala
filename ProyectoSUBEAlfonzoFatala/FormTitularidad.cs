@@ -14,13 +14,32 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormTitularidad : Form
     {
         List<object> listaUsuario;
-        public object usuarioLogueado;
+        object usuarioLogueado;
         public FormTitularidad()
         {
             InitializeComponent();
             this.listaUsuario = new List<object>();
         }
-        
+
+        public void TraerUsuario(object usuario)
+        {
+            if (usuario is UsuarioSinTarjeta)
+            {
+                usuarioLogueado = usuario;
+                
+            }
+            else if (usuario is UsuarioArgentino)
+            {
+                usuarioLogueado = usuario;
+               
+            }
+            else if (usuario is UsuarioExtranjero)
+            {
+                usuarioLogueado = usuario;
+                
+            }
+        }
+
         private void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
