@@ -24,15 +24,19 @@ namespace Entidades
 
             if (usuario != null)
             {
-                if (!usuario.TieneTarjeta)
+                if (!usuario.TieneTarjeta && usuario.Dni[0] > '0')
                 {
                     return (UsuarioSinTarjeta)usuario;
                 }
-                else if (usuario.Dni[0] < '9')
+                else if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
                 {
                     return (UsuarioArgentino)usuario;
                 }
-                else
+                else if (usuario.Dni.Length == 3)
+                {
+                    return (UsuarioAdministrador)usuario;
+                }
+                else if (usuario.Dni[0] >= '9')
                 {
                     return (UsuarioExtranjero)usuario;
                 }
@@ -69,6 +73,11 @@ namespace Entidades
                     {
                         var usuarioExtranjero = JsonConvert.DeserializeObject<UsuarioExtranjero>(JsonConvert.SerializeObject(usuarioData));
                         usuarios.Add(usuarioExtranjero);
+                    }
+                    else if (usuarioData.ContainsKey("EsAdministrador"))
+                    {
+                        var usuarioAdmin = JsonConvert.DeserializeObject<UsuarioAdministrador>(JsonConvert.SerializeObject(usuarioData));
+                        usuarios.Add(usuarioAdmin);
                     }
                     else
                     {

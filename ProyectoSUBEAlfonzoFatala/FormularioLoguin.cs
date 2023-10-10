@@ -37,6 +37,7 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
             Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
+            
         }
         
         /// <summary>
@@ -101,6 +102,17 @@ namespace ProyectoSUBEAlfonzoFatala
                         }
                         
                     }
+                    else if (usuario is UsuarioAdministrador)
+                    {
+                        MessageBox.Show("Administrador", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        UsuarioAdministrador usuarioLogueado = (UsuarioAdministrador)usuario;
+                        if (usuarioLogueado.ValidarClave(clave))
+                        {
+                            FormAdministrador admin = new FormAdministrador();
+                            admin.Show();
+                            this.Hide();
+                        }
+                    }
                 }
                 else
                 {
@@ -137,12 +149,16 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
             UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
             UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
+            UsuarioAdministrador nuevoUsuarioAdmin = new UsuarioAdministrador("Juan", "Perez", "10000001", "1234");
             Listados.AgregarUsuario(nuevoUsuario);
             Listados.AgregarUsuario(nuevoUsuArgentino);
             Listados.AgregarUsuario(nuevoUsuExtrangero);
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);*/
-            
-            
+            Listados.AgregarUsuario(nuevoUsuarioAdmin);
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            */
+            txtUsuario.Text = "000";
+            txtPassword.Text = "1234";
+
         }
 
         //boton para ir al formulario de alta de cliente
