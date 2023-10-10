@@ -103,7 +103,10 @@ namespace ProyectoSUBEAlfonzoFatala
         private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormRegistro formRegistro = new FormRegistro();
+            
             formRegistro.Show();
+
+
         }
     }
 }

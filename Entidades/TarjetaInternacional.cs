@@ -11,6 +11,11 @@ namespace Entidades
         public TarjetaInternacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
         {
         }
+        public TarjetaInternacional()
+        {
+
+        }
+
 
         public override List<Viajes> Viajes { get; set; }
 

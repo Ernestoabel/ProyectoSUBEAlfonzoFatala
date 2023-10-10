@@ -23,6 +23,11 @@ namespace Entidades
             Clave = clave; // 4 digitos
             TieneTarjeta = false;
         }
+        public Usuario()
+        {
+
+        
+        }
 
         public string Nombre { get => _nombre; set => _nombre = value; }
         public string Apellido { get => _apellido; set => _apellido = value; }

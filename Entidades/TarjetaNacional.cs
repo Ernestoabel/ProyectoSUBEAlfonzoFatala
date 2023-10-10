@@ -12,6 +12,10 @@ namespace Entidades
         {
 
         }
+        public TarjetaNacional()
+        {
+
+        }
 
         public override List<Viajes> Viajes { get; set; }
 

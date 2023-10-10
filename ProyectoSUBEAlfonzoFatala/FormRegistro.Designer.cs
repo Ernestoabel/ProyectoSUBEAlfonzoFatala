@@ -34,7 +34,7 @@
             lblApellido = new Label();
             txtApellido = new TextBox();
             lblDni = new Label();
-            textBox1 = new TextBox();
+            txtDni = new TextBox();
             lblNumTarjeta = new Label();
             txtNumTarjeta = new TextBox();
             btnContinuar = new Button();
@@ -58,11 +58,11 @@
             // 
             lblNombre.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNombre.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblNombre.ForeColor = Color.White;
             lblNombre.Location = new Point(26, 95);
             lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(52, 16);
+            lblNombre.Size = new Size(56, 16);
             lblNombre.TabIndex = 1;
             lblNombre.Text = "Nombre";
             // 
@@ -78,11 +78,11 @@
             // 
             lblApellido.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblApellido.AutoSize = true;
-            lblApellido.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblApellido.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblApellido.ForeColor = Color.White;
             lblApellido.Location = new Point(26, 155);
             lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(52, 16);
+            lblApellido.Size = new Size(58, 16);
             lblApellido.TabIndex = 3;
             lblApellido.Text = "Apellido";
             // 
@@ -98,31 +98,31 @@
             // 
             lblDni.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblDni.AutoSize = true;
-            lblDni.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblDni.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblDni.ForeColor = Color.White;
             lblDni.Location = new Point(26, 214);
             lblDni.Name = "lblDni";
-            lblDni.Size = new Size(27, 16);
+            lblDni.Size = new Size(29, 16);
             lblDni.TabIndex = 5;
             lblDni.Text = "DNI";
             // 
-            // textBox1
+            // txtDni
             // 
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(38, 233);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(182, 23);
-            textBox1.TabIndex = 6;
+            txtDni.BorderStyle = BorderStyle.FixedSingle;
+            txtDni.Location = new Point(38, 233);
+            txtDni.Name = "txtDni";
+            txtDni.Size = new Size(182, 23);
+            txtDni.TabIndex = 6;
             // 
             // lblNumTarjeta
             // 
             lblNumTarjeta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             lblNumTarjeta.AutoSize = true;
-            lblNumTarjeta.Font = new Font("Tahoma", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
+            lblNumTarjeta.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
             lblNumTarjeta.ForeColor = Color.White;
             lblNumTarjeta.Location = new Point(26, 270);
             lblNumTarjeta.Name = "lblNumTarjeta";
-            lblNumTarjeta.Size = new Size(81, 16);
+            lblNumTarjeta.Size = new Size(92, 16);
             lblNumTarjeta.TabIndex = 7;
             lblNumTarjeta.Text = "N° de tarjeta";
             // 
@@ -172,20 +172,22 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.FromArgb(0, 0, 64);
+            BackColor = Color.FromArgb(51, 51, 51);
             ClientSize = new Size(596, 435);
             Controls.Add(lblPaso1);
             Controls.Add(pbrPasos);
             Controls.Add(btnContinuar);
             Controls.Add(txtNumTarjeta);
             Controls.Add(lblNumTarjeta);
-            Controls.Add(textBox1);
+            Controls.Add(txtDni);
             Controls.Add(lblDni);
             Controls.Add(txtApellido);
             Controls.Add(lblApellido);
             Controls.Add(txtNombre);
             Controls.Add(lblNombre);
             Controls.Add(lblRegistrar);
+            FormBorderStyle = FormBorderStyle.None;
+            IsMdiContainer = true;
             Name = "FormRegistro";
             Text = "FormRegistro";
             ResumeLayout(false);
@@ -200,7 +202,7 @@
         private Label lblApellido;
         private TextBox txtApellido;
         private Label lblDni;
-        private TextBox textBox1;
+        private TextBox txtDni;
         private Label lblNumTarjeta;
         private TextBox txtNumTarjeta;
         private Button btnContinuar;

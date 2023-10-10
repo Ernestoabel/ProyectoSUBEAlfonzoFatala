@@ -18,6 +18,10 @@ namespace Entidades
             Saldo = saldo;
             Viajes = viajes;
         }
+        public Tarjeta()
+        {
+        
+        }
 
         public abstract List<Viajes> Viajes { get; set; }
 
