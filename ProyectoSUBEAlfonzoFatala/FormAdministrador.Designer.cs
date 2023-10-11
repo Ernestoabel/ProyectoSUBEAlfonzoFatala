@@ -37,30 +37,36 @@
             // 
             // menuStrip1
             // 
+            menuStrip1.BackColor = SystemColors.ActiveCaption;
+            menuStrip1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             menuStrip1.Items.AddRange(new ToolStripItem[] { usuariosToolStripMenuItem, tarjetasToolStripMenuItem, mensajesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
-            menuStrip1.Size = new Size(800, 24);
+            menuStrip1.Size = new Size(800, 33);
             menuStrip1.TabIndex = 0;
             menuStrip1.Text = "menuStrip1";
+            menuStrip1.ItemClicked += menuStrip1_ItemClicked;
             // 
             // usuariosToolStripMenuItem
             // 
             usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            usuariosToolStripMenuItem.Size = new Size(64, 20);
+            usuariosToolStripMenuItem.Size = new Size(101, 29);
             usuariosToolStripMenuItem.Text = "Usuarios";
+            usuariosToolStripMenuItem.Click += usuariosToolStripMenuItem_Click;
             // 
             // tarjetasToolStripMenuItem
             // 
             tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
-            tarjetasToolStripMenuItem.Size = new Size(58, 20);
+            tarjetasToolStripMenuItem.Size = new Size(91, 29);
             tarjetasToolStripMenuItem.Text = "Tarjetas";
+            tarjetasToolStripMenuItem.Click += tarjetasToolStripMenuItem_Click;
             // 
             // mensajesToolStripMenuItem
             // 
             mensajesToolStripMenuItem.Name = "mensajesToolStripMenuItem";
-            mensajesToolStripMenuItem.Size = new Size(68, 20);
+            mensajesToolStripMenuItem.Size = new Size(105, 29);
             mensajesToolStripMenuItem.Text = "Mensajes";
+            mensajesToolStripMenuItem.Click += mensajesToolStripMenuItem_Click;
             // 
             // FormAdministrador
             // 
