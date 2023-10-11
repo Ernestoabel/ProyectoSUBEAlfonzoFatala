@@ -13,13 +13,14 @@ using System.Windows.Forms;
 namespace ProyectoSUBEAlfonzoFatala
 {
 
-
     /// <summary>
     /// Primer formulario que se inicializa al ejecutar la aplicacion
     /// hereda el diseño de un formulario padre
     /// </summary>
     public partial class FormularioLoguin : LoguinPadre
     {
+        
+        
         public FormularioLoguin()
         {
             InitializeComponent();
@@ -134,6 +135,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
+            Application.Exit();
         }
 
         //boton para llenar el usuario y password con un usuario de la lista
@@ -164,11 +166,15 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para ir al formulario de alta de cliente
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            FormularioAltaLoguin formAlta = new FormularioAltaLoguin();
 
-            formAlta.Show();
+            FormRegistro formRegistro = new FormRegistro();
+
+            formRegistro.Show();
+
             this.Hide();
 
         }
+
+
     }
 }

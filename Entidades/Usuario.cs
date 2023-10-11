@@ -55,10 +55,21 @@ namespace Entidades
             return Clave == clave;
         }
 
-        public string ObtenerInformacionUsuario()
+
+        public string ObtenerInformacionUsuario(Usuario nuevoUsuario)
         {
-            string informacion = $"Nombre: {Nombre}, Apellido: {Apellido}, DNI: {Dni}, Clave: {Clave}, TieneTarjeta: {(TieneTarjeta ? "Sí" : "No")}";
+
+            string informacion = $"Nombre: {nuevoUsuario.Nombre}, Apellido: {nuevoUsuario.Apellido}, DNI: {nuevoUsuario.Dni}, Clave: {nuevoUsuario.Clave}, TieneTarjeta: {(nuevoUsuario.TieneTarjeta ? "Sí" : "No")}";
             return informacion;
+        }
+
+        /// <summary>
+        /// Muestra los datos del usurio actual
+        /// </summary>
+        /// <returns>string personalizado</returns>
+        public override string ToString()
+        {
+            return $"Usuario: {this.Nombre} {this.Apellido}, Dni: {this.Dni}, Clave{this.Clave}";
         }
 
     }

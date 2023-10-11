@@ -7,6 +7,7 @@ using System.Linq;
 using System.Reflection.Emit;
 using System.Runtime.Intrinsics.X86;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 
 namespace Entidades

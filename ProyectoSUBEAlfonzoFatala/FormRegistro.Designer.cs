@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             lblRegistrar = new Label();
             lblNombre = new Label();
             txtNombre = new TextBox();
@@ -35,11 +36,16 @@
             txtApellido = new TextBox();
             lblDni = new Label();
             txtDni = new TextBox();
-            lblNumTarjeta = new Label();
-            txtNumTarjeta = new TextBox();
             btnContinuar = new Button();
             pbrPasos = new ProgressBar();
             lblPaso1 = new Label();
+            btnCancelar = new Button();
+            txtClave = new TextBox();
+            lblClave = new Label();
+            lblRepetirClave = new Label();
+            txtRepetirClave = new TextBox();
+            errorProviderRegistro = new ErrorProvider(components);
+            ((System.ComponentModel.ISupportInitialize)errorProviderRegistro).BeginInit();
             SuspendLayout();
             // 
             // lblRegistrar
@@ -114,33 +120,13 @@
             txtDni.Size = new Size(182, 23);
             txtDni.TabIndex = 6;
             // 
-            // lblNumTarjeta
-            // 
-            lblNumTarjeta.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            lblNumTarjeta.AutoSize = true;
-            lblNumTarjeta.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNumTarjeta.ForeColor = Color.White;
-            lblNumTarjeta.Location = new Point(26, 270);
-            lblNumTarjeta.Name = "lblNumTarjeta";
-            lblNumTarjeta.Size = new Size(92, 16);
-            lblNumTarjeta.TabIndex = 7;
-            lblNumTarjeta.Text = "N° de tarjeta";
-            // 
-            // txtNumTarjeta
-            // 
-            txtNumTarjeta.BorderStyle = BorderStyle.FixedSingle;
-            txtNumTarjeta.Location = new Point(38, 289);
-            txtNumTarjeta.Name = "txtNumTarjeta";
-            txtNumTarjeta.Size = new Size(183, 23);
-            txtNumTarjeta.TabIndex = 8;
-            // 
             // btnContinuar
             // 
             btnContinuar.BackColor = Color.MediumBlue;
             btnContinuar.FlatStyle = FlatStyle.Flat;
             btnContinuar.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnContinuar.ForeColor = SystemColors.ControlLightLight;
-            btnContinuar.Location = new Point(39, 357);
+            btnContinuar.Location = new Point(207, 345);
             btnContinuar.Name = "btnContinuar";
             btnContinuar.Size = new Size(183, 36);
             btnContinuar.TabIndex = 9;
@@ -168,17 +154,82 @@
             lblPaso1.TabIndex = 11;
             lblPaso1.Text = "Paso 1";
             // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = Color.OrangeRed;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.Location = new Point(207, 387);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(181, 36);
+            btnCancelar.TabIndex = 12;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
+            // txtClave
+            // 
+            txtClave.BorderStyle = BorderStyle.FixedSingle;
+            txtClave.Location = new Point(338, 114);
+            txtClave.Name = "txtClave";
+            txtClave.Size = new Size(182, 23);
+            txtClave.TabIndex = 13;
+            txtClave.Visible = false;
+            // 
+            // lblClave
+            // 
+            lblClave.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblClave.AutoSize = true;
+            lblClave.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblClave.ForeColor = Color.White;
+            lblClave.Location = new Point(321, 95);
+            lblClave.Name = "lblClave";
+            lblClave.Size = new Size(42, 16);
+            lblClave.TabIndex = 14;
+            lblClave.Text = "Clave";
+            lblClave.Visible = false;
+            // 
+            // lblRepetirClave
+            // 
+            lblRepetirClave.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+            lblRepetirClave.AutoSize = true;
+            lblRepetirClave.Font = new Font("Tahoma", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            lblRepetirClave.ForeColor = Color.White;
+            lblRepetirClave.Location = new Point(321, 155);
+            lblRepetirClave.Name = "lblRepetirClave";
+            lblRepetirClave.Size = new Size(94, 16);
+            lblRepetirClave.TabIndex = 15;
+            lblRepetirClave.Text = "Repetir Clave";
+            lblRepetirClave.Visible = false;
+            // 
+            // txtRepetirClave
+            // 
+            txtRepetirClave.BorderStyle = BorderStyle.FixedSingle;
+            txtRepetirClave.Location = new Point(338, 174);
+            txtRepetirClave.Name = "txtRepetirClave";
+            txtRepetirClave.Size = new Size(182, 23);
+            txtRepetirClave.TabIndex = 16;
+            txtRepetirClave.Visible = false;
+            // 
+            // errorProviderRegistro
+            // 
+            errorProviderRegistro.ContainerControl = this;
+            // 
             // FormRegistro
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(51, 51, 51);
             ClientSize = new Size(596, 435);
+            Controls.Add(txtRepetirClave);
+            Controls.Add(lblRepetirClave);
+            Controls.Add(lblClave);
+            Controls.Add(txtClave);
+            Controls.Add(btnCancelar);
             Controls.Add(lblPaso1);
             Controls.Add(pbrPasos);
             Controls.Add(btnContinuar);
-            Controls.Add(txtNumTarjeta);
-            Controls.Add(lblNumTarjeta);
             Controls.Add(txtDni);
             Controls.Add(lblDni);
             Controls.Add(txtApellido);
@@ -187,9 +238,9 @@
             Controls.Add(lblNombre);
             Controls.Add(lblRegistrar);
             FormBorderStyle = FormBorderStyle.None;
-            IsMdiContainer = true;
             Name = "FormRegistro";
             Text = "FormRegistro";
+            ((System.ComponentModel.ISupportInitialize)errorProviderRegistro).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -203,10 +254,14 @@
         private TextBox txtApellido;
         private Label lblDni;
         private TextBox txtDni;
-        private Label lblNumTarjeta;
-        private TextBox txtNumTarjeta;
         private Button btnContinuar;
         private ProgressBar pbrPasos;
         private Label lblPaso1;
+        private Button btnCancelar;
+        private TextBox txtClave;
+        private Label lblClave;
+        private Label lblRepetirClave;
+        private TextBox txtRepetirClave;
+        private ErrorProvider errorProviderRegistro;
     }
 }
