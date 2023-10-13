@@ -13,7 +13,9 @@ namespace Entidades
             
         }
         public UsuarioSinTarjeta()
-        { }
+        {
+        
+        }
 
     }
 }

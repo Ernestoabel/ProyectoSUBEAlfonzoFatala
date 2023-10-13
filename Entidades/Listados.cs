@@ -9,7 +9,7 @@ using Newtonsoft.Json;
 
 namespace Entidades
 {
-    public class Listados
+    public static class Listados
     {
         public static List<Usuario> listaUsuarios = new List<Usuario>();
         public static List<UsuarioArgentino> listaUsuariosArgentinos = new List<UsuarioArgentino>();

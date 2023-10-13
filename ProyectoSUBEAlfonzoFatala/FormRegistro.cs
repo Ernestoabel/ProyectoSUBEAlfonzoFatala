@@ -14,8 +14,12 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormRegistro : Form
     {
+        // Listados listado = new Listados();
         private int contador = 0;
         Usuario nuevoUsuarioRegistrado = new Usuario();
+        Tarjeta nuevaTarjetaNacional = new TarjetaNacional();
+        Tarjeta nuevaTarjetaInternacional = new TarjetaInternacional();
+
 
         public FormRegistro()
         {
@@ -32,14 +36,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 contador++;
 
-                //FormRegistro2 formClave = new FormRegistro2();
-                //formClave.MdiParent = this;
-
                 pbrPasos.PerformStep();
                 lblPaso1.Text = "Paso 2";
-
-                //formClave.Show();
-
                 btnContinuar.Location = new System.Drawing.Point(377, 300);
 
                 lblClave.Visible = true;
@@ -49,59 +47,69 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 GuardarDatos();
 
-                if(ValidarClaves())
+                if (ValidarClaves())
                 {
-                    MessageBox.Show("Clave valida");
+                    //contador++;
+                    GuardarDatos();
+                    MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
+                    //this.Hide();
+                    Usuario usuario = nuevoUsuarioRegistrado;
+                    MostrarUsuarioEnControles(usuario);
+                    Listados.AgregarUsuario(usuario);
+                    //UsuarioArgentino nuevoUser = new UsuarioArgentino(nombre, apellido, dni, ca,"", nuevaTarjetaNacional );
+
+                    FormInicio formInicio = new FormInicio(usuario);
+                    formInicio.Show();
                 }
-
-                //if (contador >= 1)
-                //{
-
-                //    //this.Close();
-                //}
-
-
-                //btnContinuar.Location = new System.Drawing.Point(114, 357);
-
-                /*FormRegistro formRegistro = new FormRegistro();
-                formRegistro.Show();*/
+                /*else
+                {
+                    string error;
+                    error = $"Las claves no coinciden";
+                    MessageBox.Show(error,"Ingrese la clave de nuevo",MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }*/
 
             }
 
 
         }
 
-
+        /// <summary>
+        /// Guarda los datos ingresados en un objeto usuario y luego lo agrega a la lista
+        /// </summary>
+        /// <returns></returns>
         private bool GuardarDatos()
         {
 
             if (contador == 1)
             {
 
-                //Tarjeta nuevaTarjeta = new TarjetaNacional();
+               // Tarjeta nuevaTarjeta = new TarjetaNacional();
                 //Tarjeta nuevaTarjetaInternacional = new TarjetaInternacional();
 
 
                 string nombre = txtNombre.Text;
                 string apellido = txtApellido.Text;
                 string dni = txtDni.Text;
-                bool tieneTarjeta = true;
+                bool tieneTarjeta = false;
 
 
                 nuevoUsuarioRegistrado.Nombre = nombre;
                 nuevoUsuarioRegistrado.Apellido = apellido;
                 nuevoUsuarioRegistrado.Dni = dni;
-
                 nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
 
             }
             else
             {
+                 
                 string clave = txtClave.Text;
                 nuevoUsuarioRegistrado.Clave = clave;
 
-                Usuario usuario = nuevoUsuarioRegistrado;
-                MostrarUsuarioEnControles(usuario);
+                
+
+                // listaUsuarios.Add(usuario);
+               
+
 
             }
 
@@ -158,18 +166,18 @@ namespace ProyectoSUBEAlfonzoFatala
                 ok = false;
                 errorProviderRegistro.SetError(txtDni, "Ingresar DNI");
             }
-           
 
-           /* if (txtClave.Text == "")
-            {
-                ok = false;
-                errorProviderRegistro.SetError(txtClave, "Ingresar Clave");
-            }
-            if (txtRepetirClave.Text == "")
-            {
-                ok = false;
-                errorProviderRegistro.SetError(txtRepetirClave, "Ingresar Clave");
-            }*/
+
+            /* if (txtClave.Text == "")
+             {
+                 ok = false;
+                 errorProviderRegistro.SetError(txtClave, "Ingresar Clave");
+             }
+             if (txtRepetirClave.Text == "")
+             {
+                 ok = false;
+                 errorProviderRegistro.SetError(txtRepetirClave, "Ingresar Clave");
+             }*/
 
 
             return ok;
@@ -188,10 +196,32 @@ namespace ProyectoSUBEAlfonzoFatala
             if (txtRepetirClave.Text == "")
             {
                 ok = false;
-                errorProviderRegistro.SetError(txtRepetirClave, "Ingresar Clave");
+                errorProviderRegistro.SetError(txtRepetirClave, "Repetir Clave");
             }
+            if(txtClave.Text != txtRepetirClave.Text)
+            {
+                ok = false;
+                errorProviderRegistro.SetError(txtRepetirClave, "Las Claves no coinciden");
+            }
+
             return ok;
         }
+
+        private bool ConfirmarClave()
+        {
+            bool ok;
+            ok= true;
+
+            if(txtClave.Text != txtRepetirClave.Text)
+            {
+                ok = false;
+                errorProviderRegistro.SetError(txtClave, "Las claves no coinciden");
+            }
+
+            return ok;
+
+        }
+
 
         private void BorrarMensajeError()
         {
@@ -203,5 +233,16 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        private void txtDni_Validating(object sender, CancelEventArgs e)
+        {
+            int num;
+
+            //si el valor ingresado no es correcto, que devuelva el valor en variable nmum
+            if (!int.TryParse(txtDni.Text, out num))
+            {
+                errorProviderRegistro.SetError(txtDni, "Ingrese valor numerico");
+            }
+
+        }
     }
 }

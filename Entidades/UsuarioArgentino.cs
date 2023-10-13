@@ -16,6 +16,10 @@ namespace Entidades
             TarjetaNacional = tarjetaNacional;
             TieneTarjeta = true;
         }
+        public UsuarioArgentino()
+        {
+
+        }
 
         /// <summary>
         /// Metodo heredado para el DNI sea argentino

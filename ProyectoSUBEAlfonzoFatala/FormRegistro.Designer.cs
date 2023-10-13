@@ -77,6 +77,7 @@
             txtNombre.BorderStyle = BorderStyle.FixedSingle;
             txtNombre.Location = new Point(39, 114);
             txtNombre.Name = "txtNombre";
+            txtNombre.PlaceholderText = "Ingrese su nombre";
             txtNombre.Size = new Size(182, 23);
             txtNombre.TabIndex = 2;
             // 
@@ -97,6 +98,7 @@
             txtApellido.BorderStyle = BorderStyle.FixedSingle;
             txtApellido.Location = new Point(39, 174);
             txtApellido.Name = "txtApellido";
+            txtApellido.PlaceholderText = "Ingrese su apellido";
             txtApellido.Size = new Size(182, 23);
             txtApellido.TabIndex = 4;
             // 
@@ -117,8 +119,10 @@
             txtDni.BorderStyle = BorderStyle.FixedSingle;
             txtDni.Location = new Point(38, 233);
             txtDni.Name = "txtDni";
+            txtDni.PlaceholderText = "Ingrese su documento ";
             txtDni.Size = new Size(182, 23);
             txtDni.TabIndex = 6;
+            txtDni.Validating += txtDni_Validating;
             // 
             // btnContinuar
             // 
@@ -173,6 +177,8 @@
             txtClave.BorderStyle = BorderStyle.FixedSingle;
             txtClave.Location = new Point(338, 114);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
+            txtClave.PlaceholderText = "Ingrese clave numerica";
             txtClave.Size = new Size(182, 23);
             txtClave.TabIndex = 13;
             txtClave.Visible = false;
@@ -208,6 +214,8 @@
             txtRepetirClave.BorderStyle = BorderStyle.FixedSingle;
             txtRepetirClave.Location = new Point(338, 174);
             txtRepetirClave.Name = "txtRepetirClave";
+            txtRepetirClave.PasswordChar = '*';
+            txtRepetirClave.PlaceholderText = "Ingrese de nuevo su clave";
             txtRepetirClave.Size = new Size(182, 23);
             txtRepetirClave.TabIndex = 16;
             txtRepetirClave.Visible = false;
