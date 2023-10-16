@@ -31,7 +31,7 @@
             menuStrip1 = new MenuStrip();
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             tarjetasToolStripMenuItem = new ToolStripMenuItem();
-            mensajesToolStripMenuItem = new ToolStripMenuItem();
+            mensajesToolStripMenuItem1 = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -39,7 +39,7 @@
             // 
             menuStrip1.BackColor = SystemColors.ActiveCaption;
             menuStrip1.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { usuariosToolStripMenuItem, tarjetasToolStripMenuItem, mensajesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { usuariosToolStripMenuItem, tarjetasToolStripMenuItem, mensajesToolStripMenuItem1 });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 33);
@@ -61,12 +61,12 @@
             tarjetasToolStripMenuItem.Text = "Tarjetas";
             tarjetasToolStripMenuItem.Click += tarjetasToolStripMenuItem_Click;
             // 
-            // mensajesToolStripMenuItem
+            // mensajesToolStripMenuItem1
             // 
-            mensajesToolStripMenuItem.Name = "mensajesToolStripMenuItem";
-            mensajesToolStripMenuItem.Size = new Size(105, 29);
-            mensajesToolStripMenuItem.Text = "Mensajes";
-            mensajesToolStripMenuItem.Click += mensajesToolStripMenuItem_Click;
+            mensajesToolStripMenuItem1.Name = "mensajesToolStripMenuItem1";
+            mensajesToolStripMenuItem1.Size = new Size(105, 29);
+            mensajesToolStripMenuItem1.Text = "Mensajes";
+            mensajesToolStripMenuItem1.Click += mensajesToolStripMenuItem1_Click;
             // 
             // FormAdministrador
             // 
@@ -88,6 +88,6 @@
         private MenuStrip menuStrip1;
         private ToolStripMenuItem usuariosToolStripMenuItem;
         private ToolStripMenuItem tarjetasToolStripMenuItem;
-        private ToolStripMenuItem mensajesToolStripMenuItem;
+        private ToolStripMenuItem mensajesToolStripMenuItem1;
     }
 }

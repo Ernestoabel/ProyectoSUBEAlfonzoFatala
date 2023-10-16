@@ -12,6 +12,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormViajesPrueba formViajes = new FormViajesPrueba();
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
+        FormBajaUsuario formBaja = new FormBajaUsuario();
         public object usuarioLogueado;
 
         /// <summary>
@@ -24,7 +25,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             this.usuarioLogueado = usuario;
         }
-        
+
         /// <summary>
         /// evento para traer el fomulario de viajes
         /// con un metodo para enviar el usuario logueado
@@ -56,6 +57,10 @@ namespace ProyectoSUBEAlfonzoFatala
             if (e.ClickedItem != consultaTiToolStripMenuItem)
             {
                 formTitularidad.Hide();
+            }
+            if (e.ClickedItem != bajaToolStripMenuItem)
+            {
+                formBaja.Hide();
             }
 
         }
@@ -92,7 +97,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormRegistro formRegistro = new FormRegistro();
-            
+
             formRegistro.Show();
 
 
@@ -111,6 +116,16 @@ namespace ProyectoSUBEAlfonzoFatala
         private void FormInicio_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            formBaja.TraerUsuario(usuarioLogueado);
+            formBaja.TopLevel = false;
+            formBaja.FormBorderStyle = FormBorderStyle.None;
+            formBaja.Dock = DockStyle.Fill;
+            this.Controls.Add(formBaja);
+            formBaja.Show();
         }
     }
 }

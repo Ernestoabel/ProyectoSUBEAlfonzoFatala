@@ -14,6 +14,8 @@ namespace ProyectoSUBEAlfonzoFatala
     {
         FormABMUsuarios formABMUsuarios = new FormABMUsuarios();
         FormABMTarjetas formABMTarjetas = new FormABMTarjetas();
+        FormAdminMensajes formMensajes = new FormAdminMensajes();
+
         public FormAdministrador()
         {
             InitializeComponent();
@@ -37,13 +39,6 @@ namespace ProyectoSUBEAlfonzoFatala
             formABMTarjetas.Show();
         }
 
-        private void mensajesToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-
-        }
-
-
-
         private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
         {
             if (e.ClickedItem != tarjetasToolStripMenuItem)
@@ -54,6 +49,19 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 formABMUsuarios.Hide();
             }
+            if (e.ClickedItem != mensajesToolStripMenuItem1)
+            {
+                formABMUsuarios.Hide();
+            }
+        }
+
+        private void mensajesToolStripMenuItem1_Click(object sender, EventArgs e)
+        {
+            formMensajes.TopLevel = false;
+            formMensajes.FormBorderStyle = FormBorderStyle.None;
+            formMensajes.Dock = DockStyle.Fill;
+            this.Controls.Add(formMensajes);
+            formMensajes.Show();
         }
     }
 }

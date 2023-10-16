@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Entidades
@@ -19,6 +20,7 @@ namespace Entidades
         public static List<Viajes> ViajeTarjeta1001 = new List<Viajes>();
         public static List<Viajes> ViajeTarjeta5001 = new List<Viajes>();
         public static List<Viajes> listaDeViajes = new List<Viajes>();
+        public static List<Dictionary<int,string>> listaBajas = new List<Dictionary<int,string>>();
 
 
         #region Metodos
@@ -208,6 +210,67 @@ namespace Entidades
             return tarjetas;
         }
 
+        public class BajaData
+        {
+            [XmlAttribute("Indice")]
+            public int Indice { get; set; }
+
+            [XmlElement("Mensaje")]
+            public string Mensaje { get; set; }
+        }
+        public static int obtenerUltimoIndiceListaMensajes(List<Dictionary<int, string>> listaBajas)
+        {
+            int ultimoIndice = listaBajas.Count > 0
+                         ? listaBajas.Max(diccionario => diccionario.Keys.Max()) + 1
+                         : 1;
+
+            return ultimoIndice;
+        }
+        public static void GuardarMensajesBajaEnArchivo(List<Dictionary<int, string>> listaBajas)
+        {
+            string rutaArchivo = @"..\..\..\Archivos\mensajes.xml";
+
+            // Convert listaBajas to BajaData objects
+            List<BajaData> bajaDataList = listaBajas.Select(dic =>
+                new BajaData { Indice = dic.Keys.First(), Mensaje = dic.Values.First() }).ToList();
+
+            XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
+            using (StreamWriter writer = new StreamWriter(rutaArchivo))
+            {
+                serializer.Serialize(writer, bajaDataList);
+            }
+        }
+
+        public static List<Dictionary<int, string>> DeserializarMensajesBajaDesdeArchivo()
+        {
+            XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
+
+            string rutaCarpetaArchivos = @"..\..\..\Archivos";
+            string rutaArchivo = Path.Combine(rutaCarpetaArchivos, "mensajes.xml");
+
+            if (!File.Exists(rutaArchivo))
+            {
+                Console.WriteLine("El archivo de mensajes no existe.");
+                return new List<Dictionary<int, string>>();
+            }
+
+            using (StreamReader reader = new StreamReader(rutaArchivo))
+            {
+                List<BajaData> bajaDataList = (List<BajaData>)serializer.Deserialize(reader);
+
+                List<Dictionary<int, string>> listaBajas = new List<Dictionary<int, string>>();
+                foreach (var bajaData in bajaDataList)
+                {
+                    Dictionary<int, string> diccionario = new Dictionary<int, string>
+                {
+                    { bajaData.Indice, bajaData.Mensaje }
+                };
+                    listaBajas.Add(diccionario);
+                }
+
+                return listaBajas;
+            }
+        }
         #endregion
 
 
