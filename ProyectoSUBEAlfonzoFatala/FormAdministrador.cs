@@ -15,6 +15,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormABMUsuarios formABMUsuarios = new FormABMUsuarios();
         FormABMTarjetas formABMTarjetas = new FormABMTarjetas();
         FormAdminMensajes formMensajes = new FormAdminMensajes();
+        FormularioLoguin formLogin = new FormularioLoguin();
 
         public FormAdministrador()
         {
@@ -62,6 +63,11 @@ namespace ProyectoSUBEAlfonzoFatala
             formMensajes.Dock = DockStyle.Fill;
             this.Controls.Add(formMensajes);
             formMensajes.Show();
+        }
+
+        private void FormAdministrador_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            formLogin.Show();
         }
     }
 }

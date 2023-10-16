@@ -25,9 +25,10 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             CargarJson();
-            /*Listados.listaBajas.Add(new Dictionary<int, string> { { 1, "Mensajes para el administrador" } });
+            /*
+            Listados.listaBajas.Add(new Dictionary<int, string> { { 1, "Mensajes para el administrador" } });
             Listados.GuardarMensajesBajaEnArchivo(Listados.listaBajas);*/
-            Listados.DeserializarMensajesBajaDesdeArchivo();
+            Listados.listaBajas = Listados.DeserializarMensajesBajaDesdeArchivo();
         }
 
         /// <summary>

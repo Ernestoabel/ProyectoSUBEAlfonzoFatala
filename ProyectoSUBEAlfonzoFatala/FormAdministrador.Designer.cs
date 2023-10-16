@@ -77,6 +77,7 @@
             MainMenuStrip = menuStrip1;
             Name = "FormAdministrador";
             Text = "FormAdministrador";
+            FormClosed += FormAdministrador_FormClosed;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
