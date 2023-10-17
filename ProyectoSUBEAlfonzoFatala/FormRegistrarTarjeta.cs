@@ -18,9 +18,6 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             this.usuarioLogueado = usuario;
-
-            
-
         }
 
 
@@ -57,11 +54,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 if (esArgentino)
                 {
-                    usuarioLogueado = new UsuarioArgentino();
+                    UsuarioArgentino usuarioLogueado = new UsuarioArgentino();
                 }
                 else if (esExtranjero)
                 {
-                    usuarioLogueado = new UsuarioExtranjero();
+                    UsuarioExtranjero usuarioLogueado = new UsuarioExtranjero();
                 }
 
                 this.Hide();

@@ -65,14 +65,14 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(180, 26);
+            logueateToolStripMenuItem.Size = new Size(156, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
             // 
             // registrateToolStripMenuItem
             // 
             registrateToolStripMenuItem.Name = "registrateToolStripMenuItem";
-            registrateToolStripMenuItem.Size = new Size(180, 26);
+            registrateToolStripMenuItem.Size = new Size(156, 26);
             registrateToolStripMenuItem.Text = "Registrate";
             registrateToolStripMenuItem.Click += registrateToolStripMenuItem_Click;
             // 
@@ -89,6 +89,7 @@
             cOMPRARToolStripMenuItem.Name = "cOMPRARToolStripMenuItem";
             cOMPRARToolStripMenuItem.Size = new Size(112, 25);
             cOMPRARToolStripMenuItem.Text = "Comprala";
+            cOMPRARToolStripMenuItem.Click += cOMPRARToolStripMenuItem_Click;
             // 
             // bajaToolStripMenuItem
             // 

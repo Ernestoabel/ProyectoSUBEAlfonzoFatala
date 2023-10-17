@@ -14,6 +14,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
         public object usuarioLogueado;
+        
 
         /// <summary>
         /// Formulario parametrizado
@@ -25,16 +26,6 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             this.usuarioLogueado = usuario;
         }
-<<<<<<< HEAD
-        /*public FormInicio(object usuario, Tarjeta tarjeta, Viajes viajes)
-        {
-            InitializeComponent();
-            this.usuarioLogueado = usuario;
-
-        }*/
-
-=======
->>>>>>> 13a4da626584afd5ceee62098bea4847304c25e4
 
         /// <summary>
         /// evento para traer el fomulario de viajes
@@ -128,22 +119,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-//<<<<<<< HEAD
-        private void registralaToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /* Usuario usuario = (Usuario)usuarioLogueado;
-             TarjetaNacional nuevaTarjetaNacional = new TarjetaNacional(1002, 500, Listados.ViajeTarjeta1001);
-             TarjetaInternacional nuevaTarjetaInternacional = new TarjetaInternacional(5002, 3000, Listados.ViajeTarjeta1001);
-
-
-
-            // UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuario, "1002",nuevaTarjetaNacional);
-             FormInicio formw = new FormInicio(usuario);
-             formw.Show();*/
-
-            FormRegistrarTarjeta registrandola = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
-            registrandola.Show();
-//=======
         private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formBaja.TraerUsuario(usuarioLogueado);
@@ -152,7 +127,12 @@ namespace ProyectoSUBEAlfonzoFatala
             formBaja.Dock = DockStyle.Fill;
             this.Controls.Add(formBaja);
             formBaja.Show();
-//>>>>>>> 13a4da626584afd5ceee62098bea4847304c25e4
+        }
+
+        private void cOMPRARToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormRegistrarTarjeta formComprar = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
+            formComprar.Show();
         }
     }
 }
