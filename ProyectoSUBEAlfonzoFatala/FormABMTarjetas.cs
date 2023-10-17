@@ -61,7 +61,6 @@ namespace ProyectoSUBEAlfonzoFatala
         }
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
-            // Cuando cambia la selección de un radio botón
             SetDataGridView();
         }
         private void SetDataGridView()
@@ -82,5 +81,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Limpia cualquier estilo si no hay selección
             }
         }
+
+        
     }
 }

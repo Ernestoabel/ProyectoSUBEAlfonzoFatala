@@ -18,7 +18,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
         }
-
+        string tarjeta;
         private void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
@@ -64,6 +64,7 @@ namespace ProyectoSUBEAlfonzoFatala
             this.dataGridUsuarios.DataSource = Listados.listaUsuarios;
             SetDataGridViewStyle();
             dataGridUsuarios.CellValueChanged += dataGridUsuarios_CellValueChanged;
+            dataGridUsuarios.CellDoubleClick += DataGridView_CellDoubleClick;
         }
 
         private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
@@ -100,6 +101,75 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+        }
+
+        private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
+        {
+            bool bandera = true;
+            if (e.RowIndex >= 0 && e.RowIndex < dataGridUsuarios.Rows.Count)
+            {
+                DataGridViewRow selectedRow = dataGridUsuarios.Rows[e.RowIndex];
+
+                object usuario = dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
+                if (usuario is UsuarioArgentino)
+                {
+                    UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
+                    tarjeta = tarjetaBaja.TarjetaNacional.ToString();
+                }
+                else if (usuario is UsuarioExtranjero)
+                {
+                    UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
+                    tarjeta = tarjetaBaja.TarjetaInternacional.ToString();
+                }
+                else
+                {
+                    MessageBox.Show("Este usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    bandera = false;
+                }
+
+                if (bandera)
+                {
+                    DialogResult result = MessageBox.Show("Quiere dar de baja la Tarjeta: " + tarjeta, "Baja de tarjeta",
+                                                          MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+
+                    if (result == DialogResult.Yes)
+                    {
+                        if (usuario is UsuarioArgentino)
+                        {
+                            UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
+                            int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
+
+                            if (index != -1)
+                            {
+                                UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
+
+                                Listados.listaUsuarios.RemoveAt(index);
+
+                                Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                            }
+
+                        }
+                        else if (usuario is UsuarioExtranjero)
+                        {
+                            UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
+                            int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
+
+                            if (index != -1)
+                            {
+                                UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
+
+                                Listados.listaUsuarios.RemoveAt(index);
+
+                                Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                            }
+                        }
+                    }
+                    else if (result == DialogResult.No)
+                    {
+                        this.Close();
+                    }
+                }
+            }
         }
     }
 }
