@@ -17,13 +17,19 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormAdminMensajes()
         {
             InitializeComponent();
-            listaMostrarMensajes = Listados.listaBajas;
+            listaMostrarMensajes = ArchivoMensaje.listaBajas;
         }
 
         
 
         private void SetDataGridViewStyle()
         {
+            this.dataGridMensajes.DataBindingComplete += (sender, e) =>
+            {
+                // Establece el ancho de la primera columna (índice 0) a 200 pixels
+                if (this.dataGridMensajes.Columns.Count > 0)
+                    this.dataGridMensajes.Columns[0].Width = 80;
+            };
             // Establece el estilo de las celdas
             this.dataGridMensajes.DefaultCellStyle.Font = new Font("Arial", 12);
             this.dataGridMensajes.DefaultCellStyle.ForeColor = Color.Black;

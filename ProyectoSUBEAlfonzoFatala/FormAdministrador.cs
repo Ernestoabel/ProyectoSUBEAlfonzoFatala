@@ -52,7 +52,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             if (e.ClickedItem != mensajesToolStripMenuItem1)
             {
-                formABMUsuarios.Hide();
+                formMensajes.Hide();
             }
         }
 
