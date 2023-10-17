@@ -90,6 +90,7 @@
             txtDocumento.Size = new Size(160, 23);
             txtDocumento.TabIndex = 4;
             txtDocumento.TextChanged += txtDocumento_TextChanged;
+            txtDocumento.KeyPress += txtDocumento_KeyPress;
             // 
             // lblNacionalidad
             // 
@@ -156,6 +157,7 @@
             txtClave.Size = new Size(160, 23);
             txtClave.TabIndex = 10;
             txtClave.TextChanged += txtClave_TextChanged;
+            txtClave.KeyPress += txtClave_KeyPress;
             // 
             // btnContinuar
             // 

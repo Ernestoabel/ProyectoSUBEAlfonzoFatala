@@ -314,7 +314,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void txtRepetirClave_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            if (txtRepetirClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
             {
                 e.Handled = true;
             }

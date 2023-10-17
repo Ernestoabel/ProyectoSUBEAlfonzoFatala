@@ -60,11 +60,11 @@ namespace ProyectoSUBEAlfonzoFatala
                 // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
                 btnContinuar.Enabled = false;
             }
-  
+
 
         }
 
-    private void btnContinuar_Click(object sender, EventArgs e)
+        private void btnContinuar_Click(object sender, EventArgs e)
         {
             bool esArgentino = rdoArgentino.Checked;
             bool esExtranjero = rdoExtranjero.Checked;
@@ -127,6 +127,37 @@ namespace ProyectoSUBEAlfonzoFatala
             FormInicio form = new FormInicio(usuarioLogueado);
             form.Show();
 
+        }
+
+        private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
+            {
+                // Obtener el texto actual del TextBox
+                string dniIngresado = txtDocumento.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (dniIngresado.Length < 9 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true; // Cancelar la entrada si ya hay 9 caracteres
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la entrada del carácter
+            }
         }
     }
 }
