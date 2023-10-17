@@ -16,7 +16,7 @@ namespace Entidades
         {
             Id = id;
             Saldo = saldo;
-            Viajes = viajes;
+            Viajes = new List<Viajes>();
         }
         public Tarjeta()
         {

@@ -24,9 +24,7 @@ namespace Entidades
             TieneTarjeta = false;
         }
         public Usuario()
-        {
-
-        
+        { 
         }
 
         public string Nombre { get => _nombre; set => _nombre = value; }

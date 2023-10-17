@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -25,10 +26,18 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             //this.IsMdiContainer = true;
+
+        }
+        private void FormRegistro_Load(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = false;
+
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
         {
+            bool claveValida = ValidarClaves();
+
             BorrarMensajeError();
             if (ValidarCampos())
             {
@@ -38,7 +47,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 pbrPasos.PerformStep();
                 lblPaso1.Text = "Paso 2";
-                btnContinuar.Location = new System.Drawing.Point(377, 300);
+
 
                 lblClave.Visible = true;
                 txtClave.Visible = true;
@@ -47,28 +56,22 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 GuardarDatos();
 
-                if (ValidarClaves())
-                {
-                    //contador++;
-                    GuardarDatos();
-                    MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
-                    //this.Hide();
-                    Usuario usuario = nuevoUsuarioRegistrado;
-                    MostrarUsuarioEnControles(usuario);
-                    Listados.AgregarUsuario(usuario);
-                    //UsuarioArgentino nuevoUser = new UsuarioArgentino(nombre, apellido, dni, ca,"", nuevaTarjetaNacional );
-
-                    FormInicio formInicio = new FormInicio(usuario);
-                    formInicio.Show();
-                }
-                /*else
-                {
-                    string error;
-                    error = $"Las claves no coinciden";
-                    MessageBox.Show(error,"Ingrese la clave de nuevo",MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }*/
-
             }
+            if (claveValida)
+            {
+
+                GuardarDatos();
+                MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
+                //this.Hide();
+                Usuario usuario = nuevoUsuarioRegistrado;
+                MostrarUsuarioEnControles(usuario);
+                Listados.AgregarUsuario(usuario);
+                Listados.listaUsuarios.Add(usuario);
+
+                FormInicio formInicio = new FormInicio(usuario);
+                formInicio.Show();
+            }
+
 
 
         }
@@ -83,7 +86,7 @@ namespace ProyectoSUBEAlfonzoFatala
             if (contador == 1)
             {
 
-               // Tarjeta nuevaTarjeta = new TarjetaNacional();
+                // Tarjeta nuevaTarjeta = new TarjetaNacional();
                 //Tarjeta nuevaTarjetaInternacional = new TarjetaInternacional();
 
 
@@ -93,22 +96,33 @@ namespace ProyectoSUBEAlfonzoFatala
                 bool tieneTarjeta = false;
 
 
+
                 nuevoUsuarioRegistrado.Nombre = nombre;
                 nuevoUsuarioRegistrado.Apellido = apellido;
                 nuevoUsuarioRegistrado.Dni = dni;
                 nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
+                nuevoUsuarioRegistrado = new UsuarioSinTarjeta();
+
 
             }
             else
             {
-                 
-                string clave = txtClave.Text;
-                nuevoUsuarioRegistrado.Clave = clave;
+                if (contador > 1)
+                {
+                    string clave = txtClave.Text;
+                    string nombre = txtNombre.Text;
+                    string apellido = txtApellido.Text;
+                    string dni = txtDni.Text;
+                    bool tieneTarjeta = false;
 
-                
+                    nuevoUsuarioRegistrado.Nombre = nombre;
+                    nuevoUsuarioRegistrado.Apellido = apellido;
+                    nuevoUsuarioRegistrado.Dni = dni;
+                    nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
+                    nuevoUsuarioRegistrado.Clave = clave;
 
-                // listaUsuarios.Add(usuario);
-               
+
+                }
 
 
             }
@@ -167,19 +181,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 errorProviderRegistro.SetError(txtDni, "Ingresar DNI");
             }
 
-
-            /* if (txtClave.Text == "")
-             {
-                 ok = false;
-                 errorProviderRegistro.SetError(txtClave, "Ingresar Clave");
-             }
-             if (txtRepetirClave.Text == "")
-             {
-                 ok = false;
-                 errorProviderRegistro.SetError(txtRepetirClave, "Ingresar Clave");
-             }*/
-
-
             return ok;
         }
 
@@ -198,7 +199,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 ok = false;
                 errorProviderRegistro.SetError(txtRepetirClave, "Repetir Clave");
             }
-            if(txtClave.Text != txtRepetirClave.Text)
+            if (txtClave.Text != txtRepetirClave.Text)
             {
                 ok = false;
                 errorProviderRegistro.SetError(txtRepetirClave, "Las Claves no coinciden");
@@ -207,20 +208,33 @@ namespace ProyectoSUBEAlfonzoFatala
             return ok;
         }
 
-        private bool ConfirmarClave()
+        private bool HabilitarContinuar()
         {
-            bool ok;
-            ok= true;
-
-            if(txtClave.Text != txtRepetirClave.Text)
+            if (string.IsNullOrEmpty(txtNombre.Text) ||
+             string.IsNullOrEmpty(txtApellido.Text) ||
+             string.IsNullOrEmpty(txtDni.Text))
             {
-                ok = false;
-                errorProviderRegistro.SetError(txtClave, "Las claves no coinciden");
+                return false; // Faltan datos obligatorios
             }
 
-            return ok;
+            return true; // Todos los datos obligatorios están completos
 
         }
+
+        private bool HabilitarContinuarClave()
+        {
+            if (string.IsNullOrEmpty(txtRepetirClave.Text) ||
+             string.IsNullOrEmpty(txtClave.Text))
+             
+            {
+                return false; // Faltan datos obligatorios
+            }
+
+            return true; // Todos los datos obligatorios están completos
+
+        }
+
+
 
 
         private void BorrarMensajeError()
@@ -243,6 +257,33 @@ namespace ProyectoSUBEAlfonzoFatala
                 errorProviderRegistro.SetError(txtDni, "Ingrese valor numerico");
             }
 
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuar();
+        }
+
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuar();
+        }
+
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuar();
+        }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+          
+             btnContinuar.Enabled = HabilitarContinuarClave();
+          
+        }
+
+        private void txtRepetirClave_TextChanged(object sender, EventArgs e)
+        {
+              btnContinuar.Enabled = HabilitarContinuarClave();
         }
     }
 }

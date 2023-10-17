@@ -21,6 +21,11 @@ namespace Entidades
             TarjetaInternacional = tarjetaInternacional;
             TieneTarjeta = true;
         }
+        public UsuarioExtranjero()
+        {
+        }
+
+
 
         /// <summary>
         /// Metodo heredado para validadr que el DNI sea de personas con residencia

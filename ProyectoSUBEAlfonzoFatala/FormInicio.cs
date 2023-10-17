@@ -24,7 +24,14 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             this.usuarioLogueado = usuario;
         }
-        
+        /*public FormInicio(object usuario, Tarjeta tarjeta, Viajes viajes)
+        {
+            InitializeComponent();
+            this.usuarioLogueado = usuario;
+
+        }*/
+
+
         /// <summary>
         /// evento para traer el fomulario de viajes
         /// con un metodo para enviar el usuario logueado
@@ -92,7 +99,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormRegistro formRegistro = new FormRegistro();
-            
+
             formRegistro.Show();
 
 
@@ -111,6 +118,22 @@ namespace ProyectoSUBEAlfonzoFatala
         private void FormInicio_FormClosing(object sender, FormClosingEventArgs e)
         {
 
+        }
+
+        private void registralaToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /* Usuario usuario = (Usuario)usuarioLogueado;
+             TarjetaNacional nuevaTarjetaNacional = new TarjetaNacional(1002, 500, Listados.ViajeTarjeta1001);
+             TarjetaInternacional nuevaTarjetaInternacional = new TarjetaInternacional(5002, 3000, Listados.ViajeTarjeta1001);
+
+
+
+            // UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuario, "1002",nuevaTarjetaNacional);
+             FormInicio formw = new FormInicio(usuario);
+             formw.Show();*/
+
+            FormRegistrarTarjeta registrandola = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
+            registrandola.Show();
         }
     }
 }

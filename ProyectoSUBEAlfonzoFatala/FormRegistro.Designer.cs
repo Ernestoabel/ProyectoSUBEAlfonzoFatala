@@ -80,6 +80,7 @@
             txtNombre.PlaceholderText = "Ingrese su nombre";
             txtNombre.Size = new Size(182, 23);
             txtNombre.TabIndex = 2;
+            txtNombre.TextChanged += txtNombre_TextChanged;
             // 
             // lblApellido
             // 
@@ -101,6 +102,7 @@
             txtApellido.PlaceholderText = "Ingrese su apellido";
             txtApellido.Size = new Size(182, 23);
             txtApellido.TabIndex = 4;
+            txtApellido.TextChanged += txtApellido_TextChanged;
             // 
             // lblDni
             // 
@@ -122,6 +124,7 @@
             txtDni.PlaceholderText = "Ingrese su documento ";
             txtDni.Size = new Size(182, 23);
             txtDni.TabIndex = 6;
+            txtDni.TextChanged += txtDni_TextChanged;
             txtDni.Validating += txtDni_Validating;
             // 
             // btnContinuar
@@ -182,6 +185,7 @@
             txtClave.Size = new Size(182, 23);
             txtClave.TabIndex = 13;
             txtClave.Visible = false;
+            txtClave.TextChanged += txtClave_TextChanged;
             // 
             // lblClave
             // 
@@ -219,6 +223,7 @@
             txtRepetirClave.Size = new Size(182, 23);
             txtRepetirClave.TabIndex = 16;
             txtRepetirClave.Visible = false;
+            txtRepetirClave.TextChanged += txtRepetirClave_TextChanged;
             // 
             // errorProviderRegistro
             // 
@@ -247,7 +252,9 @@
             Controls.Add(lblRegistrar);
             FormBorderStyle = FormBorderStyle.None;
             Name = "FormRegistro";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "FormRegistro";
+            Load += FormRegistro_Load;
             ((System.ComponentModel.ISupportInitialize)errorProviderRegistro).EndInit();
             ResumeLayout(false);
             PerformLayout();

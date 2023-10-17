@@ -18,7 +18,7 @@ namespace Entidades
         }
         public UsuarioArgentino()
         {
-
+            
         }
 
         /// <summary>
