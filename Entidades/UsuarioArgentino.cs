@@ -4,6 +4,8 @@ namespace Entidades
 {
     public class UsuarioArgentino : Usuario
     {
+        //private static int _ultimoID = 1002;
+
         private string _idSubeArgentina;
         private TarjetaNacional _tarjetaNacional;
 

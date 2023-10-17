@@ -40,6 +40,7 @@
             lblClave = new Label();
             txtClave = new TextBox();
             btnContinuar = new Button();
+            btnCancelarRegistro = new Button();
             SuspendLayout();
             // 
             // lblTitulo
@@ -150,6 +151,7 @@
             // 
             txtClave.Location = new Point(34, 286);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = "Ingrese su clave";
             txtClave.Size = new Size(160, 23);
             txtClave.TabIndex = 10;
@@ -160,7 +162,7 @@
             btnContinuar.BackColor = Color.FromArgb(0, 0, 64);
             btnContinuar.Font = new Font("Trebuchet MS", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             btnContinuar.ForeColor = Color.White;
-            btnContinuar.Location = new Point(339, 356);
+            btnContinuar.Location = new Point(343, 339);
             btnContinuar.Name = "btnContinuar";
             btnContinuar.Size = new Size(163, 29);
             btnContinuar.TabIndex = 11;
@@ -168,12 +170,26 @@
             btnContinuar.UseVisualStyleBackColor = false;
             btnContinuar.Click += btnContinuar_Click;
             // 
+            // btnCancelarRegistro
+            // 
+            btnCancelarRegistro.BackColor = Color.FromArgb(192, 64, 0);
+            btnCancelarRegistro.Font = new Font("Trebuchet MS", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelarRegistro.ForeColor = Color.White;
+            btnCancelarRegistro.Location = new Point(343, 374);
+            btnCancelarRegistro.Name = "btnCancelarRegistro";
+            btnCancelarRegistro.Size = new Size(163, 29);
+            btnCancelarRegistro.TabIndex = 12;
+            btnCancelarRegistro.Text = "Cancelar";
+            btnCancelarRegistro.UseVisualStyleBackColor = false;
+            btnCancelarRegistro.Click += btnCancelarRegistro_Click;
+            // 
             // FormRegistrarTarjeta
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(53, 53, 53);
             ClientSize = new Size(549, 422);
+            Controls.Add(btnCancelarRegistro);
             Controls.Add(btnContinuar);
             Controls.Add(txtClave);
             Controls.Add(lblClave);
@@ -207,5 +223,6 @@
         private Label lblClave;
         private TextBox txtClave;
         private Button btnContinuar;
+        private Button btnCancelarRegistro;
     }
 }

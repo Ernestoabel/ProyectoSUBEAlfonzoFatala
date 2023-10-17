@@ -177,12 +177,8 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para ir al formulario de alta de cliente
         private void btnAlta_Click(object sender, EventArgs e)
         {
-
             FormRegistro formRegistro = new FormRegistro();
-
             formRegistro.Show();
-
-            this.Hide();
 
         }
 

@@ -109,8 +109,9 @@
             // 
             // viajesToolStripMenuItem
             // 
+            viajesToolStripMenuItem.Image = (Image)resources.GetObject("viajesToolStripMenuItem.Image");
             viajesToolStripMenuItem.Name = "viajesToolStripMenuItem";
-            viajesToolStripMenuItem.Size = new Size(66, 25);
+            viajesToolStripMenuItem.Size = new Size(82, 25);
             viajesToolStripMenuItem.Text = "Viajes";
             viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
             // 

@@ -14,7 +14,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
         public object usuarioLogueado;
-        
+
 
         /// <summary>
         /// Formulario parametrizado
@@ -98,9 +98,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
         {
             FormRegistro formRegistro = new FormRegistro();
-
             formRegistro.Show();
-
+            this.Close();
 
         }
 
@@ -133,6 +132,8 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             FormRegistrarTarjeta formComprar = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
             formComprar.Show();
+
+            this.Hide();
         }
     }
 }

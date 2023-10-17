@@ -45,6 +45,7 @@
             lblRepetirClave = new Label();
             txtRepetirClave = new TextBox();
             errorProviderRegistro = new ErrorProvider(components);
+            toolTipClave = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)errorProviderRegistro).BeginInit();
             SuspendLayout();
             // 
@@ -80,7 +81,9 @@
             txtNombre.PlaceholderText = "Ingrese su nombre";
             txtNombre.Size = new Size(182, 23);
             txtNombre.TabIndex = 2;
+            toolTipClave.SetToolTip(txtNombre, "Ingrese solo letras por favor.");
             txtNombre.TextChanged += txtNombre_TextChanged;
+            txtNombre.KeyPress += txtNombre_KeyPress;
             // 
             // lblApellido
             // 
@@ -102,7 +105,9 @@
             txtApellido.PlaceholderText = "Ingrese su apellido";
             txtApellido.Size = new Size(182, 23);
             txtApellido.TabIndex = 4;
+            toolTipClave.SetToolTip(txtApellido, "Ingrese solo letras por favor.");
             txtApellido.TextChanged += txtApellido_TextChanged;
+            txtApellido.KeyPress += txtApellido_KeyPress;
             // 
             // lblDni
             // 
@@ -124,7 +129,9 @@
             txtDni.PlaceholderText = "Ingrese su documento ";
             txtDni.Size = new Size(182, 23);
             txtDni.TabIndex = 6;
+            toolTipClave.SetToolTip(txtDni, "El documento tiene de 8 o 9 caracteres. \r\n");
             txtDni.TextChanged += txtDni_TextChanged;
+            txtDni.KeyPress += txtDni_KeyPress;
             txtDni.Validating += txtDni_Validating;
             // 
             // btnContinuar
@@ -184,8 +191,10 @@
             txtClave.PlaceholderText = "Ingrese clave numerica";
             txtClave.Size = new Size(182, 23);
             txtClave.TabIndex = 13;
+            toolTipClave.SetToolTip(txtClave, "La clave debe ser de 4 digitos numericos.");
             txtClave.Visible = false;
             txtClave.TextChanged += txtClave_TextChanged;
+            txtClave.KeyPress += txtClave_KeyPress;
             // 
             // lblClave
             // 
@@ -222,8 +231,10 @@
             txtRepetirClave.PlaceholderText = "Ingrese de nuevo su clave";
             txtRepetirClave.Size = new Size(182, 23);
             txtRepetirClave.TabIndex = 16;
+            toolTipClave.SetToolTip(txtRepetirClave, "La clave debe ser de 4 digitos numericos.");
             txtRepetirClave.Visible = false;
             txtRepetirClave.TextChanged += txtRepetirClave_TextChanged;
+            txtRepetirClave.KeyPress += txtRepetirClave_KeyPress;
             // 
             // errorProviderRegistro
             // 
@@ -278,5 +289,6 @@
         private Label lblRepetirClave;
         private TextBox txtRepetirClave;
         private ErrorProvider errorProviderRegistro;
+        private ToolTip toolTipClave;
     }
 }

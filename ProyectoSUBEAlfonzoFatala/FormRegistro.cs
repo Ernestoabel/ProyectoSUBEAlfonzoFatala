@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -26,6 +27,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             //this.IsMdiContainer = true;
+
 
         }
         private void FormRegistro_Load(object sender, EventArgs e)
@@ -210,6 +212,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private bool HabilitarContinuar()
         {
+
+
             if (string.IsNullOrEmpty(txtNombre.Text) ||
              string.IsNullOrEmpty(txtApellido.Text) ||
              string.IsNullOrEmpty(txtDni.Text))
@@ -223,9 +227,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private bool HabilitarContinuarClave()
         {
-            if (string.IsNullOrEmpty(txtRepetirClave.Text) ||
-             string.IsNullOrEmpty(txtClave.Text))
-             
+            string clave = txtClave.Text;
+            string repetirClave = txtRepetirClave.Text;
+
+            if (string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 ||
+             string.IsNullOrEmpty(repetirClave) && repetirClave.All(char.IsDigit) && repetirClave.Length == 4)
             {
                 return false; // Faltan datos obligatorios
             }
@@ -276,14 +282,81 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void txtClave_TextChanged(object sender, EventArgs e)
         {
-          
-             btnContinuar.Enabled = HabilitarContinuarClave();
-          
+
+            btnContinuar.Enabled = HabilitarContinuarClave();
+
         }
 
         private void txtRepetirClave_TextChanged(object sender, EventArgs e)
         {
-              btnContinuar.Enabled = HabilitarContinuarClave();
+            btnContinuar.Enabled = HabilitarContinuarClave();
+        }
+
+        /// <summary>
+        /// metodopara agregar solo 4 digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true; // Cancela la entrada del carácter
+            }
+        }
+
+        /// <summary>
+        /// metodo para solo ingresar 4 digitos en la clave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtRepetirClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            {
+                e.Handled = true;
+            }
+        }
+
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
+            {
+                // Obtener el texto actual del TextBox
+                string dniIngresado = txtDni.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (dniIngresado.Length < 9 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true; // Cancelar la entrada si ya hay 9 caracteres
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
         }
     }
 }
