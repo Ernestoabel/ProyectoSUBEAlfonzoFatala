@@ -35,7 +35,7 @@
             registrateToolStripMenuItem = new ToolStripMenuItem();
             iNICIARSESIONToolStripMenuItem = new ToolStripMenuItem();
             cOMPRARToolStripMenuItem = new ToolStripMenuItem();
-            registralaToolStripMenuItem = new ToolStripMenuItem();
+            bajaToolStripMenuItem = new ToolStripMenuItem();
             consultaTiToolStripMenuItem = new ToolStripMenuItem();
             viajesToolStripMenuItem = new ToolStripMenuItem();
             menuStrip1.SuspendLayout();
@@ -46,7 +46,7 @@
             menuStrip1.BackColor = Color.White;
             menuStrip1.BackgroundImageLayout = ImageLayout.None;
             menuStrip1.Font = new Font("Microsoft YaHei", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            menuStrip1.Items.AddRange(new ToolStripItem[] { rEGISTRESEToolStripMenuItem, iNICIARSESIONToolStripMenuItem, cOMPRARToolStripMenuItem, registralaToolStripMenuItem, consultaTiToolStripMenuItem, viajesToolStripMenuItem });
+            menuStrip1.Items.AddRange(new ToolStripItem[] { rEGISTRESEToolStripMenuItem, iNICIARSESIONToolStripMenuItem, cOMPRARToolStripMenuItem, bajaToolStripMenuItem, consultaTiToolStripMenuItem, viajesToolStripMenuItem });
             menuStrip1.Location = new Point(0, 0);
             menuStrip1.Name = "menuStrip1";
             menuStrip1.Size = new Size(800, 29);
@@ -90,13 +90,13 @@
             cOMPRARToolStripMenuItem.Size = new Size(112, 25);
             cOMPRARToolStripMenuItem.Text = "Comprala";
             // 
-            // registralaToolStripMenuItem
+            // bajaToolStripMenuItem
             // 
-            registralaToolStripMenuItem.Image = (Image)resources.GetObject("registralaToolStripMenuItem.Image");
-            registralaToolStripMenuItem.Name = "registralaToolStripMenuItem";
-            registralaToolStripMenuItem.Size = new Size(112, 25);
-            registralaToolStripMenuItem.Text = "Registrala";
-            registralaToolStripMenuItem.Click += registralaToolStripMenuItem_Click;
+            bajaToolStripMenuItem.Image = (Image)resources.GetObject("bajaToolStripMenuItem.Image");
+            bajaToolStripMenuItem.Name = "bajaToolStripMenuItem";
+            bajaToolStripMenuItem.Size = new Size(126, 25);
+            bajaToolStripMenuItem.Text = "Pedi la baja";
+            bajaToolStripMenuItem.Click += bajaToolStripMenuItem_Click;
             // 
             // consultaTiToolStripMenuItem
             // 
@@ -139,7 +139,7 @@
         private ToolStripMenuItem rEGISTRESEToolStripMenuItem;
         private ToolStripMenuItem iNICIARSESIONToolStripMenuItem;
         private ToolStripMenuItem cOMPRARToolStripMenuItem;
-        private ToolStripMenuItem registralaToolStripMenuItem;
+        private ToolStripMenuItem bajaToolStripMenuItem;
         private ToolStripMenuItem viajesToolStripMenuItem;
         private ToolStripMenuItem logueateToolStripMenuItem;
         private ToolStripMenuItem consultaTiToolStripMenuItem;

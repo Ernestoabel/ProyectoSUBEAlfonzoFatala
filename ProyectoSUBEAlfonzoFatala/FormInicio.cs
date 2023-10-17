@@ -12,6 +12,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormViajesPrueba formViajes = new FormViajesPrueba();
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
+        FormBajaUsuario formBaja = new FormBajaUsuario();
         public object usuarioLogueado;
 
         /// <summary>
@@ -24,14 +25,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             this.usuarioLogueado = usuario;
         }
-        /*public FormInicio(object usuario, Tarjeta tarjeta, Viajes viajes)
-        {
-            InitializeComponent();
-            this.usuarioLogueado = usuario;
-
-        }*/
-
-
+        
         /// <summary>
         /// evento para traer el fomulario de viajes
         /// con un metodo para enviar el usuario logueado
@@ -63,6 +57,10 @@ namespace ProyectoSUBEAlfonzoFatala
             if (e.ClickedItem != consultaTiToolStripMenuItem)
             {
                 formTitularidad.Hide();
+            }
+            if (e.ClickedItem != bajaToolStripMenuItem)
+            {
+                formBaja.Hide();
             }
 
         }
@@ -120,20 +118,14 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        private void registralaToolStripMenuItem_Click(object sender, EventArgs e)
+        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            /* Usuario usuario = (Usuario)usuarioLogueado;
-             TarjetaNacional nuevaTarjetaNacional = new TarjetaNacional(1002, 500, Listados.ViajeTarjeta1001);
-             TarjetaInternacional nuevaTarjetaInternacional = new TarjetaInternacional(5002, 3000, Listados.ViajeTarjeta1001);
-
-
-
-            // UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuario, "1002",nuevaTarjetaNacional);
-             FormInicio formw = new FormInicio(usuario);
-             formw.Show();*/
-
-            FormRegistrarTarjeta registrandola = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
-            registrandola.Show();
+            formBaja.TraerUsuario(usuarioLogueado);
+            formBaja.TopLevel = false;
+            formBaja.FormBorderStyle = FormBorderStyle.None;
+            formBaja.Dock = DockStyle.Fill;
+            this.Controls.Add(formBaja);
+            formBaja.Show();
         }
     }
 }

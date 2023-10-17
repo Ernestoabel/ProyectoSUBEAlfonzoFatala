@@ -19,6 +19,7 @@ namespace Entidades
     /// </summary>
     public class ManejoDeListados
     {
+        public static List<string> listaBajas = new List<string>();
         public static Usuario ObtenerUsuarioPorDniYTarjeta(string dni)
         {
             Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
@@ -91,4 +92,5 @@ namespace Entidades
             return usuarios;
         }
     }
+
 }

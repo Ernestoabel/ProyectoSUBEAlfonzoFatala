@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -44,10 +45,17 @@ namespace ProyectoSUBEAlfonzoFatala
             dataGridUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
             // Las celdas no se puede modificar
-            dataGridUsuarios.ReadOnly = true;
+            //dataGridUsuarios.ReadOnly = true;
+
+            // Habilita la edición para la columna de la clave
+            dataGridUsuarios.Columns["Nombre"].ReadOnly = true;
+            dataGridUsuarios.Columns["Apellido"].ReadOnly = true;
+            dataGridUsuarios.Columns["Dni"].ReadOnly = true;
+            dataGridUsuarios.Columns["Clave"].ReadOnly = false;
+            dataGridUsuarios.Columns["TieneTarjeta"].ReadOnly = true;
 
             dataGridUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            
+
 
         }
 
@@ -55,6 +63,43 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             this.dataGridUsuarios.DataSource = Listados.listaUsuarios;
             SetDataGridViewStyle();
+            dataGridUsuarios.CellValueChanged += dataGridUsuarios_CellValueChanged;
+        }
+
+        private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
+            {
+                string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+
+                object usuario = dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
+                if (usuario is UsuarioSinTarjeta)
+                {
+                    UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
+                    usuarioACambiar.Clave = nuevaClave;
+                }
+                else if (usuario is UsuarioArgentino)
+                {
+                    UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
+                    usuarioACambiar.Clave = nuevaClave;
+                }
+                else if (usuario is UsuarioExtranjero)
+                {
+                    UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
+                    usuarioACambiar.Clave = nuevaClave;
+                }
+                else if (usuario is UsuarioAdministrador)
+                {
+                    MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+
+            }
+
+        }
+
+        private void btnGuardar_Click(object sender, EventArgs e)
+        {
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
         }
     }
 }

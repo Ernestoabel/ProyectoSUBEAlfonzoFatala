@@ -29,23 +29,35 @@
         private void InitializeComponent()
         {
             dataGridUsuarios = new DataGridView();
+            btnGuardar = new Button();
             ((System.ComponentModel.ISupportInitialize)dataGridUsuarios).BeginInit();
             SuspendLayout();
             // 
             // dataGridUsuarios
             // 
             dataGridUsuarios.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridUsuarios.Location = new Point(12, 64);
+            dataGridUsuarios.Location = new Point(12, 86);
             dataGridUsuarios.Name = "dataGridUsuarios";
             dataGridUsuarios.RowTemplate.Height = 25;
-            dataGridUsuarios.Size = new Size(776, 374);
+            dataGridUsuarios.Size = new Size(776, 352);
             dataGridUsuarios.TabIndex = 0;
+            // 
+            // btnGuardar
+            // 
+            btnGuardar.Location = new Point(12, 38);
+            btnGuardar.Name = "btnGuardar";
+            btnGuardar.Size = new Size(156, 32);
+            btnGuardar.TabIndex = 1;
+            btnGuardar.Text = "Guardar cambios";
+            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Click += btnGuardar_Click;
             // 
             // FormABMUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnGuardar);
             Controls.Add(dataGridUsuarios);
             Name = "FormABMUsuarios";
             Text = "FormABMUsuarios";
@@ -57,5 +69,6 @@
         #endregion
 
         private DataGridView dataGridUsuarios;
+        private Button btnGuardar;
     }
 }

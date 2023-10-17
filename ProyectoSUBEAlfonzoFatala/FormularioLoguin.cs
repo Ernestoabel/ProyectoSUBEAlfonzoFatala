@@ -25,6 +25,10 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             CargarJson();
+            /*
+            Listados.listaBajas.Add(new Dictionary<int, string> { { 1, "Mensajes para el administrador" } });
+            Listados.GuardarMensajesBajaEnArchivo(Listados.listaBajas);*/
+            ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
         }
 
         /// <summary>
@@ -75,7 +79,8 @@ namespace ProyectoSUBEAlfonzoFatala
                             FormInicio inicio = new FormInicio(usuarioLogueado);
                             inicio.Show();
                             this.Hide();
-                        }  
+                        }
+                        else { throw new ClaveInvalidaException(); }
                     }
                     else if (usuario is UsuarioArgentino)
                     {
@@ -88,7 +93,7 @@ namespace ProyectoSUBEAlfonzoFatala
                             inicio.Show();
                             this.Hide();
                         }
-                            
+                        else { throw new ClaveInvalidaException(); }
                     }
                     else if (usuario is UsuarioExtranjero)
                     {
@@ -101,7 +106,8 @@ namespace ProyectoSUBEAlfonzoFatala
                             inicio.Show();
                             this.Hide();
                         }
-                        
+                        else { throw new ClaveInvalidaException(); }
+
                     }
                     else if (usuario is UsuarioAdministrador)
                     {
@@ -113,12 +119,17 @@ namespace ProyectoSUBEAlfonzoFatala
                             admin.Show();
                             this.Hide();
                         }
+                        else { throw new ClaveInvalidaException(); }
                     }
                 }
                 else
                 {
                     throw new Exception();
                 }
+            }
+            catch (ClaveInvalidaException ex)
+            {
+                MessageBox.Show("La clave ingresada es incorrecta. Por favor, inténtelo de nuevo.", "Error de clave", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             catch (Exception)
             {

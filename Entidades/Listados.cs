@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Serialization;
 using Newtonsoft.Json;
 
 namespace Entidades
@@ -19,6 +20,7 @@ namespace Entidades
         public static List<Viajes> ViajeTarjeta1001 = new List<Viajes>();
         public static List<Viajes> ViajeTarjeta5001 = new List<Viajes>();
         public static List<Viajes> listaDeViajes = new List<Viajes>();
+        
 
 
         #region Metodos
@@ -208,6 +210,7 @@ namespace Entidades
             return tarjetas;
         }
 
+        
         #endregion
 
 

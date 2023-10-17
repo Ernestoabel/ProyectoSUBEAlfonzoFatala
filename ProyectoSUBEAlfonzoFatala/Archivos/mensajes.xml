@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ArrayOfBajaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <BajaData Indice="1">
+    <Mensaje>Mensajes para el administrador</Mensaje>
+  </BajaData>
+  <BajaData Indice="2">
+    <Mensaje>El usuario 20000000 con la tarjeta 1001 quiere la baja</Mensaje>
+  </BajaData>
+</ArrayOfBajaData>
