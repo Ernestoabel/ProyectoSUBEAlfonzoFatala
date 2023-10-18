@@ -212,11 +212,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private bool HabilitarContinuar()
         {
-
+            string dniIngresado = txtDni.Text;
 
             if (string.IsNullOrEmpty(txtNombre.Text) ||
              string.IsNullOrEmpty(txtApellido.Text) ||
-             string.IsNullOrEmpty(txtDni.Text))
+             string.IsNullOrEmpty(dniIngresado) && dniIngresado.Length >= 8 && dniIngresado.Length <= 9)
             {
                 return false; // Faltan datos obligatorios
             }
@@ -293,7 +293,7 @@ namespace ProyectoSUBEAlfonzoFatala
         }
 
         /// <summary>
-        /// metodopara agregar solo 4 digitos
+        /// eventp para agregar solo 4 digitos
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>

@@ -71,8 +71,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
 
             List<Viajes> nuevosViajes = new List<Viajes>();
-            TarjetaNacional tarjetaNacional = new TarjetaNacional(1002, 5000, nuevosViajes);
-            TarjetaInternacional tarjetaInternacional = new TarjetaInternacional(5002, 3000, nuevosViajes); ;
+            TarjetaNacional tarjetaNacional = new TarjetaNacional(1002, 0, nuevosViajes);
+            TarjetaInternacional tarjetaInternacional = new TarjetaInternacional(5002, 0, nuevosViajes); ;
 
             if (txtDocumento.Text == usuarioLogueado.Dni && txtClave.Text == usuarioLogueado.Clave)
             {
@@ -80,8 +80,9 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 if (esArgentino)
                 {
+                    string idEnString = tarjetaNacional.Id.ToString();
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
-                        usuarioLogueado.Dni, usuarioLogueado.Clave, "1002", tarjetaNacional);
+                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
 
                     Listados.AgregarUsuario(usuarioArgentino);
                     Listados.AgregarTarjetaNacional(tarjetaNacional);
@@ -94,9 +95,10 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
                 else if (esExtranjero)
                 {
+                    string idEnString = tarjetaInternacional.Id.ToString();
                     // UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero();
                     UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
-                        usuarioLogueado.Dni, usuarioLogueado.Clave, "5002", tarjetaInternacional);
+                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
 
                     Listados.AgregarUsuario(usuarioExtranjero);
                     Listados.AgregarTarjetaInternacional(tarjetaInternacional);
