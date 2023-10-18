@@ -25,9 +25,6 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             CargarJson();
-            /*
-            Listados.listaBajas.Add(new Dictionary<int, string> { { 1, "Mensajes para el administrador" } });
-            Listados.GuardarMensajesBajaEnArchivo(Listados.listaBajas);*/
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
         }
 
@@ -145,6 +142,9 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
+            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
+            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();
         }
@@ -152,23 +152,6 @@ namespace ProyectoSUBEAlfonzoFatala
         //boton para llenar el usuario y password con un usuario de la lista
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
-            /*
-            UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
-            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-            Listados.AgregarTarjetaNacional(tarjeta1001);
-            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
-            Listados.AgregarTarjetaInternacional(tarjeta5001);
-            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
-            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
-            UsuarioAdministrador nuevoUsuarioAdmin = new UsuarioAdministrador("Juan", "Perez", "10000001", "1234");
-            Listados.AgregarUsuario(nuevoUsuario);
-            Listados.AgregarUsuario(nuevoUsuArgentino);
-            Listados.AgregarUsuario(nuevoUsuExtrangero);
-            Listados.AgregarUsuario(nuevoUsuarioAdmin);
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-            */
             txtUsuario.Text = "000";
             txtPassword.Text = "1234";
 

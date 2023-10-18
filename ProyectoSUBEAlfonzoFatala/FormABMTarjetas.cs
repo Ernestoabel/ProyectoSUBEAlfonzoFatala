@@ -56,7 +56,7 @@ namespace ProyectoSUBEAlfonzoFatala
             rdArgentinas.CheckedChanged += RadioButton_CheckedChanged;
             rdExtranjeras.CheckedChanged += RadioButton_CheckedChanged;
 
-            // Inicialmente, establece el origen de datos y estilo del DataGridView
+            RefreshDataGridView();
             SetDataGridView();
         }
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
@@ -81,7 +81,13 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Limpia cualquier estilo si no hay selección
             }
         }
+        private void RefreshDataGridView()
+        {
+            dataGridABMTarjetas.DataSource = null;
+            dataGridABMTarjetas.DataSource = Listados.listaUsuarios;
 
-        
+            SetDataGridViewStyle();
+        }
+
     }
 }
