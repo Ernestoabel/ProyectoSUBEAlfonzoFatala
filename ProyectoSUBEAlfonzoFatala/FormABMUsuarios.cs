@@ -101,6 +101,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -166,7 +167,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     }
                     else if (result == DialogResult.No)
                     {
-                        this.Close();
+                        
                     }
                 }
             }
