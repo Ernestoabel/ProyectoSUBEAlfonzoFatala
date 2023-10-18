@@ -20,13 +20,13 @@ namespace Entidades
         /// <param name="viajes"></param>
         public Tarjeta( int id, decimal saldo, List<Viajes> viajes)
         {
-            Id = id;
+            Id = GenerarNuevoId();
             Saldo = saldo;
             Viajes = new List<Viajes>();
         }
         public Tarjeta()
         {
-        
+            
         }
 
         public abstract List<Viajes> Viajes { get; set; }
@@ -35,6 +35,8 @@ namespace Entidades
         public decimal Saldo { get => _saldo; set => _saldo = value; }
 
         public abstract void DesignarId(int UltimoNumeroEnLista);
+
+        protected abstract int GenerarNuevoId();
 
         public bool RestarSaldo(decimal valor)
         {

@@ -8,12 +8,14 @@ namespace Entidades
 {
     public class TarjetaInternacional : Tarjeta
     {
+        private static int proximoId = 5003;
         public TarjetaInternacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
         {
+            id = GenerarNuevoId();
         }
         public TarjetaInternacional()
         {
-
+            
         }
 
 
@@ -22,6 +24,11 @@ namespace Entidades
         public override void DesignarId(int UltimoNumeroEnLista)
         {
             this.Id = UltimoNumeroEnLista;
+        }
+
+        protected override int GenerarNuevoId()
+        {
+            return proximoId++;
         }
     }
 }
