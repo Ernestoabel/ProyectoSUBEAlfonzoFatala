@@ -5,6 +5,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -100,6 +101,35 @@ namespace ProyectoSUBEAlfonzoFatala
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
             this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
             this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
+        }
+
+        private void btnViajar_Click(object sender, EventArgs e)
+        {
+            Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
+            listaViajes = listaViajes + nuevoViaje;
+            if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
+            {
+                int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
+                if (indice >= 0)
+                {
+                    usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
+                    Listados.listaUsuarios.RemoveAt(indice);
+                    Listados.listaUsuarios.Add(usuarioArgentino);
+                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                }
+
+            }
+            else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
+            {
+                int indice = Listados.listaUsuarios.FindIndex(u => u == usuarioExtranjero);
+                if (indice >= 0)
+                {
+                    usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
+                }
+                usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
+            }
+            dtgViajes.DataSource = null;
+            dtgViajes.DataSource = listaViajes;
         }
     }
 }

@@ -11,24 +11,41 @@ namespace Entidades
         private List<Viajes> listaDeViajes = new List<Viajes>();
 
         private DateTime fechaHora;
-        private string medioTransporte;
         private decimal valorBoleto;
+        private EMedioTransporte medioTransporte;
 
         public Viajes()
         {
             
         }
-        public Viajes(DateTime fechaHora, string medioTransporte, decimal valorBoleto)
+        public Viajes(DateTime fechaHora, EMedioTransporte medioTransporte, decimal valorBoleto)
         {
             this.fechaHora = fechaHora;
             this.medioTransporte = medioTransporte;
             this.valorBoleto = valorBoleto;
         }
-        
 
+        public EMedioTransporte MedioTransporte 
+        {
+            get => medioTransporte;
+            set => medioTransporte = value;
+        }
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
-        public string MedioTransporte { get => medioTransporte; set => medioTransporte = value; }
         public decimal ValorBoleto { get => valorBoleto; set => valorBoleto = value; }
+
+        public static Viajes GenerarViajeAleatorio()
+        {
+            Random random = new Random();
+
+            // Generar valores aleatorios
+            DateTime fechaHora = DateTime.Now.AddDays(random.Next(-30, 31));
+            EMedioTransporte[] mediosTransporte = (EMedioTransporte[])Enum.GetValues(typeof(EMedioTransporte));
+            EMedioTransporte medioTransporte = mediosTransporte[random.Next(mediosTransporte.Length)];
+            decimal valorBoleto = (decimal)(random.NextDouble() * 100);
+
+            // Crear y retornar un objeto Viajes con valores aleatorios
+            return new Viajes(fechaHora, medioTransporte, valorBoleto);
+        }
 
         /// <summary>
         /// Sobrecarga del operador + para agregar un objeto viaje a la lista viajes
@@ -55,6 +72,7 @@ namespace Entidades
             return result;
         }*/
 
+        /*
         /// <summary>
         ///     Método para crear y agregar un viaje
         /// </summary>
@@ -65,7 +83,7 @@ namespace Entidades
         {
             Viajes viaje  = new Viajes(fechaHora, medioTransporte, valorBoleto);
             listaDeViajes.Add(viaje);
-        }
+        }*/
 
         /// <summary>
         ///     Método para obtener la lista de viajes

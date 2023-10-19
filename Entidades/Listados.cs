@@ -41,16 +41,17 @@ namespace Entidades
         {
             listaTarjetasIntenacionales.Add(objeto);
         }*/
-
+        /*
         static Listados()
         {
             AgregarViajes1001();
             AgregarViajes5001();
-        }
+        }*/
+        /*
         public static void AgregarViajes1001()
         {
-            /*DateTime fechaHardcodeada = new DateTime(2023, 10, 4, 15, 30, 0);
-            ViajeTarjeta1001.Add(new Viajes(fechaHardcodeada, "Mirage", 28));*/
+            DateTime fechaHardcodeada = new DateTime(2023, 10, 4, 15, 30, 0);
+            ViajeTarjeta1001.Add(new Viajes(fechaHardcodeada, "Mirage", 28));
             
             Viajes manager = new Viajes();
             manager.AgregarViaje(DateTime.Parse("2023-09-30 10:00:00"), "Autobus", 36);
@@ -80,7 +81,7 @@ namespace Entidades
             extranjeroUno.AgregarViaje(DateTime.Parse("2023-10-04 21:23:05"), "Tren", 42);
 
             ViajeTarjeta5001 = extranjeroUno.ObtenerListaDeViajes();    
-        }
+        }*/
 
 
 
