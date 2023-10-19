@@ -166,9 +166,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            FormRegistro formRegistro = new FormRegistro();
-            formRegistro.Show();
-            /*
             using (FormRegistro formRegistro = new FormRegistro())
             {
                 formRegistro.ShowDialog();
@@ -176,8 +173,10 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (formRegistro.ProcesoCompletado)
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
+                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }*/
+            }
 
         }
 
