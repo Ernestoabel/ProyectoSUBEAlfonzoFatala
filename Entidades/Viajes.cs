@@ -33,6 +33,10 @@ namespace Entidades
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public decimal ValorBoleto { get => valorBoleto; set => valorBoleto = value; }
 
+        /// <summary>
+        /// Metodo para generar viajes aleatorios
+        /// </summary>
+        /// <returns>El objeto viajes</returns>
         public static Viajes GenerarViajeAleatorio()
         {
             Random random = new Random();
@@ -41,9 +45,62 @@ namespace Entidades
             DateTime fechaHora = DateTime.Now.AddDays(random.Next(-30, 31));
             EMedioTransporte[] mediosTransporte = (EMedioTransporte[])Enum.GetValues(typeof(EMedioTransporte));
             EMedioTransporte medioTransporte = mediosTransporte[random.Next(mediosTransporte.Length)];
-            decimal valorBoleto = (decimal)(random.NextDouble() * 100);
+            decimal valorBoleto;
+            switch (medioTransporte)
+            {
+                case EMedioTransporte.Autobus:
+                    valorBoleto = 50;
+                    break;
+                case EMedioTransporte.Tren:
+                    valorBoleto = 35;
+                    break;
+                case EMedioTransporte.Subte:
+                    valorBoleto = 80;
+                    break;
+                case EMedioTransporte.Bicicleta:
+                    valorBoleto = 120;
+                    break;
+                default:
+                    valorBoleto = 0;
+                    break;
+            }
+            //decimal valorBoleto = (decimal)(random.NextDouble() * 100);
 
-            // Crear y retornar un objeto Viajes con valores aleatorios
+            return new Viajes(fechaHora, medioTransporte, valorBoleto);
+        }
+
+        /// <summary>
+        /// Sobrecarga del metodo aleatorio que indica otros precios de viaje
+        /// </summary>
+        /// <param name="usuario"></param>
+        /// <returns>El objeto viajes</returns>
+        public static Viajes GenerarViajeAleatorio(UsuarioExtranjero usuario)
+        {
+            Random random = new Random();
+
+            // Generar valores aleatorios
+            DateTime fechaHora = DateTime.Now.AddDays(random.Next(-30, 31));
+            EMedioTransporte[] mediosTransporte = (EMedioTransporte[])Enum.GetValues(typeof(EMedioTransporte));
+            EMedioTransporte medioTransporte = mediosTransporte[random.Next(mediosTransporte.Length)];
+            decimal valorBoleto;
+            switch (medioTransporte)
+            {
+                case EMedioTransporte.Autobus:
+                    valorBoleto = 700;
+                    break;
+                case EMedioTransporte.Tren:
+                    valorBoleto = 1100;
+                    break;
+                case EMedioTransporte.Subte:
+                    valorBoleto = 1500;
+                    break;
+                case EMedioTransporte.Bicicleta:
+                    valorBoleto = 2000;
+                    break;
+                default:
+                    valorBoleto = 0;
+                    break;
+            }
             return new Viajes(fechaHora, medioTransporte, valorBoleto);
         }
 
@@ -58,32 +115,7 @@ namespace Entidades
             lista.Add(nuevoViaje);
             return lista;
         }
-        /*
-        /// <summary>
-        /// Sobrecarga del operador + para sumar dos listas
-        /// </summary>
-        /// <param name="lista1"></param>
-        /// <param name="lista2"></param>
-        /// <returns></returns>
-        public static List<Viajes> operator +(List<Viajes> lista1, List<Viajes> lista2)
-        {
-            List<Viajes> result = new List<Viajes>(lista1);
-            result.AddRange(lista2);
-            return result;
-        }*/
 
-        /*
-        /// <summary>
-        ///     Método para crear y agregar un viaje
-        /// </summary>
-        /// <param name="fechaHora"></param>
-        /// <param name="medioTransporte"></param>
-        /// <param name="valorBoleto"></param>
-        public void AgregarViaje(DateTime fechaHora, string medioTransporte, decimal valorBoleto)
-        {
-            Viajes viaje  = new Viajes(fechaHora, medioTransporte, valorBoleto);
-            listaDeViajes.Add(viaje);
-        }*/
 
         /// <summary>
         ///     Método para obtener la lista de viajes
@@ -94,31 +126,7 @@ namespace Entidades
             return listaDeViajes;
         }
 
-        public decimal CalcularTotalBoletos(List<Viajes> listaDeViajes)
-        {
-            decimal total = 0;
-
-            foreach (Viajes viaje in listaDeViajes)
-            {
-                total += viaje.ValorBoleto;
-            }
-
-            return total;
-        }
-
-        public bool RealizarViaje(Tarjeta tarjeta)
-        {
-            if (tarjeta.RestarSaldo(ValorBoleto))
-            {
-                // El viaje se realizó con éxito (suficiente saldo)
-                return true;
-            }
-            else
-            {
-                // No hay suficiente saldo en la tarjeta
-                return false;
-            }
-        }
+      
 
     }
 }

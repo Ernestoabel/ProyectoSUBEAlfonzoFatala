@@ -27,6 +27,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
+            
         }
 
         /// <summary>
@@ -146,12 +147,17 @@ namespace ProyectoSUBEAlfonzoFatala
             
             tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
             tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();
         }
 
-        //boton para llenar el usuario y password con un usuario de la lista
+        /// <summary>
+        /// Boton para cargar por default el administrador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
             txtUsuario.Text = "000";
@@ -173,7 +179,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (formRegistro.ProcesoCompletado)
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
                     MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }

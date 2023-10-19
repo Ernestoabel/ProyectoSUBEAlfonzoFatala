@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,6 +34,12 @@ namespace Entidades
         {
             return proximoId++;
         }
+        
+        /// <summary>
+        /// Metodo interface para serializar la tarjeta
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="nombreArchivo"></param>
         public void GuardarEnArchivo(List<TarjetaInternacional> lista, string nombreArchivo)
         {
             JsonSerializer serializer = new JsonSerializer();
@@ -50,8 +57,38 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Sobrecarga de la serialiacion para indicarle no solo el archivo sino tambien la carpeta a guardar
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="nombreArchivo"></param>
+        /// <param name="rutaCarpetaArchivos"></param>
+        public void GuardarEnArchivo(List<TarjetaInternacional> lista, string nombreArchivo, string rutaCarpetaArchivos)
+        {
+            JsonSerializer serializer = new JsonSerializer();
+
+            if (!Directory.Exists(rutaCarpetaArchivos))
+            {
+                Directory.CreateDirectory(rutaCarpetaArchivos);
+            }
+
+            string rutaCompleta = Path.Combine(rutaCarpetaArchivos, nombreArchivo);
+
+            using (StreamWriter sw = new StreamWriter(rutaCompleta))
+            using (JsonWriter writer = new JsonTextWriter(sw))
+            {
+                serializer.Serialize(writer, lista);
+            }
+        }
+
+        /// <summary>
+        /// Deserealizacion de la lista de tarjetasInternacional
+        /// </summary>
+        /// <param name="nombreArchivo"></param>
+        /// <returns></returns>
         public List<TarjetaInternacional> CargarDesdeArchivo(string nombreArchivo)
         {
+            
             List<TarjetaInternacional> usuarios = new List<TarjetaInternacional>();
             string rutaArchivo = Path.Combine(@"..\..\..\Archivos", nombreArchivo);
 

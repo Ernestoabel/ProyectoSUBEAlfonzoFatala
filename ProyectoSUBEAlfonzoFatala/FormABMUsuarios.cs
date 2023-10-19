@@ -117,7 +117,8 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 

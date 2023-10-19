@@ -86,8 +86,9 @@ namespace ProyectoSUBEAlfonzoFatala
                     TarjetaNacional tarjetaNac = new TarjetaNacional();
                     Listados.AgregarUsuario(usuarioArgentino);
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
-                    tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json"); ;
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
                     usuarioRegistrado.Show();
@@ -103,7 +104,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     Listados.AgregarUsuario(usuarioExtranjero);
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
                     tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
                     usuarioRegistrado.Show();

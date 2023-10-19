@@ -1,5 +1,6 @@
 ﻿using Entidades;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -89,13 +90,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void FormViajesPrueba_Load(object sender, EventArgs e)
         {
-            /*
-            this.listaViajes.Add(new Viajes(DateTime.Parse("2023-09-30 10:30:12"), "Autobus", 36));
-            this.listaViajes.Add(new Viajes(DateTime.Parse("2023-07-30 10:40:31"), "Subte", 56));
-            this.listaViajes.Add(new Viajes(DateTime.Parse("2023-05-30 09:47:00"), "Tren", 23));
-            this.listaViajes.Add(new Viajes(DateTime.Parse("2023-05-22 12:00:00"), "Autobus", 12));
-            this.listaViajes.Add(new Viajes(DateTime.Parse("2023-05-18 13:00:00"), "Autobus", 31));
-            */
+            
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
@@ -105,28 +100,34 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnViajar_Click(object sender, EventArgs e)
         {
-            Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
-            listaViajes = listaViajes + nuevoViaje;
             if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
             {
+                Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
+                listaViajes = listaViajes + nuevoViaje;
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
                 if (indice >= 0)
                 {
                     usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
                     Listados.listaUsuarios.RemoveAt(indice);
                     Listados.listaUsuarios.Add(usuarioArgentino);
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
                 }
 
             }
             else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
             {
-                int indice = Listados.listaUsuarios.FindIndex(u => u == usuarioExtranjero);
+                Viajes nuevoViaje = Viajes.GenerarViajeAleatorio(usuarioExtranjero);
+                listaViajes = listaViajes + nuevoViaje;
+                int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
                 if (indice >= 0)
                 {
                     usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
+                    Listados.listaUsuarios.RemoveAt(indice);
+                    Listados.listaUsuarios.Add(usuarioExtranjero);
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
                 }
-                usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
             }
             dtgViajes.DataSource = null;
             dtgViajes.DataSource = listaViajes;
