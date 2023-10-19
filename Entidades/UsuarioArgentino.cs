@@ -37,5 +37,8 @@ namespace Entidades
         {
             return IdSubeArgentina;
         }
+
+        
+
     }
 }

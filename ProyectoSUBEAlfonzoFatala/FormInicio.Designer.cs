@@ -126,7 +126,7 @@
             Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             MainMenuStrip = menuStrip1;
             Name = "FormInicio";
-            Text = "Form1";
+            Text = "Programa SUBE";
             FormClosing += FormInicio_FormClosing;
             FormClosed += FormInicio_FormClosed;
             Load += FormInicio_Load;

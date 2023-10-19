@@ -67,12 +67,12 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             if (rdArgentinas.Checked)
             {
-                this.dataGridABMTarjetas.DataSource = Listados.listaTarjetasNacionales;
+                this.dataGridABMTarjetas.DataSource = TarjetaNacional.listaTarjetasNacionales;
                 SetDataGridViewStyle();
             }
             else if (rdExtranjeras.Checked)
             {
-                this.dataGridABMTarjetas.DataSource = Listados.listaTarjetasIntenacionales;
+                this.dataGridABMTarjetas.DataSource = TarjetaInternacional.listaTarjetasIntenacionales;
                 SetDataGridViewStyle();
             }
             else

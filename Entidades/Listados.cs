@@ -13,22 +13,26 @@ namespace Entidades
     public static class Listados
     {
         public static List<Usuario> listaUsuarios = new List<Usuario>();
-        public static List<UsuarioArgentino> listaUsuariosArgentinos = new List<UsuarioArgentino>();
-        public static List<UsuarioExtranjero> listaUsuariosExtranjeros = new List<UsuarioExtranjero>();
-        public static List<TarjetaNacional> listaTarjetasNacionales = new List<TarjetaNacional>();
-        public static List<TarjetaInternacional> listaTarjetasIntenacionales = new List<TarjetaInternacional>();
+        //public static List<TarjetaNacional> listaTarjetasNacionales = new List<TarjetaNacional>();
+        //public static List<TarjetaInternacional> listaTarjetasIntenacionales = new List<TarjetaInternacional>();
         public static List<Viajes> ViajeTarjeta1001 = new List<Viajes>();
         public static List<Viajes> ViajeTarjeta5001 = new List<Viajes>();
         public static List<Viajes> listaDeViajes = new List<Viajes>();
+
+        /// <summary>
+        /// Sobrecarga del operador + para sumar dos listas
+        /// </summary>
+        /// <param name="lista1"></param>
+        /// <param name="lista2"></param>
+        /// <returns></returns>
         
-
-
         #region Metodos
 
         public static void AgregarUsuario(Usuario objeto)
         {
             listaUsuarios.Add(objeto);
         }
+        /*
         public static void AgregarTarjetaNacional(TarjetaNacional objeto)
         {
             listaTarjetasNacionales.Add(objeto);
@@ -36,7 +40,7 @@ namespace Entidades
         public static void AgregarTarjetaInternacional(TarjetaInternacional objeto)
         {
             listaTarjetasIntenacionales.Add(objeto);
-        }
+        }*/
 
         static Listados()
         {
@@ -104,6 +108,7 @@ namespace Entidades
 
         }
 
+        /*
         /// <summary>
         /// Serealizacion de las tarjetas SUBE nacionales en JSON
         /// </summary>
@@ -208,7 +213,7 @@ namespace Entidades
             }
 
             return tarjetas;
-        }
+        }*/
 
         
         #endregion

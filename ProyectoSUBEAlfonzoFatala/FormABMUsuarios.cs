@@ -163,8 +163,8 @@ namespace ProyectoSUBEAlfonzoFatala
                             TarjetaNacional tarjetaNacional = tarjetaBaja.TarjetaNacional;
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
                             int id = tarjetaNacional.Id;
-                            tarjetaNacional = Listados.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
-                            int indexTarjeta = Listados.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
+                            tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
+                            int indexTarjeta = TarjetaNacional.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
                             
                             if (index != -1)
                             {
@@ -172,7 +172,7 @@ namespace ProyectoSUBEAlfonzoFatala
                                 
 
                                 Listados.listaUsuarios.RemoveAt(index);
-                                Listados.listaTarjetasNacionales.RemoveAt(indexTarjeta);
+                                TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
                                 RefreshDataGridView();
                             }
@@ -184,14 +184,14 @@ namespace ProyectoSUBEAlfonzoFatala
                             TarjetaInternacional tarjetaInternacional = (TarjetaInternacional)tarjetaBaja.TarjetaInternacional;
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
                             int id = tarjetaInternacional.Id;
-                            tarjetaInternacional = Listados.listaTarjetasIntenacionales.FirstOrDefault(t => t.Id == id);
-                            int indexTarjeta = Listados.listaTarjetasIntenacionales.FindIndex(u => u == tarjetaInternacional);
+                            tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(t => t.Id == id);
+                            int indexTarjeta = TarjetaInternacional.listaTarjetasIntenacionales.FindIndex(u => u == tarjetaInternacional);
                             if (index != -1)
                             {
                                 UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
 
                                 Listados.listaUsuarios.RemoveAt(index);
-                                Listados.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
+                                TarjetaInternacional.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
                                 RefreshDataGridView();
                             }
@@ -205,6 +205,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
             }
         }
+        /// <summary>
+        /// Metodo para refrescar la lista sincronicamente cuando se hace una cambio
+        /// </summary>
         private void RefreshDataGridView()
         {
             dataGridUsuarios.DataSource = null;

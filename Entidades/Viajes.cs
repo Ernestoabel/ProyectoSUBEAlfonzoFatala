@@ -13,7 +13,6 @@ namespace Entidades
         private DateTime fechaHora;
         private string medioTransporte;
         private decimal valorBoleto;
-        private Tarjeta tarjetaAsociada;
 
         public Viajes()
         {
@@ -25,19 +24,36 @@ namespace Entidades
             this.medioTransporte = medioTransporte;
             this.valorBoleto = valorBoleto;
         }
-        public Viajes(DateTime fechaHora, string medioTransporte, decimal valorBoleto, Tarjeta tarjeta)
-        {
-            this.fechaHora = fechaHora;
-            this.medioTransporte = medioTransporte;
-            this.valorBoleto = valorBoleto;
-            this.tarjetaAsociada = tarjeta;
-        }
+        
 
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public string MedioTransporte { get => medioTransporte; set => medioTransporte = value; }
         public decimal ValorBoleto { get => valorBoleto; set => valorBoleto = value; }
 
-
+        /// <summary>
+        /// Sobrecarga del operador + para agregar un objeto viaje a la lista viajes
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="nuevoViaje"></param>
+        /// <returns></returns>
+        public static List<Viajes> operator +(List<Viajes> lista, Viajes nuevoViaje)
+        {
+            lista.Add(nuevoViaje);
+            return lista;
+        }
+        /*
+        /// <summary>
+        /// Sobrecarga del operador + para sumar dos listas
+        /// </summary>
+        /// <param name="lista1"></param>
+        /// <param name="lista2"></param>
+        /// <returns></returns>
+        public static List<Viajes> operator +(List<Viajes> lista1, List<Viajes> lista2)
+        {
+            List<Viajes> result = new List<Viajes>(lista1);
+            result.AddRange(lista2);
+            return result;
+        }*/
 
         /// <summary>
         ///     Método para crear y agregar un viaje

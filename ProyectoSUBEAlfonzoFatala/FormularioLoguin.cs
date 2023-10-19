@@ -19,8 +19,9 @@ namespace ProyectoSUBEAlfonzoFatala
     /// </summary>
     public partial class FormularioLoguin : LoguinPadre
     {
-        
-        
+        TarjetaInternacional tarjetaInt = new TarjetaInternacional();
+        TarjetaNacional tarjetaNac = new TarjetaNacional();
+
         public FormularioLoguin()
         {
             InitializeComponent();
@@ -31,13 +32,13 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <summary>
         /// Metodo para cargar las listas con datos en los Json
         /// </summary>
-        private static void CargarJson()
+        private void CargarJson()
         {
-            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
-            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<TarjetaNacional> tajetaNacionalCargadas = tarjetaNac.CargarDesdeArchivo("tarjetaNacional.json");
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = tarjetaInt.CargarDesdeArchivo("tarjetaInternacional.json");
             List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
-            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
-            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
+            TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
             
         }
@@ -142,8 +143,9 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
-            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
+            
+            tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
+            tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
             Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();
@@ -157,11 +159,25 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        //boton para ir al formulario de alta de cliente
+        /// <summary>
+        /// Boton para el registro con dialogo entre formularios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAlta_Click(object sender, EventArgs e)
         {
             FormRegistro formRegistro = new FormRegistro();
             formRegistro.Show();
+            /*
+            using (FormRegistro formRegistro = new FormRegistro())
+            {
+                formRegistro.ShowDialog();
+
+                if (formRegistro.ProcesoCompletado)
+                {
+                    Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
+                }
+            }*/
 
         }
 

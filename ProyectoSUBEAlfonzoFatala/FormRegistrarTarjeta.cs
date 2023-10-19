@@ -83,10 +83,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     string idEnString = tarjetaNacional.Id.ToString();
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
-
+                    TarjetaNacional tarjetaNac = new TarjetaNacional();
                     Listados.AgregarUsuario(usuarioArgentino);
-                    Listados.AgregarTarjetaNacional(tarjetaNacional);
-                    Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
+                    TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
+                    tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json"); ;
                     Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
@@ -99,10 +99,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     // UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero();
                     UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
-
+                    TarjetaInternacional tarjetaInt = new TarjetaInternacional();
                     Listados.AgregarUsuario(usuarioExtranjero);
-                    Listados.AgregarTarjetaInternacional(tarjetaInternacional);
-                    Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
+                    TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
+                    tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
                     Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);

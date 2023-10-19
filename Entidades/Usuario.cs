@@ -53,7 +53,11 @@ namespace Entidades
             return Clave == clave;
         }
 
-
+        /// <summary>
+        /// Metodo para mostrar el objeto cuando se debuguea
+        /// </summary>
+        /// <param name="nuevoUsuario"></param>
+        /// <returns></returns>
         public string ObtenerInformacionUsuario(Usuario nuevoUsuario)
         {
 
