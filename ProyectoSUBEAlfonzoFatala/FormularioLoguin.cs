@@ -174,14 +174,14 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             using (FormRegistro formRegistro = new FormRegistro())
             {
-                formRegistro.ShowDialog();
-
-                if (formRegistro.ProcesoCompletado)
+               
+                if (formRegistro.ShowDialog() == DialogResult.OK)
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
                     //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-                    MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "INICIE SESION!", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
                 }
             }
 

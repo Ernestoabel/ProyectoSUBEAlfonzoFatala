@@ -82,6 +82,7 @@
             iNICIARSESIONToolStripMenuItem.Name = "iNICIARSESIONToolStripMenuItem";
             iNICIARSESIONToolStripMenuItem.Size = new Size(96, 25);
             iNICIARSESIONToolStripMenuItem.Text = "Cargala";
+            iNICIARSESIONToolStripMenuItem.Click += iNICIARSESIONToolStripMenuItem_Click;
             // 
             // cOMPRARToolStripMenuItem
             // 

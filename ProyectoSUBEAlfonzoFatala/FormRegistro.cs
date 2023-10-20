@@ -67,10 +67,11 @@ namespace ProyectoSUBEAlfonzoFatala
                 UsuarioSinTarjeta usuario = nuevoUsuarioRegistrado;
                 MostrarUsuarioEnControles(usuario);
 
+                this.DialogResult = DialogResult.OK;
                 ProcesoCompletado = true;
-                this.Close();
                 //FormInicio formInicio = new FormInicio(usuario);
                 //formInicio.Show();
+                this.Close();
             }
 
 
@@ -162,6 +163,10 @@ namespace ProyectoSUBEAlfonzoFatala
             return Regex.IsMatch(input, patron);
         }
 
+        /// <summary>
+        /// Valida que el usuario haya colocado en el textbox los datos pertinentes
+        /// </summary>
+        /// <returns></returns>
         private bool ValidarCampos()
         {
             bool ok;
@@ -186,6 +191,10 @@ namespace ProyectoSUBEAlfonzoFatala
             return ok;
         }
 
+        /// <summary>
+        /// Verifica que el usuario escriba en el text box las claves
+        /// </summary>
+        /// <returns></returns>
         private bool ValidarClaves()
         {
             bool ok;
@@ -210,6 +219,10 @@ namespace ProyectoSUBEAlfonzoFatala
             return ok;
         }
 
+        /// <summary>
+        /// Una vez verifica los textbox permite continuar con el registro
+        /// </summary>
+        /// <returns></returns>
         private bool HabilitarContinuar()
         {
             string dniIngresado = txtDni.Text;
@@ -225,6 +238,10 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// En el paso 2 del registro permite continuar con las claves
+        /// </summary>
+        /// <returns></returns>
         private bool HabilitarContinuarClave()
         {
             string clave = txtClave.Text;
@@ -283,13 +300,36 @@ namespace ProyectoSUBEAlfonzoFatala
         private void txtClave_TextChanged(object sender, EventArgs e)
         {
 
-            btnContinuar.Enabled = HabilitarContinuarClave();
+            string claveIngresada = txtClave.Text;
+
+            // Verifica si la clave es numérica y tiene exactamente 4 dígitos
+            if (!string.IsNullOrEmpty(claveIngresada) && claveIngresada.All(char.IsDigit) && claveIngresada.Length == 4)
+            {
+                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                btnContinuar.Enabled = HabilitarContinuarClave();
+            }
+            else
+            {
+                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                btnContinuar.Enabled = HabilitarContinuarClave();
+            }
 
         }
 
         private void txtRepetirClave_TextChanged(object sender, EventArgs e)
         {
-            btnContinuar.Enabled = HabilitarContinuarClave();
+            string claveConfirmada = txtRepetirClave.Text;
+
+            if (!string.IsNullOrEmpty(claveConfirmada) && claveConfirmada.All(char.IsDigit) && claveConfirmada.Length == 4 && claveConfirmada == txtClave.Text)
+            {
+                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                btnContinuar.Enabled = true;
+            }
+            else
+            {
+                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                btnContinuar.Enabled = false;
+            }
         }
 
         /// <summary>
@@ -300,9 +340,23 @@ namespace ProyectoSUBEAlfonzoFatala
         private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
-                e.Handled = true; // Cancela la entrada del carácter
+                string claveIngresada = txtClave.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
             }
         }
 
@@ -314,9 +368,23 @@ namespace ProyectoSUBEAlfonzoFatala
         private void txtRepetirClave_KeyPress(object sender, KeyPressEventArgs e)
         {
 
-            if (txtRepetirClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
-                e.Handled = true;
+                string claveIngresada = txtRepetirClave.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
             }
         }
 

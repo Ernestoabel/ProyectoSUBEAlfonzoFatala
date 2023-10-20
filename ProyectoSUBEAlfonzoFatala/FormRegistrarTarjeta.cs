@@ -50,7 +50,7 @@ namespace ProyectoSUBEAlfonzoFatala
             string clave = txtClave.Text;
 
             // Verifica si la clave es numérica y tiene exactamente 4 dígitos
-            if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4)
+            if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 && clave == usuarioLogueado.Clave)
             {
                 // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
                 btnContinuar.Enabled = true;
@@ -133,11 +133,16 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Solo deja ingresar hasta 9 numeros
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
-                // Obtener el texto actual del TextBox
+               
                 string dniIngresado = txtDocumento.Text;
 
                 // Permitir la edición si no se alcanza el límite de 9 caracteres
@@ -156,12 +161,33 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        ///     Solo deja ingresar numeros hasta 4digitos.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (txtClave.Text.Length >= 4 || !char.IsDigit(e.KeyChar))
+
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
-                e.Handled = true; // Cancela la entrada del carácter
+                string claveIngresada = txtClave.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true; 
+                }
             }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+
         }
     }
 }

@@ -100,7 +100,7 @@ namespace ProyectoSUBEAlfonzoFatala
             /*FormRegistro formRegistro = new FormRegistro();
             formRegistro.Show();
             this.Close();*/
-            
+
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
@@ -134,6 +134,14 @@ namespace ProyectoSUBEAlfonzoFatala
             formComprar.Show();
 
             this.Hide();
+        }
+
+        private void iNICIARSESIONToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            /// Cargar sube
+            /// 
+
+
         }
     }
 }
