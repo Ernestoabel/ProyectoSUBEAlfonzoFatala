@@ -19,28 +19,27 @@ namespace ProyectoSUBEAlfonzoFatala
     /// </summary>
     public partial class FormularioLoguin : LoguinPadre
     {
-        
-        
+        TarjetaInternacional tarjetaInt = new TarjetaInternacional();
+        TarjetaNacional tarjetaNac = new TarjetaNacional();
+
         public FormularioLoguin()
         {
             InitializeComponent();
             CargarJson();
-            /*
-            Listados.listaBajas.Add(new Dictionary<int, string> { { 1, "Mensajes para el administrador" } });
-            Listados.GuardarMensajesBajaEnArchivo(Listados.listaBajas);*/
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
+            
         }
 
         /// <summary>
         /// Metodo para cargar las listas con datos en los Json
         /// </summary>
-        private static void CargarJson()
+        private void CargarJson()
         {
-            List<TarjetaNacional> tajetaNacionalCargadas = Listados.CargarTarjetaNacionalsDesdeArchivo();
-            List<TarjetaInternacional> tarjetaInternacionalCargadas = Listados.CargarTarjetaInternacionalDesdeArchivo();
+            List<TarjetaNacional> tajetaNacionalCargadas = tarjetaNac.CargarDesdeArchivo("tarjetaNacional.json");
+            List<TarjetaInternacional> tarjetaInternacionalCargadas = tarjetaInt.CargarDesdeArchivo("tarjetaInternacional.json");
             List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
-            Listados.listaTarjetasNacionales = tajetaNacionalCargadas;
-            Listados.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
+            TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
+            TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
             
         }
@@ -145,40 +144,46 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            
+            tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
+            tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
+            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();
         }
 
-        //boton para llenar el usuario y password con un usuario de la lista
+        /// <summary>
+        /// Boton para cargar por default el administrador
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAdministrador_Click(object sender, EventArgs e)
         {
-            /*
-            UsuarioSinTarjeta nuevoUsuario = new UsuarioSinTarjeta("Ernesto", "Fatala", "10000000", "1234");
-            TarjetaNacional tarjeta1001 = new TarjetaNacional(1001, 500, Listados.ViajeTarjeta1001);
-            Listados.AgregarTarjetaNacional(tarjeta1001);
-            TarjetaInternacional tarjeta5001 = new TarjetaInternacional(5001, 2000, Listados.ViajeTarjeta5001);
-            Listados.AgregarTarjetaInternacional(tarjeta5001);
-            Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
-            Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
-            UsuarioArgentino nuevoUsuArgentino = new UsuarioArgentino("Carlos", "Pepe", "20000000", "1234", "1001", tarjeta1001);
-            UsuarioExtranjero nuevoUsuExtrangero = new UsuarioExtranjero("Carlos", "Pepe", "90000000", "1234", "5001", tarjeta5001);
-            UsuarioAdministrador nuevoUsuarioAdmin = new UsuarioAdministrador("Juan", "Perez", "10000001", "1234");
-            Listados.AgregarUsuario(nuevoUsuario);
-            Listados.AgregarUsuario(nuevoUsuArgentino);
-            Listados.AgregarUsuario(nuevoUsuExtrangero);
-            Listados.AgregarUsuario(nuevoUsuarioAdmin);
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-            */
             txtUsuario.Text = "000";
             txtPassword.Text = "1234";
 
         }
 
-        //boton para ir al formulario de alta de cliente
+        /// <summary>
+        /// Boton para el registro con dialogo entre formularios
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAlta_Click(object sender, EventArgs e)
         {
-            FormRegistro formRegistro = new FormRegistro();
-            formRegistro.Show();
+            using (FormRegistro formRegistro = new FormRegistro())
+            {
+                formRegistro.ShowDialog();
+
+                if (formRegistro.ProcesoCompletado)
+                {
+                    Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
 
         }
 

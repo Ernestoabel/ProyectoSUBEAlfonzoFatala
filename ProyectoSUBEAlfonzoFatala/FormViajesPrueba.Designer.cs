@@ -30,22 +30,34 @@
         private void InitializeComponent()
         {
             dtgViajes = new DataGridView();
+            btnViajar = new Button();
             ((System.ComponentModel.ISupportInitialize)dtgViajes).BeginInit();
             SuspendLayout();
             // 
             // dtgViajes
             // 
             dtgViajes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgViajes.Location = new Point(12, 42);
+            dtgViajes.Location = new Point(12, 84);
             dtgViajes.Name = "dtgViajes";
-            dtgViajes.Size = new Size(776, 396);
+            dtgViajes.Size = new Size(776, 354);
             dtgViajes.TabIndex = 0;
+            // 
+            // btnViajar
+            // 
+            btnViajar.Location = new Point(281, 36);
+            btnViajar.Name = "btnViajar";
+            btnViajar.Size = new Size(243, 31);
+            btnViajar.TabIndex = 1;
+            btnViajar.Text = "Viajar!!!";
+            btnViajar.UseVisualStyleBackColor = true;
+            btnViajar.Click += btnViajar_Click;
             // 
             // FormViajesPrueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnViajar);
             Controls.Add(dtgViajes);
             Name = "FormViajesPrueba";
             Text = "FormViajesPrueba";
@@ -57,5 +69,6 @@
         #endregion
 
         private DataGridView dtgViajes;
+        private Button btnViajar;
     }
 }

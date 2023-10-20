@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase para personalizar una excepcion
+    /// </summary>
     public class ClaveInvalidaException : Exception
     {
         public ClaveInvalidaException() : base("La clave proporcionada es inválida.")

@@ -32,5 +32,13 @@ namespace Entidades
         {
             return base.ValidarDni(dni) && int.Parse(dni[0].ToString()) < 9;
         }
+
+        public override string ToString()
+        {
+            return IdSubeArgentina;
+        }
+
+        
+
     }
 }

@@ -19,6 +19,10 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
         }
         string tarjeta;
+
+        /// <summary>
+        /// Metodo para darle estilo al datagrid
+        /// </summary>
         private void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
@@ -44,9 +48,6 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             dataGridUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Las celdas no se puede modificar
-            //dataGridUsuarios.ReadOnly = true;
-
             // Habilita la edición para la columna de la clave
             dataGridUsuarios.Columns["Nombre"].ReadOnly = true;
             dataGridUsuarios.Columns["Apellido"].ReadOnly = true;
@@ -55,18 +56,29 @@ namespace ProyectoSUBEAlfonzoFatala
             dataGridUsuarios.Columns["TieneTarjeta"].ReadOnly = true;
 
             dataGridUsuarios.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-
-
         }
 
+        /// <summary>
+        /// evento para cargar metodos al cargarce el formulario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormABMUsuarios_Load(object sender, EventArgs e)
         {
             this.dataGridUsuarios.DataSource = Listados.listaUsuarios;
             SetDataGridViewStyle();
             dataGridUsuarios.CellValueChanged += dataGridUsuarios_CellValueChanged;
             dataGridUsuarios.CellDoubleClick += DataGridView_CellDoubleClick;
+
+            // Refresca la vista para que se aplique el estilo y se muestre la columna IdSubeArgentina
+            dataGridUsuarios.Refresh();
         }
 
+        /// <summary>
+        /// metodo para capturar el evento click de la celda Clave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
             if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
@@ -98,11 +110,23 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Boton para guardad los datos que se cambiaron en la clave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+            MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
+        /// <summary>
+        /// Evento para tomar un objeto cuando se hace doble click en una fila del datagrid
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void DataGridView_CellDoubleClick(object sender, DataGridViewCellEventArgs e)
         {
             bool bandera = true;
@@ -114,12 +138,12 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (usuario is UsuarioArgentino)
                 {
                     UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
-                    tarjeta = tarjetaBaja.TarjetaNacional.ToString();
+                    tarjeta = tarjetaBaja.IdSubeArgentina.ToString();
                 }
                 else if (usuario is UsuarioExtranjero)
                 {
                     UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
-                    tarjeta = tarjetaBaja.TarjetaInternacional.ToString();
+                    tarjeta = tarjetaBaja.IdSubeExtranjero.ToString();
                 }
                 else
                 {
@@ -137,39 +161,60 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuario is UsuarioArgentino)
                         {
                             UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
+                            TarjetaNacional tarjetaNacional = tarjetaBaja.TarjetaNacional;
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-
+                            int id = tarjetaNacional.Id;
+                            tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
+                            int indexTarjeta = TarjetaNacional.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
+                            
                             if (index != -1)
                             {
                                 UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
+                                
 
                                 Listados.listaUsuarios.RemoveAt(index);
-
+                                TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                                RefreshDataGridView();
                             }
 
                         }
                         else if (usuario is UsuarioExtranjero)
                         {
                             UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
+                            TarjetaInternacional tarjetaInternacional = (TarjetaInternacional)tarjetaBaja.TarjetaInternacional;
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-
+                            int id = tarjetaInternacional.Id;
+                            tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(t => t.Id == id);
+                            int indexTarjeta = TarjetaInternacional.listaTarjetasIntenacionales.FindIndex(u => u == tarjetaInternacional);
                             if (index != -1)
                             {
                                 UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
 
                                 Listados.listaUsuarios.RemoveAt(index);
-
+                                TarjetaInternacional.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                                RefreshDataGridView();
                             }
+                            
                         }
                     }
                     else if (result == DialogResult.No)
                     {
-                        this.Close();
+                        
                     }
                 }
             }
+        }
+        /// <summary>
+        /// Metodo para refrescar la lista sincronicamente cuando se hace una cambio
+        /// </summary>
+        private void RefreshDataGridView()
+        {
+            dataGridUsuarios.DataSource = null;
+            dataGridUsuarios.DataSource = Listados.listaUsuarios;
+
+            SetDataGridViewStyle();
         }
     }
 }

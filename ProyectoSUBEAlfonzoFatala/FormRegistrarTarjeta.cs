@@ -83,11 +83,12 @@ namespace ProyectoSUBEAlfonzoFatala
                     string idEnString = tarjetaNacional.Id.ToString();
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
-
+                    TarjetaNacional tarjetaNac = new TarjetaNacional();
                     Listados.AgregarUsuario(usuarioArgentino);
-                    Listados.AgregarTarjetaNacional(tarjetaNacional);
-                    Listados.GuardarTarjetaNacionalEnArchivo(Listados.listaTarjetasNacionales);
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
+                    tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
                     usuarioRegistrado.Show();
@@ -99,11 +100,12 @@ namespace ProyectoSUBEAlfonzoFatala
                     // UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero();
                     UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
-
+                    TarjetaInternacional tarjetaInt = new TarjetaInternacional();
                     Listados.AgregarUsuario(usuarioExtranjero);
-                    Listados.AgregarTarjetaInternacional(tarjetaInternacional);
-                    Listados.GuardarTarjetaInternacionalEnArchivo(Listados.listaTarjetasIntenacionales);
-                    Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
+                    TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
+                    tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
+                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
 
                     FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
                     usuarioRegistrado.Show();

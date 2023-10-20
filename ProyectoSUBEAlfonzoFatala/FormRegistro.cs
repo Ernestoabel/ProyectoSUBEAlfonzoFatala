@@ -17,10 +17,9 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormRegistro : Form
     {
         // Listados listado = new Listados();
+        public bool ProcesoCompletado { get; private set; }
         private int contador = 0;
-        Usuario nuevoUsuarioRegistrado = new Usuario();
-        Tarjeta nuevaTarjetaNacional = new TarjetaNacional();
-        Tarjeta nuevaTarjetaInternacional = new TarjetaInternacional();
+        public UsuarioSinTarjeta nuevoUsuarioRegistrado = new UsuarioSinTarjeta();
 
 
         public FormRegistro()
@@ -65,13 +64,13 @@ namespace ProyectoSUBEAlfonzoFatala
                 GuardarDatos();
                 MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
                 //this.Hide();
-                Usuario usuario = nuevoUsuarioRegistrado;
+                UsuarioSinTarjeta usuario = nuevoUsuarioRegistrado;
                 MostrarUsuarioEnControles(usuario);
-                Listados.AgregarUsuario(usuario);
-                Listados.listaUsuarios.Add(usuario);
 
-                FormInicio formInicio = new FormInicio(usuario);
-                formInicio.Show();
+                ProcesoCompletado = true;
+                this.Close();
+                //FormInicio formInicio = new FormInicio(usuario);
+                //formInicio.Show();
             }
 
 
@@ -103,7 +102,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 nuevoUsuarioRegistrado.Apellido = apellido;
                 nuevoUsuarioRegistrado.Dni = dni;
                 nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
-                nuevoUsuarioRegistrado = new UsuarioSinTarjeta();
+                //nuevoUsuarioRegistrado = new UsuarioSinTarjeta();
 
 
             }
@@ -115,12 +114,12 @@ namespace ProyectoSUBEAlfonzoFatala
                     string nombre = txtNombre.Text;
                     string apellido = txtApellido.Text;
                     string dni = txtDni.Text;
-                    bool tieneTarjeta = false;
+                    //bool tieneTarjeta = false;
 
                     nuevoUsuarioRegistrado.Nombre = nombre;
                     nuevoUsuarioRegistrado.Apellido = apellido;
                     nuevoUsuarioRegistrado.Dni = dni;
-                    nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
+                    //nuevoUsuarioRegistrado.TieneTarjeta = tieneTarjeta;
                     nuevoUsuarioRegistrado.Clave = clave;
 
 
@@ -142,8 +141,9 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
+            ProcesoCompletado = false;
             this.Close();
-            Application.Exit();
+            //Application.Exit();
 
         }
 

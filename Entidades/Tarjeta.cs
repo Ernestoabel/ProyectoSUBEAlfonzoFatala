@@ -12,6 +12,12 @@ namespace Entidades
         private int _id;
         private decimal _saldo;
 
+        /// <summary>
+        /// Constructor del objeto tarjeta
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="saldo"></param>
+        /// <param name="viajes"></param>
         public Tarjeta( int id, decimal saldo, List<Viajes> viajes)
         {
             Id = GenerarNuevoId();

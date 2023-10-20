@@ -7,8 +7,14 @@ using System.Xml.Serialization;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase el menejo de la lista mensajes
+    /// </summary>
     public class ArchivoMensaje
     {
+        /// <summary>
+        /// Atributos XML para la lista diccionario
+        /// </summary>
         public class BajaData
         {
             [XmlAttribute("Indice")]
@@ -19,7 +25,16 @@ namespace Entidades
 
         }
 
+        /// <summary>
+        /// Creacion de la lista diccionario
+        /// </summary>
         public static List<Dictionary<int, string>> listaBajas = new List<Dictionary<int, string>>();
+
+        /// <summary>
+        /// Metodo para obtener el ultimo indice de la lista
+        /// </summary>
+        /// <param name="listaBajas"></param>
+        /// <returns>Retorna el ultimo indice + uno</returns>
         public static int obtenerUltimoIndiceListaMensajes(List<Dictionary<int, string>> listaBajas)
         {
             //operador ternario
@@ -29,6 +44,11 @@ namespace Entidades
 
             return ultimoIndice;
         }
+
+        /// <summary>
+        /// Serealizacion XML de la lista diccionario
+        /// </summary>
+        /// <param name="listaBajas"></param>
         public static void GuardarMensajesBajaEnArchivo(List<Dictionary<int, string>> listaBajas)
         {
             string rutaArchivo = @"..\..\..\Archivos\mensajes.xml";
@@ -44,6 +64,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Deserealizacion de la lista mensajes
+        /// </summary>
+        /// <returns>Retorna la lista</returns>
         public static List<Dictionary<int, string>> DeserializarMensajesBajaDesdeArchivo()
         {
             XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
@@ -74,6 +98,13 @@ namespace Entidades
                 return listaBajas;
             }
         }
+
+        /// <summary>
+        /// Metodo para validar que un entero sea parte del mensaje
+        /// </summary>
+        /// <param name="cadena"></param>
+        /// <param name="numero"></param>
+        /// <returns>retorna true o false</returns>
         public static bool EsDNIParteDeString(string cadena, int numero)
         {
             string numeroStr = numero.ToString();
@@ -81,6 +112,11 @@ namespace Entidades
             return cadena.Contains(numeroStr);
         }
 
+        /// <summary>
+        /// Metodo para validar que el mismo usuario no repita el mensaje de baja
+        /// </summary>
+        /// <param name="numero"></param>
+        /// <returns></returns>
         public static bool VerificarNumeroEnListaBajas(int numero)
         {
             bool retorno = false;
