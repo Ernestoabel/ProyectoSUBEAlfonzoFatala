@@ -100,7 +100,7 @@ namespace ProyectoSUBEAlfonzoFatala
             FormRegistro formRegistro = new FormRegistro();
             formRegistro.Show();
             this.Close();
-
+            //dialog result
         }
 
         private void FormInicio_Load(object sender, EventArgs e)
