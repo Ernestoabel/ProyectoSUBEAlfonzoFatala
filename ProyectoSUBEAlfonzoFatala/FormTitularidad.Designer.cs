@@ -28,34 +28,155 @@
         /// </summary>
         private void InitializeComponent()
         {
-            dataGridTitularidad = new DataGridView();
-            ((System.ComponentModel.ISupportInitialize)dataGridTitularidad).BeginInit();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormTitularidad));
+            txtNombre = new TextBox();
+            txtApellido = new TextBox();
+            TxtDNI = new TextBox();
+            txtTarjeta = new TextBox();
+            lbNombre = new Label();
+            lbApellido = new Label();
+            lbDNI = new Label();
+            lbTarjeta = new Label();
+            lbSaldo = new Label();
+            txtSaldo = new TextBox();
             SuspendLayout();
             // 
-            // dataGridTitularidad
+            // txtNombre
             // 
-            dataGridTitularidad.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridTitularidad.Location = new Point(12, 67);
-            dataGridTitularidad.Name = "dataGridTitularidad";
-            dataGridTitularidad.RowTemplate.Height = 25;
-            dataGridTitularidad.Size = new Size(776, 371);
-            dataGridTitularidad.TabIndex = 0;
+            txtNombre.BorderStyle = BorderStyle.None;
+            txtNombre.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            txtNombre.Location = new Point(190, 69);
+            txtNombre.Name = "txtNombre";
+            txtNombre.Size = new Size(228, 36);
+            txtNombre.TabIndex = 0;
+            // 
+            // txtApellido
+            // 
+            txtApellido.BorderStyle = BorderStyle.None;
+            txtApellido.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            txtApellido.Location = new Point(190, 111);
+            txtApellido.Name = "txtApellido";
+            txtApellido.Size = new Size(228, 36);
+            txtApellido.TabIndex = 1;
+            // 
+            // TxtDNI
+            // 
+            TxtDNI.BorderStyle = BorderStyle.None;
+            TxtDNI.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            TxtDNI.Location = new Point(190, 153);
+            TxtDNI.Name = "TxtDNI";
+            TxtDNI.Size = new Size(228, 36);
+            TxtDNI.TabIndex = 2;
+            // 
+            // txtTarjeta
+            // 
+            txtTarjeta.BorderStyle = BorderStyle.None;
+            txtTarjeta.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            txtTarjeta.Location = new Point(190, 195);
+            txtTarjeta.Name = "txtTarjeta";
+            txtTarjeta.Size = new Size(228, 36);
+            txtTarjeta.TabIndex = 3;
+            // 
+            // lbNombre
+            // 
+            lbNombre.AutoSize = true;
+            lbNombre.BackColor = Color.Transparent;
+            lbNombre.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbNombre.Location = new Point(40, 68);
+            lbNombre.Name = "lbNombre";
+            lbNombre.Size = new Size(123, 37);
+            lbNombre.TabIndex = 4;
+            lbNombre.Text = "Nombre";
+            // 
+            // lbApellido
+            // 
+            lbApellido.AutoSize = true;
+            lbApellido.BackColor = Color.Transparent;
+            lbApellido.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbApellido.Location = new Point(40, 110);
+            lbApellido.Name = "lbApellido";
+            lbApellido.Size = new Size(126, 37);
+            lbApellido.TabIndex = 5;
+            lbApellido.Text = "Apellido";
+            // 
+            // lbDNI
+            // 
+            lbDNI.AutoSize = true;
+            lbDNI.BackColor = Color.Transparent;
+            lbDNI.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbDNI.Location = new Point(40, 152);
+            lbDNI.Name = "lbDNI";
+            lbDNI.Size = new Size(67, 37);
+            lbDNI.TabIndex = 6;
+            lbDNI.Text = "DNI";
+            // 
+            // lbTarjeta
+            // 
+            lbTarjeta.AutoSize = true;
+            lbTarjeta.BackColor = Color.Transparent;
+            lbTarjeta.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbTarjeta.Location = new Point(40, 194);
+            lbTarjeta.Name = "lbTarjeta";
+            lbTarjeta.Size = new Size(106, 37);
+            lbTarjeta.TabIndex = 7;
+            lbTarjeta.Text = "Tarjeta";
+            // 
+            // lbSaldo
+            // 
+            lbSaldo.AutoSize = true;
+            lbSaldo.BackColor = Color.Transparent;
+            lbSaldo.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            lbSaldo.Location = new Point(40, 237);
+            lbSaldo.Name = "lbSaldo";
+            lbSaldo.Size = new Size(89, 37);
+            lbSaldo.TabIndex = 8;
+            lbSaldo.Text = "Saldo";
+            // 
+            // txtSaldo
+            // 
+            txtSaldo.BorderStyle = BorderStyle.None;
+            txtSaldo.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
+            txtSaldo.Location = new Point(190, 237);
+            txtSaldo.Name = "txtSaldo";
+            txtSaldo.Size = new Size(228, 36);
+            txtSaldo.TabIndex = 9;
             // 
             // FormTitularidad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ScrollBar;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(800, 450);
-            Controls.Add(dataGridTitularidad);
+            Controls.Add(txtSaldo);
+            Controls.Add(lbSaldo);
+            Controls.Add(lbTarjeta);
+            Controls.Add(lbDNI);
+            Controls.Add(lbApellido);
+            Controls.Add(lbNombre);
+            Controls.Add(txtTarjeta);
+            Controls.Add(TxtDNI);
+            Controls.Add(txtApellido);
+            Controls.Add(txtNombre);
             Name = "FormTitularidad";
             Text = "FormTitularidad";
             Load += FormTitularidad_Load_1;
-            ((System.ComponentModel.ISupportInitialize)dataGridTitularidad).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dataGridTitularidad;
+        private TextBox txtNombre;
+        private TextBox txtApellido;
+        private TextBox TxtDNI;
+        private TextBox txtTarjeta;
+        private Label lbNombre;
+        private Label lbApellido;
+        private Label lbDNI;
+        private Label lbTarjeta;
+        private Label lbSaldo;
+        private TextBox txtSaldo;
     }
 }
