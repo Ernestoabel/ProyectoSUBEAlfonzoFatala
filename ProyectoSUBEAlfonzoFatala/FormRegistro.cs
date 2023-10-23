@@ -148,20 +148,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        /// <summary>
-        /// Verifica si un string es solo alfabetico
-        /// 
-        /// </summary>
-        /// <param name="input"></param>
-        /// <returns></returns>
-        public static bool EsCadenaDeCaracteres(string input)
-        {
-            // Patrón de expresión regular que coincide con letras mayúsculas y minúsculas.
-            string patron = "^[A-Za-z]+$";
-
-            // Usar Regex.IsMatch para verificar si el input coincide con el patrón.
-            return Regex.IsMatch(input, patron);
-        }
 
         /// <summary>
         /// Valida que el usuario haya colocado en el textbox los datos pertinentes
@@ -227,9 +213,11 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             string dniIngresado = txtDni.Text;
 
+            bool dniNoIngresado = EncontrarDni();
+
             if (string.IsNullOrEmpty(txtNombre.Text) ||
              string.IsNullOrEmpty(txtApellido.Text) ||
-             string.IsNullOrEmpty(dniIngresado) && dniIngresado.Length >= 8 && dniIngresado.Length <= 9)
+             string.IsNullOrEmpty(dniIngresado) && dniIngresado.Length >= 8 && dniIngresado.Length <= 9 && dniNoIngresado)
             {
                 return false; // Faltan datos obligatorios
             }
@@ -257,7 +245,27 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        private bool EncontrarDni()
+        {
 
+            string dniBuscado = txtDni.Text; // DNI que deseas buscar
+
+            bool dniEncontrado = false;
+
+            foreach (Usuario usuario in Listados.listaUsuarios)
+            {
+                if (usuario.Dni == dniBuscado)
+                {
+                    dniEncontrado = true;
+                    
+                    MessageBox.Show("El usuario ya está registrado. No se puede registrar nuevamente.", "Usuario Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    txtDni.Clear();
+                    break; 
+                }
+            }
+
+            return dniEncontrado;
+        }
 
 
         private void BorrarMensajeError()
@@ -294,7 +302,19 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void txtDni_TextChanged(object sender, EventArgs e)
         {
-            btnContinuar.Enabled = HabilitarContinuar();
+            bool dniEncontrado = EncontrarDni();
+            string dniIngresado = txtDni.Text;
+
+
+            if(!dniEncontrado && dniIngresado.Length >= 8)
+            {
+                btnContinuar.Enabled = HabilitarContinuar();
+            }
+            else
+            {
+                btnContinuar.Enabled = false;
+            }
+            
         }
 
         private void txtClave_TextChanged(object sender, EventArgs e)

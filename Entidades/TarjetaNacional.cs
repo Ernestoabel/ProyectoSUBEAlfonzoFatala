@@ -10,11 +10,13 @@ namespace Entidades
 {
     public class TarjetaNacional : Tarjeta, IOperacionesSistema<TarjetaNacional>
     {
-        private static int proximoId = 1003;
+        
+        IdManager idManagerNacional = new IdManager(true);
         public static List<TarjetaNacional> listaTarjetasNacionales = new List<TarjetaNacional>();
+
         public TarjetaNacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
         {
-            id = GenerarNuevoId();
+            
         }
         public TarjetaNacional()
         {
@@ -30,7 +32,7 @@ namespace Entidades
 
         protected override int GenerarNuevoId()
         {
-            return proximoId++;
+            return idManagerNacional.GetNextId();
         }
         public void GuardarEnArchivo(List<TarjetaNacional> lista, string nombreArchivo)
         {

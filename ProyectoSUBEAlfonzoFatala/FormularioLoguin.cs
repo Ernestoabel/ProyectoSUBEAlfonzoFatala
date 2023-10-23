@@ -145,9 +145,9 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             
-            tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
-            tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
-            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            //tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
+            //tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
+            //Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
             //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();

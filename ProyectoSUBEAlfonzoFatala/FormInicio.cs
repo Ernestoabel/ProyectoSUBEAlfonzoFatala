@@ -130,10 +130,20 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void cOMPRARToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            FormRegistrarTarjeta formComprar = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
-            formComprar.Show();
+            if (usuarioLogueado is UsuarioSinTarjeta )
+            {
 
-            this.Hide();
+
+                FormRegistrarTarjeta formComprar = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
+                formComprar.Show();
+
+                this.Hide();
+            }
+            else
+            {
+                MessageBox.Show("Usted ya tiene tarjeta", "Usted tiene tarjeta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                cOMPRARToolStripMenuItem.Enabled = false;
+            }
         }
 
         private void iNICIARSESIONToolStripMenuItem_Click(object sender, EventArgs e)

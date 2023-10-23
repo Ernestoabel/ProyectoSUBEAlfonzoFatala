@@ -26,41 +26,14 @@ namespace ProyectoSUBEAlfonzoFatala
             this.usuarioLogueado = usuario;
         }
 
+        #region Controlers
 
-        private bool HabilitarContinuarClave()
+        private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtDocumento.Text) ||
-                string.IsNullOrEmpty(txtClave.Text))
-            {
-                return false; // Faltan datos obligatorios
-            }
+            this.Close();
 
-            return true; // Todos los datos obligatorios están completos
-
-        }
-
-        private void txtDocumento_TextChanged(object sender, EventArgs e)
-        {
-            btnContinuar.Enabled = HabilitarContinuarClave();
-        }
-
-        private void txtClave_TextChanged(object sender, EventArgs e)
-        {
-
-            string clave = txtClave.Text;
-
-            // Verifica si la clave es numérica y tiene exactamente 4 dígitos
-            if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 && clave == usuarioLogueado.Clave)
-            {
-                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
-                btnContinuar.Enabled = true;
-            }
-            else
-            {
-                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
-                btnContinuar.Enabled = false;
-            }
-
+            FormInicio form = new FormInicio(usuarioLogueado);
+            form.Show();
 
         }
 
@@ -110,8 +83,6 @@ namespace ProyectoSUBEAlfonzoFatala
                     FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
                     usuarioRegistrado.Show();
 
-                    //ManejoDeListados.ObtenerUsuarioPorDniYTarjeta()
-
                 }
 
                 this.Hide();
@@ -123,15 +94,60 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Error los datos no coinciden. Reingreselos. Muchas Gracias");
             }
         }
+        #endregion
 
-        private void btnCancelarRegistro_Click(object sender, EventArgs e)
+        #region Metodos
+
+        /// <summary>
+        ///  Permite habilitar el boton continuar si los datos fueron ingresados
+        /// </summary>
+        /// <returns></returns>
+        private bool HabilitarContinuarClave()
         {
-            this.Close();
+            if (string.IsNullOrEmpty(txtDocumento.Text) ||
+                string.IsNullOrEmpty(txtClave.Text))
+            {
+                return false; // Faltan datos obligatorios
+            }
 
-            FormInicio form = new FormInicio(usuarioLogueado);
-            form.Show();
+            return true; // Todos los datos obligatorios están completos
+
+        } 
+
+  
+
+        #endregion
+
+        #region Eventos Controlers
+
+
+        private void txtDocumento_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuarClave();
+
+            
+        }
+
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+
+            string clave = txtClave.Text;
+
+            // Verifica si la clave es numérica y tiene exactamente 4 dígitos
+            if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 && clave == usuarioLogueado.Clave)
+            {
+                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                btnContinuar.Enabled = true;
+            }
+            else
+            {
+                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                btnContinuar.Enabled = false;
+            }
+
 
         }
+
 
         /// <summary>
         /// Solo deja ingresar hasta 9 numeros
@@ -140,6 +156,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
+            
             if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
                
@@ -189,5 +206,8 @@ namespace ProyectoSUBEAlfonzoFatala
             }
 
         }
+
+        #endregion
+
     }
 }
