@@ -10,7 +10,9 @@ namespace Entidades
 {
     public class TarjetaInternacional : Tarjeta, IOperacionesSistema<TarjetaInternacional>
     {
-        private static int proximoId = 5003;
+        //private static int proximoId = 5003;
+        IdManager idManager = new IdManager();
+
 
         public static List<TarjetaInternacional> listaTarjetasIntenacionales = new List<TarjetaInternacional>();
         public TarjetaInternacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
@@ -32,7 +34,7 @@ namespace Entidades
 
         protected override int GenerarNuevoId()
         {
-            return proximoId++;
+            return idManager.GetNextId();
         }
         
         /// <summary>
