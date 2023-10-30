@@ -137,5 +137,34 @@ namespace Entidades
 
             ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
         }
+
+        public List<TarjetaInternacional> ObtenerElementosSQL()
+        {
+            List<TarjetaInternacional> tarjetasInternacional = new List<TarjetaInternacional>();
+            ConexionSQL.Conectar(); // Abre la conexión
+
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionSQL.mysqlConexion;
+                cmd.CommandText = "SELECT * FROM tarjetanacional";
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32("Id");
+                        decimal saldo = reader.GetDecimal("Saldo");
+                        string viajesJson = reader.GetString("Viajes");
+                        List<Viajes> viajes = JsonConvert.DeserializeObject<List<Viajes>>(viajesJson);
+
+                        TarjetaInternacional tarjeta = new TarjetaInternacional(id, saldo, viajes);
+                        tarjetasInternacional.Add(tarjeta);
+                    }
+                }
+            }
+
+            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            return tarjetasInternacional;
+        }
     }
 }

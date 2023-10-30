@@ -55,5 +55,34 @@ namespace Entidades
             ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
         }
 
+        public List<UsuarioSinTarjeta> ObtenerElementosSQL()
+        {
+            List<UsuarioSinTarjeta> usuariosSinTarjeta = new List<UsuarioSinTarjeta>();
+            ConexionSQL.Conectar(); // Abre la conexión
+
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionSQL.mysqlConexion;
+                cmd.CommandText = "SELECT Nombre, Apellido, Clave, DNI FROM tarjetanacional";
+
+                using (MySqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string nombre = reader.GetString("Nombre");
+                        string apellido = reader.GetString("Apellido");
+                        string clave = reader.GetString("Clave");
+                        string dni = reader.GetString("DNI");
+
+                        UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
+                        usuariosSinTarjeta.Add(usuario);
+                    }
+                }
+            }
+
+            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            return usuariosSinTarjeta;
+        }
+
     }
 }

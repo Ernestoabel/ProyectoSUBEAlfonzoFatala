@@ -13,5 +13,7 @@ namespace Entidades
         {
 
         }
+
+        List<T> ObtenerElementosSQL();
     }
 }
