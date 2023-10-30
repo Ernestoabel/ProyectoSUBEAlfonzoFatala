@@ -51,6 +51,9 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 lblTitulo.Text = $"Bienvenido {usuarioLogueado.Nombre}!";
 
+                //Aca esta el problema de por que se duplica el usuario
+                //Vos estas agregando un nuevo usuario con datos del usuario que te traes a la lista con una tarjeta
+                //Pero como no quitas al usuario anterior de la lista se duplica el usuario
                 if (esArgentino)
                 {
                     string idEnString = tarjetaNacional.Id.ToString();

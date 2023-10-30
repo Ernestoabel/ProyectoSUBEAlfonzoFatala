@@ -41,9 +41,9 @@ namespace ProyectoSUBEAlfonzoFatala
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            
+            //TarjetaNacional.InsertarElementosSQL(tajetaNacionalCargadas);
         }
-        
+
         /// <summary>
         /// Evento para el logeo
         /// Pide dni y clave
@@ -179,9 +179,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-                    MessageBox.Show("usuario: " + formRegistro.nuevoUsuarioRegistrado, "INICIE SESION!", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
                 }
             }
 

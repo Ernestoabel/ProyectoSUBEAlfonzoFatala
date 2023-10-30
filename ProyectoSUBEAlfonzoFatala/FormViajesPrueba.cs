@@ -29,12 +29,12 @@ namespace ProyectoSUBEAlfonzoFatala
             if (usuario is UsuarioSinTarjeta)
             {
                 MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+                btnViajar.Enabled = false;
             }
             else if (usuario is UsuarioArgentino)
             {
                 usuarioLogueado = usuario;
-
+                btnViajar.Enabled = true;
                 if (usuario is UsuarioArgentino usuarioArgentino)
                 {
                     List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
@@ -46,6 +46,7 @@ namespace ProyectoSUBEAlfonzoFatala
             else if (usuario is UsuarioExtranjero)
             {
                 usuarioLogueado = usuario;
+                btnViajar.Enabled = true;
                 if (usuario is UsuarioExtranjero usuarioExtranjero)
                 {
                     List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;

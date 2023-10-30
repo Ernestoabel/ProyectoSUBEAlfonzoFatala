@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
@@ -37,8 +38,6 @@ namespace Entidades
         {
             return IdSubeArgentina;
         }
-
-        
 
     }
 }
