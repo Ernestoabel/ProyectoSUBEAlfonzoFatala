@@ -130,7 +130,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void cOMPRARToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (usuarioLogueado is UsuarioSinTarjeta )
+            if (usuarioLogueado is UsuarioSinTarjeta)
             {
 
 
@@ -151,6 +151,18 @@ namespace ProyectoSUBEAlfonzoFatala
             /// Cargar sube
             /// 
 
+            if (usuarioLogueado is not UsuarioSinTarjeta)
+            {
+                FormCargarSaldo cargarSaldo = new FormCargarSaldo(usuarioLogueado);
+                cargarSaldo.MdiParent = this;
+                cargarSaldo.Show();
+
+            }
+            else
+            {
+                MessageBox.Show("Usted no tiene tarjeta", "Usted no tiene tarjeta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                iNICIARSESIONToolStripMenuItem.Enabled = false;
+            }
 
         }
     }

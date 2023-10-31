@@ -125,6 +125,7 @@
             ClientSize = new Size(800, 450);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "FormInicio";
             Text = "Programa SUBE";
