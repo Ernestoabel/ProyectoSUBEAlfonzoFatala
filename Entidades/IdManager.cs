@@ -13,8 +13,6 @@ namespace Entidades
         private int lastId;
         bool esNacional = false;    
        
-        
-
         public IdManager(bool esNacionalEste)
         {
             // Intenta cargar el último ID desde el archivo al crear una instancia de la clase.

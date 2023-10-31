@@ -7,6 +7,7 @@ using System.Data;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
+using System.Net;
 using System.Numerics;
 using System.Security.Cryptography.X509Certificates;
 using System.Text;
@@ -41,13 +42,15 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             bool esArgentino = rdoArgentino.Checked;
             bool esExtranjero = rdoExtranjero.Checked;
+            string dni = txtDocumento.Text;
+            string clave = txtClave.Text;
 
 
             List<Viajes> nuevosViajes = new List<Viajes>();
             TarjetaNacional tarjetaNacional = new TarjetaNacional(1002, 0, nuevosViajes);
             TarjetaInternacional tarjetaInternacional = new TarjetaInternacional(5002, 0, nuevosViajes); ;
 
-            if (txtDocumento.Text == usuarioLogueado.Dni && txtClave.Text == usuarioLogueado.Clave)
+            if (dni == usuarioLogueado.Dni && clave == usuarioLogueado.Clave)
             {
                 lblTitulo.Text = $"Bienvenido {usuarioLogueado.Nombre}!";
 
@@ -60,7 +63,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
                     TarjetaNacional tarjetaNac = new TarjetaNacional();
+
                     Listados.AgregarUsuario(usuarioArgentino);
+                    RemoverUsuarioSinTarjetaLocalizado();
+
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
                     tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
@@ -78,6 +84,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
                     TarjetaInternacional tarjetaInt = new TarjetaInternacional();
                     Listados.AgregarUsuario(usuarioExtranjero);
+                    RemoverUsuarioSinTarjetaLocalizado();
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
                     tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
@@ -115,9 +122,23 @@ namespace ProyectoSUBEAlfonzoFatala
 
             return true; // Todos los datos obligatorios están completos
 
-        } 
+        }
 
-  
+        private void RemoverUsuarioSinTarjetaLocalizado()
+        {
+
+            UsuarioSinTarjeta usuarioArgentinoExistente = Listados.listaUsuarios
+           .OfType<UsuarioSinTarjeta>()
+           .FirstOrDefault(u => u.Dni == usuarioLogueado.Dni);
+
+            if (usuarioArgentinoExistente != null)
+            {
+                // Eliminamos el usuario anterior del mismo tipo
+                Listados.listaUsuarios.Remove(usuarioArgentinoExistente);
+            }
+        }
+
+
 
         #endregion
 
@@ -127,8 +148,26 @@ namespace ProyectoSUBEAlfonzoFatala
         private void txtDocumento_TextChanged(object sender, EventArgs e)
         {
             btnContinuar.Enabled = HabilitarContinuarClave();
+            string dni = txtDocumento.Text;
 
-            
+            if (dni.Length == 8)
+            {
+                // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
+                rdoArgentino.Checked = true;
+                rdoExtranjero.Checked = false;
+            }
+            else if (dni.Length == 9)
+            {
+                // El DNI tiene 9 dígitos, por lo que se considera "Extranjero"
+                rdoArgentino.Checked = false;
+                rdoExtranjero.Checked = true;
+            }
+            else
+            {
+                // Longitud de DNI no válida, deseleccionar ambos botones
+                rdoArgentino.Checked = false;
+                rdoExtranjero.Checked = false;
+            }
         }
 
         private void txtClave_TextChanged(object sender, EventArgs e)
@@ -159,16 +198,17 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void txtDocumento_KeyPress(object sender, KeyPressEventArgs e)
         {
-            
+
             if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
             {
-               
+
                 string dniIngresado = txtDocumento.Text;
 
                 // Permitir la edición si no se alcanza el límite de 9 caracteres
                 if (dniIngresado.Length < 9 || e.KeyChar == 8)
                 {
                     e.Handled = false; // Permitir la entrada del carácter
+              
                 }
                 else
                 {
@@ -200,7 +240,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
                 else
                 {
-                    e.Handled = true; 
+                    e.Handled = true;
                 }
             }
             else

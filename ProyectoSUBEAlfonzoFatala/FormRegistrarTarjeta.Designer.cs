@@ -88,7 +88,7 @@
             txtDocumento.Name = "txtDocumento";
             txtDocumento.PlaceholderText = "Ingrese su documento";
             txtDocumento.Size = new Size(160, 23);
-            txtDocumento.TabIndex = 4;
+            txtDocumento.TabIndex = 1;
             txtDocumento.TextChanged += txtDocumento_TextChanged;
             txtDocumento.KeyPress += txtDocumento_KeyPress;
             // 
@@ -120,8 +120,7 @@
             rdoArgentino.Location = new Point(34, 228);
             rdoArgentino.Name = "rdoArgentino";
             rdoArgentino.Size = new Size(89, 19);
-            rdoArgentino.TabIndex = 7;
-            rdoArgentino.TabStop = true;
+            rdoArgentino.TabIndex = 2;
             rdoArgentino.Text = "Argentino/a";
             rdoArgentino.UseVisualStyleBackColor = true;
             // 
@@ -132,8 +131,7 @@
             rdoExtranjero.Location = new Point(129, 228);
             rdoExtranjero.Name = "rdoExtranjero";
             rdoExtranjero.Size = new Size(89, 19);
-            rdoExtranjero.TabIndex = 8;
-            rdoExtranjero.TabStop = true;
+            rdoExtranjero.TabIndex = 3;
             rdoExtranjero.Text = "Extranjero/a";
             rdoExtranjero.UseVisualStyleBackColor = true;
             // 
@@ -155,7 +153,7 @@
             txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = "Ingrese su clave";
             txtClave.Size = new Size(160, 23);
-            txtClave.TabIndex = 10;
+            txtClave.TabIndex = 4;
             txtClave.TextChanged += txtClave_TextChanged;
             txtClave.KeyPress += txtClave_KeyPress;
             // 
