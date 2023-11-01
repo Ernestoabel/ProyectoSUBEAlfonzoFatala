@@ -38,6 +38,11 @@ namespace Entidades
 
         protected abstract int GenerarNuevoId();
 
+        public void CargarSaldo(decimal monto)
+        {
+            Saldo += monto;
+        }
+
         public bool RestarSaldo(decimal valor)
         {
             if (Saldo >= valor)
@@ -49,9 +54,8 @@ namespace Entidades
             {
                 return false; // No hay suficiente saldo
             }
+            
         }
-
-
 
     }
 }

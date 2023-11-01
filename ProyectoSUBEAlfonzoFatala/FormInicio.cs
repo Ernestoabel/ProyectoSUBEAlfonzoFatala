@@ -13,6 +13,7 @@ namespace ProyectoSUBEAlfonzoFatala
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
+        FormCargarSaldo formCarga = new FormCargarSaldo();
         public object usuarioLogueado;
 
 
@@ -153,9 +154,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
-                FormCargarSaldo cargarSaldo = new FormCargarSaldo(usuarioLogueado);
-                cargarSaldo.MdiParent = this;
-                cargarSaldo.Show();
+                formCarga.TraerUsuario(usuarioLogueado);
+                formCarga.FormBorderStyle = FormBorderStyle.None;
+                formCarga.Dock = DockStyle.Fill;
+                formCarga.MdiParent = this;
+                formCarga.Show();
 
             }
             else

@@ -35,6 +35,13 @@
             lblVerSaldo = new Label();
             btnSalir = new Button();
             lblSalir = new Label();
+            pbTarjeta = new PictureBox();
+            lblNombre = new Label();
+            lblApellido = new Label();
+            lblSaldo = new Label();
+            lblIdTarjeta = new Label();
+            lblDni = new Label();
+            ((System.ComponentModel.ISupportInitialize)pbTarjeta).BeginInit();
             SuspendLayout();
             // 
             // btnCargar
@@ -43,7 +50,7 @@
             btnCargar.BackgroundImage = (Image)resources.GetObject("btnCargar.BackgroundImage");
             btnCargar.BackgroundImageLayout = ImageLayout.Stretch;
             btnCargar.FlatStyle = FlatStyle.Flat;
-            btnCargar.Location = new Point(83, 136);
+            btnCargar.Location = new Point(83, 145);
             btnCargar.Name = "btnCargar";
             btnCargar.Size = new Size(68, 60);
             btnCargar.TabIndex = 0;
@@ -56,7 +63,7 @@
             btnVerSaldo.BackgroundImage = (Image)resources.GetObject("btnVerSaldo.BackgroundImage");
             btnVerSaldo.BackgroundImageLayout = ImageLayout.Stretch;
             btnVerSaldo.FlatStyle = FlatStyle.Flat;
-            btnVerSaldo.Location = new Point(83, 273);
+            btnVerSaldo.Location = new Point(83, 248);
             btnVerSaldo.Name = "btnVerSaldo";
             btnVerSaldo.Size = new Size(68, 60);
             btnVerSaldo.TabIndex = 1;
@@ -69,7 +76,7 @@
             lblCargarSaldo.BackColor = Color.Transparent;
             lblCargarSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblCargarSaldo.ForeColor = Color.White;
-            lblCargarSaldo.Location = new Point(83, 208);
+            lblCargarSaldo.Location = new Point(74, 215);
             lblCargarSaldo.Name = "lblCargarSaldo";
             lblCargarSaldo.Size = new Size(122, 24);
             lblCargarSaldo.TabIndex = 2;
@@ -81,7 +88,7 @@
             lblVerSaldo.BackColor = Color.Transparent;
             lblVerSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblVerSaldo.ForeColor = Color.White;
-            lblVerSaldo.Location = new Point(83, 345);
+            lblVerSaldo.Location = new Point(74, 311);
             lblVerSaldo.Name = "lblVerSaldo";
             lblVerSaldo.Size = new Size(94, 24);
             lblVerSaldo.TabIndex = 3;
@@ -93,7 +100,7 @@
             btnSalir.BackgroundImage = (Image)resources.GetObject("btnSalir.BackgroundImage");
             btnSalir.BackgroundImageLayout = ImageLayout.Stretch;
             btnSalir.FlatStyle = FlatStyle.Flat;
-            btnSalir.Location = new Point(611, 273);
+            btnSalir.Location = new Point(83, 35);
             btnSalir.Name = "btnSalir";
             btnSalir.Size = new Size(68, 60);
             btnSalir.TabIndex = 4;
@@ -106,29 +113,109 @@
             lblSalir.BackColor = Color.Transparent;
             lblSalir.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblSalir.ForeColor = Color.White;
-            lblSalir.Location = new Point(629, 345);
+            lblSalir.Location = new Point(74, 98);
             lblSalir.Name = "lblSalir";
             lblSalir.Size = new Size(50, 24);
             lblSalir.TabIndex = 5;
             lblSalir.Text = "Salir";
             // 
+            // pbTarjeta
+            // 
+            pbTarjeta.BackColor = Color.Transparent;
+            pbTarjeta.Image = (Image)resources.GetObject("pbTarjeta.Image");
+            pbTarjeta.Location = new Point(334, 12);
+            pbTarjeta.Name = "pbTarjeta";
+            pbTarjeta.Size = new Size(365, 258);
+            pbTarjeta.SizeMode = PictureBoxSizeMode.Zoom;
+            pbTarjeta.TabIndex = 6;
+            pbTarjeta.TabStop = false;
+            // 
+            // lblNombre
+            // 
+            lblNombre.AutoSize = true;
+            lblNombre.BackColor = Color.Transparent;
+            lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblNombre.ForeColor = Color.White;
+            lblNombre.Location = new Point(357, 87);
+            lblNombre.Name = "lblNombre";
+            lblNombre.Size = new Size(86, 23);
+            lblNombre.TabIndex = 7;
+            lblNombre.Text = "Nombre";
+            // 
+            // lblApellido
+            // 
+            lblApellido.AutoSize = true;
+            lblApellido.BackColor = Color.Transparent;
+            lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblApellido.ForeColor = Color.White;
+            lblApellido.Location = new Point(486, 87);
+            lblApellido.Name = "lblApellido";
+            lblApellido.Size = new Size(88, 23);
+            lblApellido.TabIndex = 8;
+            lblApellido.Text = "Apellido";
+            // 
+            // lblSaldo
+            // 
+            lblSaldo.AutoSize = true;
+            lblSaldo.BackColor = Color.Transparent;
+            lblSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSaldo.ForeColor = Color.White;
+            lblSaldo.Location = new Point(367, 210);
+            lblSaldo.Name = "lblSaldo";
+            lblSaldo.Size = new Size(67, 24);
+            lblSaldo.TabIndex = 9;
+            lblSaldo.Text = "$ 0.00";
+            // 
+            // lblIdTarjeta
+            // 
+            lblIdTarjeta.AutoSize = true;
+            lblIdTarjeta.BackColor = Color.Transparent;
+            lblIdTarjeta.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblIdTarjeta.ForeColor = Color.White;
+            lblIdTarjeta.Location = new Point(424, 172);
+            lblIdTarjeta.Name = "lblIdTarjeta";
+            lblIdTarjeta.Size = new Size(39, 14);
+            lblIdTarjeta.TabIndex = 10;
+            lblIdTarjeta.Text = "0000";
+            // 
+            // lblDni
+            // 
+            lblDni.AutoSize = true;
+            lblDni.BackColor = Color.Transparent;
+            lblDni.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDni.ForeColor = Color.White;
+            lblDni.Location = new Point(378, 141);
+            lblDni.Name = "lblDni";
+            lblDni.Size = new Size(71, 14);
+            lblDni.TabIndex = 11;
+            lblDni.Text = "xx xxx xxx";
+            // 
             // FormCargarSaldo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.HotTrack;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackColor = Color.DarkSlateGray;
             BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(800, 450);
+            ClientSize = new Size(791, 424);
             ControlBox = false;
+            Controls.Add(lblDni);
+            Controls.Add(lblIdTarjeta);
+            Controls.Add(lblSaldo);
+            Controls.Add(lblApellido);
+            Controls.Add(lblNombre);
+            Controls.Add(pbTarjeta);
             Controls.Add(lblSalir);
             Controls.Add(btnSalir);
             Controls.Add(lblVerSaldo);
             Controls.Add(lblCargarSaldo);
             Controls.Add(btnVerSaldo);
             Controls.Add(btnCargar);
+            FormBorderStyle = FormBorderStyle.None;
             Name = "FormCargarSaldo";
+            StartPosition = FormStartPosition.CenterParent;
             Text = "FormCargarSaldo";
+            Load += FormCargarSaldo_Load;
+            ((System.ComponentModel.ISupportInitialize)pbTarjeta).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -141,5 +228,11 @@
         private Label lblVerSaldo;
         private Button btnSalir;
         private Label lblSalir;
+        private PictureBox pbTarjeta;
+        private Label lblNombre;
+        private Label lblApellido;
+        private Label lblSaldo;
+        private Label lblIdTarjeta;
+        private Label lblDni;
     }
 }
