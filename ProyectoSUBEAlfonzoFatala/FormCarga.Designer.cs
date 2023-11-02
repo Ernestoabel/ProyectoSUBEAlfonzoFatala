@@ -38,15 +38,17 @@
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(53, 96);
+            txtMonto.Location = new Point(173, 94);
             txtMonto.Name = "txtMonto";
             txtMonto.PlaceholderText = "Ingrese el monto";
             txtMonto.Size = new Size(149, 23);
             txtMonto.TabIndex = 0;
+            txtMonto.TextChanged += txtMonto_TextChanged;
+            txtMonto.KeyPress += txtMonto_KeyPress;
             // 
             // txtClave
             // 
-            txtClave.Location = new Point(53, 166);
+            txtClave.Location = new Point(173, 156);
             txtClave.Name = "txtClave";
             txtClave.PlaceholderText = "Ingrese su clave";
             txtClave.Size = new Size(149, 23);
@@ -57,7 +59,7 @@
             lblMonto.AutoSize = true;
             lblMonto.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblMonto.ForeColor = Color.White;
-            lblMonto.Location = new Point(44, 69);
+            lblMonto.Location = new Point(82, 94);
             lblMonto.Name = "lblMonto";
             lblMonto.Size = new Size(65, 24);
             lblMonto.TabIndex = 2;
@@ -68,7 +70,7 @@
             lblClave.AutoSize = true;
             lblClave.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblClave.ForeColor = Color.White;
-            lblClave.Location = new Point(44, 139);
+            lblClave.Location = new Point(82, 156);
             lblClave.Name = "lblClave";
             lblClave.Size = new Size(60, 24);
             lblClave.TabIndex = 3;
@@ -79,7 +81,7 @@
             lblNombre.AutoSize = true;
             lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblNombre.ForeColor = Color.Gainsboro;
-            lblNombre.Location = new Point(329, 49);
+            lblNombre.Location = new Point(116, 282);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(86, 23);
             lblNombre.TabIndex = 4;
@@ -90,7 +92,7 @@
             lblApellido.AutoSize = true;
             lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblApellido.ForeColor = Color.Gainsboro;
-            lblApellido.Location = new Point(329, 92);
+            lblApellido.Location = new Point(252, 282);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(88, 23);
             lblApellido.TabIndex = 5;

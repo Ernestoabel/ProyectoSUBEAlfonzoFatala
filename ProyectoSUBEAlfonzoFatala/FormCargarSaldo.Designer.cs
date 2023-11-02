@@ -38,7 +38,6 @@
             pbTarjeta = new PictureBox();
             lblNombre = new Label();
             lblApellido = new Label();
-            lblSaldo = new Label();
             lblIdTarjeta = new Label();
             lblDni = new Label();
             ((System.ComponentModel.ISupportInitialize)pbTarjeta).BeginInit();
@@ -50,7 +49,7 @@
             btnCargar.BackgroundImage = (Image)resources.GetObject("btnCargar.BackgroundImage");
             btnCargar.BackgroundImageLayout = ImageLayout.Stretch;
             btnCargar.FlatStyle = FlatStyle.Flat;
-            btnCargar.Location = new Point(83, 145);
+            btnCargar.Location = new Point(83, 138);
             btnCargar.Name = "btnCargar";
             btnCargar.Size = new Size(68, 60);
             btnCargar.TabIndex = 0;
@@ -76,7 +75,7 @@
             lblCargarSaldo.BackColor = Color.Transparent;
             lblCargarSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblCargarSaldo.ForeColor = Color.White;
-            lblCargarSaldo.Location = new Point(74, 215);
+            lblCargarSaldo.Location = new Point(74, 205);
             lblCargarSaldo.Name = "lblCargarSaldo";
             lblCargarSaldo.Size = new Size(122, 24);
             lblCargarSaldo.TabIndex = 2;
@@ -123,7 +122,7 @@
             // 
             pbTarjeta.BackColor = Color.Transparent;
             pbTarjeta.Image = (Image)resources.GetObject("pbTarjeta.Image");
-            pbTarjeta.Location = new Point(334, 12);
+            pbTarjeta.Location = new Point(367, 12);
             pbTarjeta.Name = "pbTarjeta";
             pbTarjeta.Size = new Size(365, 258);
             pbTarjeta.SizeMode = PictureBoxSizeMode.Zoom;
@@ -133,10 +132,10 @@
             // lblNombre
             // 
             lblNombre.AutoSize = true;
-            lblNombre.BackColor = Color.Transparent;
+            lblNombre.BackColor = Color.FromArgb(4, 124, 179);
             lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblNombre.ForeColor = Color.White;
-            lblNombre.Location = new Point(357, 87);
+            lblNombre.Location = new Point(397, 145);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(86, 23);
             lblNombre.TabIndex = 7;
@@ -145,48 +144,36 @@
             // lblApellido
             // 
             lblApellido.AutoSize = true;
-            lblApellido.BackColor = Color.Transparent;
+            lblApellido.BackColor = Color.FromArgb(4, 124, 179);
             lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblApellido.ForeColor = Color.White;
-            lblApellido.Location = new Point(486, 87);
+            lblApellido.Location = new Point(499, 145);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(88, 23);
             lblApellido.TabIndex = 8;
             lblApellido.Text = "Apellido";
             // 
-            // lblSaldo
-            // 
-            lblSaldo.AutoSize = true;
-            lblSaldo.BackColor = Color.Transparent;
-            lblSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSaldo.ForeColor = Color.White;
-            lblSaldo.Location = new Point(367, 210);
-            lblSaldo.Name = "lblSaldo";
-            lblSaldo.Size = new Size(67, 24);
-            lblSaldo.TabIndex = 9;
-            lblSaldo.Text = "$ 0.00";
-            // 
             // lblIdTarjeta
             // 
             lblIdTarjeta.AutoSize = true;
-            lblIdTarjeta.BackColor = Color.Transparent;
-            lblIdTarjeta.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblIdTarjeta.BackColor = Color.FromArgb(4, 124, 179);
+            lblIdTarjeta.Font = new Font("Tahoma", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblIdTarjeta.ForeColor = Color.White;
-            lblIdTarjeta.Location = new Point(424, 172);
+            lblIdTarjeta.Location = new Point(397, 205);
             lblIdTarjeta.Name = "lblIdTarjeta";
-            lblIdTarjeta.Size = new Size(39, 14);
+            lblIdTarjeta.Size = new Size(48, 18);
             lblIdTarjeta.TabIndex = 10;
             lblIdTarjeta.Text = "0000";
             // 
             // lblDni
             // 
             lblDni.AutoSize = true;
-            lblDni.BackColor = Color.Transparent;
-            lblDni.Font = new Font("Tahoma", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            lblDni.BackColor = Color.FromArgb(4, 124, 179);
+            lblDni.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblDni.ForeColor = Color.White;
-            lblDni.Location = new Point(378, 141);
+            lblDni.Location = new Point(397, 179);
             lblDni.Name = "lblDni";
-            lblDni.Size = new Size(71, 14);
+            lblDni.Size = new Size(99, 19);
             lblDni.TabIndex = 11;
             lblDni.Text = "xx xxx xxx";
             // 
@@ -200,7 +187,6 @@
             ControlBox = false;
             Controls.Add(lblDni);
             Controls.Add(lblIdTarjeta);
-            Controls.Add(lblSaldo);
             Controls.Add(lblApellido);
             Controls.Add(lblNombre);
             Controls.Add(pbTarjeta);
@@ -231,7 +217,6 @@
         private PictureBox pbTarjeta;
         private Label lblNombre;
         private Label lblApellido;
-        private Label lblSaldo;
         private Label lblIdTarjeta;
         private Label lblDni;
     }

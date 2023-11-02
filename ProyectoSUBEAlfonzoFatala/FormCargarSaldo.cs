@@ -43,7 +43,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
-            MessageBox.Show($"Saldo Acreditado ");
+            FormCarga formCarga = new FormCarga();
+            formCarga.ShowDialog();
         }
 
         private void btnVerSaldo_Click(object sender, EventArgs e)
@@ -53,7 +54,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnSalir_Click(object sender, EventArgs e)
         {
-            this.Close();
+            MessageBox.Show("No podes salir de aqui");
+
         }
 
         private void FormCargarSaldo_Load(object sender, EventArgs e)
@@ -78,7 +80,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblApellido.Text = usuarioLogueado.Apellido.ToString();
                 lblDni.Text = usuarioLogueado.Dni.ToString();
                 lblIdTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
-                lblSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
+                //lblSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
             }
             else if (usuario is UsuarioExtranjero)
             {
@@ -87,7 +89,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblApellido.Text = usuarioLogueado.Apellido.ToString();
                 lblDni.Text = usuarioLogueado.Dni.ToString();
                 lblIdTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
-                lblSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
+               // lblSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
             }
         }
 
