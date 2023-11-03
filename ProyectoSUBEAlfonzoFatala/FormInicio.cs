@@ -54,7 +54,11 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             if (e.ClickedItem != viajesToolStripMenuItem)
             {
-                formViajes.Hide();
+                try
+                {
+                    formViajes.Hide();
+                }catch (Exception ex) { }
+                
             }
             if (e.ClickedItem != consultaTiToolStripMenuItem)
             {

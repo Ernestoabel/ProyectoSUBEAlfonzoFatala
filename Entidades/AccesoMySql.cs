@@ -11,6 +11,11 @@ namespace Entidades
 {
     public class AccesoMySql<T>
     {
+        /// <summary>
+        /// Metodo generico para subir datos de una lista a mySQL
+        /// </summary>
+        /// <param name="elementos"></param>
+        /// <param name="nombreTabla"></param>
         public void InsertarElementosSQL(List<T> elementos, string nombreTabla)
         {
             ConexionSQL.Conectar(); // Abre la conexión
@@ -46,6 +51,11 @@ namespace Entidades
             ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
         }
 
+        /// <summary>
+        /// Metodo generico para traer datos de una tabla mySQL y volcarlos a una lista
+        /// </summary>
+        /// <param name="nombreTabla"></param>
+        /// <returns></returns>
         public List<T> ObtenerElementosSQL(string nombreTabla)
         {
             List<T> elementos = new List<T>();
@@ -95,6 +105,12 @@ namespace Entidades
             return elementos;
         }
 
+        /// <summary>
+        /// Metodo generico para actualizar una fila en una tabla de mySQL
+        /// </summary>
+        /// <param name="elemento"></param>
+        /// <param name="nombreTabla"></param>
+        /// <param name="condicion"></param>
         public void ActualizarElementoSQL(T elemento, string nombreTabla, string condicion)
         {
             ConexionSQL.Conectar(); // Abre la conexión
@@ -112,13 +128,74 @@ namespace Entidades
                     // Evita actualizar la propiedad 'Id'
                     if (propiedad.Name != "Id")
                     {
-                        cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
-                        cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                        if (propiedad.Name == "Viajes")
+                        {
+                            // Para la columna JSON 'Viajes', serializa el objeto como JSON
+                            cmd.CommandText += $"{propiedad.Name} = @json, ";
+                            string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
+                            cmd.Parameters.AddWithValue("@json", jsonValue);
+                        }
+                        else
+                        {
+                            cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
+                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                        }
                     }
                 }
 
                 cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
                 cmd.CommandText += $" WHERE {condicion}";
+
+                cmd.ExecuteNonQuery();
+            }
+
+            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+        }
+
+        /// <summary>
+        /// Metodo generico para agregar una fila a una tabla en mySQL
+        /// </summary>
+        /// <param name="elemento"></param>
+        /// <param name="nombreTabla"></param>
+        public void AgregarElementoSQL(T elemento, string nombreTabla)
+        {
+            ConexionSQL.Conectar(); // Abre la conexión
+
+            using (MySqlCommand cmd = new MySqlCommand())
+            {
+                cmd.Connection = ConexionSQL.mysqlConexion;
+                cmd.CommandText = $"INSERT INTO {nombreTabla} (";
+
+                PropertyInfo[] propiedades = typeof(T).GetProperties();
+
+                // Construye la parte de nombres de columna de la consulta SQL
+                foreach (var propiedad in propiedades)
+                {
+                    cmd.CommandText += $"{propiedad.Name}, ";
+                }
+
+                cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
+                cmd.CommandText += ") VALUES (";
+
+                // Construye la parte de valores de la consulta SQL
+                foreach (var propiedad in propiedades)
+                {
+                    if (propiedad.Name == "Viajes")
+                    {
+                        // Para la columna JSON 'Viajes', serializa el objeto como JSON
+                        cmd.CommandText += "@json, ";
+                        string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
+                        cmd.Parameters.AddWithValue("@json", jsonValue);
+                    }
+                    else
+                    {
+                        cmd.CommandText += $"@{propiedad.Name}, ";
+                        cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                    }
+                }
+
+                cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
+                cmd.CommandText += ")";
 
                 cmd.ExecuteNonQuery();
             }

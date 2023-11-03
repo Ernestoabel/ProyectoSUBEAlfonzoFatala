@@ -68,6 +68,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     RemoverUsuarioSinTarjetaLocalizado();
 
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
+                    //tarjetaNacional.AgregarElementoSQL();
                     tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
                     //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
@@ -86,6 +87,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     Listados.AgregarUsuario(usuarioExtranjero);
                     RemoverUsuarioSinTarjetaLocalizado();
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
+                    //tarjetaInternacional.AgregarElementoSQL();
                     tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
                     //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);

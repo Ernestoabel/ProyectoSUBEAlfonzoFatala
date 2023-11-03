@@ -131,6 +131,11 @@ namespace Entidades
             AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
             accesoBD.ActualizarElementoSQL(this, "tarjetainternacional", condicion);
         }
+        public void AgregarElementoSQL()
+        {
+            AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
+            accesoBD.AgregarElementoSQL(this, "tarjetainternacional");
+        }
 
     }
 }
