@@ -9,7 +9,7 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
-    public class TarjetaNacional : Tarjeta, IOperacionesSistema<TarjetaNacional>, IConexionesSQL<TarjetaNacional>
+    public class TarjetaNacional : Tarjeta, IOperacionesSistema<TarjetaNacional>
     {
         
         IdManager idManagerNacional = new IdManager(true);
@@ -77,57 +77,22 @@ namespace Entidades
             return usuarios;
         }
 
-        public static void InsertarElementosSQL(List<TarjetaNacional> tarjetasNacionales)
+        public static void InsertarEnBaseDeDatos(List<TarjetaNacional> tarjetasNacionales)
         {
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
-            {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = "INSERT INTO tarjetanacional (Id, Saldo, Viajes) VALUES (@Id, @Saldo, @Viajes)";
-
-                foreach (TarjetaNacional tarjeta in tarjetasNacionales)
-                {
-                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
-                    cmd.Parameters.AddWithValue("@Id", tarjeta.Id);
-                    cmd.Parameters.AddWithValue("@Saldo", tarjeta.Saldo);
-                    string viajesJson = JsonConvert.SerializeObject(tarjeta.Viajes);
-                    cmd.Parameters.AddWithValue("@Viajes", viajesJson);
-
-                    cmd.ExecuteNonQuery();
-                }
-            }
-
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+            accesoBD.InsertarElementosSQL(tarjetasNacionales, "tarjetanacional");
         }
 
-        public List<TarjetaNacional> ObtenerElementosSQL()
+        public static List<TarjetaNacional> ObtenerDeBaseDeDatos()
         {
-            List<TarjetaNacional> tarjetasNacionales = new List<TarjetaNacional>();
-            ConexionSQL.Conectar(); // Abre la conexión
+            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+            return accesoBD.ObtenerElementosSQL("tarjetanacional");
+        }
 
-            using (MySqlCommand cmd = new MySqlCommand())
-            {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = "SELECT * FROM tarjetanacional";
-
-                using (MySqlDataReader reader = cmd.ExecuteReader())
-                {
-                    while (reader.Read())
-                    {
-                        int id = reader.GetInt32("Id");
-                        decimal saldo = reader.GetDecimal("Saldo");
-                        string viajesJson = reader.GetString("Viajes");
-                        List<Viajes> viajes = JsonConvert.DeserializeObject<List<Viajes>>(viajesJson);
-
-                        TarjetaNacional tarjeta = new TarjetaNacional(id, saldo, viajes);
-                        tarjetasNacionales.Add(tarjeta);
-                    }
-                }
-            }
-
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
-            return tarjetasNacionales;
+        public void ActualizarEnBaseDeDatos(string condicion)
+        {
+            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+            accesoBD.ActualizarElementoSQL(this, "tarjetanacional", condicion);
         }
     }
 }

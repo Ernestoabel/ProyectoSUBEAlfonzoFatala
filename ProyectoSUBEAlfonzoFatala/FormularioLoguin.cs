@@ -35,13 +35,16 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private void CargarJson()
         {
+            //List<TarjetaNacional> tajetaNacionalCargadas = TarjetaNacional.ObtenerDeBaseDeDatos();
+            //List<TarjetaInternacional> tarjetaInternacionalCargadas = TarjetaInternacional.ObtenerDeBaseDeDatos();
             List<TarjetaNacional> tajetaNacionalCargadas = tarjetaNac.CargarDesdeArchivo("tarjetaNacional.json");
             List<TarjetaInternacional> tarjetaInternacionalCargadas = tarjetaInt.CargarDesdeArchivo("tarjetaInternacional.json");
             List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            //TarjetaNacional.InsertarElementosSQL(tajetaNacionalCargadas);
+            //TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
+            //TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
         }
 
         /// <summary>
