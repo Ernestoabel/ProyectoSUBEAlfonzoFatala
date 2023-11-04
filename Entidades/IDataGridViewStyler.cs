@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    public class ArchivosUsuarios
+    public interface IDataGridViewStyler
     {
-
+        void SetDataGridViewStyle();
     }
 }

@@ -11,14 +11,14 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    public partial class FormABMTarjetas : Form
+    public partial class FormABMTarjetas : Form, IDataGridViewStyler
     {
         public FormABMTarjetas()
         {
             InitializeComponent();
         }
 
-        private void SetDataGridViewStyle()
+        public void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
             dataGridABMTarjetas.DefaultCellStyle.Font = new Font("Arial", 12);

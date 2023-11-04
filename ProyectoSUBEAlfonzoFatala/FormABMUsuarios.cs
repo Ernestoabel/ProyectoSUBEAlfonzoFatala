@@ -12,7 +12,7 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    public partial class FormABMUsuarios : Form
+    public partial class FormABMUsuarios : Form, IDataGridViewStyler
     {
         public FormABMUsuarios()
         {
@@ -23,7 +23,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <summary>
         /// Metodo para darle estilo al datagrid
         /// </summary>
-        private void SetDataGridViewStyle()
+        public void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
             dataGridUsuarios.DefaultCellStyle.Font = new Font("Arial", 12);
