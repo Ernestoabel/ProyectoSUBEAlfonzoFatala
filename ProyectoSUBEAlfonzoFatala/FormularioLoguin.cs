@@ -45,6 +45,20 @@ namespace ProyectoSUBEAlfonzoFatala
             Listados.listaUsuarios = usuariosCargados;
             TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
             TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
+            PruebaTestUnitario();
+        }
+
+        /// <summary>
+        /// Metodo para la implementacion de los test unitarios
+        /// </summary>
+        public void PruebaTestUnitario()
+        {
+            var tarjetaIntTests = new TarjetaInternacionalTestsUnitario();
+            var tarjetaNacTests = new TarjetaNacionalTestsUnitario();
+            tarjetaIntTests.GuardarEnArchivo_SerializaListaCorrectamente();
+            tarjetaIntTests.CargarDesdeArchivo_DeserializaListaCorrectamente();
+            tarjetaNacTests.GuardarEnArchivo_SerializaListaCorrectamente();
+            tarjetaNacTests.CargarDesdeArchivo_DeserializaListaCorrectamente();
         }
 
         /// <summary>
