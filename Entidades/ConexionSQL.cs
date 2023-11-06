@@ -13,7 +13,7 @@ namespace Entidades
     {
         
         public static MySqlConnection mysqlConexion;
-        private static MySqlCommand query;
+        //private static MySqlCommand query;
         static ConexionSQL()
         {
             mysqlConexion = new MySqlConnection("Server=localhost;Port=3306;Database=proyectosube;Uid=root;Pwd='';");

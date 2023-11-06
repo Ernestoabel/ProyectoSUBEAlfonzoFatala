@@ -69,9 +69,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnViajar.Enabled = false;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-                
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

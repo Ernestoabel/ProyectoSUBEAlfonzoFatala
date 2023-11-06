@@ -145,7 +145,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (ClaveInvalidaException ex)
+            catch (ClaveInvalidaException )
             {
                 MessageBox.Show("La clave ingresada es incorrecta. Por favor, inténtelo de nuevo.", "Error de clave", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

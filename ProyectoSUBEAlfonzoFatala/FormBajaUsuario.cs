@@ -45,14 +45,14 @@ namespace ProyectoSUBEAlfonzoFatala
                     dni = int.Parse(usuarioExtranjero.Dni);
                 }
             }
-            catch (UsuarioSinTarjetaException ex)
+            catch (UsuarioSinTarjetaException )
             {
                 MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnBajaTarjetaUsuario.Enabled = false;
             }
-            catch (Exception ex)
+            catch (Exception )
             {
-
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void btnBajaTarjetaUsuario_Click(object sender, EventArgs e)
@@ -70,7 +70,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 MessageBox.Show("Esta tarjeta ya pidio la baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
