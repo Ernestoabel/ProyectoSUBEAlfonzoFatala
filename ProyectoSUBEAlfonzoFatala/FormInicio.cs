@@ -26,11 +26,13 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="usuario"></param>
         public FormInicio(object usuario)
         {
+            
             InitializeComponent();
-            this.usuarioLogueado = usuario;
             configuraciones = new Configuraciones();
             ConfiguracionInicial();
+            
         }
+
 
         /// <summary>
         /// evento para traer el fomulario de viajes

@@ -21,20 +21,32 @@ namespace Entidades
             listaUsuarios.Add(objeto);
         }
 
+        /// <summary>
+        /// Metodo para serealizar la lista de usuarios
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="nombreArchivo"></param>
         public static void GuardarEnArchivo(List<Usuario> lista, string nombreArchivo) 
         {
-            JsonSerializer serializer = new JsonSerializer();
-            string rutaCarpetaArchivos = @"..\..\..\Archivos";
-
-            if (!Directory.Exists(rutaCarpetaArchivos))
+            try
             {
-                Directory.CreateDirectory(rutaCarpetaArchivos);
+                JsonSerializer serializer = new JsonSerializer();
+                string rutaCarpetaArchivos = @"..\..\..\Archivos";
+
+                if (!Directory.Exists(rutaCarpetaArchivos))
+                {
+                    Directory.CreateDirectory(rutaCarpetaArchivos);
+                }
+
+                using (StreamWriter sw = new StreamWriter(Path.Combine(rutaCarpetaArchivos, nombreArchivo)))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, lista);
+                }
             }
-
-            using (StreamWriter sw = new StreamWriter(Path.Combine(rutaCarpetaArchivos, nombreArchivo)))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            catch (Exception ex)
             {
-                serializer.Serialize(writer, lista);
+                CatchError.LogError(nameof(Listados), nameof(GuardarEnArchivo), "Error al serializar la lista de usuarios", ex);
             }
         }
        

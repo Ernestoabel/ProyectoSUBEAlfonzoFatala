@@ -43,8 +43,8 @@ namespace ProyectoSUBEAlfonzoFatala
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            //TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
-            //TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
+            TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
+            TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
         }
 
         /// <summary>
@@ -91,7 +91,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           
                             FormInicio inicio = new FormInicio(usuarioLogueado);
+                            
                             inicio.Show();
                             this.Hide();
                         }

@@ -35,23 +35,41 @@ namespace Entidades
         {
             return idManagerNacional.GetNextId();
         }
+
+        /// <summary>
+        /// Metodo para serealizar la lista
+        /// </summary>
+        /// <param name="lista"></param>
+        /// <param name="nombreArchivo"></param>
         public void GuardarEnArchivo(List<TarjetaNacional> lista, string nombreArchivo)
         {
-            JsonSerializer serializer = new JsonSerializer();
-            string rutaCarpetaArchivos = @"..\..\..\Archivos";
-
-            if (!Directory.Exists(rutaCarpetaArchivos))
+            try
             {
-                Directory.CreateDirectory(rutaCarpetaArchivos);
+                JsonSerializer serializer = new JsonSerializer();
+                string rutaCarpetaArchivos = @"..\..\..\Archivos";
+
+                if (!Directory.Exists(rutaCarpetaArchivos))
+                {
+                    Directory.CreateDirectory(rutaCarpetaArchivos);
+                }
+
+                using (StreamWriter sw = new StreamWriter(Path.Combine(rutaCarpetaArchivos, nombreArchivo)))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, lista);
+                }
             }
-
-            using (StreamWriter sw = new StreamWriter(Path.Combine(rutaCarpetaArchivos, nombreArchivo)))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            catch (Exception ex)
             {
-                serializer.Serialize(writer, lista);
+                CatchError.LogError(nameof(TarjetaNacional), nameof(GuardarEnArchivo), "Error al serializar la lista de tarjeta nacional", ex);
             }
         }
 
+        /// <summary>
+        /// Metodo para deserealizar la lista
+        /// </summary>
+        /// <param name="nombreArchivo"></param>
+        /// <returns></returns>
         public List<TarjetaNacional> CargarDesdeArchivo(string nombreArchivo)
         {
             List<TarjetaNacional> usuarios = new List<TarjetaNacional>();
@@ -66,39 +84,77 @@ namespace Entidades
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al deserializar el archivo: " + ex.Message);
+                    CatchError.LogError(nameof(TarjetaNacional), nameof(CargarDesdeArchivo), "Error al deserializar la lista de tarjeta nacional", ex);
                 }
-            }
-            else
-            {
-                Console.WriteLine("El archivo de usuarios no existe.");
             }
 
             return usuarios;
         }
 
+        /// <summary>
+        /// Metodo para insertar datos en mySql
+        /// </summary>
+        /// <param name="tarjetasNacionales"></param>
         public static void InsertarEnBaseDeDatos(List<TarjetaNacional> tarjetasNacionales)
         {
-            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
-            accesoBD.InsertarElementosSQL(tarjetasNacionales, "tarjetanacional");
+            try
+            {
+                AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+                accesoBD.InsertarElementosSQL(tarjetasNacionales, "tarjetanacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(InsertarEnBaseDeDatos), "Error al insertar tabla mySQL de tarjeta nacional", ex);
+            }
         }
 
+        /// <summary>
+        /// Metodo para obtener datos de la tabla mySql
+        /// </summary>
+        /// <returns></returns>
         public static List<TarjetaNacional> ObtenerDeBaseDeDatos()
         {
-            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
-            return accesoBD.ObtenerElementosSQL("tarjetanacional");
+            try
+            {
+                AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+                return accesoBD.ObtenerElementosSQL("tarjetanacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(ObtenerDeBaseDeDatos), "Error al obtener tabla mySQL de tarjeta nacional", ex);
+                return null;
+            }
         }
-
+        /// <summary>
+        /// Metodo para actualizar la tabla en mySql
+        /// </summary>
+        /// <param name="condicion"></param>
         public void ActualizarEnBaseDeDatos(string condicion)
         {
-            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
-            accesoBD.ActualizarElementoSQL(this, "tarjetanacional", condicion);
+            try
+            {
+                AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+                accesoBD.ActualizarElementoSQL(this, "tarjetanacional", condicion);
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(ActualizarEnBaseDeDatos), "Error al actualizar tabla mySQL de tarjeta nacional", ex);
+            }
         }
-
+        /// <summary>
+        /// Metodo para agregar una fila a la tabla mySql
+        /// </summary>
         public void AgregarElementoSQL()
         {
-            AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
-            accesoBD.AgregarElementoSQL(this, "tarjetanacional");
+            try
+            {
+                AccesoMySql<TarjetaNacional> accesoBD = new AccesoMySql<TarjetaNacional>();
+                accesoBD.AgregarElementoSQL(this, "tarjetanacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(AgregarElementoSQL), "Error al insertar fila a la tabla mySQL de tarjeta nacional", ex);
+            }
         }
 
     }

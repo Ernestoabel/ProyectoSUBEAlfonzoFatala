@@ -18,6 +18,9 @@ namespace Entidades
         {
             mysqlConexion = new MySqlConnection("Server=localhost;Port=3306;Database=proyectosube;Uid=root;Pwd='';");
         }
+        /// <summary>
+        /// Metodo para abrir la conexion mySQL
+        /// </summary>
         public static void Conectar()
         {
             try
@@ -26,7 +29,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                throw new Exception("Error: " + ex);
+                CatchError.LogError(nameof(ConexionSQL), nameof(Conectar), "Error al conectar la base de datos", ex);
             }
         }
 
