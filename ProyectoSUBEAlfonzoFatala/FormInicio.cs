@@ -13,9 +13,10 @@ namespace ProyectoSUBEAlfonzoFatala
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
-        FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
-        
+        FormCargarSaldo formCarga = new FormCargarSaldo();
+        private Configuraciones configuraciones;
         public object usuarioLogueado;
+        private string configuracionesFilePath = @"..\..\..\Archivos\configuraciones.json";
 
 
         /// <summary>
@@ -25,10 +26,13 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="usuario"></param>
         public FormInicio(object usuario)
         {
+            
             InitializeComponent();
-            this.usuarioLogueado = usuario;
-           
+            configuraciones = new Configuraciones();
+            ConfiguracionInicial();
+            
         }
+
 
         /// <summary>
         /// evento para traer el fomulario de viajes
@@ -59,8 +63,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 try
                 {
                     formViajes.Hide();
-                }catch (Exception ex) { }
-                
+                }
+                catch (Exception ) { }
+
             }
             if (e.ClickedItem != consultaTiToolStripMenuItem)
             {
@@ -102,29 +107,27 @@ namespace ProyectoSUBEAlfonzoFatala
             formTitularidad.Show();
         }
 
-        private void registrateToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            /*FormRegistro formRegistro = new FormRegistro();
-            formRegistro.Show();
-            this.Close();*/
 
-        }
 
-        private void FormInicio_Load(object sender, EventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Evento para cerrar el formulario
+        /// Volver al Loguin
+        /// Y guardar la configuracion del usuario en JSON
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void FormInicio_FormClosed(object sender, FormClosedEventArgs e)
         {
+            ConfiguracionManager.GuardarConfiguraciones(configuracionesFilePath, configuraciones);
             formLogin.Show();
         }
 
-        private void FormInicio_FormClosing(object sender, FormClosingEventArgs e)
-        {
-
-        }
-
+        /// <summary>
+        /// Evento para mostrar el formulario de baja tarjeta
+        /// Con un metodo para enviar el objeto usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
             formBaja.TraerUsuario(usuarioLogueado);
@@ -176,10 +179,41 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
-                MessageBox.Show("Usted no tiene tarjeta", "Usted no tiene tarjeta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                MessageBox.Show("Usted no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 iNICIARSESIONToolStripMenuItem.Enabled = false;
             }
 
+        }
+
+        /// <summary>
+        /// Evento para cambiar el tema de la aplicacion
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void chbTema_CheckedChanged(object sender, EventArgs e)
+        {
+            if (!chbTema.Checked)
+            {
+                configuraciones.ConfiguracionNacional();
+            }
+            else
+            {
+                configuraciones.ConfiguracionSovietical();
+            }
+            BackgroundImage = Image.FromFile(configuraciones.ImagenFondo);
+            menuStrip1.BackColor = Color.FromName(configuraciones.ColorFondo);
+            menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
+        }
+
+        /// <summary>
+        /// metodo para cargar la configuracion guardada en un JSON
+        /// </summary>
+        private void ConfiguracionInicial()
+        {
+            configuraciones = ConfiguracionManager.CargarConfiguraciones(configuracionesFilePath);
+            BackgroundImage = Image.FromFile(configuraciones.ImagenFondo);
+            menuStrip1.BackColor = Color.FromName(configuraciones.ColorFondo);
+            menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
         }
     }
 }

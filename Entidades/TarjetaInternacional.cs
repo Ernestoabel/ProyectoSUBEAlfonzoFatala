@@ -67,19 +67,26 @@ namespace Entidades
         /// <param name="rutaCarpetaArchivos"></param>
         public void GuardarEnArchivo(List<TarjetaInternacional> lista, string nombreArchivo, string rutaCarpetaArchivos)
         {
-            JsonSerializer serializer = new JsonSerializer();
-
-            if (!Directory.Exists(rutaCarpetaArchivos))
+            try
             {
-                Directory.CreateDirectory(rutaCarpetaArchivos);
+                JsonSerializer serializer = new JsonSerializer();
+
+                if (!Directory.Exists(rutaCarpetaArchivos))
+                {
+                    Directory.CreateDirectory(rutaCarpetaArchivos);
+                }
+
+                string rutaCompleta = Path.Combine(rutaCarpetaArchivos, nombreArchivo);
+
+                using (StreamWriter sw = new StreamWriter(rutaCompleta))
+                using (JsonWriter writer = new JsonTextWriter(sw))
+                {
+                    serializer.Serialize(writer, lista);
+                }
             }
-
-            string rutaCompleta = Path.Combine(rutaCarpetaArchivos, nombreArchivo);
-
-            using (StreamWriter sw = new StreamWriter(rutaCompleta))
-            using (JsonWriter writer = new JsonTextWriter(sw))
+            catch (Exception ex)
             {
-                serializer.Serialize(writer, lista);
+                CatchError.LogError(nameof(TarjetaInternacional), nameof(GuardarEnArchivo), "Error al serealizar tarjeta internacional", ex);
             }
         }
 
@@ -103,38 +110,76 @@ namespace Entidades
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Error al deserializar el archivo: " + ex.Message);
+                    CatchError.LogError(nameof(TarjetaInternacional), nameof(CargarDesdeArchivo), "Error al deserealizar tarjeta internacional", ex);
                 }
-            }
-            else
-            {
-                Console.WriteLine("El archivo de usuarios no existe.");
             }
 
             return usuarios;
         }
 
+        /// <summary>
+        /// Metodo para insertar datos en mySql
+        /// </summary>
+        /// <param name="tarjetasInternacionales"></param>
         public static void InsertarEnBaseDeDatos(List<TarjetaInternacional> tarjetasInternacionales)
         {
-            AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
-            accesoBD.InsertarElementosSQL(tarjetasInternacionales, "tarjetainternacional");
+            try
+            {
+                AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
+                accesoBD.InsertarElementosSQL(tarjetasInternacionales, "tarjetainternacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaInternacional), nameof(InsertarEnBaseDeDatos), "Error al insertar mySQL tarjeta internacional", ex);
+            }
         }
-
+        /// <summary>
+        /// Metodo para obtener la tabla mySQL
+        /// </summary>
+        /// <returns></returns>
         public static List<TarjetaInternacional> ObtenerDeBaseDeDatos()
         {
-            AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
-            return accesoBD.ObtenerElementosSQL("tarjetainternacional");
+            try
+            {
+                AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
+                return accesoBD.ObtenerElementosSQL("tarjetainternacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaInternacional), nameof(ObtenerDeBaseDeDatos), "Error al obtener mySQL tarjeta internacional", ex);
+                return null;
+            }
         }
-
+        /// <summary>
+        /// Metodo para modificar la tabla mySQL
+        /// </summary>
+        /// <param name="condicion"></param>
         public void ActualizarEnBaseDeDatos(string condicion)
         {
-            AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
-            accesoBD.ActualizarElementoSQL(this, "tarjetainternacional", condicion);
+            try
+            {
+                AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
+                accesoBD.ActualizarElementoSQL(this, "tarjetainternacional", condicion);
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaInternacional), nameof(ActualizarEnBaseDeDatos), "Error al actualizar mySQL tarjeta internacional", ex);
+            }
         }
+        /// <summary>
+        /// Metodo para agregar una fila a la tabla mySql
+        /// </summary>
         public void AgregarElementoSQL()
         {
-            AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
-            accesoBD.AgregarElementoSQL(this, "tarjetainternacional");
+            try
+            {
+                AccesoMySql<TarjetaInternacional> accesoBD = new AccesoMySql<TarjetaInternacional>();
+                accesoBD.AgregarElementoSQL(this, "tarjetainternacional");
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaInternacional), nameof(AgregarElementoSQL), "Error al agregar fila mySQL tarjeta internacional", ex);
+            }
         }
 
     }

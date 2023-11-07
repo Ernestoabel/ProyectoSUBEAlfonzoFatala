@@ -32,12 +32,12 @@
             menuStrip1 = new MenuStrip();
             rEGISTRESEToolStripMenuItem = new ToolStripMenuItem();
             logueateToolStripMenuItem = new ToolStripMenuItem();
-            registrateToolStripMenuItem = new ToolStripMenuItem();
             iNICIARSESIONToolStripMenuItem = new ToolStripMenuItem();
             cOMPRARToolStripMenuItem = new ToolStripMenuItem();
             bajaToolStripMenuItem = new ToolStripMenuItem();
             consultaTiToolStripMenuItem = new ToolStripMenuItem();
             viajesToolStripMenuItem = new ToolStripMenuItem();
+            chbTema = new CheckBox();
             menuStrip1.SuspendLayout();
             SuspendLayout();
             // 
@@ -56,7 +56,7 @@
             // 
             // rEGISTRESEToolStripMenuItem
             // 
-            rEGISTRESEToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logueateToolStripMenuItem, registrateToolStripMenuItem });
+            rEGISTRESEToolStripMenuItem.DropDownItems.AddRange(new ToolStripItem[] { logueateToolStripMenuItem });
             rEGISTRESEToolStripMenuItem.Image = (Image)resources.GetObject("rEGISTRESEToolStripMenuItem.Image");
             rEGISTRESEToolStripMenuItem.Name = "rEGISTRESEToolStripMenuItem";
             rEGISTRESEToolStripMenuItem.Size = new Size(101, 25);
@@ -65,16 +65,9 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(156, 26);
+            logueateToolStripMenuItem.Size = new Size(180, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
-            // 
-            // registrateToolStripMenuItem
-            // 
-            registrateToolStripMenuItem.Name = "registrateToolStripMenuItem";
-            registrateToolStripMenuItem.Size = new Size(156, 26);
-            registrateToolStripMenuItem.Text = "Registrate";
-            registrateToolStripMenuItem.Click += registrateToolStripMenuItem_Click;
             // 
             // iNICIARSESIONToolStripMenuItem
             // 
@@ -116,6 +109,19 @@
             viajesToolStripMenuItem.Text = "Viajes";
             viajesToolStripMenuItem.Click += viajesToolStripMenuItem_Click;
             // 
+            // chbTema
+            // 
+            chbTema.AutoSize = true;
+            chbTema.BackColor = Color.Transparent;
+            chbTema.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            chbTema.Location = new Point(12, 49);
+            chbTema.Name = "chbTema";
+            chbTema.Size = new Size(130, 24);
+            chbTema.TabIndex = 5;
+            chbTema.Text = "Tema Sovietico";
+            chbTema.UseVisualStyleBackColor = false;
+            chbTema.CheckedChanged += chbTema_CheckedChanged;
+            // 
             // FormInicio
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -123,15 +129,14 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(chbTema);
             Controls.Add(menuStrip1);
             Font = new Font("Segoe UI Semibold", 9F, FontStyle.Bold, GraphicsUnit.Point);
             IsMdiContainer = true;
             MainMenuStrip = menuStrip1;
             Name = "FormInicio";
             Text = "Programa SUBE";
-            FormClosing += FormInicio_FormClosing;
             FormClosed += FormInicio_FormClosed;
-            Load += FormInicio_Load;
             menuStrip1.ResumeLayout(false);
             menuStrip1.PerformLayout();
             ResumeLayout(false);
@@ -147,6 +152,6 @@
         private ToolStripMenuItem viajesToolStripMenuItem;
         private ToolStripMenuItem logueateToolStripMenuItem;
         private ToolStripMenuItem consultaTiToolStripMenuItem;
-        private ToolStripMenuItem registrateToolStripMenuItem;
+        private CheckBox chbTema;
     }
 }

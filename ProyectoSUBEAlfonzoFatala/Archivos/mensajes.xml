@@ -12,4 +12,7 @@
   <BajaData Indice="4">
     <Mensaje>El usuario 50000000 con la tarjeta 1012 quiere la baja</Mensaje>
   </BajaData>
+  <BajaData Indice="5">
+    <Mensaje>El usuario 30555191 con la tarjeta 1013 quiere la baja</Mensaje>
+  </BajaData>
 </ArrayOfBajaData>

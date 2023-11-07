@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -18,37 +19,48 @@ namespace Entidades
         /// <param name="nombreTabla"></param>
         public void InsertarElementosSQL(List<T> elementos, string nombreTabla)
         {
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = $"INSERT INTO {nombreTabla} (Id, Saldo, Viajes) VALUES (@Id, @Saldo, @Viajes)";
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                foreach (T elemento in elementos)
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"INSERT INTO {nombreTabla} (Id, Saldo, Viajes) VALUES (@Id, @Saldo, @Viajes)";
 
-                    PropertyInfo[] propiedades = typeof(T).GetProperties();
-
-                    foreach (var propiedad in propiedades)
+                    foreach (T elemento in elementos)
                     {
-                        object valor = propiedad.GetValue(elemento);
+                        cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente
 
-                        // Si la propiedad es 'Viajes', convierte a JSON antes de insertar en la base de datos
-                        if (propiedad.Name == "Viajes" && valor != null)
+                        PropertyInfo[] propiedades = typeof(T).GetProperties();
+
+                        foreach (var propiedad in propiedades)
                         {
-                            valor = JsonConvert.SerializeObject(valor);
+                            object valor = propiedad.GetValue(elemento);
+
+                            // Si la propiedad es 'Viajes', convierte a JSON antes de insertar en la base de datos
+                            if (propiedad.Name == "Viajes" && valor != null)
+                            {
+                                valor = JsonConvert.SerializeObject(valor);
+                            }
+
+                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", valor);
                         }
 
-                        cmd.Parameters.AddWithValue($"@{propiedad.Name}", valor);
+                        cmd.ExecuteNonQuery();
                     }
-
-                    cmd.ExecuteNonQuery();
                 }
+            }catch (Exception ex)
+            {
+                CatchError.LogError(nameof(AccesoMySql<T>), nameof(InsertarElementosSQL), "Error al insertar elementos en la base de datos", ex);
+                
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close(); 
             }
 
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            
         }
 
         /// <summary>
@@ -59,50 +71,63 @@ namespace Entidades
         public List<T> ObtenerElementosSQL(string nombreTabla)
         {
             List<T> elementos = new List<T>();
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = $"SELECT * FROM {nombreTabla}";
+                
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    while (reader.Read())
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"SELECT * FROM {nombreTabla}";
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        // Lógica para obtener y deserializar elementos
-                        int id = reader.GetInt32("Id");
-                        decimal saldo = reader.GetDecimal("Saldo");
-                        string viajesJson = reader.GetString("Viajes");
-                        List<Viajes> viajes = JsonConvert.DeserializeObject<List<Viajes>>(viajesJson);
-
-                        // Crear una instancia del tipo genérico
-                        T elemento = Activator.CreateInstance<T>();
-                        PropertyInfo[] propiedades = typeof(T).GetProperties();
-
-                        foreach (var propiedad in propiedades)
+                        while (reader.Read())
                         {
-                            if (propiedad.Name == "Id")
-                            {
-                                propiedad.SetValue(elemento, id);
-                            }
-                            else if (propiedad.Name == "Saldo")
-                            {
-                                propiedad.SetValue(elemento, saldo);
-                            }
-                            else if (propiedad.Name == "Viajes")
-                            {
-                                propiedad.SetValue(elemento, viajes);
-                            }
-                        }
+                            // Lógica para obtener y deserializar elementos
+                            int id = reader.GetInt32("Id");
+                            decimal saldo = reader.GetDecimal("Saldo");
+                            string viajesJson = reader.GetString("Viajes");
+                            List<Viajes> viajes = JsonConvert.DeserializeObject<List<Viajes>>(viajesJson);
 
-                        elementos.Add(elemento);
+                            // Crear una instancia del tipo genérico
+                            T elemento = Activator.CreateInstance<T>();
+                            PropertyInfo[] propiedades = typeof(T).GetProperties();
+
+                            foreach (var propiedad in propiedades)
+                            {
+                                if (propiedad.Name == "Id")
+                                {
+                                    propiedad.SetValue(elemento, id);
+                                }
+                                else if (propiedad.Name == "Saldo")
+                                {
+                                    propiedad.SetValue(elemento, saldo);
+                                }
+                                else if (propiedad.Name == "Viajes")
+                                {
+                                    propiedad.SetValue(elemento, viajes);
+                                }
+                            }
+
+                            elementos.Add(elemento);
+                        }
                     }
+
                 }
+            }catch (Exception ex)
+            {
+                CatchError.LogError(nameof(AccesoMySql<T>), nameof(ObtenerElementosSQL), "Error al obtener elementos de la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+                
             }
 
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
-            return elementos;
+            return elementos; 
+            
         }
 
         /// <summary>
@@ -113,43 +138,59 @@ namespace Entidades
         /// <param name="condicion"></param>
         public void ActualizarElementoSQL(T elemento, string nombreTabla, string condicion)
         {
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = $"UPDATE {nombreTabla} SET ";
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                PropertyInfo[] propiedades = typeof(T).GetProperties();
-
-                // Construye la parte SET de la consulta SQL
-                foreach (var propiedad in propiedades)
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    // Evita actualizar la propiedad 'Id'
-                    if (propiedad.Name != "Id")
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"UPDATE {nombreTabla} SET ";
+
+                    PropertyInfo[] propiedades = typeof(T).GetProperties();
+
+                    // Lista para almacenar los parámetros
+                    List<MySqlParameter> parametros = new List<MySqlParameter>();
+
+                    // Construye la parte SET de la consulta SQL
+                    foreach (var propiedad in propiedades)
                     {
-                        if (propiedad.Name == "Viajes")
+                        // Evita actualizar la propiedad 'Id'
+                        if (propiedad.Name != "Id")
                         {
-                            // Para la columna JSON 'Viajes', serializa el objeto como JSON
-                            cmd.CommandText += $"{propiedad.Name} = @json, ";
-                            string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
-                            cmd.Parameters.AddWithValue("@json", jsonValue);
-                        }
-                        else
-                        {
-                            cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
-                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                            if (propiedad.Name == "Viajes")
+                            {
+                                // Para la columna JSON 'Viajes', serializa el objeto como JSON
+                                cmd.CommandText += $"{propiedad.Name} = @json, ";
+                                string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
+                                parametros.Add(new MySqlParameter("@json", jsonValue));
+                            }
+                            else
+                            {
+                                cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
+                                parametros.Add(new MySqlParameter($"@{propiedad.Name}", propiedad.GetValue(elemento)));
+                            }
                         }
                     }
+
+                    cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
+                    cmd.CommandText += $" WHERE {condicion}";
+
+                    // Agrega los parámetros al comando
+                    cmd.Parameters.AddRange(parametros.ToArray());
+
+                    cmd.ExecuteNonQuery();
                 }
-
-                cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
-                cmd.CommandText += $" WHERE {condicion}";
-
-                cmd.ExecuteNonQuery();
             }
-
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            catch (Exception ex)
+            {
+                // Maneja la excepción, por ejemplo, registrándola en el log
+                CatchError.LogError(nameof(AccesoMySql<T>), nameof(ActualizarElementoSQL), "Error al actualizar elemento en la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+            }
         }
 
         /// <summary>
@@ -159,48 +200,55 @@ namespace Entidades
         /// <param name="nombreTabla"></param>
         public void AgregarElementoSQL(T elemento, string nombreTabla)
         {
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = $"INSERT INTO {nombreTabla} (";
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                PropertyInfo[] propiedades = typeof(T).GetProperties();
-
-                // Construye la parte de nombres de columna de la consulta SQL
-                foreach (var propiedad in propiedades)
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    cmd.CommandText += $"{propiedad.Name}, ";
-                }
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"INSERT INTO {nombreTabla} (";
 
-                cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
-                cmd.CommandText += ") VALUES (";
+                    PropertyInfo[] propiedades = typeof(T).GetProperties();
 
-                // Construye la parte de valores de la consulta SQL
-                foreach (var propiedad in propiedades)
-                {
-                    if (propiedad.Name == "Viajes")
+                    // Construye la parte de nombres de columna de la consulta SQL
+                    string columnNames = string.Join(", ", propiedades.Select(propiedad => propiedad.Name));
+                    cmd.CommandText += columnNames;
+
+                    cmd.CommandText += ") VALUES (";
+
+                    // Construye la parte de valores de la consulta SQL
+                    string valuePlaceholders = string.Join(", ", propiedades.Select(propiedad => $"@{propiedad.Name}"));
+                    cmd.CommandText += valuePlaceholders;
+
+                    cmd.CommandText += ")";
+
+                    foreach (var propiedad in propiedades)
                     {
-                        // Para la columna JSON 'Viajes', serializa el objeto como JSON
-                        cmd.CommandText += "@json, ";
-                        string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
-                        cmd.Parameters.AddWithValue("@json", jsonValue);
+                        if (propiedad.Name == "Viajes")
+                        {
+                            // Para la columna JSON 'Viajes', serializa el objeto como JSON
+                            string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
+                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", jsonValue);
+                        }
+                        else
+                        {
+                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                        }
                     }
-                    else
-                    {
-                        cmd.CommandText += $"@{propiedad.Name}, ";
-                        cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
-                    }
+
+                    cmd.ExecuteNonQuery();
                 }
-
-                cmd.CommandText = cmd.CommandText.TrimEnd(',', ' '); // Elimina la última coma y espacio
-                cmd.CommandText += ")";
-
-                cmd.ExecuteNonQuery();
             }
-
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            catch (Exception ex)
+            {
+                // Maneja la excepción, por ejemplo, registrándola en el log
+                CatchError.LogError(nameof(AccesoMySql<T>), nameof(AgregarElementoSQL), "Error al agregar elemento en la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+            }
         }
     }
 }

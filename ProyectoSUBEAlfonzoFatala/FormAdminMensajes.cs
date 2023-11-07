@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    public partial class FormAdminMensajes : Form
+    public partial class FormAdminMensajes : Form, IDataGridViewStyler
     {
         public static List<Dictionary<int, string>> listaMostrarMensajes;
         public FormAdminMensajes()
@@ -22,7 +22,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         
 
-        private void SetDataGridViewStyle()
+        public void SetDataGridViewStyle()
         {
             this.dataGridMensajes.DataBindingComplete += (sender, e) =>
             {

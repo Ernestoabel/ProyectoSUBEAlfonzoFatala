@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase abstracta de tarjeta
+    /// </summary>
     public abstract class Tarjeta
     {
 

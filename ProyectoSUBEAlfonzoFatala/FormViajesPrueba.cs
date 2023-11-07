@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    public partial class FormViajesPrueba : Form
+    public partial class FormViajesPrueba : Form, IDataGridViewStyler
     {
         List<Viajes> listaViajes;
         object usuarioLogueado;
@@ -28,44 +28,55 @@ namespace ProyectoSUBEAlfonzoFatala
 
         public void TraerUsuario(object usuario)
         {
-            if (usuario is UsuarioSinTarjeta)
+            try
             {
-                MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (usuario is UsuarioSinTarjeta)
+                {
+                    throw new UsuarioSinTarjetaException();
+                }
+                else if (usuario is UsuarioArgentino)
+                {
+                    usuarioLogueado = usuario;
+                    btnViajar.Enabled = true;
+                    if (usuario is UsuarioArgentino usuarioArgentino)
+                    {
+
+                        List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
+                        /*int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        List<Viajes> viajes = tarjetaNacional.Viajes;
+                        listaViajes.AddRange(viajes);*/
+                    }
+
+                }
+                else if (usuario is UsuarioExtranjero)
+                {
+                    usuarioLogueado = usuario;
+                    btnViajar.Enabled = true;
+                    if (usuario is UsuarioExtranjero usuarioExtranjero)
+                    {
+                        List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
+                        /*
+                        int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
+                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        List<Viajes> viajes = tarjetaInternacional.Viajes;
+                        listaViajes.AddRange(viajes);*/
+                    }
+                }
+            }
+            catch (UsuarioSinTarjetaException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnViajar.Enabled = false;
             }
-            else if (usuario is UsuarioArgentino)
+            catch (Exception )
             {
-                usuarioLogueado = usuario;
-                btnViajar.Enabled = true;
-                if (usuario is UsuarioArgentino usuarioArgentino)
-                {
-                    
-                    List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
-                    /*int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
-                    tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                    List<Viajes> viajes = tarjetaNacional.Viajes;
-                    listaViajes.AddRange(viajes);*/
-                }
-
-            }
-            else if (usuario is UsuarioExtranjero)
-            {
-                usuarioLogueado = usuario;
-                btnViajar.Enabled = true;
-                if (usuario is UsuarioExtranjero usuarioExtranjero)
-                {
-                    List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
-                    /*
-                    int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
-                    tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                    List<Viajes> viajes = tarjetaInternacional.Viajes;
-                    listaViajes.AddRange(viajes);*/
-                }
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
 
-        private void SetDataGridViewStyle()
+        public void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
             this.dtgViajes.DefaultCellStyle.Font = new Font("Arial", 12);
@@ -94,12 +105,11 @@ namespace ProyectoSUBEAlfonzoFatala
             this.dtgViajes.ReadOnly = true;
 
             this.dtgViajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            //this.dtgViajes.Dock = DockStyle.Fill;
         }
 
         private void FormViajesPrueba_Load(object sender, EventArgs e)
         {
-            
+
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
@@ -118,16 +128,16 @@ namespace ProyectoSUBEAlfonzoFatala
                 string condicion = $"Id = {tarjetaNacional.Id}";
 
                 tarjetaNacional.ActualizarEnBaseDeDatos(condicion);*/
-                
+
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
                 if (indice >= 0)
                 {
-                    
+
                     usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
                     Listados.listaUsuarios.RemoveAt(indice);
                     Listados.listaUsuarios.Add(usuarioArgentino);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    
+
                 }
 
             }
@@ -140,7 +150,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 string condicion = $"Id = {tarjetaInternacional.Id}";
                 tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
                 */
-                
+
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
                 if (indice >= 0)
                 {

@@ -26,33 +26,51 @@ namespace ProyectoSUBEAlfonzoFatala
 
         public void TraerUsuario(object usuario)
         {
-            if (usuario is UsuarioSinTarjeta)
+            try
+            {
+                if (usuario is UsuarioSinTarjeta)
+                {
+                    throw new UsuarioSinTarjetaException();
+                }
+                else if (usuario is UsuarioArgentino usuarioArgentino)
+                {
+                    mensaje = $"El usuario {usuarioArgentino.Dni} con la tarjeta {usuarioArgentino.IdSubeArgentina} quiere la baja";
+                    indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
+                    dni = int.Parse(usuarioArgentino.Dni);
+                }
+                else if (usuario is UsuarioExtranjero usuarioExtranjero)
+                {
+                    mensaje = $"El usuario {usuarioExtranjero.Dni} con la tarjeta {usuarioExtranjero.IdSubeExtranjero} quiere la baja";
+                    indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
+                    dni = int.Parse(usuarioExtranjero.Dni);
+                }
+            }
+            catch (UsuarioSinTarjetaException )
             {
                 MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnBajaTarjetaUsuario.Enabled = false;
             }
-            else if (usuario is UsuarioArgentino usuarioArgentino)
+            catch (Exception )
             {
-                mensaje = $"El usuario {usuarioArgentino.Dni} con la tarjeta {usuarioArgentino.IdSubeArgentina} quiere la baja";
-                indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
-                dni = int.Parse(usuarioArgentino.Dni);
-            }
-            else if (usuario is UsuarioExtranjero usuarioExtranjero)
-            {
-                mensaje = $"El usuario {usuarioExtranjero.Dni} con la tarjeta {usuarioExtranjero.IdSubeExtranjero} quiere la baja";
-                indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
-                dni = int.Parse(usuarioExtranjero.Dni);
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void btnBajaTarjetaUsuario_Click(object sender, EventArgs e)
         {
-            if (!ArchivoMensaje.VerificarNumeroEnListaBajas(dni))
+            try
             {
-                ArchivoMensaje.listaBajas.Add(new Dictionary<int, string> { { indice, mensaje } });
-                ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
-                MessageBox.Show("El mensaje fue enviado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                if (!ArchivoMensaje.VerificarNumeroEnListaBajas(dni))
+                {
+                    ArchivoMensaje.listaBajas.Add(new Dictionary<int, string> { { indice, mensaje } });
+                    ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
+                    MessageBox.Show("El mensaje fue enviado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+                else
+                {
+                    throw new Exception();
+                }
             }
-            else
+            catch (Exception)
             {
                 MessageBox.Show("Esta tarjeta ya pidio la baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }

@@ -22,30 +22,40 @@ namespace Entidades
         public static List<string> listaBajas = new List<string>();
         public static Usuario ObtenerUsuarioPorDniYTarjeta(string dni)
         {
-            Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
-
-            if (usuario != null)
+            try
             {
-                if (!usuario.TieneTarjeta && usuario.Dni[0] > '0')
+                Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
+
+                if (usuario != null)
                 {
-                    return (UsuarioSinTarjeta)usuario;
-                }
-                else if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
-                {
-                    return (UsuarioArgentino)usuario;
-                }
-                else if (usuario.Dni.Length == 3)
-                {
-                    return (UsuarioAdministrador)usuario;
-                }
-                else if (usuario.Dni[0] >= '9')
-                {
-                    return (UsuarioExtranjero)usuario;
+                    if (!usuario.TieneTarjeta)
+                    {
+                        if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
+                        {
+                            return (UsuarioArgentino)usuario;
+                        }
+                        else if (usuario.Dni.Length == 3)
+                        {
+                            return (UsuarioAdministrador)usuario;
+                        }
+                        else if (usuario.Dni[0] >= '9')
+                        {
+                            return (UsuarioExtranjero)usuario;
+                        }
+                    }
+                    else if (usuario.Dni[0] > '0')
+                    {
+                        return (UsuarioSinTarjeta)usuario;
+                    }
                 }
 
+                return null;
             }
-
-            return null;
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(ManejoDeListados), nameof(ObtenerUsuarioPorDniYTarjeta), "Error al obtener usuario por DNI y tarjeta", ex);
+                return null;
+            }
         }
 
         /// <summary>
@@ -57,38 +67,43 @@ namespace Entidades
         {
             List<Usuario> usuarios = new List<Usuario>();
             string rutaArchivo = @"..\..\..\Archivos\usuarios.json";
-
-            string jsonData = File.ReadAllText(rutaArchivo);
-
-            var usuariosData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonData);
-
-            if (usuariosData != null)
+            try
             {
-                foreach (var usuarioData in usuariosData)
+                string jsonData = File.ReadAllText(rutaArchivo);
+
+                var usuariosData = JsonConvert.DeserializeObject<List<Dictionary<string, object>>>(jsonData);
+
+                if (usuariosData != null)
                 {
-                    if (usuarioData.ContainsKey("IdSubeArgentina"))
+                    foreach (var usuarioData in usuariosData)
                     {
-                        var usuarioArgentino = JsonConvert.DeserializeObject<UsuarioArgentino>(JsonConvert.SerializeObject(usuarioData));
-                        usuarios.Add(usuarioArgentino);
-                    }
-                    else if (usuarioData.ContainsKey("IdSubeExtranjero"))
-                    {
-                        var usuarioExtranjero = JsonConvert.DeserializeObject<UsuarioExtranjero>(JsonConvert.SerializeObject(usuarioData));
-                        usuarios.Add(usuarioExtranjero);
-                    }
-                    else if (usuarioData.ContainsKey("EsAdministrador"))
-                    {
-                        var usuarioAdmin = JsonConvert.DeserializeObject<UsuarioAdministrador>(JsonConvert.SerializeObject(usuarioData));
-                        usuarios.Add(usuarioAdmin);
-                    }
-                    else
-                    {
-                        var usuarioSinTarjeta = JsonConvert.DeserializeObject<UsuarioSinTarjeta>(JsonConvert.SerializeObject(usuarioData));
-                        usuarios.Add(usuarioSinTarjeta);
+                        if (usuarioData.ContainsKey("IdSubeArgentina"))
+                        {
+                            var usuarioArgentino = JsonConvert.DeserializeObject<UsuarioArgentino>(JsonConvert.SerializeObject(usuarioData));
+                            usuarios.Add(usuarioArgentino);
+                        }
+                        else if (usuarioData.ContainsKey("IdSubeExtranjero"))
+                        {
+                            var usuarioExtranjero = JsonConvert.DeserializeObject<UsuarioExtranjero>(JsonConvert.SerializeObject(usuarioData));
+                            usuarios.Add(usuarioExtranjero);
+                        }
+                        else if (usuarioData.ContainsKey("EsAdministrador"))
+                        {
+                            var usuarioAdmin = JsonConvert.DeserializeObject<UsuarioAdministrador>(JsonConvert.SerializeObject(usuarioData));
+                            usuarios.Add(usuarioAdmin);
+                        }
+                        else
+                        {
+                            var usuarioSinTarjeta = JsonConvert.DeserializeObject<UsuarioSinTarjeta>(JsonConvert.SerializeObject(usuarioData));
+                            usuarios.Add(usuarioSinTarjeta);
+                        }
                     }
                 }
             }
-
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(ManejoDeListados), nameof(DeserializeUsuarios), "Error al deserializar usuarios", ex);
+            }
             return usuarios;
         }
     }

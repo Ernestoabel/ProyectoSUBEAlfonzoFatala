@@ -43,8 +43,22 @@ namespace ProyectoSUBEAlfonzoFatala
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            //TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
-            //TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
+            TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
+            TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
+            PruebaTestUnitario();
+        }
+
+        /// <summary>
+        /// Metodo para la implementacion de los test unitarios
+        /// </summary>
+        public void PruebaTestUnitario()
+        {
+            var tarjetaIntTests = new TarjetaInternacionalTestsUnitario();
+            var tarjetaNacTests = new TarjetaNacionalTestsUnitario();
+            tarjetaIntTests.GuardarEnArchivo_SerializaListaCorrectamente();
+            tarjetaIntTests.CargarDesdeArchivo_DeserializaListaCorrectamente();
+            tarjetaNacTests.GuardarEnArchivo_SerializaListaCorrectamente();
+            tarjetaNacTests.CargarDesdeArchivo_DeserializaListaCorrectamente();
         }
 
         /// <summary>
@@ -91,7 +105,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuarioLogueado.ValidarClave(clave))
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                           
                             FormInicio inicio = new FormInicio(usuarioLogueado);
+                            
                             inicio.Show();
                             this.Hide();
                         }
@@ -129,7 +145,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (ClaveInvalidaException ex)
+            catch (ClaveInvalidaException )
             {
                 MessageBox.Show("La clave ingresada es incorrecta. Por favor, inténtelo de nuevo.", "Error de clave", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
