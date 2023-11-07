@@ -181,7 +181,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.DarkSlateGray;
+            BackColor = Color.FromArgb(53, 53, 53);
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(791, 424);
             ControlBox = false;

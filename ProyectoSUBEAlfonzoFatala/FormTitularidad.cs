@@ -49,9 +49,8 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 MessageBox.Show("Hubo un error ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-
-
         }
+
         private void insertarDatos(object usuario)
         {
             if (usuario is UsuarioSinTarjeta)

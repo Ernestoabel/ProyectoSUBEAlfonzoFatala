@@ -13,7 +13,8 @@ namespace ProyectoSUBEAlfonzoFatala
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
-        FormCargarSaldo formCarga = new FormCargarSaldo();
+        FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
+        
         public object usuarioLogueado;
 
 
@@ -26,6 +27,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             InitializeComponent();
             this.usuarioLogueado = usuario;
+           
         }
 
         /// <summary>
@@ -137,8 +139,6 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             if (usuarioLogueado is UsuarioSinTarjeta)
             {
-
-
                 FormRegistrarTarjeta formComprar = new FormRegistrarTarjeta((Usuario)usuarioLogueado);
                 formComprar.Show();
 
@@ -158,11 +158,20 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
-                formCarga.TraerUsuario(usuarioLogueado);
-                formCarga.FormBorderStyle = FormBorderStyle.None;
-                formCarga.Dock = DockStyle.Fill;
-                formCarga.MdiParent = this;
-                formCarga.Show();
+                //formCargarSaldo.TraerUsuario(usuarioLogueado);
+                //formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
+                //formCargarSaldo.Dock = DockStyle.Fill;
+                //formCargarSaldo.MdiParent = this;
+                //formCargarSaldo.Show();
+
+                FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
+                formCargarSaldo.TraerUsuario(usuarioLogueado);
+                formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
+                formCargarSaldo.Dock = DockStyle.Fill;
+                formCargarSaldo.MdiParent = this;
+                formCargarSaldo.Show();
+
+               
 
             }
             else

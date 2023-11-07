@@ -28,90 +28,107 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             txtMonto = new TextBox();
             txtClave = new TextBox();
             lblMonto = new Label();
             lblClave = new Label();
-            lblNombre = new Label();
-            lblApellido = new Label();
+            toolTip1 = new ToolTip(components);
+            btnAcreditarSaldo = new Button();
+            btnCancelar = new Button();
             SuspendLayout();
             // 
             // txtMonto
             // 
-            txtMonto.Location = new Point(173, 94);
+            txtMonto.Font = new Font("Trebuchet MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtMonto.Location = new Point(83, 41);
             txtMonto.Name = "txtMonto";
             txtMonto.PlaceholderText = "Ingrese el monto";
-            txtMonto.Size = new Size(149, 23);
+            txtMonto.Size = new Size(149, 21);
             txtMonto.TabIndex = 0;
+            toolTip1.SetToolTip(txtMonto, "Ingrese el monto en digitos decimales.");
             txtMonto.TextChanged += txtMonto_TextChanged;
             txtMonto.KeyPress += txtMonto_KeyPress;
             // 
             // txtClave
             // 
-            txtClave.Location = new Point(173, 156);
+            txtClave.Font = new Font("Trebuchet MS", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtClave.Location = new Point(83, 96);
             txtClave.Name = "txtClave";
+            txtClave.PasswordChar = '*';
             txtClave.PlaceholderText = "Ingrese su clave";
-            txtClave.Size = new Size(149, 23);
+            txtClave.Size = new Size(149, 21);
             txtClave.TabIndex = 1;
+            toolTip1.SetToolTip(txtClave, "Ingrese la clave de usuario.");
+            txtClave.TextChanged += txtClave_TextChanged;
             // 
             // lblMonto
             // 
             lblMonto.AutoSize = true;
-            lblMonto.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMonto.Font = new Font("Bahnschrift SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblMonto.ForeColor = Color.White;
-            lblMonto.Location = new Point(82, 94);
+            lblMonto.Location = new Point(12, 38);
             lblMonto.Name = "lblMonto";
-            lblMonto.Size = new Size(65, 24);
+            lblMonto.Size = new Size(62, 23);
             lblMonto.TabIndex = 2;
             lblMonto.Text = "Monto";
             // 
             // lblClave
             // 
             lblClave.AutoSize = true;
-            lblClave.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblClave.Font = new Font("Bahnschrift SemiBold", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblClave.ForeColor = Color.White;
-            lblClave.Location = new Point(82, 156);
+            lblClave.Location = new Point(17, 93);
             lblClave.Name = "lblClave";
-            lblClave.Size = new Size(60, 24);
+            lblClave.Size = new Size(58, 23);
             lblClave.TabIndex = 3;
             lblClave.Text = "Clave";
             // 
-            // lblNombre
+            // btnAcreditarSaldo
             // 
-            lblNombre.AutoSize = true;
-            lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblNombre.ForeColor = Color.Gainsboro;
-            lblNombre.Location = new Point(116, 282);
-            lblNombre.Name = "lblNombre";
-            lblNombre.Size = new Size(86, 23);
-            lblNombre.TabIndex = 4;
-            lblNombre.Text = "Nombre";
+            btnAcreditarSaldo.BackColor = Color.Gold;
+            btnAcreditarSaldo.FlatStyle = FlatStyle.Flat;
+            btnAcreditarSaldo.Font = new Font("Bahnschrift SemiLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnAcreditarSaldo.ForeColor = SystemColors.ActiveCaptionText;
+            btnAcreditarSaldo.Location = new Point(17, 168);
+            btnAcreditarSaldo.Name = "btnAcreditarSaldo";
+            btnAcreditarSaldo.Size = new Size(107, 34);
+            btnAcreditarSaldo.TabIndex = 4;
+            btnAcreditarSaldo.Text = "Acreditar";
+            toolTip1.SetToolTip(btnAcreditarSaldo, "Verifique que haya ingresado un saldo correcto.");
+            btnAcreditarSaldo.UseVisualStyleBackColor = false;
+            btnAcreditarSaldo.Click += btnAcreditarSaldo_Click;
             // 
-            // lblApellido
+            // btnCancelar
             // 
-            lblApellido.AutoSize = true;
-            lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblApellido.ForeColor = Color.Gainsboro;
-            lblApellido.Location = new Point(252, 282);
-            lblApellido.Name = "lblApellido";
-            lblApellido.Size = new Size(88, 23);
-            lblApellido.TabIndex = 5;
-            lblApellido.Text = "Apellido";
+            btnCancelar.BackColor = Color.Tomato;
+            btnCancelar.FlatStyle = FlatStyle.Flat;
+            btnCancelar.Font = new Font("Bahnschrift SemiLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnCancelar.ForeColor = Color.White;
+            btnCancelar.Location = new Point(141, 168);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(107, 34);
+            btnCancelar.TabIndex = 5;
+            btnCancelar.Text = "Cancelar";
+            toolTip1.SetToolTip(btnCancelar, "Verifique que haya ingresado un saldo correcto.");
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
             // 
             // FormCarga
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Olive;
-            ClientSize = new Size(491, 356);
-            Controls.Add(lblApellido);
-            Controls.Add(lblNombre);
+            BackColor = SystemColors.MenuHighlight;
+            ClientSize = new Size(260, 233);
+            Controls.Add(btnCancelar);
+            Controls.Add(btnAcreditarSaldo);
             Controls.Add(lblClave);
             Controls.Add(lblMonto);
             Controls.Add(txtClave);
             Controls.Add(txtMonto);
             Name = "FormCarga";
             Text = "FormCarga";
+            Load += FormCarga_Load;
             ResumeLayout(false);
             PerformLayout();
         }
@@ -122,7 +139,8 @@
         private TextBox txtClave;
         private Label lblMonto;
         private Label lblClave;
-        private Label lblNombre;
-        private Label lblApellido;
+        private ToolTip toolTip1;
+        private Button btnAcreditarSaldo;
+        private Button btnCancelar;
     }
 }

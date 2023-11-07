@@ -32,10 +32,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
             this.Close();
-
             FormInicio form = new FormInicio(usuarioLogueado);
             form.Show();
-
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -59,39 +57,36 @@ namespace ProyectoSUBEAlfonzoFatala
                 //Pero como no quitas al usuario anterior de la lista se duplica el usuario
                 if (esArgentino)
                 {
+                    //USUARIO
                     string idEnString = tarjetaNacional.Id.ToString();
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
                     TarjetaNacional tarjetaNac = new TarjetaNacional();
-
                     Listados.AgregarUsuario(usuarioArgentino);
                     RemoverUsuarioSinTarjetaLocalizado();
 
+                    //TARJETA
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
-                    //tarjetaNacional.AgregarElementoSQL();
                     tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-
                     FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
                     usuarioRegistrado.Show();
 
                 }
                 else if (esExtranjero)
                 {
+                    //USUARIO
                     string idEnString = tarjetaInternacional.Id.ToString();
-                    // UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero();
                     UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
                         usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
                     TarjetaInternacional tarjetaInt = new TarjetaInternacional();
                     Listados.AgregarUsuario(usuarioExtranjero);
                     RemoverUsuarioSinTarjetaLocalizado();
+
+                    //TARJETA
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
-                    //tarjetaInternacional.AgregarElementoSQL();
                     tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-
                     FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
                     usuarioRegistrado.Show();
 
@@ -156,12 +151,14 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
                 rdoArgentino.Checked = true;
+                rdoExtranjero.Enabled = false;
                 rdoExtranjero.Checked = false;
             }
             else if (dni.Length == 9)
             {
                 // El DNI tiene 9 dígitos, por lo que se considera "Extranjero"
                 rdoArgentino.Checked = false;
+                rdoArgentino.Enabled = false;
                 rdoExtranjero.Checked = true;
             }
             else
@@ -169,6 +166,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Longitud de DNI no válida, deseleccionar ambos botones
                 rdoArgentino.Checked = false;
                 rdoExtranjero.Checked = false;
+                rdoExtranjero.Enabled = true;
+                rdoArgentino.Enabled = true;
             }
         }
 

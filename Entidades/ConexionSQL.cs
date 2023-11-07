@@ -18,6 +18,7 @@ namespace Entidades
         {
             mysqlConexion = new MySqlConnection("Server=localhost;Port=3306;Database=proyectosube;Uid=root;Pwd='';");
         }
+
         public static void Conectar()
         {
             try
