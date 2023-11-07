@@ -43,9 +43,9 @@ namespace ProyectoSUBEAlfonzoFatala
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
-            TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
-            PruebaTestUnitario();
+            //TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
+            //TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
+            //PruebaTestUnitario();
         }
 
         /// <summary>
@@ -149,7 +149,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 MessageBox.Show("La clave ingresada es incorrecta. Por favor, inténtelo de nuevo.", "Error de clave", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 MessageBox.Show("Se produjo un error al intentar iniciar sesión", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }

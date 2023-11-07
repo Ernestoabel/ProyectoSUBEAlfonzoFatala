@@ -148,3 +148,299 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Duplicate entry '5020' for k
    at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
    at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
 
+7/11/2023 12:24:51 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:24:53 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:24:55 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:24:55 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:25:34 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:25:37 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:25:53 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:25:53 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:25:55 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:25:55 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:26:21 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioSinTarjeta' to type 'Entidades.UsuarioExtranjero'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 43
+
+7/11/2023 12:31:51 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:31:51 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:31:53 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:31:53 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:32:04 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:32:10 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:32:27 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:32:41 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:33:05 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:33:05 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:33:07 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+7/11/2023 12:33:07 - Error en AccesoMySql.InsertarElementosSQL: Error al insertar elementos en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.InsertarElementosSQL(List`1 elementos, String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 50
+
+7/11/2023 12:33:34 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:36:05 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:36:20 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:38:30 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+
+7/11/2023 12:38:42 - Error en ManejoDeListados.ObtenerUsuarioPorDniYTarjeta: Error al obtener usuario por DNI y tarjeta
+System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioArgentino' to type 'Entidades.UsuarioSinTarjeta'.
+   at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 48
+

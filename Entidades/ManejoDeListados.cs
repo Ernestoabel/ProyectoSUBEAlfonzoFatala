@@ -22,40 +22,30 @@ namespace Entidades
         public static List<string> listaBajas = new List<string>();
         public static Usuario ObtenerUsuarioPorDniYTarjeta(string dni)
         {
-            try
-            {
-                Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
+            Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
 
-                if (usuario != null)
+            if (usuario != null)
+            {
+                if (!usuario.TieneTarjeta && usuario.Dni[0] > '0')
                 {
-                    if (!usuario.TieneTarjeta)
-                    {
-                        if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
-                        {
-                            return (UsuarioArgentino)usuario;
-                        }
-                        else if (usuario.Dni.Length == 3)
-                        {
-                            return (UsuarioAdministrador)usuario;
-                        }
-                        else if (usuario.Dni[0] >= '9')
-                        {
-                            return (UsuarioExtranjero)usuario;
-                        }
-                    }
-                    else if (usuario.Dni[0] > '0')
-                    {
-                        return (UsuarioSinTarjeta)usuario;
-                    }
+                    return (UsuarioSinTarjeta)usuario;
+                }
+                else if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
+                {
+                    return (UsuarioArgentino)usuario;
+                }
+                else if (usuario.Dni.Length == 3)
+                {
+                    return (UsuarioAdministrador)usuario;
+                }
+                else if (usuario.Dni[0] >= '9')
+                {
+                    return (UsuarioExtranjero)usuario;
                 }
 
-                return null;
             }
-            catch (Exception ex)
-            {
-                CatchError.LogError(nameof(ManejoDeListados), nameof(ObtenerUsuarioPorDniYTarjeta), "Error al obtener usuario por DNI y tarjeta", ex);
-                return null;
-            }
+
+            return null;
         }
 
         /// <summary>
