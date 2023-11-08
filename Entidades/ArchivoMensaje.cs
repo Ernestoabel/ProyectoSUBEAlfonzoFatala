@@ -23,19 +23,27 @@ namespace Entidades
             [XmlElement("Mensaje")]
             public string Mensaje { get; set; }
 
+            [XmlElement("confirmacion")]
+            public bool confirmacion { get; set; }
+
+            public BajaData()
+            {
+                // Establecer NamespaceEntidades como false por defecto
+                confirmacion = false;
+            }
         }
 
         /// <summary>
         /// Creacion de la lista diccionario
         /// </summary>
-        public static List<Dictionary<int, string>> listaBajas = new List<Dictionary<int, string>>();
+        public static List<Dictionary<int, BajaData>> listaBajas = new List<Dictionary<int, BajaData>>();
 
         /// <summary>
         /// Metodo para obtener el ultimo indice de la lista
         /// </summary>
         /// <param name="listaBajas"></param>
         /// <returns>Retorna el ultimo indice + uno</returns>
-        public static int obtenerUltimoIndiceListaMensajes(List<Dictionary<int, string>> listaBajas)
+        public static int obtenerUltimoIndiceListaMensajes(List<Dictionary<int, BajaData>> listaBajas)
         {
             try
             {
@@ -50,13 +58,36 @@ namespace Entidades
                 CatchError.LogError(nameof(ArchivoMensaje), nameof(obtenerUltimoIndiceListaMensajes), "Error al obtener el indice", ex);
                 return 0;
             }
-            
+
         }
 
         /// <summary>
         /// Serealizacion XML de la lista diccionario
         /// </summary>
         /// <param name="listaBajas"></param>
+
+        public static void GuardarMensajesBajaEnArchivo(List<Dictionary<int, BajaData>> listaBajas)
+        {
+            string rutaArchivo = @"..\..\..\Archivos\mensajes.xml";
+            try
+            {
+                List<BajaData> bajaDataList = listaBajas
+                    .SelectMany(dic => dic.Values)
+                    .ToList();
+
+                XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
+                using (StreamWriter writer = new StreamWriter(rutaArchivo))
+                {
+                    serializer.Serialize(writer, bajaDataList);
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(ArchivoMensaje), nameof(GuardarMensajesBajaEnArchivo), "Error al guardar el mensaje", ex);
+            }
+        }
+
+        /*
         public static void GuardarMensajesBajaEnArchivo(List<Dictionary<int, string>> listaBajas)
         {
             string rutaArchivo = @"..\..\..\Archivos\mensajes.xml";
@@ -76,12 +107,45 @@ namespace Entidades
             {
                 CatchError.LogError(nameof(ArchivoMensaje), nameof(GuardarMensajesBajaEnArchivo), "Error al guardar el mensaje", ex);
             }
-        }
+        }*/
 
         /// <summary>
         /// Deserealizacion de la lista mensajes
         /// </summary>
         /// <returns>Retorna la lista</returns>
+        public static List<Dictionary<int, BajaData>> DeserializarMensajesBajaDesdeArchivo()
+        {
+            try
+            {
+                XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
+
+                string rutaCarpetaArchivos = @"..\..\..\Archivos";
+                string rutaArchivo = Path.Combine(rutaCarpetaArchivos, "mensajes.xml");
+
+                if (!File.Exists(rutaArchivo))
+                {
+                    Console.WriteLine("El archivo de mensajes no existe.");
+                    return new List<Dictionary<int, BajaData>>();
+                }
+
+                using (StreamReader reader = new StreamReader(rutaArchivo))
+                {
+                    List<BajaData> bajaDataList = (List<BajaData>)serializer.Deserialize(reader);
+
+                    List<Dictionary<int, BajaData>> listaBajas = bajaDataList
+                        .Select(bajaData => new Dictionary<int, BajaData> { { bajaData.Indice, bajaData } })
+                        .ToList();
+
+                    return listaBajas;
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(ArchivoMensaje), nameof(DeserializarMensajesBajaDesdeArchivo), "Error al cargar el archivo", ex);
+                return null;
+            }
+        }
+        /*
         public static List<Dictionary<int, string>> DeserializarMensajesBajaDesdeArchivo()
         {
             try
@@ -119,7 +183,7 @@ namespace Entidades
                 CatchError.LogError(nameof(ArchivoMensaje), nameof(DeserializarMensajesBajaDesdeArchivo), "Error al cargar el archivo", ex);
                 return null; 
             }
-        }
+        }*/
 
         /// <summary>
         /// Metodo para validar que un entero sea parte del mensaje
@@ -143,28 +207,24 @@ namespace Entidades
         {
             try
             {
-                bool retorno = false;
                 foreach (var diccionario in listaBajas)
                 {
                     foreach (var kvp in diccionario)
                     {
-                        int indice = kvp.Key;
-                        string mensaje = kvp.Value;
-
-                        if (EsDNIParteDeString(mensaje, numero))
+                        if (EsDNIParteDeString(kvp.Value.Mensaje, numero))
                         {
-                            retorno = true;
+                            return true; // Si se encuentra una coincidencia, puedes devolver true inmediatamente.
                         }
-
                     }
                 }
-                return retorno;
+                return false; // Si no se encuentra ninguna coincidencia.
             }
             catch (Exception ex)
             {
-                CatchError.LogError(nameof(ArchivoMensaje), nameof(VerificarNumeroEnListaBajas), "Error al realizar el metodo", ex);
+                CatchError.LogError(nameof(ArchivoMensaje), nameof(VerificarNumeroEnListaBajas), "Error al realizar el método", ex);
                 return false;
             }
         }
+
     }
 }

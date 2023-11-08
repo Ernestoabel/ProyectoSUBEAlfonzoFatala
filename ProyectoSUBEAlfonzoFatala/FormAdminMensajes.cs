@@ -8,19 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Entidades.ArchivoMensaje;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormAdminMensajes : Form, IDataGridViewStyler
     {
-        public static List<Dictionary<int, string>> listaMostrarMensajes;
+        public static List<Dictionary<int, BajaData>> listaMostrarMensajes;
         public FormAdminMensajes()
         {
             InitializeComponent();
             listaMostrarMensajes = ArchivoMensaje.listaBajas;
         }
 
-        
+
 
         public void SetDataGridViewStyle()
         {
@@ -65,12 +66,13 @@ namespace ProyectoSUBEAlfonzoFatala
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Indice", typeof(int));
             dataTable.Columns.Add("Mensaje", typeof(string));
+            dataTable.Columns.Add("Leido", typeof(bool)); // Agregar columna para el booleano
 
             foreach (var dict in listaMostrarMensajes)
             {
                 foreach (var kvp in dict)
                 {
-                    dataTable.Rows.Add(kvp.Key, kvp.Value);
+                    dataTable.Rows.Add(kvp.Key, kvp.Value.Mensaje, kvp.Value.confirmacion); // Agregar el valor de NamespaceEntidades
                 }
             }
 

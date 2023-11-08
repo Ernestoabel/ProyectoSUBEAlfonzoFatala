@@ -29,6 +29,7 @@ namespace ProyectoSUBEAlfonzoFatala
             
             InitializeComponent();
             configuraciones = new Configuraciones();
+            usuarioLogueado= usuario;
             ConfiguracionInicial();
             
         }

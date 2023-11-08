@@ -10,10 +10,11 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Entidades.Listados;
 using System.Xml.Serialization;
+using static Entidades.ArchivoMensaje;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
-    
+
     public partial class FormBajaUsuario : Form
     {
         string mensaje;
@@ -45,12 +46,12 @@ namespace ProyectoSUBEAlfonzoFatala
                     dni = int.Parse(usuarioExtranjero.Dni);
                 }
             }
-            catch (UsuarioSinTarjetaException )
+            catch (UsuarioSinTarjetaException)
             {
                 MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnBajaTarjetaUsuario.Enabled = false;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
@@ -61,7 +62,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 if (!ArchivoMensaje.VerificarNumeroEnListaBajas(dni))
                 {
-                    ArchivoMensaje.listaBajas.Add(new Dictionary<int, string> { { indice, mensaje } });
+                    ArchivoMensaje.listaBajas.Add(new Dictionary<int, BajaData> { { indice, new BajaData { Indice = indice, Mensaje = mensaje } } });
                     ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
                     MessageBox.Show("El mensaje fue enviado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
@@ -75,7 +76,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Esta tarjeta ya pidio la baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
     }
 }
 
