@@ -54,11 +54,14 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             this.dataGridMensajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Las celdas no se puede modificar
-            this.dataGridMensajes.ReadOnly = true;
+            this.dataGridMensajes.Columns["Indice"].ReadOnly = true;
+            this.dataGridMensajes.Columns["Mensaje"].ReadOnly = true;
+            this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
+            this.dataGridMensajes.Columns["Confirmar"].Width = 80;
 
             this.dataGridMensajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            //this.dtgViajes.Dock = DockStyle.Fill;
+
+            
         }
 
         private void FormAdminMensajes_Load(object sender, EventArgs e)
@@ -66,7 +69,7 @@ namespace ProyectoSUBEAlfonzoFatala
             DataTable dataTable = new DataTable();
             dataTable.Columns.Add("Indice", typeof(int));
             dataTable.Columns.Add("Mensaje", typeof(string));
-            dataTable.Columns.Add("Leido", typeof(bool)); // Agregar columna para el booleano
+            dataTable.Columns.Add("Confirmar", typeof(bool)); // Agregar columna para el booleano
 
             foreach (var dict in listaMostrarMensajes)
             {
@@ -78,6 +81,31 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dataGridMensajes.DataSource = dataTable;
             SetDataGridViewStyle();
+
+            this.dataGridMensajes.CellValueChanged += (sender, e) =>
+            {
+                if (e.RowIndex >= 0 && e.ColumnIndex == dataTable.Columns["Confirmar"].Ordinal)
+                {
+                    int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
+                    bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
+
+                    // Actualiza el valor "Leido" en la lista
+                    foreach (var dict in listaMostrarMensajes)
+                    {
+                        foreach (var kvp in dict)
+                        {
+                            if (kvp.Key == indice)
+                            {
+                                kvp.Value.confirmacion = leido;
+                                break;
+                            }
+                        }
+                    }
+
+                    // Guarda los cambios en el archivo XML
+                    ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
+                }
+            };
         }
     }
 }
