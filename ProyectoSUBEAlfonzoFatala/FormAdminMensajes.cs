@@ -89,7 +89,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
                     bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
 
-                    // Actualiza el valor "Leido" en la lista
+                    // Actualiza el valor "Confirmar" en la lista
                     foreach (var dict in listaMostrarMensajes)
                     {
                         foreach (var kvp in dict)

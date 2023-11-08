@@ -17,6 +17,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private Configuraciones configuraciones;
         public object usuarioLogueado;
         private string configuracionesFilePath = @"..\..\..\Archivos\configuraciones.json";
+        
 
 
         /// <summary>
@@ -24,14 +25,19 @@ namespace ProyectoSUBEAlfonzoFatala
         /// trae el usuario del loguin
         /// </summary>
         /// <param name="usuario"></param>
-        public FormInicio(object usuario)
+        public FormInicio()
         {
             
             InitializeComponent();
             configuraciones = new Configuraciones();
-            usuarioLogueado= usuario;
+            //usuarioLogueado= usuario;
             ConfiguracionInicial();
             
+        }
+
+        public void RecivirObjeto (object objeto)
+        {
+            this.usuarioLogueado = objeto;
         }
 
 
