@@ -74,7 +74,7 @@ namespace Entidades
             }
         }
 
-        public static void InsertarElementoSQL(UsuarioExtranjero usuariosExtrangero)
+        public static void InsertarElementoSQL(UsuarioExtranjero usuariosExtranjero)
         {
             try
             {
@@ -83,14 +83,15 @@ namespace Entidades
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = ConexionSQL.mysqlConexion;
-                    cmd.CommandText = "INSERT INTO usuarioextrangero (nombre, apellido, clave, dni, idSube) VALUES (@nombre, @apellido, @clave, @dni, @idSube)";
+                    cmd.CommandText = "INSERT INTO usuarioextranjero (nombre, apellido, clave, dni, idSube, tienetarjeta) VALUES (@nombre, @apellido, @clave, @dni, @idSube, @tienetarjeta)";
 
                     cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
-                    cmd.Parameters.AddWithValue("@nombre", usuariosExtrangero.Nombre);
-                    cmd.Parameters.AddWithValue("@apellido", usuariosExtrangero.Apellido);
-                    cmd.Parameters.AddWithValue("@clave", usuariosExtrangero.Clave);
-                    cmd.Parameters.AddWithValue("@dni", usuariosExtrangero.Dni);
-                    cmd.Parameters.AddWithValue("@idSube", usuariosExtrangero.IdSubeExtranjero);
+                    cmd.Parameters.AddWithValue("@nombre", usuariosExtranjero.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", usuariosExtranjero.Apellido);
+                    cmd.Parameters.AddWithValue("@clave", usuariosExtranjero.Clave);
+                    cmd.Parameters.AddWithValue("@dni", usuariosExtranjero.Dni);
+                    cmd.Parameters.AddWithValue("@idSube", usuariosExtranjero.IdSubeExtranjero);
+                    cmd.Parameters.AddWithValue("@tienetarjeta", usuariosExtranjero.TieneTarjeta);
                     cmd.ExecuteNonQuery();
 
 
@@ -98,7 +99,7 @@ namespace Entidades
             }
             catch (Exception ex)
             {
-                CatchError.LogError(nameof(UsuarioArgentino), nameof(InsertarElementoSQL), "Error al insertar elemento a la base de datos", ex);
+                CatchError.LogError(nameof(UsuarioExtranjero), nameof(InsertarElementoSQL), "Error al insertar elemento a la base de datos", ex);
             }
             finally
             {

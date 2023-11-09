@@ -17,7 +17,7 @@ namespace Entidades
 
         public bool EsAdministrador { get => _esAdministrador; set => _esAdministrador = value; }
 
-        public static void ObtenerElementosSQL()
+        public static List<Usuario> ObtenerElementosSQL()
         {
             List<Usuario> elementos = new List<Usuario>();
             try
@@ -39,7 +39,7 @@ namespace Entidades
                             string dni = reader.GetString("dni");
 
                             UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
-                            Listados.listaUsuarios.Add(usuario);
+                            elementos.Add(usuario);
                         }
                     }
                 }
@@ -53,6 +53,7 @@ namespace Entidades
                 ConexionSQL.mysqlConexion.Close();
 
             }
+            return elementos;
         }
     }
 }

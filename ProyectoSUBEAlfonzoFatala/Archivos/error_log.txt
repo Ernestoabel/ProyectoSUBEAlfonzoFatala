@@ -498,3 +498,18 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'proyectosube.usuarioe
    at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
    at Entidades.UsuarioExtranjero.InsertarElementoSQL(UsuarioExtranjero usuariosExtrangero) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioExtranjero.cs:line 94
 
+9/11/2023 10:32:08 - Error en UsuarioExtranjero.InsertarElementoSQL: Error al insertar elemento a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Table 'proyectosube.usuarioextrangero' doesn't exist
+   at MySql.Data.MySqlClient.MySqlStream.ReadPacketAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.NativeDriver.GetResultAsync(Int32 affectedRow, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.GetResultAsync(Int32 statementId, Int32 affectedRows, Int64 insertedId, Boolean execAsync)
+   at MySql.Data.MySqlClient.Driver.NextResultAsync(Int32 statementId, Boolean force, Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlDataReader.NextResultAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.UsuarioExtranjero.InsertarElementoSQL(UsuarioExtranjero usuariosExtrangero) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioExtranjero.cs:line 95
+

@@ -46,7 +46,7 @@ namespace Entidades
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = ConexionSQL.mysqlConexion;
-                    cmd.CommandText = "INSERT INTO usuarioargentino (nombre, apellido, clave, dni, idSube) VALUES (@nombre, @apellido, @clave, @dni, @idSube)";
+                    cmd.CommandText = "INSERT INTO usuarioargentino (nombre, apellido, clave, dni, idSube, tienetarjeta) VALUES (@nombre, @apellido, @clave, @dni, @idSube, @tienetarjeta)";
 
                     cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
                     cmd.Parameters.AddWithValue("@nombre", usuariosArgentino.Nombre);
@@ -54,6 +54,7 @@ namespace Entidades
                     cmd.Parameters.AddWithValue("@clave", usuariosArgentino.Clave);
                     cmd.Parameters.AddWithValue("@dni", usuariosArgentino.Dni);
                     cmd.Parameters.AddWithValue("@idSube", usuariosArgentino.IdSubeArgentina);
+                    cmd.Parameters.AddWithValue("@tienetarjeta", usuariosArgentino.IdSubeArgentina);
                     cmd.ExecuteNonQuery();
 
 
@@ -90,6 +91,7 @@ namespace Entidades
                             string clave = reader.GetString("Clave");
                             string dni = reader.GetString("DNI");
                             string idSube = reader.GetString("idSube");
+  
 
                             UsuarioArgentino usuario = new UsuarioArgentino(nombre, apellido, dni, clave, idSube);
                             Listados.AgregarUsuario(usuario);

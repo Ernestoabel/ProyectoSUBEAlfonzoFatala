@@ -51,10 +51,10 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             TarjetaNacional.listaTarjetasNacionales = TarjetaNacional.ObtenerDeBaseDeDatos();
             TarjetaInternacional.listaTarjetasIntenacionales = TarjetaInternacional.ObtenerDeBaseDeDatos();
-            UsuarioSinTarjeta.ObtenerElementosSQL();
-            UsuarioArgentino.ObtenerElementosSQL();
-            UsuarioExtranjero.ObtenerElementosSQL();
-            UsuarioAdministrador.ObtenerElementosSQL();
+            Listados.listaUsuarios.AddRange(UsuarioSinTarjeta.ObtenerElementosSQL());
+            //UsuarioArgentino.ObtenerElementosSQL();
+            //UsuarioExtranjero.ObtenerElementosSQL();
+            Listados.listaUsuarios.AddRange(UsuarioAdministrador.ObtenerElementosSQL());
         }
 
         /// <summary>

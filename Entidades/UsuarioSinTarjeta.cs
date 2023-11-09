@@ -28,8 +28,9 @@ namespace Entidades
 
         }
 
-        public static void ObtenerElementosSQL()
+        public static List<Usuario> ObtenerElementosSQL()
         {
+            List<Usuario> elementos = new List<Usuario>();
             try
             {
                 ConexionSQL.Conectar(); // Abre la conexión
@@ -49,7 +50,7 @@ namespace Entidades
                             string dni = reader.GetString("dni");
 
                             UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
-                            Listados.listaUsuarios.Add(usuario);
+                            elementos.Add(usuario);
                         }
                     }
                 }
@@ -63,6 +64,7 @@ namespace Entidades
                 ConexionSQL.mysqlConexion.Close();
 
             }
+            return elementos;
         }
 
         public static void InsertarElementoSQL(UsuarioSinTarjeta usuariosSinTarjeta)
