@@ -22,8 +22,7 @@ namespace ProyectoSUBEAlfonzoFatala
     {
         TarjetaInternacional tarjetaInt = new TarjetaInternacional();
         TarjetaNacional tarjetaNac = new TarjetaNacional();
-        FormInicio inicio = new FormInicio();
-        Action<object> pasarObjeto;
+        
         public FormularioLoguin()
         {
             InitializeComponent();
@@ -94,8 +93,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         {
                             MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             //FormInicio inicio = new FormInicio(usuarioLogueado);
-                            this.pasarObjeto = inicio.RecivirObjeto;
-                            this.pasarObjeto.Invoke(usuarioLogueado);
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
                             inicio.Show();
                             this.Hide();
                         }
@@ -109,7 +107,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         {
                             MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                            
-                            //FormInicio inicio = new FormInicio(usuarioLogueado);
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
                             
                             inicio.Show();
                             this.Hide();
@@ -123,7 +121,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         {
                             MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                             
-                            //FormInicio inicio = new FormInicio(usuarioLogueado);
+                            FormInicio inicio = new FormInicio(usuarioLogueado);
                             inicio.Show();
                             this.Hide();
                         }
