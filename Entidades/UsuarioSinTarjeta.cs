@@ -8,80 +8,93 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
-    public class UsuarioSinTarjeta : Usuario, IConexionesSQL<UsuarioSinTarjeta>
+    public class UsuarioSinTarjeta : Usuario
     {
         public UsuarioSinTarjeta(string nombre, string apellido, string dni, string clave) : base(nombre, apellido, dni, clave)
         {
-            
+
         }
         public UsuarioSinTarjeta()
         {
-        
+
         }
 
         public UsuarioSinTarjeta(UsuarioArgentino usuarioArgentino) : base(usuarioArgentino.Nombre, usuarioArgentino.Apellido, usuarioArgentino.Dni, usuarioArgentino.Clave)
         {
-            
+
         }
         public UsuarioSinTarjeta(UsuarioExtranjero usuarioExtranjero) : base(usuarioExtranjero.Nombre, usuarioExtranjero.Apellido, usuarioExtranjero.Dni, usuarioExtranjero.Clave)
         {
 
         }
 
-        public static void InsertarElementosSQL(List<Usuario> usuariosSinTarjeta)
+        public static void ObtenerElementosSQL()
         {
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = "INSERT INTO tarjetanacional (Nombre, Apellido, Clave, DNI) VALUES (@Nombre, @Apellido, @Clave, @DNI)";
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                foreach (Usuario usuario in usuariosSinTarjeta)
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    if (usuario is UsuarioSinTarjeta)
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "SELECT nombre, apellido, clave, dni FROM usuariosintarjeta";
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
                     {
-                        UsuarioSinTarjeta usuarioSQL = (UsuarioSinTarjeta)usuario;
-                        cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
-                        cmd.Parameters.AddWithValue("@Nombre", usuarioSQL.Nombre);
-                        cmd.Parameters.AddWithValue("@Apellido", usuarioSQL.Apellido);
-                        cmd.Parameters.AddWithValue("@Clave", usuarioSQL.Clave);
-                        cmd.Parameters.AddWithValue("@DNI", usuarioSQL.Dni);
-                        cmd.ExecuteNonQuery();
+                        while (reader.Read())
+                        {
+                            string nombre = reader.GetString("nombre");
+                            string apellido = reader.GetString("apellido");
+                            string clave = reader.GetString("clave");
+                            string dni = reader.GetString("dni");
+
+                            UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
+                            Listados.listaUsuarios.Add(usuario);
+                        }
                     }
                 }
             }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioSinTarjeta), nameof(ObtenerElementosSQL), "Error al obtener elementos de la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
 
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
+            }
         }
 
-        public List<UsuarioSinTarjeta> ObtenerElementosSQL()
+        public static void InsertarElementoSQL(UsuarioSinTarjeta usuariosSinTarjeta)
         {
-            List<UsuarioSinTarjeta> usuariosSinTarjeta = new List<UsuarioSinTarjeta>();
-            ConexionSQL.Conectar(); // Abre la conexión
-
-            using (MySqlCommand cmd = new MySqlCommand())
+            try
             {
-                cmd.Connection = ConexionSQL.mysqlConexion;
-                cmd.CommandText = "SELECT Nombre, Apellido, Clave, DNI FROM tarjetanacional";
+                ConexionSQL.Conectar(); // Abre la conexión
 
-                using (MySqlDataReader reader = cmd.ExecuteReader())
+                using (MySqlCommand cmd = new MySqlCommand())
                 {
-                    while (reader.Read())
-                    {
-                        string nombre = reader.GetString("Nombre");
-                        string apellido = reader.GetString("Apellido");
-                        string clave = reader.GetString("Clave");
-                        string dni = reader.GetString("DNI");
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "INSERT INTO usuariosintarjeta (nombre, apellido, clave, dni) VALUES (@nombre, @apellido, @clave, @dni)";
 
-                        UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
-                        usuariosSinTarjeta.Add(usuario);
-                    }
+                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
+                    cmd.Parameters.AddWithValue("@nombre", usuariosSinTarjeta.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", usuariosSinTarjeta.Apellido);
+                    cmd.Parameters.AddWithValue("@clave", usuariosSinTarjeta.Clave);
+                    cmd.Parameters.AddWithValue("@dni", usuariosSinTarjeta.Dni);
+                    cmd.ExecuteNonQuery();
+
+
                 }
             }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioArgentino), nameof(InsertarElementoSQL), "Error al insertar elemento a la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
 
-            ConexionSQL.mysqlConexion.Close(); // Cierra la conexión
-            return usuariosSinTarjeta;
+            }
         }
 
     }

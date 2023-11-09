@@ -71,7 +71,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 txtApellido.Text = usuarioLogueado.Apellido.ToString();
                 TxtDNI.Text = usuarioLogueado.Dni.ToString();
                 txtTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
-                txtSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
+                //txtSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
             }
             else if (usuario is UsuarioExtranjero)
             {
@@ -80,7 +80,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 txtApellido.Text = usuarioLogueado.Apellido.ToString();
                 TxtDNI.Text = usuarioLogueado.Dni.ToString();
                 txtTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
-                txtSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
+                //txtSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
             }
         }
     }

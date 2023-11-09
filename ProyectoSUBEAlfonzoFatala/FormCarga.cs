@@ -19,7 +19,7 @@ namespace ProyectoSUBEAlfonzoFatala
         object usuarioLogueado;
         private bool contraseñaCheck;
         private bool montoCheck;
-
+        Action<object> pasarObjeto;
 
         public FormCarga()
         {
@@ -90,7 +90,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnAcreditarSaldo_Click(object sender, EventArgs e)
         {
-
+            /*
             if (contraseñaCheck && montoCheck)
             {
                 if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
@@ -116,8 +116,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (ventanaEmergenteSaldo.DialogResult == DialogResult.OK)
                     {
                         this.Close();
-                        //FormInicio form = new FormInicio(usuarioLogueado);
-                        //form.Show();
+                        FormInicio inicio = new FormInicio();
+                        this.pasarObjeto += inicio.RecivirObjeto;
+                        this.pasarObjeto.Invoke(usuarioLogueado);
+                        inicio.Show();
                     }
 
                 }
@@ -144,8 +146,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (ventanaEmergenteSaldo.DialogResult == DialogResult.OK)
                     {
                         this.Close();
-                        //FormInicio form = new FormInicio(usuarioLogueado);
-                        //form.Show();
+                        FormInicio inicio = new FormInicio();
+                        this.pasarObjeto += inicio.RecivirObjeto;
+                        this.pasarObjeto.Invoke(usuarioLogueado);
+                        inicio.Show();
                     }
                 }
 
@@ -153,7 +157,7 @@ namespace ProyectoSUBEAlfonzoFatala
             else
             {
                 MessageBox.Show("Contraseña incorrecta");
-            }
+            }*/
         }
 
         private void insertarDatos(object usuario)
@@ -200,8 +204,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-            //FormInicio form = new FormInicio(usuarioLogueado);
-            //form.Show();
+            FormInicio form = new FormInicio();
+            form.Show();
         }
     }
 }

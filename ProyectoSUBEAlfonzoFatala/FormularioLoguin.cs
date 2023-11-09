@@ -27,7 +27,8 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormularioLoguin()
         {
             InitializeComponent();
-            CargarJson();
+            CargarSQL();
+            //CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
             
         }
@@ -36,17 +37,24 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private void CargarJson()
         {
-            //List<TarjetaNacional> tajetaNacionalCargadas = TarjetaNacional.ObtenerDeBaseDeDatos();
-            //List<TarjetaInternacional> tarjetaInternacionalCargadas = TarjetaInternacional.ObtenerDeBaseDeDatos();
+            
             List<TarjetaNacional> tajetaNacionalCargadas = tarjetaNac.CargarDesdeArchivo("tarjetaNacional.json");
             List<TarjetaInternacional> tarjetaInternacionalCargadas = tarjetaInt.CargarDesdeArchivo("tarjetaInternacional.json");
             List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
             TarjetaNacional.listaTarjetasNacionales = tajetaNacionalCargadas;
             TarjetaInternacional.listaTarjetasIntenacionales = tarjetaInternacionalCargadas;
             Listados.listaUsuarios = usuariosCargados;
-            //TarjetaNacional.InsertarEnBaseDeDatos(tajetaNacionalCargadas);
-            //TarjetaInternacional.InsertarEnBaseDeDatos(tarjetaInternacionalCargadas);
             //PruebaTestUnitario();
+        }
+
+        private void CargarSQL()
+        {
+            TarjetaNacional.listaTarjetasNacionales = TarjetaNacional.ObtenerDeBaseDeDatos();
+            TarjetaInternacional.listaTarjetasIntenacionales = TarjetaInternacional.ObtenerDeBaseDeDatos();
+            UsuarioSinTarjeta.ObtenerElementosSQL();
+            UsuarioArgentino.ObtenerElementosSQL();
+            UsuarioExtranjero.ObtenerElementosSQL();
+            UsuarioAdministrador.ObtenerElementosSQL();
         }
 
         /// <summary>
@@ -97,6 +105,7 @@ namespace ProyectoSUBEAlfonzoFatala
                             FormInicio inicio = new FormInicio();
                             this.pasarObjeto += inicio.RecivirObjeto;
                             this.pasarObjeto.Invoke(usuarioLogueado);
+                            this.pasarObjeto -= inicio.RecivirObjeto;
                             inicio.Show();
                             this.Hide();
                         }
@@ -113,6 +122,7 @@ namespace ProyectoSUBEAlfonzoFatala
                             FormInicio inicio = new FormInicio();
                             this.pasarObjeto += inicio.RecivirObjeto;
                             this.pasarObjeto.Invoke(usuarioLogueado);
+                            this.pasarObjeto -= inicio.RecivirObjeto;
                             inicio.Show();
                             this.Hide();
                         }
@@ -128,6 +138,7 @@ namespace ProyectoSUBEAlfonzoFatala
                             FormInicio inicio = new FormInicio();
                             this.pasarObjeto += inicio.RecivirObjeto;
                             this.pasarObjeto.Invoke(usuarioLogueado);
+                            this.pasarObjeto -= inicio.RecivirObjeto;
                             inicio.Show();
                             this.Hide();
                         }
@@ -170,11 +181,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            
-            //tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
-            //tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
-            //Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             this.Close();
             Application.Exit();
         }
@@ -204,6 +210,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (formRegistro.ShowDialog() == DialogResult.OK)
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);
+                    UsuarioSinTarjeta.InsertarElementoSQL(formRegistro.nuevoUsuarioRegistrado);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
                 }
             }

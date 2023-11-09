@@ -13,11 +13,11 @@ namespace ProyectoSUBEAlfonzoFatala
         FormTitularidad formTitularidad = new FormTitularidad();
         FormularioLoguin formLogin = new FormularioLoguin();
         FormBajaUsuario formBaja = new FormBajaUsuario();
-        FormCargarSaldo formCarga = new FormCargarSaldo();
+        FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
         private Configuraciones configuraciones;
         public object usuarioLogueado;
         private string configuracionesFilePath = @"..\..\..\Archivos\configuraciones.json";
-
+        Action<object> pasarObjeto;
 
 
         /// <summary>
@@ -30,11 +30,14 @@ namespace ProyectoSUBEAlfonzoFatala
 
             InitializeComponent();
             configuraciones = new Configuraciones();
-            //usuarioLogueado = usuario;
             ConfiguracionInicial();
 
         }
 
+        /// <summary>
+        /// Metodo para utilizar en un delegado
+        /// </summary>
+        /// <param name="objeto"></param>
         public void RecivirObjeto (object objeto)
         {
             this.usuarioLogueado = objeto;
@@ -43,13 +46,15 @@ namespace ProyectoSUBEAlfonzoFatala
 
         /// <summary>
         /// evento para traer el fomulario de viajes
-        /// con un metodo para enviar el usuario logueado
+        /// con un delegado para enviar el usuario logueado
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formViajes.TraerUsuario(usuarioLogueado);
+            this.pasarObjeto += formViajes.TraerUsuario;
+            this.pasarObjeto.Invoke(usuarioLogueado);
+            this.pasarObjeto -= formViajes.TraerUsuario;
             formViajes.TopLevel = false;
             formViajes.FormBorderStyle = FormBorderStyle.None;
             formViajes.Dock = DockStyle.Fill;
@@ -82,6 +87,10 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 formBaja.Hide();
             }
+            if (e.ClickedItem != iNICIARSESIONToolStripMenuItem)
+            {
+                formCargarSaldo.Hide();
+            }
 
         }
 
@@ -99,14 +108,15 @@ namespace ProyectoSUBEAlfonzoFatala
 
         /// <summary>
         /// evento para mostrar el formulario de titularidad
-        /// con un metodo para enviar el usuario logueado
+        /// con un delegado para enviar el usuario logueado
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-            formTitularidad.TraerUsuario(usuarioLogueado);
+            this.pasarObjeto += formTitularidad.TraerUsuario;
+            this.pasarObjeto.Invoke(usuarioLogueado);
+            this.pasarObjeto -= formTitularidad.TraerUsuario;
             formTitularidad.TopLevel = false;
             formTitularidad.FormBorderStyle = FormBorderStyle.None;
             formTitularidad.Dock = DockStyle.Fill;
@@ -131,13 +141,15 @@ namespace ProyectoSUBEAlfonzoFatala
 
         /// <summary>
         /// Evento para mostrar el formulario de baja tarjeta
-        /// Con un metodo para enviar el objeto usuario
+        /// Con un delegado para enviar el objeto usuario
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            formBaja.TraerUsuario(usuarioLogueado);
+            this.pasarObjeto += formBaja.TraerUsuario;
+            this.pasarObjeto.Invoke(usuarioLogueado);
+            this.pasarObjeto -= formBaja.TraerUsuario;
             formBaja.TopLevel = false;
             formBaja.FormBorderStyle = FormBorderStyle.None;
             formBaja.Dock = DockStyle.Fill;
@@ -174,7 +186,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 //formCargarSaldo.MdiParent = this;
                 //formCargarSaldo.Show();
 
-                FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
+                
                 formCargarSaldo.TraerUsuario(usuarioLogueado);
                 formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
                 formCargarSaldo.Dock = DockStyle.Fill;

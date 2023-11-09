@@ -11,17 +11,15 @@ namespace Entidades
         private TarjetaNacional _tarjetaNacional;
 
         public string IdSubeArgentina { get => _idSubeArgentina; set => _idSubeArgentina = value; }
-        public TarjetaNacional TarjetaNacional { get => _tarjetaNacional; set => _tarjetaNacional = value; }
 
-        public UsuarioArgentino(string nombre, string apellido, string dni, string clave, string idSubeArgentina, TarjetaNacional tarjetaNacional) : base(nombre, apellido, dni, clave)
+        public UsuarioArgentino(string nombre, string apellido, string dni, string clave, string idSubeArgentina) : base(nombre, apellido, dni, clave)
         {
             IdSubeArgentina = idSubeArgentina;
-            TarjetaNacional = tarjetaNacional;
             TieneTarjeta = true;
         }
         public UsuarioArgentino()
         {
-            
+
         }
 
         /// <summary>
@@ -37,6 +35,77 @@ namespace Entidades
         public override string ToString()
         {
             return IdSubeArgentina;
+        }
+
+        public static void InsertarElementoSQL(UsuarioArgentino usuariosArgentino)
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "INSERT INTO usuarioargentino (nombre, apellido, clave, dni, idSube) VALUES (@nombre, @apellido, @clave, @dni, @idSube)";
+
+                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
+                    cmd.Parameters.AddWithValue("@nombre", usuariosArgentino.Nombre);
+                    cmd.Parameters.AddWithValue("@apellido", usuariosArgentino.Apellido);
+                    cmd.Parameters.AddWithValue("@clave", usuariosArgentino.Clave);
+                    cmd.Parameters.AddWithValue("@dni", usuariosArgentino.Dni);
+                    cmd.Parameters.AddWithValue("@idSube", usuariosArgentino.IdSubeArgentina);
+                    cmd.ExecuteNonQuery();
+
+
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioArgentino), nameof(InsertarElementoSQL), "Error al insertar elemento a la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+
+            }
+        }
+
+        public static void ObtenerElementosSQL()
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "SELECT nombre, apellido, clave, dni, idSube FROM usuarioargentino";
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            string nombre = reader.GetString("Nombre");
+                            string apellido = reader.GetString("Apellido");
+                            string clave = reader.GetString("Clave");
+                            string dni = reader.GetString("DNI");
+                            string idSube = reader.GetString("idSube");
+
+                            UsuarioArgentino usuario = new UsuarioArgentino(nombre, apellido, dni, clave, idSube);
+                            Listados.AgregarUsuario(usuario);
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioArgentino), nameof(ObtenerElementosSQL), "Error al obtener elementos de la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+
+            }
         }
 
     }

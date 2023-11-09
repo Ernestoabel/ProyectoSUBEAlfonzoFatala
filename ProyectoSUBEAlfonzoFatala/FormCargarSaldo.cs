@@ -43,6 +43,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnVerSaldo_Click(object sender, EventArgs e)
         {
+            /*
             if (usuarioLogueado is UsuarioArgentino usuarioLogueadoArgentino)
             {
                 MessageBox.Show($"Tu saldo es de {usuarioLogueadoArgentino.TarjetaNacional.Saldo}");
@@ -52,7 +53,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 MessageBox.Show($"Tu saldo es de {usuarioExtranjero.TarjetaInternacional.Saldo}");
             }
-           
+           */
         }
 
         private void btnSalir_Click(object sender, EventArgs e)

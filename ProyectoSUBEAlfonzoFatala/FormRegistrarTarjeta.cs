@@ -21,6 +21,7 @@ namespace ProyectoSUBEAlfonzoFatala
     {
 
         public Usuario usuarioLogueado;
+        Action<object> pasarObjeto;
         public FormRegistrarTarjeta(Usuario usuario)
         {
             InitializeComponent();
@@ -32,8 +33,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
             this.Close();
-            //FormInicio form = new FormInicio(usuarioLogueado);
-            //form.Show();
+            FormInicio form = new FormInicio();
+            form.Show();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -58,17 +59,21 @@ namespace ProyectoSUBEAlfonzoFatala
                     //USUARIO
                     string idEnString = tarjetaNacional.Id.ToString();
                     UsuarioArgentino usuarioArgentino = new UsuarioArgentino(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
-                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaNacional);
+                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString);
                     TarjetaNacional tarjetaNac = new TarjetaNacional();
                     Listados.AgregarUsuario(usuarioArgentino);
                     RemoverUsuarioSinTarjetaLocalizado();
 
                     //TARJETA
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
-                    tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
-                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    //FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
-                    //usuarioRegistrado.Show();
+                    tarjetaNacional.AgregarElementoSQL();
+                    UsuarioArgentino.InsertarElementoSQL(usuarioArgentino);
+                    //tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
+                    //Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    FormInicio inicio = new FormInicio();
+                    this.pasarObjeto += inicio.RecivirObjeto;
+                    this.pasarObjeto.Invoke(usuarioArgentino);
+                    inicio.Show();
 
                 }
                 else if (esExtranjero)
@@ -76,17 +81,21 @@ namespace ProyectoSUBEAlfonzoFatala
                     //USUARIO
                     string idEnString = tarjetaInternacional.Id.ToString();
                     UsuarioExtranjero usuarioExtranjero = new UsuarioExtranjero(usuarioLogueado.Nombre, usuarioLogueado.Apellido,
-                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString, tarjetaInternacional);
+                        usuarioLogueado.Dni, usuarioLogueado.Clave, idEnString);
                     TarjetaInternacional tarjetaInt = new TarjetaInternacional();
                     Listados.AgregarUsuario(usuarioExtranjero);
                     RemoverUsuarioSinTarjetaLocalizado();
 
                     //TARJETA
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
-                    tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
-                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    //FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
-                    //usuarioRegistrado.Show();
+                    tarjetaInternacional.AgregarElementoSQL();
+                    UsuarioExtranjero.InsertarElementoSQL(usuarioExtranjero);
+                    //tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
+                    //Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                    FormInicio inicio = new FormInicio();
+                    this.pasarObjeto += inicio.RecivirObjeto;
+                    this.pasarObjeto.Invoke(usuarioExtranjero);
+                    inicio.Show();
 
                 }
 
@@ -145,27 +154,19 @@ namespace ProyectoSUBEAlfonzoFatala
             btnContinuar.Enabled = HabilitarContinuarClave();
             string dni = txtDocumento.Text;
 
-            if (dni.Length == 8)
+            if (int.Parse(dni[0].ToString()) < 9)
             {
                 // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
                 rdoArgentino.Checked = true;
                 rdoExtranjero.Enabled = false;
                 rdoExtranjero.Checked = false;
             }
-            else if (dni.Length == 9)
+            else
             {
                 // El DNI tiene 9 dígitos, por lo que se considera "Extranjero"
                 rdoArgentino.Checked = false;
                 rdoArgentino.Enabled = false;
                 rdoExtranjero.Checked = true;
-            }
-            else
-            {
-                // Longitud de DNI no válida, deseleccionar ambos botones
-                rdoArgentino.Checked = false;
-                rdoExtranjero.Checked = false;
-                rdoExtranjero.Enabled = true;
-                rdoArgentino.Enabled = true;
             }
         }
 

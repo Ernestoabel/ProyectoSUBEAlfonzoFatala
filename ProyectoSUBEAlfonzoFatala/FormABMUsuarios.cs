@@ -161,9 +161,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         if (usuario is UsuarioArgentino)
                         {
                             UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
-                            TarjetaNacional tarjetaNacional = tarjetaBaja.TarjetaNacional;
+                            TarjetaNacional tarjetaNacional = new TarjetaNacional();
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-                            int id = tarjetaNacional.Id;
+                            int id = int.Parse(tarjetaBaja.IdSubeArgentina);
                             tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
                             int indexTarjeta = TarjetaNacional.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
                             
@@ -182,9 +182,9 @@ namespace ProyectoSUBEAlfonzoFatala
                         else if (usuario is UsuarioExtranjero)
                         {
                             UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
-                            TarjetaInternacional tarjetaInternacional = (TarjetaInternacional)tarjetaBaja.TarjetaInternacional;
+                            TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
                             int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-                            int id = tarjetaInternacional.Id;
+                            int id = int.Parse(tarjetaBaja.IdSubeExtranjero);
                             tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(t => t.Id == id);
                             int indexTarjeta = TarjetaInternacional.listaTarjetasIntenacionales.FindIndex(u => u == tarjetaInternacional);
                             if (index != -1)

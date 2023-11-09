@@ -41,7 +41,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (usuario is UsuarioArgentino usuarioArgentino)
                     {
 
-                        List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
+                        //List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
                         /*int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         List<Viajes> viajes = tarjetaNacional.Viajes;
@@ -55,7 +55,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     btnViajar.Enabled = true;
                     if (usuario is UsuarioExtranjero usuarioExtranjero)
                     {
-                        List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
+                        //List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
                         /*
                         int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                         tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
@@ -133,7 +133,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (indice >= 0)
                 {
 
-                    usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
+                    //usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
                     Listados.listaUsuarios.RemoveAt(indice);
                     Listados.listaUsuarios.Add(usuarioArgentino);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
@@ -154,7 +154,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
                 if (indice >= 0)
                 {
-                    usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
+                    //usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
                     Listados.listaUsuarios.RemoveAt(indice);
                     Listados.listaUsuarios.Add(usuarioExtranjero);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
