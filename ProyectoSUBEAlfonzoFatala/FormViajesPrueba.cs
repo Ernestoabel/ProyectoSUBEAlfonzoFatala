@@ -42,10 +42,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     {
 
                         //List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
-                        /*int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+                        int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         List<Viajes> viajes = tarjetaNacional.Viajes;
-                        listaViajes.AddRange(viajes);*/
+                        listaViajes.AddRange(viajes);
                     }
 
                 }
@@ -56,11 +56,11 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (usuario is UsuarioExtranjero usuarioExtranjero)
                     {
                         //List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
-                        /*
+                        
                         int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                         tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         List<Viajes> viajes = tarjetaInternacional.Viajes;
-                        listaViajes.AddRange(viajes);*/
+                        listaViajes.AddRange(viajes);
                     }
                 }
             }
@@ -123,12 +123,12 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
                 listaViajes = listaViajes + nuevoViaje;
-                /*
+                
                 tarjetaNacional.Viajes = listaViajes;
                 string condicion = $"Id = {tarjetaNacional.Id}";
 
-                tarjetaNacional.ActualizarEnBaseDeDatos(condicion);*/
-
+                tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                /*
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
                 if (indice >= 0)
                 {
@@ -138,19 +138,19 @@ namespace ProyectoSUBEAlfonzoFatala
                     Listados.listaUsuarios.Add(usuarioArgentino);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
 
-                }
+                }*/
 
             }
             else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
             {
                 Viajes nuevoViaje = Viajes.GenerarViajeAleatorio(usuarioExtranjero);
                 listaViajes = listaViajes + nuevoViaje;
-                /*
+                
                 tarjetaInternacional.Viajes = listaViajes;
                 string condicion = $"Id = {tarjetaInternacional.Id}";
                 tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
-                */
-
+                
+                /*
                 int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
                 if (indice >= 0)
                 {
@@ -158,7 +158,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     Listados.listaUsuarios.RemoveAt(indice);
                     Listados.listaUsuarios.Add(usuarioExtranjero);
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                }
+                }*/
             }
             dtgViajes.DataSource = null;
             dtgViajes.DataSource = listaViajes;

@@ -20,6 +20,8 @@ namespace Entidades
         public static List<Usuario> ObtenerElementosSQL()
         {
             List<Usuario> elementos = new List<Usuario>();
+            //libreria que no permite datos duplicados
+            HashSet<string> dniDuplicado = new HashSet<string>();
             try
             {
                 ConexionSQL.Conectar(); // Abre la conexión
@@ -38,8 +40,14 @@ namespace Entidades
                             string clave = reader.GetString("clave");
                             string dni = reader.GetString("dni");
 
-                            UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
-                            elementos.Add(usuario);
+                            //UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
+                            //elementos.Add(usuario);
+                            if (!dniDuplicado.Contains(dni))
+                            {
+                                UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
+                                elementos.Add(usuario);
+                                dniDuplicado.Add(dni); // Add the DNI to the HashSet
+                            }
                         }
                     }
                 }

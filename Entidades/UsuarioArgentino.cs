@@ -110,5 +110,29 @@ namespace Entidades
             }
         }
 
+        public static void EliminarUnElemento(string dni)
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"DELETE FROM usuarioargentino WHERE dni = {dni} ";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioArgentino), nameof(EliminarUnElemento), "Error al eliminar elemento a la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+
+            }
+        }
+
     }
 }

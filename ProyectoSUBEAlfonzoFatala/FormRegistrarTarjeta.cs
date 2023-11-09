@@ -63,7 +63,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     TarjetaNacional tarjetaNac = new TarjetaNacional();
                     Listados.AgregarUsuario(usuarioArgentino);
                     RemoverUsuarioSinTarjetaLocalizado();
-
+                    
                     //TARJETA
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
                     tarjetaNacional.AgregarElementoSQL();
@@ -98,8 +98,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     inicio.Show();
 
                 }
-
-                this.Hide();
+                UsuarioSinTarjeta.EliminarUnElemento(usuarioLogueado.Dni);
+                this.Close();
 
 
             }

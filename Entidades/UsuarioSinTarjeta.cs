@@ -31,6 +31,8 @@ namespace Entidades
         public static List<Usuario> ObtenerElementosSQL()
         {
             List<Usuario> elementos = new List<Usuario>();
+            //libreria que no permite datos duplicados
+            HashSet<string> dniDuplicado = new HashSet<string>();
             try
             {
                 ConexionSQL.Conectar(); // Abre la conexión
@@ -49,8 +51,14 @@ namespace Entidades
                             string clave = reader.GetString("clave");
                             string dni = reader.GetString("dni");
 
-                            UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
-                            elementos.Add(usuario);
+                            //UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
+                            //elementos.Add(usuario);
+                            if (!dniDuplicado.Contains(dni))
+                            {
+                                UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
+                                elementos.Add(usuario);
+                                dniDuplicado.Add(dni); // Add the DNI to the HashSet
+                            }
                         }
                     }
                 }
@@ -99,5 +107,29 @@ namespace Entidades
             }
         }
 
+        public static void EliminarUnElemento(string dni)
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"DELETE FROM usuariosintarjeta WHERE dni = {dni} ";
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioSinTarjeta), nameof(EliminarUnElemento), "Error al eliminar elemento a la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+
+            }
+
+        }
     }
 }

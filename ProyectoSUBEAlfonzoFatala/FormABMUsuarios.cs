@@ -173,8 +173,10 @@ namespace ProyectoSUBEAlfonzoFatala
                                 
 
                                 Listados.listaUsuarios.RemoveAt(index);
-                                TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
+                                //TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                                UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
+                                UsuarioArgentino.EliminarUnElemento(usuarioSinTarjeta.Dni);
                                 RefreshDataGridView();
                             }
 
@@ -192,8 +194,10 @@ namespace ProyectoSUBEAlfonzoFatala
                                 UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
 
                                 Listados.listaUsuarios.RemoveAt(index);
-                                TarjetaInternacional.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
+                                //TarjetaInternacional.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
                                 Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                                UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
+                                UsuarioExtranjero.EliminarUnElemento(usuarioSinTarjeta.Dni);
                                 RefreshDataGridView();
                             }
                             

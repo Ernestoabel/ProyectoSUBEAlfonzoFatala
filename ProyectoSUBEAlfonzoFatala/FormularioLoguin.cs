@@ -27,7 +27,10 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormularioLoguin()
         {
             InitializeComponent();
-            CargarSQL();
+            if (Listados.listaUsuarios.Count == 0)
+            {
+                CargarSQL();
+            }
             //CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
             
@@ -52,11 +55,10 @@ namespace ProyectoSUBEAlfonzoFatala
             TarjetaNacional.listaTarjetasNacionales = TarjetaNacional.ObtenerDeBaseDeDatos();
             TarjetaInternacional.listaTarjetasIntenacionales = TarjetaInternacional.ObtenerDeBaseDeDatos();
             Listados.listaUsuarios.AddRange(UsuarioSinTarjeta.ObtenerElementosSQL());
-            //UsuarioArgentino.ObtenerElementosSQL();
-            //UsuarioExtranjero.ObtenerElementosSQL();
+            UsuarioArgentino.ObtenerElementosSQL();
+            UsuarioExtranjero.ObtenerElementosSQL();
             Listados.listaUsuarios.AddRange(UsuarioAdministrador.ObtenerElementosSQL());
         }
-
         /// <summary>
         /// Metodo para la implementacion de los test unitarios
         /// </summary>
