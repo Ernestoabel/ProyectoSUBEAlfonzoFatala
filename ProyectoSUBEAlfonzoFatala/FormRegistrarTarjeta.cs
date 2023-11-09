@@ -32,8 +32,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
             this.Close();
-            FormInicio form = new FormInicio(usuarioLogueado);
-            form.Show();
+            //FormInicio form = new FormInicio(usuarioLogueado);
+            //form.Show();
         }
 
         private void btnContinuar_Click(object sender, EventArgs e)
@@ -67,8 +67,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     TarjetaNacional.listaTarjetasNacionales.Add(tarjetaNacional);
                     tarjetaNac.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
-                    usuarioRegistrado.Show();
+                    //FormInicio usuarioRegistrado = new FormInicio(usuarioArgentino);
+                    //usuarioRegistrado.Show();
 
                 }
                 else if (esExtranjero)
@@ -85,8 +85,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     TarjetaInternacional.listaTarjetasIntenacionales.Add(tarjetaInternacional);
                     tarjetaInt.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
                     Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
-                    usuarioRegistrado.Show();
+                    //FormInicio usuarioRegistrado = new FormInicio(usuarioExtranjero);
+                    //usuarioRegistrado.Show();
 
                 }
 

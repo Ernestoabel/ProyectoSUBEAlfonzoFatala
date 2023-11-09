@@ -116,8 +116,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (ventanaEmergenteSaldo.DialogResult == DialogResult.OK)
                     {
                         this.Close();
-                        FormInicio form = new FormInicio(usuarioLogueado);
-                        form.Show();
+                        //FormInicio form = new FormInicio(usuarioLogueado);
+                        //form.Show();
                     }
 
                 }
@@ -144,8 +144,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     if (ventanaEmergenteSaldo.DialogResult == DialogResult.OK)
                     {
                         this.Close();
-                        FormInicio form = new FormInicio(usuarioLogueado);
-                        form.Show();
+                        //FormInicio form = new FormInicio(usuarioLogueado);
+                        //form.Show();
                     }
                 }
 
@@ -200,8 +200,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelar_Click(object sender, EventArgs e)
         {
             this.Close();
-            FormInicio form = new FormInicio(usuarioLogueado);
-            form.Show();
+            //FormInicio form = new FormInicio(usuarioLogueado);
+            //form.Show();
         }
     }
 }

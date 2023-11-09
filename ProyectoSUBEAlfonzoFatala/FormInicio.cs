@@ -25,12 +25,12 @@ namespace ProyectoSUBEAlfonzoFatala
         /// trae el usuario del loguin
         /// </summary>
         /// <param name="usuario"></param>
-        public FormInicio(object usuario)
+        public FormInicio()
         {
 
             InitializeComponent();
             configuraciones = new Configuraciones();
-            usuarioLogueado = usuario;
+            //usuarioLogueado = usuario;
             ConfiguracionInicial();
 
         }
