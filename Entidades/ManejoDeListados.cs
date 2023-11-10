@@ -13,13 +13,17 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     /// <summary>
-    /// Metodo para buscar un usuario por dni
-    /// Castearlo segun su clase heredada de Usuario
-    /// y retornalo para manejarlo en el formInicio
-    /// </summary>
+    /// Clase para el manejo de la lista de usuarios
+    /// </summary>    
     public class ManejoDeListados
     {
         public static List<string> listaBajas = new List<string>();
+
+        /// <summary>
+        /// Metodo para buscar un usuario por dni
+        /// Castearlo segun su clase heredada de Usuario
+        /// y retornalo para manejarlo en el formInicio
+        /// </summary>
         public static object ObtenerUsuarioPorDniYTarjeta(string dni)
         {
             try

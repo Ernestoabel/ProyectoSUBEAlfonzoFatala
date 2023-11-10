@@ -8,7 +8,11 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
-    public class UsuarioExtranjero : Usuario
+    /// <summary>
+    /// Clase que hereda de Usuario para crear el usuario extranjero
+    /// Con una interfaz para aplicar en la base de datos
+    /// </summary>
+    public class UsuarioExtranjero : Usuario, IConexcionesSQLUsuarios<UsuarioExtranjero>
     {
         private string _idSubeExtranjero;
         private TarjetaInternacional _tarjetaInternacional;
@@ -27,7 +31,7 @@ namespace Entidades
 
 
         /// <summary>
-        /// Metodo heredado para validadr que el DNI sea de personas con residencia
+        /// Sobrescritura del metodo heredado
         /// </summary>
         /// <param name="dni"></param>
         /// <returns></returns>
@@ -36,11 +40,14 @@ namespace Entidades
             return base.ValidarDni(dni) && int.Parse(dni[0].ToString()) > 9;
         }
 
+        /// <summary>
+        /// Sobrescritura del metodo heredado
+        /// </summary>
         public static void ObtenerElementosSQL()
         {
             try
             {
-                ConexionSQL.Conectar(); // Abre la conexión
+                ConexionSQL.Conectar();
 
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
@@ -74,11 +81,15 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Metodo pare insertar una fila en la base de datos
+        /// </summary>
+        /// <param name="usuariosExtranjero"></param>
         public static void InsertarElementoSQL(UsuarioExtranjero usuariosExtranjero)
         {
             try
             {
-                ConexionSQL.Conectar(); // Abre la conexión
+                ConexionSQL.Conectar();
 
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
@@ -108,11 +119,15 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Metodo para eliminar una fila en la base de datos
+        /// </summary>
+        /// <param name="dni"></param>
         public static void EliminarUnElemento(string dni)
         {
             try
             {
-                ConexionSQL.Conectar(); // Abre la conexión
+                ConexionSQL.Conectar();
 
                 using (MySqlCommand cmd = new MySqlCommand())
                 {

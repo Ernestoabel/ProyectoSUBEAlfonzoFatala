@@ -9,6 +9,9 @@ using Newtonsoft.Json;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase para la conexion de la base de datos mySQL
+    /// </summary>
     public class ConexionSQL
     {
         

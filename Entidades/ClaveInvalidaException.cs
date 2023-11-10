@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace Entidades
 {
     /// <summary>
-    /// Clase para personalizar una excepcion
+    /// Clase para personalizar la excepcion de una clave invalidad
     /// </summary>
     public class ClaveInvalidaException : Exception
     {

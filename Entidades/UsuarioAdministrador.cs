@@ -7,6 +7,9 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase que hereda para crear el Administrador
+    /// </summary>
     public class UsuarioAdministrador : Usuario
     {
         private bool _esAdministrador;
@@ -17,6 +20,10 @@ namespace Entidades
 
         public bool EsAdministrador { get => _esAdministrador; set => _esAdministrador = value; }
 
+        /// <summary>
+        /// Metodo para obtener al administrador de mySQL
+        /// </summary>
+        /// <returns></returns>
         public static List<Usuario> ObtenerElementosSQL()
         {
             List<Usuario> elementos = new List<Usuario>();

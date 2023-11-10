@@ -10,6 +10,9 @@ using Newtonsoft.Json;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase para el manjejo de la lista de usuarios
+    /// </summary>
     public class Listados
     {
         public static List<Usuario> listaUsuarios = new List<Usuario>();

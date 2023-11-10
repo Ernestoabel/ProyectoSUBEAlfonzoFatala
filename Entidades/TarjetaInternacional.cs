@@ -9,6 +9,9 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase de Tarjeta Internacional
+    /// </summary>
     public class TarjetaInternacional : Tarjeta, IOperacionesSistema<TarjetaInternacional>
     {
         

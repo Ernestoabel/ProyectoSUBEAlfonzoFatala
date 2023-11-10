@@ -8,6 +8,7 @@ using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -26,6 +27,11 @@ namespace ProyectoSUBEAlfonzoFatala
             this.listaViajes = new List<Viajes>();
         }
 
+        /// <summary>
+        /// Metodo para recivir el usuario
+        /// Se ejecuta por delegado en el FormInicio
+        /// </summary>
+        /// <param name="usuario"></param>
         public void TraerUsuario(object usuario)
         {
             try
@@ -38,10 +44,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     usuarioLogueado = usuario;
                     btnViajar.Enabled = true;
+                    btnViajarx5.Enabled = true;
                     if (usuario is UsuarioArgentino usuarioArgentino)
                     {
-
-                        //List<Viajes> viajes = usuarioArgentino.TarjetaNacional.Viajes;
                         int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         List<Viajes> viajes = tarjetaNacional.Viajes;
@@ -53,10 +58,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     usuarioLogueado = usuario;
                     btnViajar.Enabled = true;
+                    btnViajarx5.Enabled = true;
                     if (usuario is UsuarioExtranjero usuarioExtranjero)
                     {
-                        //List<Viajes> viajes = usuarioExtranjero.TarjetaInternacional.Viajes;
-                        
                         int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                         tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         List<Viajes> viajes = tarjetaInternacional.Viajes;
@@ -68,14 +72,17 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnViajar.Enabled = false;
+                btnViajarx5.Enabled = false;
             }
-            catch (Exception )
+            catch (Exception)
             {
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 
-
+        /// <summary>
+        /// Metodo obligatorio por interfase para darle estilo al dataGrid
+        /// </summary>
         public void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
@@ -104,6 +111,12 @@ namespace ProyectoSUBEAlfonzoFatala
             // Las celdas no se puede modificar
             this.dtgViajes.ReadOnly = true;
 
+            //Les da Nombre a las columnas
+            this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
+            this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
+            this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
+
+            //Opcion para cuando se maximiza la ventana y tome toda la ventana
             this.dtgViajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
         }
 
@@ -112,56 +125,101 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
-            this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
-            this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
-            this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
+            
         }
 
-        private void btnViajar_Click(object sender, EventArgs e)
+        /// <summary>
+        /// Comportamiento asincronico del boton Viajar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void btnViajar_Click(object sender, EventArgs e)
         {
-            if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
+            await Task.Run(() => Viajar()).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Comportamiento asincronico del boton Viajar x5
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void btnViajarx5_Click(object sender, EventArgs e)
+        {
+            await Task.Run(() => ViajarCincoVeces()).ConfigureAwait(false);
+        }
+
+        /// <summary>
+        /// Metodo Task para generar el viaje en el boton viajar
+        /// </summary>
+        private void Viajar()
+        {
+            this.Invoke(new Action(() =>
             {
-                Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
-                listaViajes = listaViajes + nuevoViaje;
-                
-                tarjetaNacional.Viajes = listaViajes;
-                string condicion = $"Id = {tarjetaNacional.Id}";
-
-                tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
-                /*
-                int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
-                if (indice >= 0)
+                if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
+                    Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
+                    listaViajes = listaViajes + nuevoViaje;
+                    tarjetaNacional.Viajes = listaViajes;
+                    string condicion = $"Id = {tarjetaNacional.Id}";
+                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                }
+                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
+                {
+                    Viajes nuevoViaje = Viajes.GenerarViajeAleatorio(usuarioExtranjero);
+                    listaViajes = listaViajes + nuevoViaje;
+                    tarjetaInternacional.Viajes = listaViajes;
+                    string condicion = $"Id = {tarjetaInternacional.Id}";
+                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                }
 
-                    //usuarioArgentino.TarjetaNacional.Viajes = listaViajes;
-                    Listados.listaUsuarios.RemoveAt(indice);
-                    Listados.listaUsuarios.Add(usuarioArgentino);
-                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+                listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
+                dtgViajes.DataSource = null;
+                dtgViajes.DataSource = listaViajes;
 
-                }*/
+            }));
+        }
 
-            }
-            else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
+        /// <summary>
+        /// Metodo Task para el boton viajar x5
+        /// Se utiliza el delegado Func que retorna un objeto Viajes
+        /// </summary>
+        private void ViajarCincoVeces()
+        {
+            this.Invoke(new Action(() =>
             {
-                Viajes nuevoViaje = Viajes.GenerarViajeAleatorio(usuarioExtranjero);
-                listaViajes = listaViajes + nuevoViaje;
-                
-                tarjetaInternacional.Viajes = listaViajes;
-                string condicion = $"Id = {tarjetaInternacional.Id}";
-                tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
-                
-                /*
-                int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
-                if (indice >= 0)
+                Thread.Sleep(5000);
+                if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
-                    //usuarioExtranjero.TarjetaInternacional.Viajes = listaViajes;
-                    Listados.listaUsuarios.RemoveAt(indice);
-                    Listados.listaUsuarios.Add(usuarioExtranjero);
-                    Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                }*/
-            }
-            dtgViajes.DataSource = null;
-            dtgViajes.DataSource = listaViajes;
+                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(); ;
+                    for (var i = 0; i < 5; i++)
+                    {
+                        var nuevoViaje = acumuluarFunciones.Invoke();
+                        listaViajes = listaViajes + nuevoViaje;
+                    }
+                    tarjetaNacional.Viajes = listaViajes;
+                    string condicion = $"Id = {tarjetaNacional.Id}";
+
+                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                }
+                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
+                {
+                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(usuarioExtranjero);
+                    for (var i = 0; i < 5; i++)
+                    {
+                        var nuevoViaje = acumuluarFunciones.Invoke();
+                        listaViajes = listaViajes + nuevoViaje;
+                    }
+                    tarjetaInternacional.Viajes = listaViajes;
+                    string condicion = $"Id = {tarjetaInternacional.Id}";
+
+                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                }
+
+                listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
+                dtgViajes.DataSource = null;
+                dtgViajes.DataSource = listaViajes;
+
+            }));
         }
     }
 }

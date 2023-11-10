@@ -87,28 +87,6 @@ namespace Entidades
             }
         }
 
-        /*
-        public static void GuardarMensajesBajaEnArchivo(List<Dictionary<int, string>> listaBajas)
-        {
-            string rutaArchivo = @"..\..\..\Archivos\mensajes.xml";
-            try
-            {
-
-                List<BajaData> bajaDataList = listaBajas.Select(dic =>
-                    new BajaData { Indice = dic.Keys.First(), Mensaje = dic.Values.First() }).ToList();
-
-                XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
-                using (StreamWriter writer = new StreamWriter(rutaArchivo))
-                {
-                    serializer.Serialize(writer, bajaDataList);
-                }
-            }
-            catch (Exception ex)
-            {
-                CatchError.LogError(nameof(ArchivoMensaje), nameof(GuardarMensajesBajaEnArchivo), "Error al guardar el mensaje", ex);
-            }
-        }*/
-
         /// <summary>
         /// Deserealizacion de la lista mensajes
         /// </summary>
@@ -145,45 +123,6 @@ namespace Entidades
                 return null;
             }
         }
-        /*
-        public static List<Dictionary<int, string>> DeserializarMensajesBajaDesdeArchivo()
-        {
-            try
-            {
-                XmlSerializer serializer = new XmlSerializer(typeof(List<BajaData>));
-
-                string rutaCarpetaArchivos = @"..\..\..\Archivos";
-                string rutaArchivo = Path.Combine(rutaCarpetaArchivos, "mensajes.xml");
-
-                if (!File.Exists(rutaArchivo))
-                {
-                    Console.WriteLine("El archivo de mensajes no existe.");
-                    return new List<Dictionary<int, string>>();
-                }
-
-                using (StreamReader reader = new StreamReader(rutaArchivo))
-                {
-                    List<BajaData> bajaDataList = (List<BajaData>)serializer.Deserialize(reader);
-
-                    List<Dictionary<int, string>> listaBajas = new List<Dictionary<int, string>>();
-                    foreach (var bajaData in bajaDataList)
-                    {
-                        Dictionary<int, string> diccionario = new Dictionary<int, string>
-                {
-                    { bajaData.Indice, bajaData.Mensaje }
-                };
-                        listaBajas.Add(diccionario);
-                    }
-
-                    return listaBajas;
-                }
-            }
-            catch (Exception ex)
-            {
-                CatchError.LogError(nameof(ArchivoMensaje), nameof(DeserializarMensajesBajaDesdeArchivo), "Error al cargar el archivo", ex);
-                return null; 
-            }
-        }*/
 
         /// <summary>
         /// Metodo para validar que un entero sea parte del mensaje

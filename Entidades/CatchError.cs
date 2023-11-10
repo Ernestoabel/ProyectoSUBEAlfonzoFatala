@@ -6,7 +6,10 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
-    internal class CatchError
+    /// <summary>
+    /// Clase para el log de errores
+    /// </summary>
+    public class CatchError
     {
         private static string logFilePath = @"..\..\..\Archivos\error_log.txt"; // Ruta del archivo de registro
 

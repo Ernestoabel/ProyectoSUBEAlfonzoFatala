@@ -3,10 +3,12 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
-    public class UsuarioArgentino : Usuario
+    /// <summary>
+    /// Clase que hereda de Usuario para generar el usuario Argentino
+    /// Utiliza una interfaz para la utilizacion de metodos para manejo de mySQL
+    /// </summary>
+    public class UsuarioArgentino : Usuario, IConexcionesSQLUsuarios<UsuarioArgentino>
     {
-        //private static int _ultimoID = 1002;
-
         private string _idSubeArgentina;
         private TarjetaNacional _tarjetaNacional;
 
@@ -23,7 +25,7 @@ namespace Entidades
         }
 
         /// <summary>
-        /// Metodo heredado para el DNI sea argentino
+        /// Sobreescritura del metodo heredado
         /// </summary>
         /// <param name="dni"></param>
         /// <returns></returns>
@@ -32,11 +34,19 @@ namespace Entidades
             return base.ValidarDni(dni) && int.Parse(dni[0].ToString()) < 9;
         }
 
+        /// <summary>
+        /// Sobreescritura del metodo heredado
+        /// </summary>
+        /// <returns></returns>
         public override string ToString()
         {
             return IdSubeArgentina;
         }
 
+        /// <summary>
+        /// Metodo para insertar una fila en la base de datos
+        /// </summary>
+        /// <param name="usuariosArgentino"></param>
         public static void InsertarElementoSQL(UsuarioArgentino usuariosArgentino)
         {
             try
@@ -71,6 +81,9 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Metodo para obtener los datos de la base de datos
+        /// </summary>
         public static void ObtenerElementosSQL()
         {
             try
@@ -110,6 +123,10 @@ namespace Entidades
             }
         }
 
+        /// <summary>
+        /// Metodo para eliminar una fila de la base de datos
+        /// </summary>
+        /// <param name="dni"></param>
         public static void EliminarUnElemento(string dni)
         {
             try

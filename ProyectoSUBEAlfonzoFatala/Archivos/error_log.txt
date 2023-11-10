@@ -705,3 +705,400 @@ System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioAdm
 System.InvalidCastException: Unable to cast object of type 'Entidades.UsuarioAdministrador' to type 'Entidades.UsuarioSinTarjeta'.
    at Entidades.ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(String dni) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ManejoDeListados.cs:line 33
 
+10/11/2023 18:05:06 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:05:06 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:05:07 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:05:07 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:05:07 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:05:07 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:15:33 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:15:33 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:15:34 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:15:41 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:15:41 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:15:41 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:15:41 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:15:41 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:15:41 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:18:09 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:18:09 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:18:09 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:18:09 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:18:09 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:21:03 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:03 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:21:03 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:21:03 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 32
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 143
+
+10/11/2023 18:21:03 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:03 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:21:03 - Error en TarjetaNacional.ActualizarEnBaseDeDatos: Error al actualizar tabla mySQL de tarjeta nacional
+System.IO.IOException: The process cannot access the file 'C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\Archivos\error_log.txt' because it is being used by another process.
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.CreateFile(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options)
+   at Microsoft.Win32.SafeHandles.SafeFileHandle.Open(String fullPath, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.OSFileStreamStrategy..ctor(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategyCore(String path, FileMode mode, FileAccess access, FileShare share, FileOptions options, Int64 preallocationSize)
+   at System.IO.Strategies.FileStreamHelpers.ChooseStrategy(FileStream fileStream, String path, FileMode mode, FileAccess access, FileShare share, Int32 bufferSize, FileOptions options, Int64 preallocationSize)
+   at System.IO.StreamWriter.ValidateArgsAndOpenPath(String path, Boolean append, Encoding encoding, Int32 bufferSize)
+   at System.IO.File.AppendAllText(String path, String contents)
+   at Entidades.CatchError.LogError(String className, String methodName, String description, Exception exception) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\CatchError.cs:line 22
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 188
+   at Entidades.TarjetaNacional.ActualizarEnBaseDeDatos(String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\TarjetaNacional.cs:line 137
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+System.InvalidOperationException: The connection is already open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 28
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+
+10/11/2023 18:21:11 - Error en AccesoMySql.ActualizarElementoSQL: Error al actualizar elemento en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): There is already an open DataReader associated with this Connection which must be closed first.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.AccesoMySql`1.ActualizarElementoSQL(T elemento, String nombreTabla, String condicion) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 182
+

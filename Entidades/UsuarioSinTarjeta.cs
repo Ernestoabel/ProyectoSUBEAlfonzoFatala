@@ -8,7 +8,11 @@ using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
-    public class UsuarioSinTarjeta : Usuario
+    /// <summary>
+    /// Clase que hereda de usuario y genera un usuario sin tarjeta
+    /// Implementa una interfaz con metodos para el manejo de la base de datos
+    /// </summary>
+    public class UsuarioSinTarjeta : Usuario, IConexcionesSQLUsuarios<UsuarioSinTarjeta>
     {
         public UsuarioSinTarjeta(string nombre, string apellido, string dni, string clave) : base(nombre, apellido, dni, clave)
         {
@@ -27,7 +31,10 @@ namespace Entidades
         {
 
         }
-
+        /// <summary>
+        /// Metodo para obtener datos de una base de datos
+        /// </summary>
+        /// <returns></returns>
         public static List<Usuario> ObtenerElementosSQL()
         {
             List<Usuario> elementos = new List<Usuario>();
@@ -74,7 +81,10 @@ namespace Entidades
             }
             return elementos;
         }
-
+        /// <summary>
+        /// Metodo para enviar una fila a la base de datos
+        /// </summary>
+        /// <param name="usuariosSinTarjeta"></param>
         public static void InsertarElementoSQL(UsuarioSinTarjeta usuariosSinTarjeta)
         {
             try
@@ -107,7 +117,10 @@ namespace Entidades
 
             }
         }
-
+        /// <summary>
+        /// Metodo para eliminar una fila en la base de datos
+        /// </summary>
+        /// <param name="dni"></param>
         public static void EliminarUnElemento(string dni)
         {
             try

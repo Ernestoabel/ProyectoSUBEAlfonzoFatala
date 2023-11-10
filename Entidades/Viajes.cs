@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Clase de Viajes para que se incorpore la clase de Tarjeta en forma de lista
+    /// </summary>
     public class Viajes
     {
         private List<Viajes> listaDeViajes = new List<Viajes>();
@@ -116,17 +119,6 @@ namespace Entidades
             return lista;
         }
 
-
-        /// <summary>
-        ///     Método para obtener la lista de viajes
-        /// </summary>
-        /// <returns>lista de viajes</returns>
-        public List<Viajes> ObtenerListaDeViajes()
-        {
-            return listaDeViajes;
-        }
-
-      
 
     }
 }

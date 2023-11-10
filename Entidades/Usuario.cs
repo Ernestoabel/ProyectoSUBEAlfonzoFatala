@@ -8,7 +8,7 @@ using Newtonsoft.Json;
 namespace Entidades
 {
     /// <summary>
-    /// Clase padre para ser heredada
+    /// Clase padre de Usuario para ser heredada
     /// </summary>
     public class Usuario
     {

@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace Entidades
 {
+    /// <summary>
+    /// Enumerado para usar en el objeto Viajes
+    /// </summary>
     public enum EMedioTransporte
     {
         Autobus,
