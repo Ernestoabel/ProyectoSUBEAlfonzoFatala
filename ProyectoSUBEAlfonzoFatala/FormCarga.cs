@@ -21,6 +21,11 @@ namespace ProyectoSUBEAlfonzoFatala
         private bool montoCheck;
         Action<object> pasarObjeto;
 
+        private decimal saldoEnTarjeta;
+        TarjetaNacional tarjetaNacional = new TarjetaNacional();
+        TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
+
+
         public FormCarga()
         {
             InitializeComponent();
@@ -90,25 +95,22 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnAcreditarSaldo_Click(object sender, EventArgs e)
         {
-            /*
+
             if (contraseñaCheck && montoCheck)
             {
                 if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
-                    decimal saldoDecimal = decimal.Parse(txtMonto.Text);
-                    usuarioArgentino.TarjetaNacional.CargarSaldo(saldoDecimal);
 
-                    string saldoActual = usuarioArgentino.TarjetaNacional.Saldo.ToString();
+                    //TarjetaNacional tarjetaNacional = new TarjetaNacional();
+                    decimal saldoDecimal = decimal.Parse(txtMonto.Text);
+                    tarjetaNacional.CargarSaldo(saldoDecimal);
+
+                    string saldoActual = tarjetaNacional.Saldo.ToString();
                     string saldoAcreditado = txtMonto.Text;
 
-                    int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioArgentino.Dni);
-                    if (indice >= 0)
-                    {
-                        usuarioArgentino.TarjetaNacional.GuardarEnArchivo(TarjetaNacional.listaTarjetasNacionales, "tarjetaNacional.json");
-                        Listados.listaUsuarios.RemoveAt(indice);
-                        Listados.listaUsuarios.Add(usuarioArgentino);
-                        Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    }
+                    string condicion = $"Id = {tarjetaNacional.Id}";
+
+                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
@@ -119,26 +121,22 @@ namespace ProyectoSUBEAlfonzoFatala
                         FormInicio inicio = new FormInicio();
                         this.pasarObjeto += inicio.RecivirObjeto;
                         this.pasarObjeto.Invoke(usuarioLogueado);
-                        inicio.Show();
+                        //inicio.Show();
                     }
 
                 }
                 else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
+                    TarjetaNacional tarjetaNacional = new TarjetaNacional();
                     decimal saldoDecimal = decimal.Parse(txtMonto.Text);
-                    usuarioExtranjero.TarjetaInternacional.CargarSaldo(saldoDecimal);
+                    tarjetaNacional.CargarSaldo(saldoDecimal);
 
-                    string saldoActual = usuarioExtranjero.TarjetaInternacional.Saldo.ToString();
+                    string saldoActual = tarjetaNacional.Saldo.ToString();
                     string saldoAcreditado = txtMonto.Text;
 
-                    int indice = Listados.listaUsuarios.FindIndex(u => u.Dni == usuarioExtranjero.Dni);
-                    if (indice >= 0)
-                    {
-                        usuarioExtranjero.TarjetaInternacional.GuardarEnArchivo(TarjetaInternacional.listaTarjetasIntenacionales, "tarjetaInternacional.json");
-                        Listados.listaUsuarios.RemoveAt(indice);
-                        Listados.listaUsuarios.Add(usuarioExtranjero);
-                        Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-                    }
+                    string condicion = $"Id = {tarjetaNacional.Id}";
+
+                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
@@ -149,55 +147,55 @@ namespace ProyectoSUBEAlfonzoFatala
                         FormInicio inicio = new FormInicio();
                         this.pasarObjeto += inicio.RecivirObjeto;
                         this.pasarObjeto.Invoke(usuarioLogueado);
-                        inicio.Show();
+                       // inicio.Show();
                     }
                 }
 
             }
-            else
-            {
-                MessageBox.Show("Contraseña incorrecta");
-            }*/
         }
-
-        private void insertarDatos(object usuario)
-        {
-            string clave;
-
-            if (usuario is UsuarioArgentino)
-            {
-                UsuarioArgentino usuarioLogueado = (UsuarioArgentino)usuario;
-                //MessageBox.Show($"El usuario es {usuarioLogueado.Nombre}");
-            }
-            else if (usuario is UsuarioExtranjero)
-            {
-                UsuarioExtranjero usuarioLogueado = (UsuarioExtranjero)usuario;
-                //MessageBox.Show($"El usuario es {usuarioLogueado.Nombre}");
-            }
-        }
-        private void FormCarga_Load(object sender, EventArgs e)
+       
+        public void TraerUsuario(object usuario)
         {
             try
             {
-                insertarDatos(usuarioLogueado);
+                if (usuario is UsuarioSinTarjeta)
+                {
+                    throw new UsuarioSinTarjetaException();
+                }
+                else if (usuario is UsuarioArgentino)
+                {
+                    usuarioLogueado = usuario;
+                    btnAcreditarSaldo.Enabled = true;
+                    if (usuario is UsuarioArgentino usuarioArgentino)
+                    {
+
+                        int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        saldoEnTarjeta = tarjetaNacional.Saldo;
+
+                    }
+
+                }
+                else if (usuario is UsuarioExtranjero)
+                {
+                    usuarioLogueado = usuario;
+                    btnAcreditarSaldo.Enabled = true;
+                    if (usuario is UsuarioExtranjero usuarioExtranjero)
+                    {
+                        int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
+                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        saldoEnTarjeta = tarjetaInternacional.Saldo;
+                    }
+                }
+            }
+            catch (UsuarioSinTarjetaException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnAcreditarSaldo.Enabled = false;
             }
             catch (Exception)
             {
-                MessageBox.Show("Hubo un error ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-        }
-        public void TraerUsuario(object usuario)
-        {
-
-            if (usuario is UsuarioArgentino)
-            {
-                usuarioLogueado = usuario;
-
-            }
-            else if (usuario is UsuarioExtranjero)
-            {
-                usuarioLogueado = usuario;
-
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
 

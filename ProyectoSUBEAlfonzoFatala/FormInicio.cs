@@ -186,7 +186,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 //formCargarSaldo.MdiParent = this;
                 //formCargarSaldo.Show();
 
-                
+                this.pasarObjeto += formCargarSaldo.TraerUsuario;
+                this.pasarObjeto.Invoke(usuarioLogueado);
+                this.pasarObjeto -= formCargarSaldo.TraerUsuario;
                 formCargarSaldo.TraerUsuario(usuarioLogueado);
                 formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
                 formCargarSaldo.Dock = DockStyle.Fill;

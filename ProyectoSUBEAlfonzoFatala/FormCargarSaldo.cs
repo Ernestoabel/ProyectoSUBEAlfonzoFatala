@@ -14,15 +14,24 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormCargarSaldo : Form
     {
         object usuarioLogueado;
+        private decimal saldoEnTarjeta;
         FormCarga formCarga = new FormCarga();
+        Action<object> pasarObjeto;
+        TarjetaNacional tarjetaNacional = new TarjetaNacional();
+        TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
 
         public FormCargarSaldo()
         {
             InitializeComponent();
             TopLevel = false;
             CenterToParent();
+
         }
 
+        public void RecibirObjeto(object objeto)
+        {
+            this.usuarioLogueado = objeto;
+        }
 
         private void btnCargar_Click(object sender, EventArgs e)
         {
@@ -32,7 +41,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 formCarga.TraerUsuario(usuarioLogueado);
                 formCarga.Dock = DockStyle.Fill;
                 formCarga.Show();
-                
+
             }
             else
             {
@@ -43,17 +52,25 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnVerSaldo_Click(object sender, EventArgs e)
         {
-            /*
-            if (usuarioLogueado is UsuarioArgentino usuarioLogueadoArgentino)
+            try
             {
-                MessageBox.Show($"Tu saldo es de {usuarioLogueadoArgentino.TarjetaNacional.Saldo}");
+                if (usuarioLogueado is UsuarioArgentino)
+                {
+                    this.TraerUsuario(usuarioLogueado);
+                    MessageBox.Show($"Su saldo es de {tarjetaNacional.Saldo}");
 
+                }
+                else if (usuarioLogueado is UsuarioExtranjero)
+                {
+                    this.TraerUsuario(usuarioLogueado);
+                    MessageBox.Show($"Su saldo es de {tarjetaInternacional.Saldo}");
+                }
             }
-            else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
+            catch (Exception ex)
             {
-                MessageBox.Show($"Tu saldo es de {usuarioExtranjero.TarjetaInternacional.Saldo}");
+                MessageBox.Show(ex.Message, "Error al mostrar el saldo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
-           */
+
         }
 
         private void btnSalir_Click(object sender, EventArgs e)
@@ -62,34 +79,52 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        private void FormCargarSaldo_Load(object sender, EventArgs e)
+
+        public void TraerUsuario(object usuario)
         {
             try
             {
-                insertarDatos(usuarioLogueado);
+                if (usuario is UsuarioSinTarjeta)
+                {
+                    throw new UsuarioSinTarjetaException();
+                }
+                else if (usuario is UsuarioArgentino)
+                {
+                    usuarioLogueado = usuario;
+                    btnCargar.Enabled = true;
+                    btnVerSaldo.Enabled = true;
+                    if (usuario is UsuarioArgentino usuarioArgentino)
+                    {
+
+                        int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        saldoEnTarjeta = tarjetaNacional.Saldo;
+
+                    }
+
+                }
+                else if (usuario is UsuarioExtranjero)
+                {
+                    usuarioLogueado = usuario;
+                    btnCargar.Enabled = true;
+                    btnVerSaldo.Enabled = true;
+                    if (usuario is UsuarioExtranjero usuarioExtranjero)
+                    {
+                        int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
+                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
+                        saldoEnTarjeta = tarjetaInternacional.Saldo;
+                    }
+                }
+            }
+            catch (UsuarioSinTarjetaException ex)
+            {
+                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                btnCargar.Enabled = false;
+                btnVerSaldo.Enabled = false;
             }
             catch (Exception)
             {
-                MessageBox.Show("Hubo un error ", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            }
-
-        }
-        public void TraerUsuario(object usuario)
-        {
-            if (usuario is UsuarioSinTarjeta)
-            {
-                usuarioLogueado = usuario;
-
-            }
-            else if (usuario is UsuarioArgentino)
-            {
-                usuarioLogueado = usuario;
-
-            }
-            else if (usuario is UsuarioExtranjero)
-            {
-                usuarioLogueado = usuario;
-
+                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void insertarDatos(object usuario)
@@ -114,5 +149,9 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        private void FormCargarSaldo_Load(object sender, EventArgs e)
+        {
+            this.insertarDatos(usuarioLogueado);
+        }
     }
 }

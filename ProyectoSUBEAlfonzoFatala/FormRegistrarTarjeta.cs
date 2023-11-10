@@ -154,7 +154,7 @@ namespace ProyectoSUBEAlfonzoFatala
             btnContinuar.Enabled = HabilitarContinuarClave();
             string dni = txtDocumento.Text;
 
-            if (int.Parse(dni[0].ToString()) < 9)
+           if (int.Parse(dni[0].ToString()) < 9)
             {
                 // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
                 rdoArgentino.Checked = true;

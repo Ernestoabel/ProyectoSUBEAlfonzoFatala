@@ -128,7 +128,6 @@
             Controls.Add(txtMonto);
             Name = "FormCarga";
             Text = "FormCarga";
-            Load += FormCarga_Load;
             ResumeLayout(false);
             PerformLayout();
         }

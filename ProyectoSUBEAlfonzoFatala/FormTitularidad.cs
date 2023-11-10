@@ -72,6 +72,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 TxtDNI.Text = usuarioLogueado.Dni.ToString();
                 txtTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
                 //txtSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
+                //txtSaldo.Text = 
             }
             else if (usuario is UsuarioExtranjero)
             {
