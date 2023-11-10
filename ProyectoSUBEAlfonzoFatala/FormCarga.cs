@@ -127,16 +127,16 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
                 else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
-                    TarjetaNacional tarjetaNacional = new TarjetaNacional();
+                    //TarjetaInternacional tarjetaInternacional = new TarjetaNacional();
                     decimal saldoDecimal = decimal.Parse(txtMonto.Text);
-                    tarjetaNacional.CargarSaldo(saldoDecimal);
+                    tarjetaInternacional.CargarSaldo(saldoDecimal);
 
-                    string saldoActual = tarjetaNacional.Saldo.ToString();
+                    string saldoActual = tarjetaInternacional.Saldo.ToString();
                     string saldoAcreditado = txtMonto.Text;
 
-                    string condicion = $"Id = {tarjetaNacional.Id}";
+                    string condicion = $"Id = {tarjetaInternacional.Id}";
 
-                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
@@ -147,13 +147,13 @@ namespace ProyectoSUBEAlfonzoFatala
                         FormInicio inicio = new FormInicio();
                         this.pasarObjeto += inicio.RecivirObjeto;
                         this.pasarObjeto.Invoke(usuarioLogueado);
-                       // inicio.Show();
+                        // inicio.Show();
                     }
                 }
 
             }
         }
-       
+
         public void TraerUsuario(object usuario)
         {
             try
@@ -199,11 +199,5 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            this.Close();
-            FormInicio form = new FormInicio();
-            form.Show();
-        }
     }
 }

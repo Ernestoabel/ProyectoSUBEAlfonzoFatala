@@ -35,7 +35,6 @@
             lblClave = new Label();
             toolTip1 = new ToolTip(components);
             btnAcreditarSaldo = new Button();
-            btnCancelar = new Button();
             SuspendLayout();
             // 
             // txtMonto
@@ -90,7 +89,7 @@
             btnAcreditarSaldo.FlatStyle = FlatStyle.Flat;
             btnAcreditarSaldo.Font = new Font("Bahnschrift SemiLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
             btnAcreditarSaldo.ForeColor = SystemColors.ActiveCaptionText;
-            btnAcreditarSaldo.Location = new Point(17, 168);
+            btnAcreditarSaldo.Location = new Point(73, 168);
             btnAcreditarSaldo.Name = "btnAcreditarSaldo";
             btnAcreditarSaldo.Size = new Size(107, 34);
             btnAcreditarSaldo.TabIndex = 4;
@@ -99,28 +98,12 @@
             btnAcreditarSaldo.UseVisualStyleBackColor = false;
             btnAcreditarSaldo.Click += btnAcreditarSaldo_Click;
             // 
-            // btnCancelar
-            // 
-            btnCancelar.BackColor = Color.Tomato;
-            btnCancelar.FlatStyle = FlatStyle.Flat;
-            btnCancelar.Font = new Font("Bahnschrift SemiLight", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
-            btnCancelar.ForeColor = Color.White;
-            btnCancelar.Location = new Point(141, 168);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(107, 34);
-            btnCancelar.TabIndex = 5;
-            btnCancelar.Text = "Cancelar";
-            toolTip1.SetToolTip(btnCancelar, "Verifique que haya ingresado un saldo correcto.");
-            btnCancelar.UseVisualStyleBackColor = false;
-            btnCancelar.Click += btnCancelar_Click;
-            // 
             // FormCarga
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.MenuHighlight;
-            ClientSize = new Size(260, 233);
-            Controls.Add(btnCancelar);
+            BackColor = Color.FromArgb(53, 53, 53);
+            ClientSize = new Size(256, 233);
             Controls.Add(btnAcreditarSaldo);
             Controls.Add(lblClave);
             Controls.Add(lblMonto);
@@ -140,6 +123,5 @@
         private Label lblClave;
         private ToolTip toolTip1;
         private Button btnAcreditarSaldo;
-        private Button btnCancelar;
     }
 }

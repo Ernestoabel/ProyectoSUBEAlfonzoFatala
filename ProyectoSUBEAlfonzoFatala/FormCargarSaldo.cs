@@ -73,12 +73,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        private void btnSalir_Click(object sender, EventArgs e)
-        {
-            this.Close();
-
-        }
-
 
         public void TraerUsuario(object usuario)
         {

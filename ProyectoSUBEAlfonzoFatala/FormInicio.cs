@@ -180,11 +180,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
-                //formCargarSaldo.TraerUsuario(usuarioLogueado);
-                //formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
-                //formCargarSaldo.Dock = DockStyle.Fill;
-                //formCargarSaldo.MdiParent = this;
-                //formCargarSaldo.Show();
 
                 this.pasarObjeto += formCargarSaldo.TraerUsuario;
                 this.pasarObjeto.Invoke(usuarioLogueado);
@@ -194,8 +189,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 formCargarSaldo.Dock = DockStyle.Fill;
                 formCargarSaldo.MdiParent = this;
                 formCargarSaldo.Show();
-
-               
 
             }
             else
