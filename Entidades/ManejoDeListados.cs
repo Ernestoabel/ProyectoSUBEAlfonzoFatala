@@ -20,29 +20,35 @@ namespace Entidades
     public class ManejoDeListados
     {
         public static List<string> listaBajas = new List<string>();
-        public static Usuario ObtenerUsuarioPorDniYTarjeta(string dni)
+        public static object ObtenerUsuarioPorDniYTarjeta(string dni)
         {
-            Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
-
-            if (usuario != null)
+            try
             {
-                if (!usuario.TieneTarjeta && usuario.Dni[0] > '0')
-                {
-                    return (UsuarioSinTarjeta)usuario;
-                }
-                else if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
-                {
-                    return (UsuarioArgentino)usuario;
-                }
-                else if (usuario.Dni.Length == 3)
-                {
-                    return (UsuarioAdministrador)usuario;
-                }
-                else if (usuario.Dni[0] >= '9')
-                {
-                    return (UsuarioExtranjero)usuario;
-                }
+                Usuario usuario = Listados.listaUsuarios.FirstOrDefault(u => u.Dni == dni);
 
+                if (usuario != null)
+                {
+                    if (!usuario.TieneTarjeta && usuario.Dni[0] > '0')
+                    {
+                        return (UsuarioSinTarjeta)usuario;
+                    }
+                    else if (usuario.Dni[0] > '0' && usuario.Dni[0] < '9')
+                    {
+                        return (UsuarioArgentino)usuario;
+                    }
+                    else if (usuario.Dni.Length == 3)
+                    {
+                        return (UsuarioAdministrador)usuario;
+                    }
+                    else if (usuario.Dni[0] >= '9')
+                    {
+                        return (UsuarioExtranjero)usuario;
+                    }
+
+                }
+            }catch (Exception ex)
+            {
+                CatchError.LogError(nameof(ManejoDeListados), nameof(ObtenerUsuarioPorDniYTarjeta), "Error para el traer el objeto de la base de datos", ex);
             }
 
             return null;

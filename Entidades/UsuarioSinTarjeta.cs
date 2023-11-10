@@ -12,7 +12,7 @@ namespace Entidades
     {
         public UsuarioSinTarjeta(string nombre, string apellido, string dni, string clave) : base(nombre, apellido, dni, clave)
         {
-
+            this.TieneTarjeta = false;
         }
         public UsuarioSinTarjeta()
         {
@@ -55,9 +55,9 @@ namespace Entidades
                             //elementos.Add(usuario);
                             if (!dniDuplicado.Contains(dni))
                             {
-                                UsuarioAdministrador usuario = new UsuarioAdministrador(nombre, apellido, dni, clave);
+                                UsuarioSinTarjeta usuario = new UsuarioSinTarjeta(nombre, apellido, dni, clave);
                                 elementos.Add(usuario);
-                                dniDuplicado.Add(dni); // Add the DNI to the HashSet
+                                dniDuplicado.Add(dni);
                             }
                         }
                     }
@@ -84,13 +84,14 @@ namespace Entidades
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = ConexionSQL.mysqlConexion;
-                    cmd.CommandText = "INSERT INTO usuariosintarjeta (nombre, apellido, clave, dni) VALUES (@nombre, @apellido, @clave, @dni)";
+                    cmd.CommandText = "INSERT INTO usuariosintarjeta (nombre, apellido, clave, dni, tienetarjeta) VALUES (@nombre, @apellido, @clave, @dni, @tienetarjeta)";
 
                     cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
                     cmd.Parameters.AddWithValue("@nombre", usuariosSinTarjeta.Nombre);
                     cmd.Parameters.AddWithValue("@apellido", usuariosSinTarjeta.Apellido);
                     cmd.Parameters.AddWithValue("@clave", usuariosSinTarjeta.Clave);
                     cmd.Parameters.AddWithValue("@dni", usuariosSinTarjeta.Dni);
+                    cmd.Parameters.AddWithValue("@tienetarjeta", usuariosSinTarjeta.TieneTarjeta);
                     cmd.ExecuteNonQuery();
 
 
