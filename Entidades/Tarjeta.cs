@@ -48,6 +48,7 @@ namespace Entidades
 
         public bool RestarSaldo(decimal valor)
         {
+
             if (Saldo >= valor)
             {
                 Saldo -= valor;

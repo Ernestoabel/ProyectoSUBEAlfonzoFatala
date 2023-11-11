@@ -161,18 +161,42 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
                     Viajes nuevoViaje = Viajes.GenerarViajeAleatorio();
-                    listaViajes = listaViajes + nuevoViaje;
-                    tarjetaNacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaNacional.Id}";
-                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                    decimal costoViaje = nuevoViaje.ValorBoleto;
+                    bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
+
+                    if(haySaldo)
+                    {
+                        listaViajes = listaViajes + nuevoViaje;
+                        tarjetaNacional.Viajes = listaViajes;
+                        string condicion = $"Id = {tarjetaNacional.Id}";
+                        tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
+                    }
+
                 }
                 else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
                     Viajes nuevoViaje = Viajes.GenerarViajeAleatorio(usuarioExtranjero);
-                    listaViajes = listaViajes + nuevoViaje;
-                    tarjetaInternacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaInternacional.Id}";
-                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                    decimal costoViaje = nuevoViaje.ValorBoleto;
+                    bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
+
+                    if(haySaldo) 
+                    {
+                        listaViajes = listaViajes + nuevoViaje;
+                        tarjetaInternacional.Viajes = listaViajes;
+                        string condicion = $"Id = {tarjetaInternacional.Id}";
+                        tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                    
+                    }
+                    else
+                    {
+                        MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
+                    }
+
                 }
 
                 listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
