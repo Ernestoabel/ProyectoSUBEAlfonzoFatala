@@ -33,8 +33,6 @@
             btnVerSaldo = new Button();
             lblCargarSaldo = new Label();
             lblVerSaldo = new Label();
-            btnSalir = new Button();
-            lblSalir = new Label();
             pbTarjeta = new PictureBox();
             lblNombre = new Label();
             lblApellido = new Label();
@@ -92,31 +90,6 @@
             lblVerSaldo.Size = new Size(94, 24);
             lblVerSaldo.TabIndex = 3;
             lblVerSaldo.Text = "Ver Saldo";
-            // 
-            // btnSalir
-            // 
-            btnSalir.BackColor = Color.White;
-            btnSalir.BackgroundImage = (Image)resources.GetObject("btnSalir.BackgroundImage");
-            btnSalir.BackgroundImageLayout = ImageLayout.Stretch;
-            btnSalir.FlatStyle = FlatStyle.Flat;
-            btnSalir.Location = new Point(83, 35);
-            btnSalir.Name = "btnSalir";
-            btnSalir.Size = new Size(68, 60);
-            btnSalir.TabIndex = 4;
-            btnSalir.UseVisualStyleBackColor = false;
-            btnSalir.Click += btnSalir_Click;
-            // 
-            // lblSalir
-            // 
-            lblSalir.AutoSize = true;
-            lblSalir.BackColor = Color.Transparent;
-            lblSalir.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
-            lblSalir.ForeColor = Color.White;
-            lblSalir.Location = new Point(74, 98);
-            lblSalir.Name = "lblSalir";
-            lblSalir.Size = new Size(50, 24);
-            lblSalir.TabIndex = 5;
-            lblSalir.Text = "Salir";
             // 
             // pbTarjeta
             // 
@@ -190,8 +163,6 @@
             Controls.Add(lblApellido);
             Controls.Add(lblNombre);
             Controls.Add(pbTarjeta);
-            Controls.Add(lblSalir);
-            Controls.Add(btnSalir);
             Controls.Add(lblVerSaldo);
             Controls.Add(lblCargarSaldo);
             Controls.Add(btnVerSaldo);
@@ -212,8 +183,6 @@
         private Button btnVerSaldo;
         private Label lblCargarSaldo;
         private Label lblVerSaldo;
-        private Button btnSalir;
-        private Label lblSalir;
         private PictureBox pbTarjeta;
         private Label lblNombre;
         private Label lblApellido;
