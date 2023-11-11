@@ -17,7 +17,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private Configuraciones configuraciones;
         public object usuarioLogueado;
         private string configuracionesFilePath = @"..\..\..\Archivos\configuraciones.json";
-        Action<object> pasarObjeto;
+        Action<object> pasarObjeto; //Delegado para el envio de un objeto a los formularios
 
 
         /// <summary>

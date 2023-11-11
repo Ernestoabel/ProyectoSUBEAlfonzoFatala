@@ -14,9 +14,16 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormABMUsuarios : Form, IDataGridViewStyler
     {
+        private TextBox txtBusqueda;
+        private Label lblBusqueda;
+        private CheckBox chkActivarBusqueda;
         public FormABMUsuarios()
         {
             InitializeComponent();
+            InitializeCheckBox();
+            InitializeBusquedaControls();
+
+
         }
         string tarjeta;
 
@@ -166,11 +173,11 @@ namespace ProyectoSUBEAlfonzoFatala
                             int id = int.Parse(tarjetaBaja.IdSubeArgentina);
                             tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
                             int indexTarjeta = TarjetaNacional.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
-                            
+
                             if (index != -1)
                             {
                                 UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
-                                
+
 
                                 Listados.listaUsuarios.RemoveAt(index);
                                 //TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
@@ -200,12 +207,12 @@ namespace ProyectoSUBEAlfonzoFatala
                                 UsuarioExtranjero.EliminarUnElemento(usuarioSinTarjeta.Dni);
                                 RefreshDataGridView();
                             }
-                            
+
                         }
                     }
                     else if (result == DialogResult.No)
                     {
-                        
+
                     }
                 }
             }
@@ -220,5 +227,101 @@ namespace ProyectoSUBEAlfonzoFatala
 
             SetDataGridViewStyle();
         }
+
+        /// <summary>
+        /// Metodo para crear los elementos de busqueda en el desing
+        /// </summary>
+        private void InitializeBusquedaControls()
+        {
+            // TextBox
+            txtBusqueda = new TextBox();
+            txtBusqueda.Location = new Point(356, 45); // el primero es la posicion horizontal y el segundo la vertical
+            txtBusqueda.Size = new Size(200, 20); 
+            txtBusqueda.TextChanged += TxtBusqueda_TextChanged;
+
+            // Label
+            lblBusqueda = new Label();
+            lblBusqueda.Text = "Buscar:";
+            lblBusqueda.Location = new Point(300, 50);
+
+        }
+
+        /// <summary>
+        /// Metodo para manejar la busqueda segun el check boxs
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void TxtBusqueda_TextChanged(object sender, EventArgs e)
+        {
+            // Verifica si el CheckBox está marcado antes de aplicar el filtro
+            if (chkActivarBusqueda.Checked)
+            {
+                string filtro = txtBusqueda.Text;
+                FiltrarUsuarios(filtro);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para las condiciones del filtrado
+        /// </summary>
+        /// <param name="filtro"></param>
+        private void FiltrarUsuarios(string filtro)
+        {
+            // Filtra la lista de usuarios según el criterio de búsqueda
+            var usuariosFiltrados = Listados.listaUsuarios
+                .Where(usuario => usuario.Dni.Contains(filtro))
+                .ToList();
+
+            dataGridUsuarios.DataSource = usuariosFiltrados;
+
+            
+            SetDataGridViewStyle();
+        }
+
+        /// <summary>
+        /// metodo para inicializar el check box
+        /// </summary>
+        private void InitializeCheckBox()
+        {
+            chkActivarBusqueda = new CheckBox();
+            chkActivarBusqueda.Text = "Búsqueda";
+            chkActivarBusqueda.Location = new Point(182, 46); // Ajusta las coordenadas según tu diseño
+            chkActivarBusqueda.CheckedChanged += ChkActivarBusqueda_CheckedChanged;
+
+            // Agrega el control al formulario
+            this.Controls.Add(chkActivarBusqueda);
+        }
+
+        /// <summary>
+        /// evento para manejar no solo el check box
+        /// sino para remover del semi codigo del formulario
+        /// los text box y lavel de la busqueda
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void ChkActivarBusqueda_CheckedChanged(object sender, EventArgs e)
+        {
+            bool activarBusqueda = chkActivarBusqueda.Checked;
+
+            if (!activarBusqueda)
+            {
+                // Desvincula el controlador de eventos
+                txtBusqueda.TextChanged -= TxtBusqueda_TextChanged;
+
+                // Remueve los controles del formulario
+                this.Controls.Remove(txtBusqueda);
+                this.Controls.Remove(lblBusqueda);
+            }
+            else
+            {
+                // Vuelve a vincular el controlador de eventos
+                txtBusqueda.TextChanged += TxtBusqueda_TextChanged;
+
+                // Agrega los controles al formulario
+                this.Controls.Add(txtBusqueda);
+                this.Controls.Add(lblBusqueda);
+            }
+        }
+
     }
 }

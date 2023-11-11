@@ -14,6 +14,9 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
+    /// <summary>
+    /// Formulario para la visualizacion y creacion de Viajes
+    /// </summary>
     public partial class FormViajesPrueba : Form, IDataGridViewStyler
     {
         List<Viajes> listaViajes;
