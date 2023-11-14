@@ -65,7 +65,7 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(180, 26);
+            logueateToolStripMenuItem.Size = new Size(151, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
             // 
@@ -111,14 +111,23 @@
             // 
             // chbTema
             // 
+            chbTema.Appearance = Appearance.Button;
             chbTema.AutoSize = true;
             chbTema.BackColor = Color.Transparent;
-            chbTema.Font = new Font("Segoe UI Semibold", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            chbTema.FlatAppearance.BorderSize = 0;
+            chbTema.FlatAppearance.CheckedBackColor = Color.Transparent;
+            chbTema.FlatAppearance.MouseDownBackColor = Color.Transparent;
+            chbTema.FlatAppearance.MouseOverBackColor = Color.Transparent;
+            chbTema.FlatStyle = FlatStyle.Flat;
+            chbTema.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chbTema.Image = (Image)resources.GetObject("chbTema.Image");
             chbTema.Location = new Point(12, 49);
             chbTema.Name = "chbTema";
-            chbTema.Size = new Size(130, 24);
+            chbTema.Size = new Size(156, 32);
             chbTema.TabIndex = 5;
-            chbTema.Text = "Tema Sovietico";
+            chbTema.Text = "modo sovietico";
+            chbTema.TextAlign = ContentAlignment.BottomCenter;
+            chbTema.TextImageRelation = TextImageRelation.ImageBeforeText;
             chbTema.UseVisualStyleBackColor = false;
             chbTema.CheckedChanged += chbTema_CheckedChanged;
             // 

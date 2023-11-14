@@ -32,7 +32,7 @@ namespace Entidades
         {
             ImagenFondo = @"..\..\..\Assets\tarjetaRoja.jpg";
             ColorFondo = "Red";
-            FuenteTexto = "Engravers MT";
+            FuenteTexto = "Consolas";
         }
     }
     /// <summary>

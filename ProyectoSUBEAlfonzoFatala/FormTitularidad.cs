@@ -18,6 +18,7 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormTitularidad()
         {
             InitializeComponent();
+
         }
 
         public void TraerUsuario(object usuario)
@@ -79,5 +80,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 txtTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
             }
         }
+
+     
+
     }
 }

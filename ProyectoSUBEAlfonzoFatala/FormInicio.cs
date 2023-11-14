@@ -38,7 +38,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Metodo para utilizar en un delegado
         /// </summary>
         /// <param name="objeto"></param>
-        public void RecivirObjeto (object objeto)
+        public void RecivirObjeto(object objeto)
         {
             this.usuarioLogueado = objeto;
         }
@@ -76,7 +76,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     formViajes.Hide();
                 }
-                catch (Exception ) { }
+                catch (Exception) { }
 
             }
             if (e.ClickedItem != consultaTiToolStripMenuItem)
@@ -199,6 +199,18 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        private void chkCheckedCh(object sender, EventArgs e)
+        {
+            string rutaImagenUncheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineRadioButtonUnchecked.png");
+            string rutaImagenCheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineCheckCircleOutline.png");
+            CheckBox checkBox = sender as CheckBox;
+
+            if (checkBox.Checked)
+                checkBox.Image = Image.FromFile(rutaImagenUncheck);
+            else
+                checkBox.Image = Image.FromFile(rutaImagenCheck);
+        }
+
         /// <summary>
         /// Evento para cambiar el tema de la aplicacion
         /// </summary>
@@ -206,6 +218,20 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void chbTema_CheckedChanged(object sender, EventArgs e)
         {
+            string rutaImagenUncheck = @"..\..\..\Assets\IcBaselineRadioButtonUnchecked.png";
+            string rutaImagenCheck = @"..\..\..\Assets\IcBaselineCheckCircleOutline.png";
+
+            CheckBox checkBox = sender as CheckBox;
+
+            if (checkBox.Checked)
+            {
+                checkBox.Image = Image.FromFile(rutaImagenCheck);
+            }
+            else
+            {
+                checkBox.Image = Image.FromFile(rutaImagenUncheck);
+            }
+
             if (!chbTema.Checked)
             {
                 configuraciones.ConfiguracionNacional();
@@ -217,6 +243,8 @@ namespace ProyectoSUBEAlfonzoFatala
             BackgroundImage = Image.FromFile(configuraciones.ImagenFondo);
             menuStrip1.BackColor = Color.FromName(configuraciones.ColorFondo);
             menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
+
+
         }
 
         /// <summary>
