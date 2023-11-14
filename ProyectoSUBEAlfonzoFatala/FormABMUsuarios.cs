@@ -192,8 +192,8 @@ namespace ProyectoSUBEAlfonzoFatala
                             int index = Listados.listaUsuarios.FindIndex(u => u == usuarioTarjetaBaja);
 
                             ///Esto no esta andando
-                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja);
-
+                            //UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja);
+                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja.Nombre,usuarioTarjetaBaja.Apellido,usuarioTarjetaBaja.Dni,usuarioTarjetaBaja.Clave);
                             Listados.listaUsuarios.RemoveAt(index);
                             Listados.listaUsuarios.Add(usuarioSinTarjeta);
                             UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);

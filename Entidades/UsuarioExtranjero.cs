@@ -131,7 +131,7 @@ namespace Entidades
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = ConexionSQL.mysqlConexion;
-                    cmd.CommandText = $"DELETE FROM usuariosintarjeta WHERE dni = {dni} ";
+                    cmd.CommandText = $"DELETE FROM usuarioextranjero WHERE dni = {dni} ";
                     cmd.ExecuteNonQuery();
                 }
             }
