@@ -75,6 +75,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void FormABMUsuarios_Load(object sender, EventArgs e)
         {
+            Listados.listaUsuarios = Listados.listaUsuarios.OrderBy(u => u.Dni).ToList();
             this.dataGridUsuarios.DataSource = Listados.listaUsuarios;
             SetDataGridViewStyle();
             dataGridUsuarios.CellValueChanged += dataGridUsuarios_CellValueChanged;

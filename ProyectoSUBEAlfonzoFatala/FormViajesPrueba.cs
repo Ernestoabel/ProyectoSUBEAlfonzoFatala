@@ -221,7 +221,18 @@ namespace ProyectoSUBEAlfonzoFatala
                     for (var i = 0; i < 5; i++)
                     {
                         var nuevoViaje = acumuluarFunciones.Invoke();
-                        listaViajes = listaViajes + nuevoViaje;
+                        decimal costoViaje = nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
+                        if (haySaldo)
+                        {
+                            listaViajes = listaViajes + nuevoViaje;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
+                            break;
+                        }
                     }
                     tarjetaNacional.Viajes = listaViajes;
                     string condicion = $"Id = {tarjetaNacional.Id}";
@@ -234,7 +245,18 @@ namespace ProyectoSUBEAlfonzoFatala
                     for (var i = 0; i < 5; i++)
                     {
                         var nuevoViaje = acumuluarFunciones.Invoke();
-                        listaViajes = listaViajes + nuevoViaje;
+                        decimal costoViaje = nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
+                        if (haySaldo)
+                        {
+                            listaViajes = listaViajes + nuevoViaje;
+
+                        }
+                        else
+                        {
+                            MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
+                            break;
+                        }
                     }
                     tarjetaInternacional.Viajes = listaViajes;
                     string condicion = $"Id = {tarjetaInternacional.Id}";
