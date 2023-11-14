@@ -6,18 +6,21 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using MySql.Data.MySqlClient;
+using iTextSharp.text.pdf;
+using iTextSharp.text;
 
 namespace Entidades
 {
-    public class TarjetaNacional : Tarjeta, IOperacionesSistema<TarjetaNacional>
+    public class TarjetaNacional : Tarjeta, IOperacionesSistema<TarjetaNacional>, IGenerarFacturaPDF<TarjetaNacional>
     {
-        
+
         IdManager idManagerNacional = new IdManager(true);
         public static List<TarjetaNacional> listaTarjetasNacionales = new List<TarjetaNacional>();
+        public static int ultimoNumeroFactura = ObtenerUltimoNumeroFactura();
 
         public TarjetaNacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
         {
-            
+
         }
         public TarjetaNacional()
         {
@@ -154,6 +157,95 @@ namespace Entidades
             catch (Exception ex)
             {
                 CatchError.LogError(nameof(TarjetaNacional), nameof(AgregarElementoSQL), "Error al insertar fila a la tabla mySQL de tarjeta nacional", ex);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para generar un pdf con la factura cuando se carga la tarjeta
+        /// Se utiliza el nuget iTextSharp
+        /// </summary>
+        /// <param name="tarjeta"></param>
+        /// <param name="txtMonto"></param>
+        public static void GenerarFacturaPDF(Tarjeta tarjeta, string txtMonto)
+        {
+            try
+            {
+                ultimoNumeroFactura++;
+
+                // Crear un documento PDF
+                string nombreArchivo = @$"..\..\..\Archivos\Facturas\Factura_{ultimoNumeroFactura}.pdf";
+
+                using (FileStream fs = new FileStream(nombreArchivo, FileMode.Create))
+                {
+                    using (Document pdfDoc = new Document())
+                    {
+                        PdfWriter pdfWriter = PdfWriter.GetInstance(pdfDoc, fs);
+
+                        // Agregar contenido al documento
+                        pdfDoc.Open();
+                        pdfDoc.Add(new Paragraph("Factura de Saldo Acreditado"));
+                        pdfDoc.Add(new Paragraph($"Número de Factura: {ultimoNumeroFactura}"));
+                        pdfDoc.Add(new Paragraph($"ID de Tarjeta: {tarjeta.Id}"));
+                        pdfDoc.Add(new Paragraph($"Saldo Actual: {tarjeta.Saldo}"));
+                        pdfDoc.Add(new Paragraph($"Saldo Acreditado: {txtMonto}"));
+
+                        // Guardar el documento
+                        pdfDoc.Close();
+                    }
+
+                    // Actualizar el archivo con el nuevo número de factura
+                    ActualizarUltimoNumeroFactura();
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(GenerarFacturaPDF), "Error en el metodo", ex);
+            }
+        }
+
+        /// <summary>
+        /// Metodo para obtener el numero de la ultima factura en un archivo
+        /// </summary>
+        /// <returns></returns>
+        public static int ObtenerUltimoNumeroFactura()
+        {
+            try
+            {
+                string rutaArchivo = @"..\..\..\Archivos\UltimoNumeroFactura.txt";
+
+                if (File.Exists(rutaArchivo))
+                {
+                    string contenido = File.ReadAllText(rutaArchivo);
+
+                    if (int.TryParse(contenido, out int ultimoNumero))
+                    {
+                        return ultimoNumero;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(ObtenerUltimoNumeroFactura), "Error en el metodo", ex);
+            }
+
+            // Si no se puede obtener el último número, devolver un valor predeterminado
+            return 1000;
+        }
+
+        /// <summary>
+        /// Metodo para actualizar el archivo con el numero de la ultima factura
+        /// </summary>
+        public static void ActualizarUltimoNumeroFactura()
+        {
+            try
+            {
+                string rutaArchivo = @"..\..\..\Archivos\UltimoNumeroFactura.txt";
+
+                File.WriteAllText(rutaArchivo, ultimoNumeroFactura.ToString());
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(TarjetaNacional), nameof(ActualizarUltimoNumeroFactura), "Error en el metodo", ex);
             }
         }
 

@@ -37,8 +37,6 @@
             lbApellido = new Label();
             lbDNI = new Label();
             lbTarjeta = new Label();
-            lbSaldo = new Label();
-            txtSaldo = new TextBox();
             SuspendLayout();
             // 
             // txtNombre
@@ -121,26 +119,6 @@
             lbTarjeta.TabIndex = 7;
             lbTarjeta.Text = "Tarjeta";
             // 
-            // lbSaldo
-            // 
-            lbSaldo.AutoSize = true;
-            lbSaldo.BackColor = Color.Transparent;
-            lbSaldo.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbSaldo.Location = new Point(40, 237);
-            lbSaldo.Name = "lbSaldo";
-            lbSaldo.Size = new Size(89, 37);
-            lbSaldo.TabIndex = 8;
-            lbSaldo.Text = "Saldo";
-            // 
-            // txtSaldo
-            // 
-            txtSaldo.BorderStyle = BorderStyle.None;
-            txtSaldo.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            txtSaldo.Location = new Point(190, 237);
-            txtSaldo.Name = "txtSaldo";
-            txtSaldo.Size = new Size(228, 36);
-            txtSaldo.TabIndex = 9;
-            // 
             // FormTitularidad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -149,8 +127,6 @@
             BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
             BackgroundImageLayout = ImageLayout.Zoom;
             ClientSize = new Size(800, 450);
-            Controls.Add(txtSaldo);
-            Controls.Add(lbSaldo);
             Controls.Add(lbTarjeta);
             Controls.Add(lbDNI);
             Controls.Add(lbApellido);
@@ -176,7 +152,5 @@
         private Label lbApellido;
         private Label lbDNI;
         private Label lbTarjeta;
-        private Label lbSaldo;
-        private TextBox txtSaldo;
     }
 }

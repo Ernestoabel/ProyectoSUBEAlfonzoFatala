@@ -11,13 +11,18 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
+    /// <summary>
+    /// Formulario de administrador para ver la lista de tarjetas
+    /// </summary>
     public partial class FormABMTarjetas : Form, IDataGridViewStyler
     {
         public FormABMTarjetas()
         {
             InitializeComponent();
         }
-
+        /// <summary>
+        /// Metodo de interfaz para darle estilo al dataGrid
+        /// </summary>
         public void SetDataGridViewStyle()
         {
             // Establece el estilo de las celdas
@@ -56,13 +61,20 @@ namespace ProyectoSUBEAlfonzoFatala
             rdArgentinas.CheckedChanged += RadioButton_CheckedChanged;
             rdExtranjeras.CheckedChanged += RadioButton_CheckedChanged;
 
-            RefreshDataGridView();
             SetDataGridView();
         }
+        /// <summary>
+        /// evento para captar el cambio en el radio boton
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RadioButton_CheckedChanged(object sender, EventArgs e)
         {
             SetDataGridView();
         }
+        /// <summary>
+        /// Metodo para setear el dataGrid segun radio button
+        /// </summary>
         private void SetDataGridView()
         {
             if (rdArgentinas.Checked)
@@ -80,13 +92,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 this.dataGridABMTarjetas.DataSource = null;
                 // Limpia cualquier estilo si no hay selección
             }
-        }
-        private void RefreshDataGridView()
-        {
-            dataGridABMTarjetas.DataSource = null;
-            dataGridABMTarjetas.DataSource = Listados.listaUsuarios;
-
-            SetDataGridViewStyle();
         }
 
     }

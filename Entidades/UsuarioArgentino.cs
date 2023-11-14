@@ -10,7 +10,6 @@ namespace Entidades
     public class UsuarioArgentino : Usuario, IConexcionesSQLUsuarios<UsuarioArgentino>
     {
         private string _idSubeArgentina;
-        private TarjetaNacional _tarjetaNacional;
 
         public string IdSubeArgentina { get => _idSubeArgentina; set => _idSubeArgentina = value; }
 

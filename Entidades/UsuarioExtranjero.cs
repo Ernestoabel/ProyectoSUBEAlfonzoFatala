@@ -15,7 +15,6 @@ namespace Entidades
     public class UsuarioExtranjero : Usuario, IConexcionesSQLUsuarios<UsuarioExtranjero>
     {
         private string _idSubeExtranjero;
-        private TarjetaInternacional _tarjetaInternacional;
 
         public string IdSubeExtranjero { get => _idSubeExtranjero; set => _idSubeExtranjero = value; }
 

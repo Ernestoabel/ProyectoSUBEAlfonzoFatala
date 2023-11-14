@@ -111,6 +111,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     string condicion = $"Id = {tarjetaNacional.Id}";
 
                     tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
+                    TarjetaNacional.GenerarFacturaPDF(tarjetaNacional, saldoAcreditado);
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
@@ -137,6 +138,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     string condicion = $"Id = {tarjetaInternacional.Id}";
 
                     tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                    TarjetaInternacional.GenerarFacturaPDF(tarjetaInternacional, saldoAcreditado);
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();

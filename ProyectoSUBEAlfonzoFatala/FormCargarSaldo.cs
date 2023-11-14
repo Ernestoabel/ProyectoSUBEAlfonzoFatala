@@ -15,7 +15,7 @@ namespace ProyectoSUBEAlfonzoFatala
     {
         object usuarioLogueado;
         private decimal saldoEnTarjeta;
-        FormCarga formCarga = new FormCarga();
+        
         Action<object> pasarObjeto;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
@@ -38,6 +38,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
+                FormCarga formCarga = new FormCarga();
                 formCarga.TraerUsuario(usuarioLogueado);
                 formCarga.Dock = DockStyle.Fill;
                 formCarga.Show();

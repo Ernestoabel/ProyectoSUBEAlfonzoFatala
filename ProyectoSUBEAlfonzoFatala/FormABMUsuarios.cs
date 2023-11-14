@@ -12,6 +12,9 @@ using System.Windows.Forms;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
+    /// <summary>
+    /// Formulario de administrador para ver y modificar la lista de usuarios
+    /// </summary>
     public partial class FormABMUsuarios : Form, IDataGridViewStyler
     {
         private TextBox txtBusqueda;
@@ -28,7 +31,7 @@ namespace ProyectoSUBEAlfonzoFatala
         string tarjeta;
 
         /// <summary>
-        /// Metodo para darle estilo al datagrid
+        /// Metodo de interfaz para darle estilo al datagrid
         /// </summary>
         public void SetDataGridViewStyle()
         {
@@ -118,7 +121,7 @@ namespace ProyectoSUBEAlfonzoFatala
         }
 
         /// <summary>
-        /// Boton para guardad los datos que se cambiaron en la clave
+        /// Boton para guardar los datos que se cambiaron en la clave
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
@@ -167,46 +170,36 @@ namespace ProyectoSUBEAlfonzoFatala
                     {
                         if (usuario is UsuarioArgentino)
                         {
-                            UsuarioArgentino tarjetaBaja = (UsuarioArgentino)usuario;
+                            UsuarioArgentino usuarioTarjetaBaja = (UsuarioArgentino)usuario;
                             TarjetaNacional tarjetaNacional = new TarjetaNacional();
-                            int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-                            int id = int.Parse(tarjetaBaja.IdSubeArgentina);
-                            tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(t => t.Id == id);
-                            int indexTarjeta = TarjetaNacional.listaTarjetasNacionales.FindIndex(u => u == tarjetaNacional);
+                            int index = Listados.listaUsuarios.FindIndex(u => u == usuarioTarjetaBaja);
 
-                            if (index != -1)
-                            {
-                                UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
+                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja);
 
 
-                                Listados.listaUsuarios.RemoveAt(index);
-                                //TarjetaNacional.listaTarjetasNacionales.RemoveAt(indexTarjeta);
-                                Listados.listaUsuarios.Add(usuarioSinTarjeta);
-                                UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
-                                UsuarioArgentino.EliminarUnElemento(usuarioSinTarjeta.Dni);
-                                RefreshDataGridView();
-                            }
+                            Listados.listaUsuarios.RemoveAt(index);
+                            Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                            UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
+                            UsuarioArgentino.EliminarUnElemento(usuarioSinTarjeta.Dni);
+                            RefreshDataGridView();
+
 
                         }
                         else if (usuario is UsuarioExtranjero)
                         {
-                            UsuarioExtranjero tarjetaBaja = (UsuarioExtranjero)usuario;
+                            UsuarioExtranjero usuarioTarjetaBaja = (UsuarioExtranjero)usuario;
                             TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
-                            int index = Listados.listaUsuarios.FindIndex(u => u == tarjetaBaja);
-                            int id = int.Parse(tarjetaBaja.IdSubeExtranjero);
-                            tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(t => t.Id == id);
-                            int indexTarjeta = TarjetaInternacional.listaTarjetasIntenacionales.FindIndex(u => u == tarjetaInternacional);
-                            if (index != -1)
-                            {
-                                UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(tarjetaBaja);
+                            int index = Listados.listaUsuarios.FindIndex(u => u == usuarioTarjetaBaja);
 
-                                Listados.listaUsuarios.RemoveAt(index);
-                                //TarjetaInternacional.listaTarjetasIntenacionales.RemoveAt(indexTarjeta);
-                                Listados.listaUsuarios.Add(usuarioSinTarjeta);
-                                UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
-                                UsuarioExtranjero.EliminarUnElemento(usuarioSinTarjeta.Dni);
-                                RefreshDataGridView();
-                            }
+                            ///Esto no esta andando
+                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja);
+
+                            Listados.listaUsuarios.RemoveAt(index);
+                            Listados.listaUsuarios.Add(usuarioSinTarjeta);
+                            UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);
+                            UsuarioExtranjero.EliminarUnElemento(usuarioSinTarjeta.Dni);
+                            RefreshDataGridView();
+
 
                         }
                     }
@@ -218,10 +211,11 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
         /// <summary>
-        /// Metodo para refrescar la lista sincronicamente cuando se hace una cambio
+        /// Metodo para refrescar y ordenar la lista sincronicamente cuando se hace una cambio
         /// </summary>
         private void RefreshDataGridView()
         {
+            Listados.listaUsuarios = Listados.listaUsuarios.OrderBy(u => u.Dni).ToList();
             dataGridUsuarios.DataSource = null;
             dataGridUsuarios.DataSource = Listados.listaUsuarios;
 
@@ -236,7 +230,7 @@ namespace ProyectoSUBEAlfonzoFatala
             // TextBox
             txtBusqueda = new TextBox();
             txtBusqueda.Location = new Point(356, 45); // el primero es la posicion horizontal y el segundo la vertical
-            txtBusqueda.Size = new Size(200, 20); 
+            txtBusqueda.Size = new Size(200, 20);
             txtBusqueda.TextChanged += TxtBusqueda_TextChanged;
 
             // Label
@@ -274,7 +268,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             dataGridUsuarios.DataSource = usuariosFiltrados;
 
-            
+
             SetDataGridViewStyle();
         }
 
