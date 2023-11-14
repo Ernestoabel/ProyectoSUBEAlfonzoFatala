@@ -25,16 +25,30 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormRegistro()
         {
             InitializeComponent();
-            //this.IsMdiContainer = true;
-
-
         }
+
+        #region Eventos
         private void FormRegistro_Load(object sender, EventArgs e)
         {
             btnContinuar.Enabled = false;
-
         }
 
+        /// <summary>
+        ///  Se cancelan los procesos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            ProcesoCompletado = false;
+            this.Close();
+        }
+
+        /// <summary>
+        /// Permite comprar la tarjeta y ponerla a su nombre
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnContinuar_Click(object sender, EventArgs e)
         {
             bool claveValida = ValidarClaves();
@@ -78,6 +92,223 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// valida los error provider
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtDni_Validating(object sender, CancelEventArgs e)
+        {
+            int num;
+
+            //si el valor ingresado no es correcto, que devuelva el valor en variable nmum
+            if (!int.TryParse(txtDni.Text, out num))
+            {
+                errorProviderRegistro.SetError(txtDni, "Ingrese valor numerico");
+            }
+
+        }
+
+        /// <summary>
+        /// si se cumple la verificaracion es posible continuar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuar();
+        }
+
+        /// <summary>
+        /// si se cumple la verificacion es posible continuar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtApellido_TextChanged(object sender, EventArgs e)
+        {
+            btnContinuar.Enabled = HabilitarContinuar();
+        }
+
+        /// <summary>
+        /// evento para corroborar el dni
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtDni_TextChanged(object sender, EventArgs e)
+        {
+            bool dniEncontrado = EncontrarDni();
+            string dniIngresado = txtDni.Text;
+
+
+            if (!dniEncontrado && dniIngresado.Length >= 8)
+            {
+                btnContinuar.Enabled = HabilitarContinuar();
+            }
+            else
+            {
+                btnContinuar.Enabled = false;
+            }
+
+        }
+
+        /// <summary>
+        /// Evento para verificar clave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+
+            string claveIngresada = txtClave.Text;
+
+            // Verifica si la clave es numérica y tiene exactamente 4 dígitos
+            if (!string.IsNullOrEmpty(claveIngresada) && claveIngresada.All(char.IsDigit) && claveIngresada.Length == 4)
+            {
+                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                btnContinuar.Enabled = HabilitarContinuarClave();
+            }
+            else
+            {
+                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                btnContinuar.Enabled = HabilitarContinuarClave();
+            }
+
+        }
+
+        /// <summary>
+        /// Corrobora si la claves coinciden
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtRepetirClave_TextChanged(object sender, EventArgs e)
+        {
+            string claveConfirmada = txtRepetirClave.Text;
+
+            if (!string.IsNullOrEmpty(claveConfirmada) && claveConfirmada.All(char.IsDigit) && claveConfirmada.Length == 4 && claveConfirmada == txtClave.Text)
+            {
+                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                btnContinuar.Enabled = true;
+            }
+            else
+            {
+                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                btnContinuar.Enabled = false;
+            }
+        }
+
+        /// <summary>
+        /// eventp para agregar solo 4 digitos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
+            {
+                string claveIngresada = txtClave.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        /// <summary>
+        /// metodo para solo ingresar 4 digitos en la clave
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtRepetirClave_KeyPress(object sender, KeyPressEventArgs e)
+        {
+
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
+            {
+                string claveIngresada = txtRepetirClave.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true;
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        /// <summary>
+        /// Corrobora que se esten ingresando los datos del teclado correctos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        /// <summary>
+        /// Corrobora que se esten ingresando los datos del teclado correctos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        /// <summary>
+        /// Corrobora que se esten ingresando los datos del teclado correctos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
+            {
+                // Obtener el texto actual del TextBox
+                string dniIngresado = txtDni.Text;
+
+                // Permitir la edición si no se alcanza el límite de 9 caracteres
+                if (dniIngresado.Length < 9 || e.KeyChar == 8)
+                {
+                    e.Handled = false; // Permitir la entrada del carácter
+                }
+                else
+                {
+                    e.Handled = true; // Cancelar la entrada si ya hay 9 caracteres
+                }
+            }
+            else
+            {
+                e.Handled = true; // Cancelar la entrada de caracteres no deseados
+            }
+        }
+
+        #endregion
+
+        #region Metodos
         /// <summary>
         /// Guarda los datos ingresados en un objeto usuario y luego lo agrega a la lista
         /// </summary>
@@ -133,21 +364,16 @@ namespace ProyectoSUBEAlfonzoFatala
             return true;
         }
 
+        /// <summary>
+        /// Muestra los datos del usuario actual
+        /// </summary>
+        /// <param name="usuario"></param>
         private void MostrarUsuarioEnControles(Usuario usuario)
         {
             string informacion = $"Nombre: {usuario.Nombre}\nApellido: {usuario.Apellido}\nDNI: {usuario.Dni}\nClave: {usuario.Clave}\nTieneTarjeta: {(usuario.TieneTarjeta ? "Sí" : "No")}";
 
             MessageBox.Show(informacion, "Datos del Usuario Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
-
-        private void btnCancelar_Click(object sender, EventArgs e)
-        {
-            ProcesoCompletado = false;
-            this.Close();
-            //Application.Exit();
-
-        }
-
 
         /// <summary>
         /// Valida que el usuario haya colocado en el textbox los datos pertinentes
@@ -245,6 +471,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Recorre la lista de usuarios  y corrovora si el usuario ya 
+        /// tiene una tarjeta registrada
+        /// </summary>
+        /// <returns></returns>
         private bool EncontrarDni()
         {
 
@@ -267,7 +498,9 @@ namespace ProyectoSUBEAlfonzoFatala
             return dniEncontrado;
         }
 
-
+        /// <summary>
+        /// Elimina los error provider
+        /// </summary>
         private void BorrarMensajeError()
         {
             errorProviderRegistro.SetError(txtNombre, "");
@@ -278,173 +511,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        private void txtDni_Validating(object sender, CancelEventArgs e)
-        {
-            int num;
+        #endregion
 
-            //si el valor ingresado no es correcto, que devuelva el valor en variable nmum
-            if (!int.TryParse(txtDni.Text, out num))
-            {
-                errorProviderRegistro.SetError(txtDni, "Ingrese valor numerico");
-            }
-
-        }
-
-        private void txtNombre_TextChanged(object sender, EventArgs e)
-        {
-            btnContinuar.Enabled = HabilitarContinuar();
-        }
-
-        private void txtApellido_TextChanged(object sender, EventArgs e)
-        {
-            btnContinuar.Enabled = HabilitarContinuar();
-        }
-
-        private void txtDni_TextChanged(object sender, EventArgs e)
-        {
-            bool dniEncontrado = EncontrarDni();
-            string dniIngresado = txtDni.Text;
-
-
-            if(!dniEncontrado && dniIngresado.Length >= 8)
-            {
-                btnContinuar.Enabled = HabilitarContinuar();
-            }
-            else
-            {
-                btnContinuar.Enabled = false;
-            }
-            
-        }
-
-        private void txtClave_TextChanged(object sender, EventArgs e)
-        {
-
-            string claveIngresada = txtClave.Text;
-
-            // Verifica si la clave es numérica y tiene exactamente 4 dígitos
-            if (!string.IsNullOrEmpty(claveIngresada) && claveIngresada.All(char.IsDigit) && claveIngresada.Length == 4)
-            {
-                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
-                btnContinuar.Enabled = HabilitarContinuarClave();
-            }
-            else
-            {
-                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
-                btnContinuar.Enabled = HabilitarContinuarClave();
-            }
-
-        }
-
-        private void txtRepetirClave_TextChanged(object sender, EventArgs e)
-        {
-            string claveConfirmada = txtRepetirClave.Text;
-
-            if (!string.IsNullOrEmpty(claveConfirmada) && claveConfirmada.All(char.IsDigit) && claveConfirmada.Length == 4 && claveConfirmada == txtClave.Text)
-            {
-                // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
-                btnContinuar.Enabled = true;
-            }
-            else
-            {
-                // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
-                btnContinuar.Enabled = false;
-            }
-        }
-
-        /// <summary>
-        /// eventp para agregar solo 4 digitos
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtClave_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
-            {
-                string claveIngresada = txtClave.Text;
-
-                // Permitir la edición si no se alcanza el límite de 9 caracteres
-                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
-                {
-                    e.Handled = false; // Permitir la entrada del carácter
-                }
-                else
-                {
-                    e.Handled = true;
-                }
-            }
-            else
-            {
-                e.Handled = true; // Cancelar la entrada de caracteres no deseados
-            }
-        }
-
-        /// <summary>
-        /// metodo para solo ingresar 4 digitos en la clave
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void txtRepetirClave_KeyPress(object sender, KeyPressEventArgs e)
-        {
-
-            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
-            {
-                string claveIngresada = txtRepetirClave.Text;
-
-                // Permitir la edición si no se alcanza el límite de 9 caracteres
-                if (claveIngresada.Length <= 3 || e.KeyChar == 8)
-                {
-                    e.Handled = false; // Permitir la entrada del carácter
-                }
-                else
-                {
-                    e.Handled = true;
-                }
-            }
-            else
-            {
-                e.Handled = true; // Cancelar la entrada de caracteres no deseados
-            }
-        }
-
-        private void txtApellido_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true; // Cancelar la entrada de caracteres no deseados
-            }
-        }
-
-        private void txtNombre_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsLetter(e.KeyChar) && !char.IsControl(e.KeyChar))
-            {
-                e.Handled = true; // Cancelar la entrada de caracteres no deseados
-            }
-        }
-
-        private void txtDni_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (char.IsDigit(e.KeyChar) || char.IsControl(e.KeyChar) || e.KeyChar == 8)
-            {
-                // Obtener el texto actual del TextBox
-                string dniIngresado = txtDni.Text;
-
-                // Permitir la edición si no se alcanza el límite de 9 caracteres
-                if (dniIngresado.Length < 9 || e.KeyChar == 8)
-                {
-                    e.Handled = false; // Permitir la entrada del carácter
-                }
-                else
-                {
-                    e.Handled = true; // Cancelar la entrada si ya hay 9 caracteres
-                }
-            }
-            else
-            {
-                e.Handled = true; // Cancelar la entrada de caracteres no deseados
-            }
-        }
     }
 }
