@@ -35,15 +35,28 @@ namespace ProyectoSUBEAlfonzoFatala
         }
 
         #region Eventos
+
+        /// <summary>
+        /// Verifica si el saldo ingresado es correct0
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtMonto_TextChanged(object sender, EventArgs e)
         {
             string monto = txtMonto.Text;
+            int numero;
 
-            if (IsNumeric(monto))
+            if (IsNumeric(monto) )
             {
-                // El contenido es un número válido
-                txtMonto.BackColor = System.Drawing.Color.GreenYellow;
-                montoCheck = true;
+                numero = Convert.ToInt32(monto);
+
+                if (numero < 6000) 
+                {
+                    // El contenido es un número válido
+                    txtMonto.BackColor = System.Drawing.Color.GreenYellow;
+                    montoCheck = true;
+                    
+                }
             }
             else
             {
@@ -52,47 +65,13 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
-
-        private void txtMonto_KeyPress(object sender, KeyPressEventArgs e)
-        {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
-            {
-                e.Handled = true;
-            }
-
-            // Permite un solo punto (.) en la cadena
-            if ((e.KeyChar == '.') && ((sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1))
-            {
-                e.Handled = true;
-            }
-        }
-
-        private void txtClave_TextChanged(object sender, EventArgs e)
-        {
-            string clave = txtClave.Text;
-
-            if (usuarioLogueado is Usuario usuario)
-            {
-                if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 && clave == usuario.Clave)
-                {
-                    // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
-                    btnAcreditarSaldo.Enabled = true;
-                    contraseñaCheck = true;
-                }
-                else
-                {
-                    // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
-                    btnAcreditarSaldo.Enabled = false;
-                }
-            }
-        }
-        #endregion
-
-        private bool IsNumeric(string text)
-        {
-            return double.TryParse(text, out _);
-        }
-
+        /// <summary>
+        /// al momento de acreditar el saldo por medio de la tarjta
+        /// lo carga a ese nuevo saldo en la base de datos y genera 
+        /// una factura pdf
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnAcreditarSaldo_Click(object sender, EventArgs e)
         {
 
@@ -156,6 +135,67 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        /// evento para el ingreso del teclado
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtMonto_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
+            {
+                e.Handled = true;
+            }
+
+            // Permite un solo punto (.) en la cadena
+            if ((e.KeyChar == '.') && ((sender as System.Windows.Forms.TextBox).Text.IndexOf('.') > -1))
+            {
+                e.Handled = true;
+            }
+        }
+
+        /// <summary>
+        /// metodo para verificar los datos
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void txtClave_TextChanged(object sender, EventArgs e)
+        {
+            string clave = txtClave.Text;
+
+            if (usuarioLogueado is Usuario usuario)
+            {
+                if (!string.IsNullOrEmpty(clave) && clave.All(char.IsDigit) && clave.Length == 4 && clave == usuario.Clave)
+                {
+                    // La clave es válida, puedes habilitar el botón de continuar o realizar otras acciones.
+                    btnAcreditarSaldo.Enabled = true;
+                    contraseñaCheck = true;
+                }
+                else
+                {
+                    // La clave no cumple con los requisitos, puedes deshabilitar el botón de continuar o mostrar un mensaje de error.
+                    btnAcreditarSaldo.Enabled = false;
+                }
+            }
+        }
+        #endregion
+
+        #region Metodos
+
+        /// <summary>
+        /// verifica que el numero sea entero
+        /// </summary>
+        /// <param name="text"></param>
+        /// <returns></returns>
+        private bool IsNumeric(string text)
+        {
+            return double.TryParse(text, out _);
+        }
+
+        /// <summary>
+        /// Trae los datos de la tarjeta delusuario
+        /// </summary>
+        /// <param name="usuario"></param>
         public void TraerUsuario(object usuario)
         {
             try
@@ -200,5 +240,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
+        #endregion    
 
     }
+
+}

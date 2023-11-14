@@ -14,9 +14,6 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormCargarSaldo : Form
     {
         object usuarioLogueado;
-        private decimal saldoEnTarjeta;
-        
-        Action<object> pasarObjeto;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
 
@@ -28,11 +25,14 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        public void RecibirObjeto(object objeto)
-        {
-            this.usuarioLogueado = objeto;
-        }
 
+        #region Eventos
+
+        /// <summary>
+        /// Evento para cargar
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCargar_Click(object sender, EventArgs e)
         {
 
@@ -51,6 +51,11 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        /// Trae al usuario y verifica el saldo
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnVerSaldo_Click(object sender, EventArgs e)
         {
             try
@@ -73,8 +78,49 @@ namespace ProyectoSUBEAlfonzoFatala
             }
 
         }
+        
+        /// <summary>
+        /// evento load
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void FormCargarSaldo_Load(object sender, EventArgs e)
+        {
+            this.insertarDatos(usuarioLogueado);
+        }
+#endregion
 
+        #region Metodos
+        /// <summary>
+        /// Metodo para insertar los datos en el usuario
+        /// </summary>
+        /// <param name="usuario"></param>
+        private void insertarDatos(object usuario)
+        {
+            if (usuario is UsuarioArgentino)
+            {
+                UsuarioArgentino usuarioLogueado = (UsuarioArgentino)usuario;
+                lblNombre.Text = usuarioLogueado.Nombre.ToString();
+                lblApellido.Text = usuarioLogueado.Apellido.ToString();
+                lblDni.Text = usuarioLogueado.Dni.ToString();
+                lblIdTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
+                //lblSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
+            }
+            else if (usuario is UsuarioExtranjero)
+            {
+                UsuarioExtranjero usuarioLogueado = (UsuarioExtranjero)usuario;
+                lblNombre.Text = usuarioLogueado.Nombre.ToString();
+                lblApellido.Text = usuarioLogueado.Apellido.ToString();
+                lblDni.Text = usuarioLogueado.Dni.ToString();
+                lblIdTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
+                // lblSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
+            }
+        }
 
+        /// <summary>
+        /// Trae al usuario por dni y carga la tarjeta con los datos
+        /// </summary>
+        /// <param name="usuario"></param>
         public void TraerUsuario(object usuario)
         {
             try
@@ -88,9 +134,10 @@ namespace ProyectoSUBEAlfonzoFatala
                     usuarioLogueado = usuario;
                     btnCargar.Enabled = true;
                     btnVerSaldo.Enabled = true;
+
                     if (usuario is UsuarioArgentino usuarioArgentino)
                     {
-
+                        ///trae la tarjeta por el dni, en la lista de tarjeta
                         int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
                         saldoEnTarjeta = tarjetaNacional.Saldo;
@@ -122,31 +169,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        private void insertarDatos(object usuario)
-        {
-            if (usuario is UsuarioArgentino)
-            {
-                UsuarioArgentino usuarioLogueado = (UsuarioArgentino)usuario;
-                lblNombre.Text = usuarioLogueado.Nombre.ToString();
-                lblApellido.Text = usuarioLogueado.Apellido.ToString();
-                lblDni.Text = usuarioLogueado.Dni.ToString();
-                lblIdTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
-                //lblSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
-            }
-            else if (usuario is UsuarioExtranjero)
-            {
-                UsuarioExtranjero usuarioLogueado = (UsuarioExtranjero)usuario;
-                lblNombre.Text = usuarioLogueado.Nombre.ToString();
-                lblApellido.Text = usuarioLogueado.Apellido.ToString();
-                lblDni.Text = usuarioLogueado.Dni.ToString();
-                lblIdTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
-                // lblSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
-            }
-        }
-
-        private void FormCargarSaldo_Load(object sender, EventArgs e)
-        {
-            this.insertarDatos(usuarioLogueado);
-        }
+        
     }
+    #endregion
+
 }

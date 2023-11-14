@@ -30,6 +30,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         #region Controlers
 
+        /// <summary>
+        /// Permite salir del dialog
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
             this.Close();
@@ -37,6 +42,12 @@ namespace ProyectoSUBEAlfonzoFatala
             form.Show();
         }
 
+        /// <summary>
+        /// Coloca los datos ingresados verificados y
+        /// crea al nuevo usuario
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void btnContinuar_Click(object sender, EventArgs e)
         {
             bool esArgentino = rdoArgentino.Checked;
@@ -128,6 +139,9 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Toma el id del usuario actual y lo remueve de la lista
+        /// </summary>
         private void RemoverUsuarioSinTarjetaLocalizado()
         {
 
@@ -148,7 +162,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
         #region Eventos Controlers
 
-
+        /// <summary>
+        /// Evento para poder controlar y verificar DNI
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtDocumento_TextChanged(object sender, EventArgs e)
         {
             btnContinuar.Enabled = HabilitarContinuarClave();
@@ -170,6 +188,11 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        /// Evento creado para verificar claves
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void txtClave_TextChanged(object sender, EventArgs e)
         {
 

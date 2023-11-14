@@ -29,11 +29,19 @@ namespace Entidades
 
         public override List<Viajes> Viajes { get; set; }
 
+        /// <summary>
+        /// trae el id
+        /// </summary>
+        /// <param name="UltimoNumeroEnLista"></param>
         public override void DesignarId(int UltimoNumeroEnLista)
         {
             this.Id = UltimoNumeroEnLista;
         }
 
+        /// <summary>
+        /// Mediante la clase manejadora crea el proximo id 
+        /// </summary>
+        /// <returns></returns>
         protected override int GenerarNuevoId()
         {
             return idManagerNacional.GetNextId();
