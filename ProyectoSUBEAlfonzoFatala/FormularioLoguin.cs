@@ -31,6 +31,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 CargarSQL();
             }
+            PruebaTestUnitario();
             //CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
             
