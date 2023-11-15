@@ -210,11 +210,12 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Metodo Task para el boton viajar x5
         /// Se utiliza el delegado Func que retorna un objeto Viajes
         /// </summary>
-        private void ViajarCincoVeces()
+        private async Task ViajarCincoVeces()
         {
-            this.Invoke(new Action(() =>
+            this.Invoke(new Action(async() =>
             {
-                Thread.Sleep(5000);
+                //Thread.Sleep(5000);
+                await Task.Delay(4000);
                 if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
                     Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(); ;
