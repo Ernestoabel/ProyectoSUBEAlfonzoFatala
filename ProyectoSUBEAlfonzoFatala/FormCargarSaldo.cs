@@ -140,7 +140,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         ///trae la tarjeta por el dni, en la lista de tarjeta
                         int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        saldoEnTarjeta = tarjetaNacional.Saldo;
+                        
 
                     }
 
@@ -154,7 +154,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     {
                         int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                         tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        saldoEnTarjeta = tarjetaInternacional.Saldo;
+                        
                     }
                 }
             }
