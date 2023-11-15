@@ -18,8 +18,12 @@ namespace Entidades
         public void GuardarEnArchivo_SerializaListaCorrectamente()
         {
             // Arrange
-            var tarjeta = new TarjetaInternacional();
-            var lista = new List<TarjetaInternacional>(); // Crea una lista de tarjetas para probar
+            var viaje = Viajes.GenerarViajeAleatorio();
+            var viajes = new List<Viajes>();
+            viajes.Add(viaje);
+            var tarjeta = new TarjetaNacional(10, 500, viajes);
+            var lista = new List<TarjetaNacional>(); // Crea una lista de tarjetas para probar
+            lista.Add(tarjeta); // Crea una lista de tarjetas para probar
             var nombreArchivo = @"testTarjetaNacional.json";
 
             // Act
