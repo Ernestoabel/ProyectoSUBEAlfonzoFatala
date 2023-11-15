@@ -10,7 +10,7 @@
   </BajaData>
   <BajaData Indice="3">
     <Mensaje>El usuario 90000000 con la tarjeta 5038 quiere la baja</Mensaje>
-    <confirmacion>false</confirmacion>
+    <confirmacion>true</confirmacion>
   </BajaData>
   <BajaData Indice="4">
     <Mensaje>El usuario 30000000 con la tarjeta 1040 quiere la baja</Mensaje>

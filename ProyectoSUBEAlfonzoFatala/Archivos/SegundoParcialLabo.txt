@@ -1,0 +1,42 @@
+Falta Formulario Dialog, falta sobrecarga de operadores y metodos.
+
+Dialog entre FormRegistro (linea 84) y FormularioLogin (linea 212).
+Sobrecarga de Metodo en Viajes.cs (linea 80)
+Sobrecarga de Operador en Viajes.cs (linea 116)
+
+Excepciones: 
+tendriamos todo controlado, necesitamos un tester.
+Se crean excepciones simples y una compleja que guarda un string en un .txt
+Clase CatchError
+
+Archivos: 
+Tenemos el log de excepciones en todas la biblioteca de clases
+Tenemos la opcion de configuracion en JSON como un tema visual de la app
+El programa guarda en una listida diccionario y luego en un XML los mensajes entre usuarios y administrador
+Se genera una factura en pdf cuando un usuario carga saldo en la tarjeta usando el nuget iTextSharp
+
+Generics:
+Se aplica generics en varias interfases
+Tenemos una clase generica AccesoMySql.cs para ser utilizada en las clases de tarjetas
+
+Interfaces:
+Tenemos 6 interfases para el compartamiento de varias clases y formularios
+
+Test Unitario:
+Tenemos 4 metodos unitarios que utilizan el nuget NUnit.Framework;
+Se generan archivos con el resultado de los test
+
+Base de datos:
+Todo el programa se refatoriso para ser utilizado en mySQL
+Se tuiliza el nuget MySql.Data.MySqlClient
+
+Delegados:
+Todos los formularios se comunican con delegados.
+Se utilizan otro tipo de delegados en FromViajesPrueba
+Se utilizan Lambda para el manejo de las listas
+
+Eventos:
+El FormABMUsuarios utiliza eventos sobre el datagrid
+En el mismo se crea o se elimina un label y una barra de busqueda
+En el FormViajesPrueba se utiliza hilos y asyncronismo
+
