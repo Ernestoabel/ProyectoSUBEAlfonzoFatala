@@ -34,20 +34,7 @@ namespace Entidades
 
                         PropertyInfo[] propiedades = typeof(T).GetProperties();
 
-                        foreach (var propiedad in propiedades)
-                        {
-                            object valor = propiedad.GetValue(elemento);
-
-                            // Si la propiedad es 'Viajes', convierte a JSON antes de insertar en la base de datos
-                            if (propiedad.Name == "Viajes" && valor != null)
-                            {
-                                valor = JsonConvert.SerializeObject(valor);
-                            }
-
-                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", valor);
-                        }
-
-                        cmd.ExecuteNonQuery();
+                        Descomponer(cmd, elemento, propiedades);
                     }
                 }
             }catch (Exception ex)
@@ -61,6 +48,24 @@ namespace Entidades
             }
 
             
+        }
+
+        private static void Descomponer(MySqlCommand cmd, T elemento, PropertyInfo[] propiedades)
+        {
+            foreach (var propiedad in propiedades)
+            {
+                object valor = propiedad.GetValue(elemento);
+
+                // Si la propiedad es 'Viajes', convierte a JSON antes de insertar en la base de datos
+                if (propiedad.Name == "Viajes" && valor != null)
+                {
+                    valor = JsonConvert.SerializeObject(valor);
+                }
+
+                cmd.Parameters.AddWithValue($"@{propiedad.Name}", valor);
+            }
+
+            cmd.ExecuteNonQuery();
         }
 
         /// <summary>
