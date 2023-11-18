@@ -34,9 +34,9 @@ namespace Entidades
 
                         PropertyInfo[] propiedades = typeof(T).GetProperties();
 
-<<<<<<< HEAD
+
                         Descomponer(cmd, elemento, propiedades);
-=======
+
                         foreach (var propiedad in propiedades)
                         {
                             object valor = propiedad.GetValue(elemento);
@@ -45,7 +45,7 @@ namespace Entidades
                         }
 
                         cmd.ExecuteNonQuery();
->>>>>>> 7c159fa811b8b97f68418da0bd5b7af06b2495dd
+
                     }
                 }
             }
