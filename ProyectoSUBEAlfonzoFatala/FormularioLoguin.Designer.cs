@@ -32,6 +32,7 @@
             btnCancelar = new Button();
             btnAdministrador = new Button();
             btnAlta = new Button();
+            lblError = new Label();
             SuspendLayout();
             // 
             // btnIngresar
@@ -82,11 +83,22 @@
             btnAlta.UseVisualStyleBackColor = false;
             btnAlta.Click += btnAlta_Click;
             // 
+            // lblError
+            // 
+            lblError.AutoSize = true;
+            lblError.Font = new Font("Segoe UI", 11F, FontStyle.Bold, GraphicsUnit.Point);
+            lblError.ForeColor = Color.Red;
+            lblError.Location = new Point(376, 157);
+            lblError.Name = "lblError";
+            lblError.Size = new Size(0, 20);
+            lblError.TabIndex = 18;
+            // 
             // FormularioLoguin
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(720, 330);
+            Controls.Add(lblError);
             Controls.Add(btnAlta);
             Controls.Add(btnAdministrador);
             Controls.Add(btnCancelar);
@@ -99,6 +111,7 @@
             Controls.SetChildIndex(btnCancelar, 0);
             Controls.SetChildIndex(btnAdministrador, 0);
             Controls.SetChildIndex(btnAlta, 0);
+            Controls.SetChildIndex(lblError, 0);
             ResumeLayout(false);
             PerformLayout();
         }
@@ -109,5 +122,6 @@
         private Button btnCancelar;
         private Button btnAdministrador;
         private Button btnAlta;
+        private Label lblError;
     }
 }

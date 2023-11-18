@@ -18,7 +18,7 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormAdminMensajes()
         {
             InitializeComponent();
-            listaMostrarMensajes = ArchivoMensaje.listaBajas;
+            
         }
 
 
@@ -53,13 +53,14 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Ajusta el modo de redimensionamiento de las columnas
             this.dataGridMensajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            
             this.dataGridMensajes.Columns["Indice"].ReadOnly = true;
             this.dataGridMensajes.Columns["Mensaje"].ReadOnly = true;
-            this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
-            this.dataGridMensajes.Columns["Confirmar"].Width = 80;
+            //this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
+            //this.dataGridMensajes.Columns["Confirmar"].Width = 80;
 
             this.dataGridMensajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
 
 
         }
@@ -67,15 +68,19 @@ namespace ProyectoSUBEAlfonzoFatala
         private void FormAdminMensajes_Load(object sender, EventArgs e)
         {
             DataTable dataTable = new DataTable();
+            listaMostrarMensajes = ArchivoMensaje.listaBajas;
             dataTable.Columns.Add("Indice", typeof(int));
             dataTable.Columns.Add("Mensaje", typeof(string));
             dataTable.Columns.Add("Confirmar", typeof(bool)); // Agregar columna para el booleano
-
+            
             foreach (var dict in listaMostrarMensajes)
             {
                 foreach (var kvp in dict)
                 {
-                    dataTable.Rows.Add(kvp.Key, kvp.Value.Mensaje, kvp.Value.confirmacion); // Agregar el valor de NamespaceEntidades
+                    if (!string.IsNullOrEmpty(kvp.Value.Mensaje)) // Agrega esta condición para evitar filas vacías
+                    {
+                        dataTable.Rows.Add(kvp.Key, kvp.Value.Mensaje, kvp.Value.confirmacion);
+                    }
                 }
             }
 

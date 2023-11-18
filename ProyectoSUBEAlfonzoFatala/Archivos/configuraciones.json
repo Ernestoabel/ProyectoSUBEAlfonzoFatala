@@ -1,5 +1,5 @@
 {
-  "ImagenFondo": "..\\..\\..\\Assets\\login.jpeg",
-  "ColorFondo": "White",
-  "FuenteTexto": "Microsoft YaHei"
+  "ImagenFondo": "..\\..\\..\\Assets\\tarjetaRoja.jpg",
+  "ColorFondo": "Red",
+  "FuenteTexto": "Consolas"
 }

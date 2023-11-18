@@ -20,7 +20,7 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormViajesPrueba : Form, IDataGridViewStyler
     {
         List<Viajes> listaViajes;
-        object usuarioLogueado;
+        Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
 
@@ -35,7 +35,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Se ejecuta por delegado en el FormInicio
         /// </summary>
         /// <param name="usuario"></param>
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(Usuario usuario)
         {
             try
             {
@@ -50,9 +50,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     btnViajarx5.Enabled = true;
                     if (usuario is UsuarioArgentino usuarioArgentino)
                     {
-                        int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
-                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        List<Viajes> viajes = tarjetaNacional.Viajes;
+                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == int.Parse(usuarioArgentino.IdSubeArgentina));
+                        List<Viajes> viajes = Viajes.ObtenerViajesPorTarjetaSQL(int.Parse(usuarioArgentino.IdSubeArgentina));
                         listaViajes.AddRange(viajes);
                     }
 
@@ -64,9 +63,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     btnViajarx5.Enabled = true;
                     if (usuario is UsuarioExtranjero usuarioExtranjero)
                     {
-                        int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
-                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        List<Viajes> viajes = tarjetaInternacional.Viajes;
+                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == int.Parse(usuarioExtranjero.IdSubeExtranjero));
+                        List<Viajes> viajes = Viajes.ObtenerViajesPorTarjetaSQL(int.Parse(usuarioExtranjero.IdSubeExtranjero));
                         listaViajes.AddRange(viajes);
                     }
                 }
@@ -77,9 +75,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 btnViajar.Enabled = false;
                 btnViajarx5.Enabled = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CatchError.LogError(nameof(FormViajesPrueba), nameof(TraerUsuario), "Error en el metodo", ex);
             }
         }
 
@@ -118,6 +116,8 @@ namespace ProyectoSUBEAlfonzoFatala
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
             this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
             this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
+            this.dtgViajes.Columns[nameof(Viajes.TarjetaNacionalId)].Visible = false;
+            this.dtgViajes.Columns[nameof(Viajes.TarjetaInternacionalId)].Visible = false;
 
             //Opcion para cuando se maximiza la ventana y tome toda la ventana
             this.dtgViajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
@@ -128,7 +128,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
-            
+
         }
 
         /// <summary>
@@ -164,17 +164,14 @@ namespace ProyectoSUBEAlfonzoFatala
                     decimal costoViaje = nuevoViaje.ValorBoleto;
                     bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
 
-                    if(haySaldo)
+                    if (haySaldo)
                     {
-                        listaViajes = listaViajes + nuevoViaje;
-                        tarjetaNacional.Viajes = listaViajes;
-                        string condicion = $"Id = {tarjetaNacional.Id}";
-                        tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
-
+                        listaViajes.Add(nuevoViaje);
+                        Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
                     }
                     else
                     {
-                        MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
+                        lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                     }
 
                 }
@@ -184,24 +181,23 @@ namespace ProyectoSUBEAlfonzoFatala
                     decimal costoViaje = nuevoViaje.ValorBoleto;
                     bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
 
-                    if(haySaldo) 
+                    if (haySaldo)
                     {
-                        listaViajes = listaViajes + nuevoViaje;
-                        tarjetaInternacional.Viajes = listaViajes;
-                        string condicion = $"Id = {tarjetaInternacional.Id}";
-                        tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
-                    
+                        listaViajes.Add(nuevoViaje);
+                        Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
+
                     }
                     else
                     {
-                        MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
+                        lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                     }
 
                 }
-
+                SetTimer(3000);
                 listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
                 dtgViajes.DataSource = null;
                 dtgViajes.DataSource = listaViajes;
+                SetDataGridViewStyle();
 
             }));
         }
@@ -212,7 +208,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private async Task ViajarCincoVeces()
         {
-            this.Invoke(new Action(async() =>
+            this.Invoke(new Action(async () =>
             {
                 //Thread.Sleep(5000);
                 await Task.Delay(4000);
@@ -226,19 +222,16 @@ namespace ProyectoSUBEAlfonzoFatala
                         bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
                         if (haySaldo)
                         {
-                            listaViajes = listaViajes + nuevoViaje;
-
+                            listaViajes.Add(nuevoViaje);
+                            Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
                         }
                         else
                         {
-                            MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
+                            lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                             break;
                         }
                     }
-                    tarjetaNacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaNacional.Id}";
 
-                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
                 }
                 else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
@@ -250,26 +243,35 @@ namespace ProyectoSUBEAlfonzoFatala
                         bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
                         if (haySaldo)
                         {
-                            listaViajes = listaViajes + nuevoViaje;
-
+                            listaViajes.Add(nuevoViaje);
+                            Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
                         }
                         else
                         {
-                            MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
+                            lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                             break;
                         }
                     }
-                    tarjetaInternacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaInternacional.Id}";
-
-                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
                 }
-
+                SetTimer(3000);
                 listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
                 dtgViajes.DataSource = null;
                 dtgViajes.DataSource = listaViajes;
-
+                SetDataGridViewStyle();
             }));
+        }
+
+        private void SetTimer(int intervalo)
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = intervalo;
+            timer.Tick += (sender, e) =>
+            {
+                lblMensaje.Text = "";  // Limpiar el mensaje después del intervalo
+                timer.Stop();  // Detener el temporizador
+                timer.Dispose();  // Liberar recursos
+            };
+            timer.Start();  // Iniciar el temporizador
         }
     }
 }

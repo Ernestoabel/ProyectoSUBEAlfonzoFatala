@@ -33,15 +33,16 @@
             btnViajar = new Button();
             mySqlCommand1 = new MySqlConnector.MySqlCommand();
             btnViajarx5 = new Button();
+            lblMensaje = new Label();
             ((System.ComponentModel.ISupportInitialize)dtgViajes).BeginInit();
             SuspendLayout();
             // 
             // dtgViajes
             // 
             dtgViajes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dtgViajes.Location = new Point(12, 84);
+            dtgViajes.Location = new Point(12, 115);
             dtgViajes.Name = "dtgViajes";
-            dtgViajes.Size = new Size(776, 354);
+            dtgViajes.Size = new Size(776, 323);
             dtgViajes.TabIndex = 0;
             // 
             // btnViajar
@@ -71,11 +72,21 @@
             btnViajarx5.UseVisualStyleBackColor = true;
             btnViajarx5.Click += btnViajarx5_Click;
             // 
+            // lblMensaje
+            // 
+            lblMensaje.AutoSize = true;
+            lblMensaje.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMensaje.Location = new Point(281, 79);
+            lblMensaje.Name = "lblMensaje";
+            lblMensaje.Size = new Size(0, 21);
+            lblMensaje.TabIndex = 3;
+            // 
             // FormViajesPrueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMensaje);
             Controls.Add(btnViajarx5);
             Controls.Add(btnViajar);
             Controls.Add(dtgViajes);
@@ -84,6 +95,7 @@
             Load += FormViajesPrueba_Load;
             ((System.ComponentModel.ISupportInitialize)dtgViajes).EndInit();
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
@@ -92,5 +104,6 @@
         private Button btnViajar;
         private MySqlConnector.MySqlCommand mySqlCommand1;
         private Button btnViajarx5;
+        private Label lblMensaje;
     }
 }

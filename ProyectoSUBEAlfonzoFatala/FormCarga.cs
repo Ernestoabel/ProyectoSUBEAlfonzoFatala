@@ -16,10 +16,10 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormCarga : Form
     {
-        object usuarioLogueado;
+        Usuario usuarioLogueado;
         private bool contraseñaCheck;
         private bool montoCheck;
-        Action<object> pasarObjeto;
+        Action<Usuario> pasarObjeto;
 
         private decimal saldoEnTarjeta;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
@@ -196,7 +196,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Trae los datos de la tarjeta delusuario
         /// </summary>
         /// <param name="usuario"></param>
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(Usuario usuario)
         {
             try
             {

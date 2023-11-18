@@ -21,7 +21,7 @@ namespace Entidades
         public static List<TarjetaInternacional> listaTarjetasIntenacionales = new List<TarjetaInternacional>();
         public static int ultimoNumeroFactura = ObtenerUltimoNumeroFactura();
 
-        public TarjetaInternacional(int id, decimal saldo, List<Viajes> viajes) : base(id, saldo, viajes)
+        public TarjetaInternacional(int id, decimal saldo) : base(id, saldo)
         {
            
         }
@@ -31,7 +31,6 @@ namespace Entidades
         }
 
 
-        public override List<Viajes> Viajes { get; set; }
 
         public override void DesignarId(int UltimoNumeroEnLista)
         {

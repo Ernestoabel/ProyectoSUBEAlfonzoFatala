@@ -16,12 +16,18 @@ namespace Entidades
     public class Listados
     {
         public static List<Usuario> listaUsuarios = new List<Usuario>();
-        
+        public static List<Viajes> listaViajes = new List<Viajes>();
+
         #region Metodos
 
         public static void AgregarUsuario(Usuario objeto)
         {
             listaUsuarios.Add(objeto);
+        }
+
+        public static void AgregarViaje(Viajes objeto)
+        {
+            listaViajes.Add(objeto);
         }
 
         /// <summary>

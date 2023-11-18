@@ -26,7 +26,7 @@ namespace Entidades
                 using (MySqlCommand cmd = new MySqlCommand())
                 {
                     cmd.Connection = ConexionSQL.mysqlConexion;
-                    cmd.CommandText = $"INSERT INTO {nombreTabla} (Id, Saldo, Viajes) VALUES (@Id, @Saldo, @Viajes)";
+                    cmd.CommandText = $"INSERT INTO {nombreTabla} (Id, Saldo) VALUES (@Id, @Saldo)";
 
                     foreach (T elemento in elementos)
                     {
@@ -38,29 +38,24 @@ namespace Entidades
                         {
                             object valor = propiedad.GetValue(elemento);
 
-                            // Si la propiedad es 'Viajes', convierte a JSON antes de insertar en la base de datos
-                            if (propiedad.Name == "Viajes" && valor != null)
-                            {
-                                valor = JsonConvert.SerializeObject(valor);
-                            }
-
                             cmd.Parameters.AddWithValue($"@{propiedad.Name}", valor);
                         }
 
                         cmd.ExecuteNonQuery();
                     }
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 CatchError.LogError(nameof(AccesoMySql<T>), nameof(InsertarElementosSQL), "Error al insertar elementos en la base de datos", ex);
-                
+
             }
             finally
             {
-                ConexionSQL.mysqlConexion.Close(); 
+                ConexionSQL.mysqlConexion.Close();
             }
 
-            
+
         }
 
         /// <summary>
@@ -73,7 +68,7 @@ namespace Entidades
             List<T> elementos = new List<T>();
             try
             {
-                
+
                 ConexionSQL.Conectar(); // Abre la conexión
 
                 using (MySqlCommand cmd = new MySqlCommand())
@@ -88,8 +83,6 @@ namespace Entidades
                             // Lógica para obtener y deserializar elementos
                             int id = reader.GetInt32("Id");
                             decimal saldo = reader.GetDecimal("Saldo");
-                            string viajesJson = reader.GetString("Viajes");
-                            List<Viajes> viajes = JsonConvert.DeserializeObject<List<Viajes>>(viajesJson);
 
                             // Crear una instancia del tipo genérico
                             T elemento = Activator.CreateInstance<T>();
@@ -105,10 +98,6 @@ namespace Entidades
                                 {
                                     propiedad.SetValue(elemento, saldo);
                                 }
-                                else if (propiedad.Name == "Viajes")
-                                {
-                                    propiedad.SetValue(elemento, viajes);
-                                }
                             }
 
                             elementos.Add(elemento);
@@ -116,18 +105,19 @@ namespace Entidades
                     }
 
                 }
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 CatchError.LogError(nameof(AccesoMySql<T>), nameof(ObtenerElementosSQL), "Error al obtener elementos de la base de datos", ex);
             }
             finally
             {
                 ConexionSQL.mysqlConexion.Close();
-                
+
             }
 
-            return elementos; 
-            
+            return elementos;
+
         }
 
         /// <summary>
@@ -158,18 +148,10 @@ namespace Entidades
                         // Evita actualizar la propiedad 'Id'
                         if (propiedad.Name != "Id")
                         {
-                            if (propiedad.Name == "Viajes")
-                            {
-                                // Para la columna JSON 'Viajes', serializa el objeto como JSON
-                                cmd.CommandText += $"{propiedad.Name} = @json, ";
-                                string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
-                                parametros.Add(new MySqlParameter("@json", jsonValue));
-                            }
-                            else
-                            {
-                                cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
-                                parametros.Add(new MySqlParameter($"@{propiedad.Name}", propiedad.GetValue(elemento)));
-                            }
+
+                            cmd.CommandText += $"{propiedad.Name} = @{propiedad.Name}, ";
+                            parametros.Add(new MySqlParameter($"@{propiedad.Name}", propiedad.GetValue(elemento)));
+
                         }
                     }
 
@@ -225,16 +207,8 @@ namespace Entidades
 
                     foreach (var propiedad in propiedades)
                     {
-                        if (propiedad.Name == "Viajes")
-                        {
-                            // Para la columna JSON 'Viajes', serializa el objeto como JSON
-                            string jsonValue = JsonConvert.SerializeObject(propiedad.GetValue(elemento));
-                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", jsonValue);
-                        }
-                        else
-                        {
-                            cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
-                        }
+                        cmd.Parameters.AddWithValue($"@{propiedad.Name}", propiedad.GetValue(elemento));
+                        
                     }
 
                     cmd.ExecuteNonQuery();
