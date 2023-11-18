@@ -30,6 +30,7 @@
         {
             labelBajaUsuario = new Label();
             btnBajaTarjetaUsuario = new Button();
+            lblMensaje = new Label();
             SuspendLayout();
             // 
             // labelBajaUsuario
@@ -52,11 +53,21 @@
             btnBajaTarjetaUsuario.UseVisualStyleBackColor = true;
             btnBajaTarjetaUsuario.Click += btnBajaTarjetaUsuario_Click;
             // 
+            // lblMensaje
+            // 
+            lblMensaje.AutoSize = true;
+            lblMensaje.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            lblMensaje.Location = new Point(238, 237);
+            lblMensaje.Name = "lblMensaje";
+            lblMensaje.Size = new Size(0, 21);
+            lblMensaje.TabIndex = 2;
+            // 
             // FormBajaUsuario
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
+            Controls.Add(lblMensaje);
             Controls.Add(btnBajaTarjetaUsuario);
             Controls.Add(labelBajaUsuario);
             Name = "FormBajaUsuario";
@@ -69,5 +80,6 @@
 
         private Label labelBajaUsuario;
         private Button btnBajaTarjetaUsuario;
+        private Label lblMensaje;
     }
 }

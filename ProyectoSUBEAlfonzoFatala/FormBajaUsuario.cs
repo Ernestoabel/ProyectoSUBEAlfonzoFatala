@@ -20,6 +20,7 @@ namespace ProyectoSUBEAlfonzoFatala
         string mensaje;
         int indice = 1;
         int dni;
+        int tarjeta;
         public FormBajaUsuario()
         {
             InitializeComponent();
@@ -38,12 +39,14 @@ namespace ProyectoSUBEAlfonzoFatala
                     mensaje = $"El usuario {usuarioArgentino.Dni} con la tarjeta {usuarioArgentino.IdSubeArgentina} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioArgentino.Dni);
+                    tarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                 }
                 else if (usuario is UsuarioExtranjero usuarioExtranjero)
                 {
                     mensaje = $"El usuario {usuarioExtranjero.Dni} con la tarjeta {usuarioExtranjero.IdSubeExtranjero} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioExtranjero.Dni);
+                    tarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                 }
             }
             catch (UsuarioSinTarjetaException)
@@ -60,11 +63,11 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             try
             {
-                if (!ArchivoMensaje.VerificarNumeroEnListaBajas(dni))
+                if (!ArchivoMensaje.VerificarNumeroEnListaBajas(dni, tarjeta))
                 {
                     ArchivoMensaje.listaBajas.Add(new Dictionary<int, BajaData> { { indice, new BajaData { Indice = indice, Mensaje = mensaje } } });
                     ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
-                    MessageBox.Show("El mensaje fue enviado", "Exito", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    lblMensaje.Text = "El mensaje fue enviado";
                 }
                 else
                 {
@@ -73,7 +76,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (Exception)
             {
-                MessageBox.Show("Esta tarjeta ya pidio la baja", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                lblMensaje.Text = "Esta tarjeta ya pidio la baja";
             }
         }
 

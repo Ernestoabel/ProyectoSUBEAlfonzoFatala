@@ -34,7 +34,7 @@ namespace ProyectoSUBEAlfonzoFatala
             PruebaTestUnitario();
             //CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
-            
+
         }
         /// <summary>
         /// Metodo para cargar las listas con datos en los Json

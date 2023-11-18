@@ -61,7 +61,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dataGridMensajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
-            
+
         }
 
         private void FormAdminMensajes_Load(object sender, EventArgs e)
@@ -84,26 +84,32 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dataGridMensajes.CellValueChanged += (sender, e) =>
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex == dataTable.Columns["Confirmar"].Ordinal)
+                try
                 {
-                    int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
-                    bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
-
-                    // Actualiza el valor "Confirmar" en la lista
-                    foreach (var dict in listaMostrarMensajes)
+                    if (e.RowIndex >= 0 && e.ColumnIndex == dataTable.Columns["Confirmar"].Ordinal)
                     {
-                        foreach (var kvp in dict)
+                        int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
+                        bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
+
+                        // Actualiza el valor "Confirmar" en la lista
+                        foreach (var dict in listaMostrarMensajes)
                         {
-                            if (kvp.Key == indice)
+                            foreach (var kvp in dict)
                             {
-                                kvp.Value.confirmacion = leido;
-                                break;
+                                if (kvp.Key == indice)
+                                {
+                                    kvp.Value.confirmacion = leido;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    // Guarda los cambios en el archivo XML
-                    ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
+                        // Guarda los cambios en el archivo XML
+                        ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
+                    }
+                } catch (Exception ex)
+                {
+                    CatchError.LogError(nameof(FormAdminMensajes), nameof(FormAdminMensajes_Load), "Error en el evento", ex);
                 }
             };
         }
