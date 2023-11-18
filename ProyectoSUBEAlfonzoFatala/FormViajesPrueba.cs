@@ -23,11 +23,13 @@ namespace ProyectoSUBEAlfonzoFatala
         Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
+        private CancellationTokenSource cancellationTokenSource;
 
         public FormViajesPrueba()
         {
             InitializeComponent();
             this.listaViajes = new List<Viajes>();
+            
         }
 
         /// <summary>
@@ -86,7 +88,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         public void SetDataGridViewStyle()
         {
-            // Establece el estilo de las celdas
             this.dtgViajes.DefaultCellStyle.Font = new Font("Arial", 12);
             this.dtgViajes.DefaultCellStyle.ForeColor = Color.Black;
             this.dtgViajes.DefaultCellStyle.BackColor = Color.LightGray;
@@ -109,18 +110,48 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             this.dtgViajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Las celdas no se puede modificar
+            // Las celdas no se pueden modificar
             this.dtgViajes.ReadOnly = true;
 
-            //Les da Nombre a las columnas
+            this.dtgViajes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            this.dtgViajes.AllowUserToResizeRows = false;
+
+            // Les da Nombre a las columnas
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
             this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
             this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
             this.dtgViajes.Columns[nameof(Viajes.TarjetaNacionalId)].Visible = false;
             this.dtgViajes.Columns[nameof(Viajes.TarjetaInternacionalId)].Visible = false;
 
-            //Opcion para cuando se maximiza la ventana y tome toda la ventana
+            // Oculta la columna del índice
+            this.dtgViajes.RowHeadersVisible = false;
+
+            // Opción para cuando se maximiza la ventana y tome toda la ventana
             this.dtgViajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
+            // Asigna colores diferentes según el enumerado MedioTransporte
+            foreach (DataGridViewRow row in this.dtgViajes.Rows)
+            {
+                if (row.Cells[nameof(Viajes.MedioTransporte)].Value is EMedioTransporte transporte)
+                {
+                    switch (transporte)
+                    {
+                        case EMedioTransporte.Autobus:
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                            break;
+                        case EMedioTransporte.Subte:
+                            row.DefaultCellStyle.BackColor = Color.LightBlue;
+                            break;
+                        case EMedioTransporte.Tren:
+                            row.DefaultCellStyle.BackColor = Color.LightPink;
+                            break;
+                        case EMedioTransporte.Bicicleta:
+                            row.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+                            break;
+                    }
+                }
+            }
         }
 
         private void FormViajesPrueba_Load(object sender, EventArgs e)
@@ -128,7 +159,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
-
         }
 
         /// <summary>
@@ -198,7 +228,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 dtgViajes.DataSource = null;
                 dtgViajes.DataSource = listaViajes;
                 SetDataGridViewStyle();
-
             }));
         }
 
@@ -210,16 +239,28 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             this.Invoke(new Action(async () =>
             {
-                //Thread.Sleep(5000);
-                await Task.Delay(4000);
-                if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
+                // Crear un nuevo origen del token de cancelación antes de iniciar el bucle
+                cancellationTokenSource = new CancellationTokenSource();
+
+                try
                 {
-                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(); ;
-                    for (var i = 0; i < 5; i++)
+                    int randomDelay = new Random().Next(3, 9);
+
+                    int factorCosto = randomDelay;
+
+                    await Task.Delay(randomDelay * 1000, cancellationTokenSource.Token);
+
+                    Random random = new Random();
+
+                    if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                     {
-                        var nuevoViaje = acumuluarFunciones.Invoke();
-                        decimal costoViaje = nuevoViaje.ValorBoleto;
-                        bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
+                        Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio();
+
+                        Viajes nuevoViaje = acumuluarFunciones.Invoke();
+                        nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
+                        lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+
                         if (haySaldo)
                         {
                             listaViajes.Add(nuevoViaje);
@@ -227,20 +268,18 @@ namespace ProyectoSUBEAlfonzoFatala
                         }
                         else
                         {
-                            lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
-                            break;
+                            lblMensaje.Text = "No tiene saldo suficiente, cargue la tarjeta";
                         }
-                    }
 
-                }
-                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
-                {
-                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(usuarioExtranjero);
-                    for (var i = 0; i < 5; i++)
+                    }
+                    else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                     {
-                        var nuevoViaje = acumuluarFunciones.Invoke();
-                        decimal costoViaje = nuevoViaje.ValorBoleto;
-                        bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
+                        Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(usuarioExtranjero);
+                        Viajes nuevoViaje = acumuluarFunciones.Invoke();
+                        nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
+                        lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+
                         if (haySaldo)
                         {
                             listaViajes.Add(nuevoViaje);
@@ -248,16 +287,28 @@ namespace ProyectoSUBEAlfonzoFatala
                         }
                         else
                         {
-                            lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
-                            break;
+                            lblMensaje.Text = "No tiene saldo suficiente, cargue la tarjeta";
                         }
+
                     }
+
+                    SetTimer(6000);
+                    listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
+                    dtgViajes.DataSource = null;
+                    dtgViajes.DataSource = listaViajes;
+                    SetDataGridViewStyle();
                 }
-                SetTimer(3000);
-                listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
-                dtgViajes.DataSource = null;
-                dtgViajes.DataSource = listaViajes;
-                SetDataGridViewStyle();
+                catch (OperationCanceledException)
+                {
+                    // La excepción se lanza si se cancela la operación
+                    lblMensaje.Text = "Se cancelo el viaje";
+                }
+                finally
+                {
+                    // Limpiar el token de cancelación después de la ejecución
+                    cancellationTokenSource.Dispose();
+                    cancellationTokenSource = null;
+                }
             }));
         }
 
@@ -272,6 +323,14 @@ namespace ProyectoSUBEAlfonzoFatala
                 timer.Dispose();  // Liberar recursos
             };
             timer.Start();  // Iniciar el temporizador
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+            }
         }
     }
 }
