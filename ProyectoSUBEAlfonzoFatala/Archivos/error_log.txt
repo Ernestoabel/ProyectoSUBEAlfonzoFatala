@@ -1822,3 +1822,409 @@ System.InvalidOperationException: Connection must be valid and open.
    at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
    at Entidades.UsuarioAdministrador.ObtenerElementosSQL() in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioAdministrador.cs:line 41
 
+17/11/2023 19:56:10 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:11 - Error en AccesoMySql.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.AccesoMySql`1.ObtenerElementosSQL(String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 84
+
+17/11/2023 19:56:13 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:13 - Error en AccesoMySql.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.AccesoMySql`1.ObtenerElementosSQL(String nombreTabla) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\AccesoMySql.cs:line 84
+
+17/11/2023 19:56:15 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:15 - Error en UsuarioSinTarjeta.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.UsuarioSinTarjeta.ObtenerElementosSQL() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioSinTarjeta.cs:line 52
+
+17/11/2023 19:56:17 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:17 - Error en UsuarioArgentino.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.UsuarioArgentino.ObtenerElementosSQL() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioArgentino.cs:line 97
+
+17/11/2023 19:56:19 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:19 - Error en UsuarioExtranjero.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.UsuarioExtranjero.ObtenerElementosSQL() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioExtranjero.cs:line 56
+
+17/11/2023 19:56:21 - Error en ConexionSQL.Conectar: Error al conectar la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Unable to connect to any of the specified MySQL hosts.
+ ---> System.Net.Sockets.SocketException (10061): No se puede establecer una conexión ya que el equipo de destino denegó expresamente dicha conexión.
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.ThrowException(SocketError error, CancellationToken cancellationToken)
+   at System.Net.Sockets.Socket.AwaitableSocketAsyncEventArgs.System.Threading.Tasks.Sources.IValueTaskSource.GetResult(Int16 token)
+   at System.Threading.Tasks.ValueTask.ValueTaskSourceAsTask.<>c.<.cctor>b__4_0(Object state)
+--- End of stack trace from previous location ---
+   at System.Net.Sockets.TcpClient.CompleteConnectAsync(Task task)
+   at MySql.Data.MySqlClient.NativeDriver.<>c.<OpenAsync>b__38_0(Exception ex)
+   at System.AggregateException.Handle(Func`2 predicate)
+   at MySql.Data.MySqlClient.NativeDriver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.Driver.CreateAsync(MySqlConnectionStringBuilder settings, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.CreateNewPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetPooledConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.TryToGetDriverAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlPool.GetConnectionAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.OpenAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlConnection.Open()
+   at Entidades.ConexionSQL.Conectar() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\ConexionSQL.cs:line 31
+
+17/11/2023 19:56:21 - Error en UsuarioAdministrador.ObtenerElementosSQL: Error al obtener elementos de la base de datos
+System.InvalidOperationException: Connection must be valid and open.
+   at MySql.Data.MySqlClient.Interceptors.ExceptionInterceptor.Throw(Exception exception)
+   at MySql.Data.MySqlClient.MySqlCommand.CheckState()
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReader()
+   at Entidades.UsuarioAdministrador.ObtenerElementosSQL() in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioAdministrador.cs:line 41
+
+17/11/2023 21:59:26 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 1.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 21:59:27 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 2.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 21:59:29 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 21:59:31 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 22:10:05 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 2.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 22:10:05 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 22:10:06 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+17/11/2023 22:10:15 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 5.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 91
+
+18/11/2023 08:27:58 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:28:00 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:28:00 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:28:01 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:28:05 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:28:06 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 187
+
+18/11/2023 08:49:31 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 2.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 08:49:32 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 08:49:34 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 08:51:19 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 1.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+18/11/2023 08:53:45 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 2.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 08:53:46 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 08:53:55 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+18/11/2023 09:46:41 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaNacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 09:46:48 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaNacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 09:46:48 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaNacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 09:51:38 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaInternacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 09:51:43 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaInternacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 09:51:44 - Error en Viajes.InsertarViajeSQL: Error al insertar viaje a la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@tarjetaInternacionalId' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.Viajes.InsertarViajeSQL(Viajes viaje, Int32 idTarjeta) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\Viajes.cs:line 163
+
+18/11/2023 10:36:07 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 193
+
+18/11/2023 12:25:04 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 193
+

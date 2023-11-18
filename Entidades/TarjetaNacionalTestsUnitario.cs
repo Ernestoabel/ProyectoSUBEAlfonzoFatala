@@ -21,7 +21,7 @@ namespace Entidades
             var viaje = Viajes.GenerarViajeAleatorio();
             var viajes = new List<Viajes>();
             viajes.Add(viaje);
-            var tarjeta = new TarjetaNacional(10, 500, viajes);
+            var tarjeta = new TarjetaNacional(10, 500);
             var lista = new List<TarjetaNacional>(); // Crea una lista de tarjetas para probar
             lista.Add(tarjeta); // Crea una lista de tarjetas para probar
             var nombreArchivo = @"testTarjetaNacional.json";

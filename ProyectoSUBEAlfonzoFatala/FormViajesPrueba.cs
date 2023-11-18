@@ -20,14 +20,16 @@ namespace ProyectoSUBEAlfonzoFatala
     public partial class FormViajesPrueba : Form, IDataGridViewStyler
     {
         List<Viajes> listaViajes;
-        object usuarioLogueado;
+        Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
+        private CancellationTokenSource cancellationTokenSource;
 
         public FormViajesPrueba()
         {
             InitializeComponent();
             this.listaViajes = new List<Viajes>();
+            
         }
 
         /// <summary>
@@ -35,7 +37,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Se ejecuta por delegado en el FormInicio
         /// </summary>
         /// <param name="usuario"></param>
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(Usuario usuario)
         {
             try
             {
@@ -50,9 +52,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     btnViajarx5.Enabled = true;
                     if (usuario is UsuarioArgentino usuarioArgentino)
                     {
-                        int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
-                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        List<Viajes> viajes = tarjetaNacional.Viajes;
+                        tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == int.Parse(usuarioArgentino.IdSubeArgentina));
+                        List<Viajes> viajes = Viajes.ObtenerViajesPorTarjetaSQL(int.Parse(usuarioArgentino.IdSubeArgentina));
                         listaViajes.AddRange(viajes);
                     }
 
@@ -64,9 +65,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     btnViajarx5.Enabled = true;
                     if (usuario is UsuarioExtranjero usuarioExtranjero)
                     {
-                        int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
-                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        List<Viajes> viajes = tarjetaInternacional.Viajes;
+                        tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == int.Parse(usuarioExtranjero.IdSubeExtranjero));
+                        List<Viajes> viajes = Viajes.ObtenerViajesPorTarjetaSQL(int.Parse(usuarioExtranjero.IdSubeExtranjero));
                         listaViajes.AddRange(viajes);
                     }
                 }
@@ -77,9 +77,9 @@ namespace ProyectoSUBEAlfonzoFatala
                 btnViajar.Enabled = false;
                 btnViajarx5.Enabled = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CatchError.LogError(nameof(FormViajesPrueba), nameof(TraerUsuario), "Error en el metodo", ex);
             }
         }
 
@@ -88,7 +88,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         public void SetDataGridViewStyle()
         {
-            // Establece el estilo de las celdas
             this.dtgViajes.DefaultCellStyle.Font = new Font("Arial", 12);
             this.dtgViajes.DefaultCellStyle.ForeColor = Color.Black;
             this.dtgViajes.DefaultCellStyle.BackColor = Color.LightGray;
@@ -111,16 +110,48 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             this.dtgViajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
-            // Las celdas no se puede modificar
+            // Las celdas no se pueden modificar
             this.dtgViajes.ReadOnly = true;
 
-            //Les da Nombre a las columnas
+            this.dtgViajes.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
+            this.dtgViajes.AllowUserToResizeRows = false;
+
+            // Les da Nombre a las columnas
             this.dtgViajes.Columns[nameof(Viajes.FechaHora)].HeaderText = "Fecha y hora";
             this.dtgViajes.Columns[nameof(Viajes.MedioTransporte)].HeaderText = "Medio de Transporte";
             this.dtgViajes.Columns[nameof(Viajes.ValorBoleto)].HeaderText = "Costo del viaje";
+            this.dtgViajes.Columns[nameof(Viajes.TarjetaNacionalId)].Visible = false;
+            this.dtgViajes.Columns[nameof(Viajes.TarjetaInternacionalId)].Visible = false;
 
-            //Opcion para cuando se maximiza la ventana y tome toda la ventana
+            // Oculta la columna del índice
+            this.dtgViajes.RowHeadersVisible = false;
+
+            // Opción para cuando se maximiza la ventana y tome toda la ventana
             this.dtgViajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
+
+            // Asigna colores diferentes según el enumerado MedioTransporte
+            foreach (DataGridViewRow row in this.dtgViajes.Rows)
+            {
+                if (row.Cells[nameof(Viajes.MedioTransporte)].Value is EMedioTransporte transporte)
+                {
+                    switch (transporte)
+                    {
+                        case EMedioTransporte.Autobus:
+                            row.DefaultCellStyle.BackColor = Color.LightGreen;
+                            break;
+                        case EMedioTransporte.Subte:
+                            row.DefaultCellStyle.BackColor = Color.LightBlue;
+                            break;
+                        case EMedioTransporte.Tren:
+                            row.DefaultCellStyle.BackColor = Color.LightPink;
+                            break;
+                        case EMedioTransporte.Bicicleta:
+                            row.DefaultCellStyle.BackColor = Color.LightGoldenrodYellow;
+                            break;
+                    }
+                }
+            }
         }
 
         private void FormViajesPrueba_Load(object sender, EventArgs e)
@@ -128,7 +159,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dtgViajes.DataSource = this.listaViajes;
             SetDataGridViewStyle();
-            
         }
 
         /// <summary>
@@ -164,17 +194,14 @@ namespace ProyectoSUBEAlfonzoFatala
                     decimal costoViaje = nuevoViaje.ValorBoleto;
                     bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
 
-                    if(haySaldo)
+                    if (haySaldo)
                     {
-                        listaViajes = listaViajes + nuevoViaje;
-                        tarjetaNacional.Viajes = listaViajes;
-                        string condicion = $"Id = {tarjetaNacional.Id}";
-                        tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
-
+                        listaViajes.Add(nuevoViaje);
+                        Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
                     }
                     else
                     {
-                        MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
+                        lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                     }
 
                 }
@@ -184,25 +211,23 @@ namespace ProyectoSUBEAlfonzoFatala
                     decimal costoViaje = nuevoViaje.ValorBoleto;
                     bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
 
-                    if(haySaldo) 
+                    if (haySaldo)
                     {
-                        listaViajes = listaViajes + nuevoViaje;
-                        tarjetaInternacional.Viajes = listaViajes;
-                        string condicion = $"Id = {tarjetaInternacional.Id}";
-                        tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
-                    
+                        listaViajes.Add(nuevoViaje);
+                        Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
+
                     }
                     else
                     {
-                        MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
+                        lblMensaje.Text = "no tiene saldo suficiente, cargue la tarjeta";
                     }
 
                 }
-
+                SetTimer(3000);
                 listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
                 dtgViajes.DataSource = null;
                 dtgViajes.DataSource = listaViajes;
-
+                SetDataGridViewStyle();
             }));
         }
 
@@ -212,64 +237,100 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private async Task ViajarCincoVeces()
         {
-            this.Invoke(new Action(async() =>
+            this.Invoke(new Action(async () =>
             {
-                //Thread.Sleep(5000);
-                await Task.Delay(4000);
-                if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
+                // Crear un nuevo origen del token de cancelación antes de iniciar el bucle
+                cancellationTokenSource = new CancellationTokenSource();
+
+                try
                 {
-                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(); ;
-                    for (var i = 0; i < 5; i++)
+                    int randomDelay = new Random().Next(3, 9);
+
+                    int factorCosto = randomDelay;
+
+                    await Task.Delay(randomDelay * 1000, cancellationTokenSource.Token);
+
+                    Random random = new Random();
+
+                    if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                     {
-                        var nuevoViaje = acumuluarFunciones.Invoke();
-                        decimal costoViaje = nuevoViaje.ValorBoleto;
-                        bool haySaldo = tarjetaNacional.RestarSaldo(costoViaje);
+                        Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio();
+
+                        Viajes nuevoViaje = acumuluarFunciones.Invoke();
+                        nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
+                        lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+
                         if (haySaldo)
                         {
-                            listaViajes = listaViajes + nuevoViaje;
-
+                            listaViajes.Add(nuevoViaje);
+                            Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
                         }
                         else
                         {
-                            MessageBox.Show($"{usuarioArgentino.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaNacional.Id}");
-                            break;
+                            lblMensaje.Text = "No tiene saldo suficiente, cargue la tarjeta";
                         }
-                    }
-                    tarjetaNacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaNacional.Id}";
 
-                    tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
-                }
-                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
-                {
-                    Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(usuarioExtranjero);
-                    for (var i = 0; i < 5; i++)
+                    }
+                    else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                     {
-                        var nuevoViaje = acumuluarFunciones.Invoke();
-                        decimal costoViaje = nuevoViaje.ValorBoleto;
-                        bool haySaldo = tarjetaInternacional.RestarSaldo(costoViaje);
+                        Func<Viajes> acumuluarFunciones = () => Viajes.GenerarViajeAleatorio(usuarioExtranjero);
+                        Viajes nuevoViaje = acumuluarFunciones.Invoke();
+                        nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
+                        lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+
                         if (haySaldo)
                         {
-                            listaViajes = listaViajes + nuevoViaje;
-
+                            listaViajes.Add(nuevoViaje);
+                            Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
                         }
                         else
                         {
-                            MessageBox.Show($"{usuarioExtranjero.Nombre} no tiene saldo suficiente, cargue la tarjeta {tarjetaInternacional.Id}");
-                            break;
+                            lblMensaje.Text = "No tiene saldo suficiente, cargue la tarjeta";
                         }
+
                     }
-                    tarjetaInternacional.Viajes = listaViajes;
-                    string condicion = $"Id = {tarjetaInternacional.Id}";
 
-                    tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
+                    SetTimer(6000);
+                    listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
+                    dtgViajes.DataSource = null;
+                    dtgViajes.DataSource = listaViajes;
+                    SetDataGridViewStyle();
                 }
-
-                listaViajes = listaViajes.OrderBy(viaje => viaje.FechaHora).ToList();
-                dtgViajes.DataSource = null;
-                dtgViajes.DataSource = listaViajes;
-
+                catch (OperationCanceledException)
+                {
+                    // La excepción se lanza si se cancela la operación
+                    lblMensaje.Text = "Se cancelo el viaje";
+                }
+                finally
+                {
+                    // Limpiar el token de cancelación después de la ejecución
+                    cancellationTokenSource.Dispose();
+                    cancellationTokenSource = null;
+                }
             }));
+        }
+
+        private void SetTimer(int intervalo)
+        {
+            System.Windows.Forms.Timer timer = new System.Windows.Forms.Timer();
+            timer.Interval = intervalo;
+            timer.Tick += (sender, e) =>
+            {
+                lblMensaje.Text = "";  // Limpiar el mensaje después del intervalo
+                timer.Stop();  // Detener el temporizador
+                timer.Dispose();  // Liberar recursos
+            };
+            timer.Start();  // Iniciar el temporizador
+        }
+
+        private void btnCancelar_Click(object sender, EventArgs e)
+        {
+            if (cancellationTokenSource != null)
+            {
+                cancellationTokenSource.Cancel();
+            }
         }
     }
 }

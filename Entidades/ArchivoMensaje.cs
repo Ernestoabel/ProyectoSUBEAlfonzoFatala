@@ -136,27 +136,27 @@ namespace Entidades
 
             return cadena.Contains(numeroStr);
         }
+        public static bool EsTarjetaParteDeString(string cadena, int numero)
+        {
+            string numeroStr = numero.ToString();
+
+            return cadena.Contains(numeroStr);
+        }
 
         /// <summary>
         /// Metodo para validar que el mismo usuario no repita el mensaje de baja
         /// </summary>
         /// <param name="numero"></param>
         /// <returns></returns>
-        public static bool VerificarNumeroEnListaBajas(int numero)
+        public static bool VerificarNumeroEnListaBajas(int numeroDni, int numeroTarjeta)
         {
             try
             {
-                foreach (var diccionario in listaBajas)
-                {
-                    foreach (var kvp in diccionario)
-                    {
-                        if (EsDNIParteDeString(kvp.Value.Mensaje, numero))
-                        {
-                            return true; // Si se encuentra una coincidencia, puedes devolver true inmediatamente.
-                        }
-                    }
-                }
-                return false; // Si no se encuentra ninguna coincidencia.
+                return listaBajas.Any(diccionario =>
+                    diccionario.Any(kvp =>
+                        EsDNIParteDeString(kvp.Value.Mensaje, numeroDni) && EsTarjetaParteDeString(kvp.Value.Mensaje, numeroTarjeta)
+                    )
+                );
             }
             catch (Exception ex)
             {
@@ -164,6 +164,5 @@ namespace Entidades
                 return false;
             }
         }
-
     }
 }

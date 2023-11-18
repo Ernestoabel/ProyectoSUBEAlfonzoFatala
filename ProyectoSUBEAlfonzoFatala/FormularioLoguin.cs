@@ -22,7 +22,7 @@ namespace ProyectoSUBEAlfonzoFatala
     {
         TarjetaInternacional tarjetaInt = new TarjetaInternacional();
         TarjetaNacional tarjetaNac = new TarjetaNacional();
-        Action<object> pasarObjeto;
+        Action<Usuario> pasarObjeto;
 
         public FormularioLoguin()
         {
@@ -34,14 +34,14 @@ namespace ProyectoSUBEAlfonzoFatala
             PruebaTestUnitario();
             //CargarJson();
             ArchivoMensaje.listaBajas = ArchivoMensaje.DeserializarMensajesBajaDesdeArchivo();
-            
+
         }
         /// <summary>
         /// Metodo para cargar las listas con datos en los Json
         /// </summary>
         private void CargarJson()
         {
-            
+
             List<TarjetaNacional> tajetaNacionalCargadas = tarjetaNac.CargarDesdeArchivo("tarjetaNacional.json");
             List<TarjetaInternacional> tarjetaInternacionalCargadas = tarjetaInt.CargarDesdeArchivo("tarjetaInternacional.json");
             List<Usuario> usuariosCargados = ManejoDeListados.DeserializeUsuarios();
@@ -73,6 +73,8 @@ namespace ProyectoSUBEAlfonzoFatala
             tarjetaNacTests.CargarDesdeArchivo_DeserializaListaCorrectamente();
         }
 
+
+
         /// <summary>
         /// Evento para el logeo
         /// Pide dni y clave
@@ -82,33 +84,31 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void btnIngresar_Click(object sender, EventArgs e)
+        private async void btnIngresar_Click(object sender, EventArgs e)
         {
-            
+            FormInicio inicio = null;
+            lblError.Text = "";
             try
             {
                 string dni = txtUsuario.Text;
                 string clave = txtPassword.Text;
                 object usuario = ManejoDeListados.ObtenerUsuarioPorDniYTarjeta(dni);
-                if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave) )
+                if (string.IsNullOrEmpty(dni) || string.IsNullOrEmpty(clave))
                 {
                     throw new Exception();
                 }
 
                 if (usuario != null)
                 {
+                    inicio = new FormInicio();
                     if (usuario is UsuarioSinTarjeta)
                     {
 
                         UsuarioSinTarjeta usuarioLogueado = (UsuarioSinTarjeta)usuario;
                         if (usuarioLogueado.ValidarClave(clave))
                         {
-                            MessageBox.Show("El usuario no tiene tarjeta", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            //FormInicio inicio = new FormInicio(usuarioLogueado);
-                            FormInicio inicio = new FormInicio();
-                            this.pasarObjeto += inicio.RecivirObjeto;
-                            this.pasarObjeto.Invoke(usuarioLogueado);
-                            this.pasarObjeto -= inicio.RecivirObjeto;
+                            await Task.Run(() => SuscribirEvento(inicio, usuarioLogueado));
+
                             inicio.Show();
                             this.Hide();
                         }
@@ -116,16 +116,11 @@ namespace ProyectoSUBEAlfonzoFatala
                     }
                     else if (usuario is UsuarioArgentino)
                     {
-                        
+
                         UsuarioArgentino usuarioLogueado = (UsuarioArgentino)usuario;
                         if (usuarioLogueado.ValidarClave(clave))
                         {
-                            MessageBox.Show("El usuario tiene tarjeta argentina", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                           
-                            FormInicio inicio = new FormInicio();
-                            this.pasarObjeto += inicio.RecivirObjeto;
-                            this.pasarObjeto.Invoke(usuarioLogueado);
-                            this.pasarObjeto -= inicio.RecivirObjeto;
+                            await Task.Run(() => SuscribirEvento(inicio, usuarioLogueado));
                             inicio.Show();
                             this.Hide();
                         }
@@ -136,12 +131,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         UsuarioExtranjero usuarioLogueado = (UsuarioExtranjero)usuario;
                         if (usuarioLogueado.ValidarClave(clave))
                         {
-                            MessageBox.Show("El usuario tiene tarjeta extranjera", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
-
-                            FormInicio inicio = new FormInicio();
-                            this.pasarObjeto += inicio.RecivirObjeto;
-                            this.pasarObjeto.Invoke(usuarioLogueado);
-                            this.pasarObjeto -= inicio.RecivirObjeto;
+                            await Task.Run(() => SuscribirEvento(inicio, usuarioLogueado));
                             inicio.Show();
                             this.Hide();
                         }
@@ -150,7 +140,6 @@ namespace ProyectoSUBEAlfonzoFatala
                     }
                     else if (usuario is UsuarioAdministrador)
                     {
-                        MessageBox.Show("Administrador", "Logueo exitoso", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         UsuarioAdministrador usuarioLogueado = (UsuarioAdministrador)usuario;
                         if (usuarioLogueado.ValidarClave(clave))
                         {
@@ -166,15 +155,47 @@ namespace ProyectoSUBEAlfonzoFatala
                     throw new Exception();
                 }
             }
-            catch (ClaveInvalidaException )
+            catch (ClaveInvalidaException)
             {
-                MessageBox.Show("La clave ingresada es incorrecta. Por favor, inténtelo de nuevo.", "Error de clave", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblError.Text = "La clave ingresada es incorrecta";
             }
             catch (Exception)
             {
-                MessageBox.Show("Se produjo un error al intentar iniciar sesión", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                lblError.Text = "Error de logueo";
+            }
+            finally
+            {
+                await Task.Run(() => DesuscribirEvento(inicio));
             }
 
+        }
+        /// <summary>
+        /// Metodos para utilizar delegados
+        /// </summary>
+        /// <param name="inicio"></param>
+        /// <param name="usuario"></param>
+        private void SuscribirEvento(FormInicio inicio, Usuario usuario)
+        {
+            try
+            {
+                pasarObjeto += inicio.RecivirObjeto;
+                pasarObjeto.Invoke(usuario);
+            }catch (Exception ex)
+            {
+                CatchError.LogError(nameof(FormInicio), nameof(SuscribirEvento), "Error en el metodo", ex);
+            }
+        }
+
+        private void DesuscribirEvento(FormInicio inicio)
+        {
+            try
+            {
+                pasarObjeto -= inicio.RecivirObjeto;
+
+            }catch (Exception ex) 
+            {
+                CatchError.LogError(nameof(FormInicio), nameof(DesuscribirEvento), "Error en el metodo", ex);
+            }
         }
 
         /// <summary>
@@ -209,7 +230,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             using (FormRegistro formRegistro = new FormRegistro())
             {
-               
+
                 if (formRegistro.ShowDialog() == DialogResult.OK)
                 {
                     Listados.listaUsuarios.Add(formRegistro.nuevoUsuarioRegistrado);

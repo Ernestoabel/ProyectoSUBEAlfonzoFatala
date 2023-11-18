@@ -18,7 +18,7 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormAdminMensajes()
         {
             InitializeComponent();
-            listaMostrarMensajes = ArchivoMensaje.listaBajas;
+            
         }
 
 
@@ -53,29 +53,34 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Ajusta el modo de redimensionamiento de las columnas
             this.dataGridMensajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-
+            
             this.dataGridMensajes.Columns["Indice"].ReadOnly = true;
             this.dataGridMensajes.Columns["Mensaje"].ReadOnly = true;
-            this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
-            this.dataGridMensajes.Columns["Confirmar"].Width = 80;
+            //this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
+            //this.dataGridMensajes.Columns["Confirmar"].Width = 80;
 
             this.dataGridMensajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 
-            
+
+
         }
 
         private void FormAdminMensajes_Load(object sender, EventArgs e)
         {
             DataTable dataTable = new DataTable();
+            listaMostrarMensajes = ArchivoMensaje.listaBajas;
             dataTable.Columns.Add("Indice", typeof(int));
             dataTable.Columns.Add("Mensaje", typeof(string));
             dataTable.Columns.Add("Confirmar", typeof(bool)); // Agregar columna para el booleano
-
+            
             foreach (var dict in listaMostrarMensajes)
             {
                 foreach (var kvp in dict)
                 {
-                    dataTable.Rows.Add(kvp.Key, kvp.Value.Mensaje, kvp.Value.confirmacion); // Agregar el valor de NamespaceEntidades
+                    if (!string.IsNullOrEmpty(kvp.Value.Mensaje)) // Agrega esta condición para evitar filas vacías
+                    {
+                        dataTable.Rows.Add(kvp.Key, kvp.Value.Mensaje, kvp.Value.confirmacion);
+                    }
                 }
             }
 
@@ -84,26 +89,32 @@ namespace ProyectoSUBEAlfonzoFatala
 
             this.dataGridMensajes.CellValueChanged += (sender, e) =>
             {
-                if (e.RowIndex >= 0 && e.ColumnIndex == dataTable.Columns["Confirmar"].Ordinal)
+                try
                 {
-                    int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
-                    bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
-
-                    // Actualiza el valor "Confirmar" en la lista
-                    foreach (var dict in listaMostrarMensajes)
+                    if (e.RowIndex >= 0 && e.ColumnIndex == dataTable.Columns["Confirmar"].Ordinal)
                     {
-                        foreach (var kvp in dict)
+                        int indice = (int)dataTable.Rows[e.RowIndex]["Indice"];
+                        bool leido = (bool)dataTable.Rows[e.RowIndex]["Confirmar"];
+
+                        // Actualiza el valor "Confirmar" en la lista
+                        foreach (var dict in listaMostrarMensajes)
                         {
-                            if (kvp.Key == indice)
+                            foreach (var kvp in dict)
                             {
-                                kvp.Value.confirmacion = leido;
-                                break;
+                                if (kvp.Key == indice)
+                                {
+                                    kvp.Value.confirmacion = leido;
+                                    break;
+                                }
                             }
                         }
-                    }
 
-                    // Guarda los cambios en el archivo XML
-                    ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
+                        // Guarda los cambios en el archivo XML
+                        ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
+                    }
+                } catch (Exception ex)
+                {
+                    CatchError.LogError(nameof(FormAdminMensajes), nameof(FormAdminMensajes_Load), "Error en el evento", ex);
                 }
             };
         }

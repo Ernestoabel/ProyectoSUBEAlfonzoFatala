@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using MySql.Data.MySqlClient;
 
 namespace Entidades
 {
@@ -16,6 +18,8 @@ namespace Entidades
         private DateTime fechaHora;
         private decimal valorBoleto;
         private EMedioTransporte medioTransporte;
+        private int tarjetaNacionalId;
+        private int tarjetaInternacionalId;
 
         public Viajes()
         {
@@ -35,6 +39,18 @@ namespace Entidades
         }
         public DateTime FechaHora { get => fechaHora; set => fechaHora = value; }
         public decimal ValorBoleto { get => valorBoleto; set => valorBoleto = value; }
+
+        public int TarjetaNacionalId
+        {
+            get => tarjetaNacionalId;
+            set => tarjetaNacionalId = value;
+        }
+
+        public int TarjetaInternacionalId
+        {
+            get => tarjetaInternacionalId;
+            set => tarjetaInternacionalId = value;
+        }
 
         /// <summary>
         /// Metodo para generar viajes aleatorios
@@ -117,6 +133,95 @@ namespace Entidades
         {
             lista.Add(nuevoViaje);
             return lista;
+        }
+
+        public static void InsertarViajeSQL(Viajes viaje, int idTarjeta)
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "INSERT INTO viajes (fechahora, medio, valorboleto, tarjetaNacionalId, tarjetaInternacionalId) VALUES (@fechahora, @medio, @valorboleto, @tarjetaNacionalId, @tarjetaInternacionalId)";
+
+                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
+                    cmd.Parameters.AddWithValue("@fechahora", viaje.FechaHora);
+                    cmd.Parameters.AddWithValue("@medio", viaje.MedioTransporte.ToString());
+                    cmd.Parameters.AddWithValue("@valorboleto", viaje.ValorBoleto);
+                    if(idTarjeta > 5000)
+                    {
+                        cmd.Parameters.AddWithValue("@tarjetaInternacionalId", idTarjeta);
+                        cmd.Parameters.AddWithValue("@tarjetaNacionalId", null);
+                    }
+                    else
+                    {
+                        cmd.Parameters.AddWithValue("@tarjetaNacionalId", idTarjeta);
+                        cmd.Parameters.AddWithValue("@tarjetaInternacionalId", null);
+                    }
+                    
+                    
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(Viajes), nameof(InsertarViajeSQL), "Error al insertar viaje a la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+            }
+        }
+
+        public static List<Viajes> ObtenerViajesPorTarjetaSQL(int numeroTarjeta)
+        {
+            List<Viajes> viajesEncontrados = new List<Viajes>();
+
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = "SELECT fechahora, medio, valorboleto, tarjetaNacionalId, tarjetaInternacionalId FROM viajes WHERE tarjetaNacionalId = @numeroTarjeta OR tarjetaInternacionalId = @numeroTarjeta";
+
+                    cmd.Parameters.AddWithValue("@numeroTarjeta", numeroTarjeta);
+
+                    using (MySqlDataReader reader = cmd.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            DateTime fechaHora = reader.GetDateTime("fechahora");
+                            EMedioTransporte medioTransporte = (EMedioTransporte)Enum.Parse(typeof(EMedioTransporte), reader.GetString("medio"));
+                            decimal valorBoleto = reader.GetDecimal("valorboleto");
+                            int tarjetaNacionalId = reader.IsDBNull("tarjetaNacionalId") ? 0 : reader.GetInt32("tarjetaNacionalId");
+                            int tarjetaInternacionalId = reader.IsDBNull("tarjetaInternacionalId") ? 0 : reader.GetInt32("tarjetaInternacionalId");
+
+                            if (tarjetaNacionalId == numeroTarjeta || tarjetaInternacionalId == numeroTarjeta)
+                            {
+                                Viajes viaje = new Viajes(fechaHora, medioTransporte, valorBoleto);
+                                viaje.TarjetaNacionalId = tarjetaNacionalId;
+                                viaje.TarjetaInternacionalId = tarjetaInternacionalId;
+
+                                viajesEncontrados.Add(viaje);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(Viajes), nameof(ObtenerViajesPorTarjetaSQL), "Error al obtener viajes de la base de datos por tarjeta", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+            }
+
+            return viajesEncontrados;
         }
 
 

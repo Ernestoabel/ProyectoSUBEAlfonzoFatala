@@ -21,7 +21,7 @@ namespace ProyectoSUBEAlfonzoFatala
     {
 
         public Usuario usuarioLogueado;
-        Action<object> pasarObjeto;
+        Action<Usuario> pasarObjeto;
         public FormRegistrarTarjeta(Usuario usuario)
         {
             InitializeComponent();
@@ -57,8 +57,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
 
             List<Viajes> nuevosViajes = new List<Viajes>();
-            TarjetaNacional tarjetaNacional = new TarjetaNacional(1002, 0, nuevosViajes);
-            TarjetaInternacional tarjetaInternacional = new TarjetaInternacional(5002, 0, nuevosViajes); ;
+            TarjetaNacional tarjetaNacional = new TarjetaNacional(1002, 0);
+            TarjetaInternacional tarjetaInternacional = new TarjetaInternacional(5002, 0); ;
 
             if (dni == usuarioLogueado.Dni && clave == usuarioLogueado.Clave)
             {

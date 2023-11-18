@@ -15,9 +15,9 @@ namespace ProyectoSUBEAlfonzoFatala
         FormBajaUsuario formBaja = new FormBajaUsuario();
         FormCargarSaldo formCargarSaldo = new FormCargarSaldo();
         private Configuraciones configuraciones;
-        public object usuarioLogueado;
+        public Usuario usuarioLogueado;
         private string configuracionesFilePath = @"..\..\..\Archivos\configuraciones.json";
-        Action<object> pasarObjeto; //Delegado para el envio de un objeto a los formularios
+        Action<Usuario> pasarObjeto; //Delegado para el envio de un objeto a los formularios
 
 
         /// <summary>
@@ -38,7 +38,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Metodo para utilizar en un delegado
         /// </summary>
         /// <param name="objeto"></param>
-        public void RecivirObjeto(object objeto)
+        public void RecivirObjeto(Usuario objeto)
         {
             this.usuarioLogueado = objeto;
         }
@@ -50,16 +50,31 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void viajesToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pasarObjeto += formViajes.TraerUsuario;
-            this.pasarObjeto.Invoke(usuarioLogueado);
-            this.pasarObjeto -= formViajes.TraerUsuario;
-            formViajes.TopLevel = false;
-            formViajes.FormBorderStyle = FormBorderStyle.None;
-            formViajes.Dock = DockStyle.Fill;
-            this.Controls.Add(formViajes);
-            formViajes.Show();
+            // Primer hilo
+            await Task.Run(() =>
+            {
+                this.pasarObjeto += formViajes.TraerUsuario;
+                this.pasarObjeto.Invoke(usuarioLogueado);
+            });
+
+            // Segundo hilo después de un retraso
+            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+
+            // Operaciones en el hilo principal (interfaz de usuario)
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Segundo hilo
+                this.pasarObjeto -= formViajes.TraerUsuario;
+
+                // Operaciones adicionales si es necesario
+                formViajes.TopLevel = false;
+                formViajes.FormBorderStyle = FormBorderStyle.None;
+                formViajes.Dock = DockStyle.Fill;
+                this.Controls.Add(formViajes);
+                formViajes.Show();
+            });
 
         }
 
@@ -112,16 +127,31 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pasarObjeto += formTitularidad.TraerUsuario;
-            this.pasarObjeto.Invoke(usuarioLogueado);
-            this.pasarObjeto -= formTitularidad.TraerUsuario;
-            formTitularidad.TopLevel = false;
-            formTitularidad.FormBorderStyle = FormBorderStyle.None;
-            formTitularidad.Dock = DockStyle.Fill;
-            this.Controls.Add(formTitularidad);
-            formTitularidad.Show();
+            // Primer hilo
+            await Task.Run(() =>
+            {
+                this.pasarObjeto += formTitularidad.TraerUsuario;
+                this.pasarObjeto.Invoke(usuarioLogueado);
+            });
+
+            // Segundo hilo después de un retraso
+            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+
+            // Operaciones en el hilo principal (interfaz de usuario)
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Segundo hilo
+                this.pasarObjeto -= formTitularidad.TraerUsuario;
+
+                // Operaciones adicionales si es necesario
+                formTitularidad.TopLevel = false;
+                formTitularidad.FormBorderStyle = FormBorderStyle.None;
+                formTitularidad.Dock = DockStyle.Fill;
+                this.Controls.Add(formTitularidad);
+                formTitularidad.Show();
+            });
         }
 
 
@@ -145,16 +175,30 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void bajaToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.pasarObjeto += formBaja.TraerUsuario;
-            this.pasarObjeto.Invoke(usuarioLogueado);
-            this.pasarObjeto -= formBaja.TraerUsuario;
-            formBaja.TopLevel = false;
-            formBaja.FormBorderStyle = FormBorderStyle.None;
-            formBaja.Dock = DockStyle.Fill;
-            this.Controls.Add(formBaja);
-            formBaja.Show();
+            await Task.Run(() =>
+            {
+                this.pasarObjeto += formBaja.TraerUsuario;
+                this.pasarObjeto.Invoke(usuarioLogueado);
+            });
+
+            // Segundo hilo después de un retraso
+            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+
+            // Operaciones en el hilo principal (interfaz de usuario)
+            this.Invoke((MethodInvoker)delegate
+            {
+                // Segundo hilo
+                this.pasarObjeto -= formBaja.TraerUsuario;
+
+                // Operaciones adicionales si es necesario
+                formBaja.TopLevel = false;
+                formBaja.FormBorderStyle = FormBorderStyle.None;
+                formBaja.Dock = DockStyle.Fill;
+                this.Controls.Add(formBaja);
+                formBaja.Show();
+            });
         }
 
         private void cOMPRARToolStripMenuItem_Click(object sender, EventArgs e)
@@ -173,7 +217,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
-        private void iNICIARSESIONToolStripMenuItem_Click(object sender, EventArgs e)
+        private async void iNICIARSESIONToolStripMenuItem_Click(object sender, EventArgs e)
         {
             /// Cargar sube
             /// 
@@ -181,14 +225,28 @@ namespace ProyectoSUBEAlfonzoFatala
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
 
-                this.pasarObjeto += formCargarSaldo.TraerUsuario;
-                this.pasarObjeto.Invoke(usuarioLogueado);
-                this.pasarObjeto -= formCargarSaldo.TraerUsuario;
-                formCargarSaldo.TraerUsuario(usuarioLogueado);
-                formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
-                formCargarSaldo.Dock = DockStyle.Fill;
-                formCargarSaldo.MdiParent = this;
-                formCargarSaldo.Show();
+                // Primer hilo
+                await Task.Run(() =>
+                {
+                    this.pasarObjeto += formCargarSaldo.TraerUsuario;
+                    this.pasarObjeto.Invoke(usuarioLogueado);
+                });
+
+                // Segundo hilo después de un retraso
+                await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+
+                // Operaciones en el hilo principal (interfaz de usuario)
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // Segundo hilo
+                    this.pasarObjeto -= formCargarSaldo.TraerUsuario;
+
+                    // Operaciones adicionales si es necesario
+                    formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
+                    formCargarSaldo.Dock = DockStyle.Fill;
+                    formCargarSaldo.MdiParent = this;
+                    formCargarSaldo.Show();
+                });
 
             }
             else

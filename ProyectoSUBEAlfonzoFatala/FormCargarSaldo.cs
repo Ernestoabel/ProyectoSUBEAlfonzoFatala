@@ -13,7 +13,7 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class FormCargarSaldo : Form
     {
-        object usuarioLogueado;
+        Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
 
@@ -121,7 +121,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// Trae al usuario por dni y carga la tarjeta con los datos
         /// </summary>
         /// <param name="usuario"></param>
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(Usuario usuario)
         {
             try
             {

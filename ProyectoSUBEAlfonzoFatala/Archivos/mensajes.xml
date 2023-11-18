@@ -1,19 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ArrayOfBajaData xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
   <BajaData Indice="1">
-    <Mensaje>El usuario 30555191 con la tarjeta 1013 quiere la baja</Mensaje>
+    <Mensaje>El usuario 30555191 con la tarjeta 1053 quiere la baja</Mensaje>
     <confirmacion>false</confirmacion>
   </BajaData>
   <BajaData Indice="2">
-    <Mensaje>El usuario 20000000 con la tarjeta 1016 quiere la baja</Mensaje>
-    <confirmacion>false</confirmacion>
-  </BajaData>
-  <BajaData Indice="3">
-    <Mensaje>El usuario 90000000 con la tarjeta 5038 quiere la baja</Mensaje>
-    <confirmacion>true</confirmacion>
-  </BajaData>
-  <BajaData Indice="4">
-    <Mensaje>El usuario 30000000 con la tarjeta 1040 quiere la baja</Mensaje>
+    <Mensaje>El usuario 30555191 con la tarjeta 1089 quiere la baja</Mensaje>
     <confirmacion>false</confirmacion>
   </BajaData>
 </ArrayOfBajaData>

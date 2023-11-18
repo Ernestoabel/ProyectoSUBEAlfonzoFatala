@@ -21,18 +21,16 @@ namespace Entidades
         /// <param name="id"></param>
         /// <param name="saldo"></param>
         /// <param name="viajes"></param>
-        public Tarjeta( int id, decimal saldo, List<Viajes> viajes)
+        public Tarjeta( int id, decimal saldo)
         {
             Id = GenerarNuevoId();
             Saldo = saldo;
-            Viajes = new List<Viajes>();
         }
         public Tarjeta()
         {
             
         }
 
-        public abstract List<Viajes> Viajes { get; set; }
 
         public int Id { get => _id; set => _id = value; }
         public decimal Saldo { get => _saldo; set => _saldo = value; }
