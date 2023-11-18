@@ -54,7 +54,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Ajusta la alineación del contenido
             dataGridUsuarios.DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleCenter;
-            dataGridUsuarios.RowHeadersVisible = false;
 
             // Ajusta el modo de redimensionamiento de las columnas
             dataGridUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
@@ -84,42 +83,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Refresca la vista para que se aplique el estilo y se muestre la columna IdSubeArgentina
             dataGridUsuarios.Refresh();
-            DataGridViewButtonColumn btnCambiarClave = new DataGridViewButtonColumn();
-            btnCambiarClave.HeaderText = "Cambiar Clave";
-            btnCambiarClave.Name = "btnCambiarClave";
-            btnCambiarClave.Text = "Cambiar";
-            btnCambiarClave.UseColumnTextForButtonValue = true;
-            dataGridUsuarios.Columns.Add(btnCambiarClave);
-        }
-
-        private void dataGridUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridUsuarios.Columns["btnCambiarClave"].Index && e.RowIndex >= 0)
-            {
-                dataGridUsuarios.Rows[e.RowIndex].Cells["Clave"].Value = "";
-                string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
-                object usuario = dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
-                if (usuario is UsuarioSinTarjeta)
-                {
-                    UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioArgentino)
-                {
-                    UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioExtranjero)
-                {
-                    UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioAdministrador)
-                {
-                    MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
         }
 
         /// <summary>
@@ -129,7 +92,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            
             if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
             {
                 string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();

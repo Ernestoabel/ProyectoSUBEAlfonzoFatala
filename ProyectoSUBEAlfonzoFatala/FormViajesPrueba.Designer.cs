@@ -34,7 +34,6 @@
             mySqlCommand1 = new MySqlConnector.MySqlCommand();
             btnViajarx5 = new Button();
             lblMensaje = new Label();
-            btnCancelar = new Button();
             ((System.ComponentModel.ISupportInitialize)dtgViajes).BeginInit();
             SuspendLayout();
             // 
@@ -52,7 +51,7 @@
             btnViajar.Name = "btnViajar";
             btnViajar.Size = new Size(203, 31);
             btnViajar.TabIndex = 1;
-            btnViajar.Text = "Viaje corto";
+            btnViajar.Text = "Viajar!!!";
             btnViajar.UseVisualStyleBackColor = true;
             btnViajar.Click += btnViajar_Click;
             // 
@@ -69,7 +68,7 @@
             btnViajarx5.Name = "btnViajarx5";
             btnViajarx5.Size = new Size(203, 31);
             btnViajarx5.TabIndex = 2;
-            btnViajarx5.Text = "Viaje largo";
+            btnViajarx5.Text = "Viajar x5!!!";
             btnViajarx5.UseVisualStyleBackColor = true;
             btnViajarx5.Click += btnViajarx5_Click;
             // 
@@ -82,22 +81,11 @@
             lblMensaje.Size = new Size(0, 21);
             lblMensaje.TabIndex = 3;
             // 
-            // btnCancelar
-            // 
-            btnCancelar.Location = new Point(713, 36);
-            btnCancelar.Name = "btnCancelar";
-            btnCancelar.Size = new Size(75, 31);
-            btnCancelar.TabIndex = 4;
-            btnCancelar.Text = "Cancelar";
-            btnCancelar.UseVisualStyleBackColor = true;
-            btnCancelar.Click += btnCancelar_Click;
-            // 
             // FormViajesPrueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
-            Controls.Add(btnCancelar);
             Controls.Add(lblMensaje);
             Controls.Add(btnViajarx5);
             Controls.Add(btnViajar);
@@ -117,6 +105,5 @@
         private MySqlConnector.MySqlCommand mySqlCommand1;
         private Button btnViajarx5;
         private Label lblMensaje;
-        private Button btnCancelar;
     }
 }

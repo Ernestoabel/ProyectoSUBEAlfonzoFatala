@@ -47,7 +47,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Ajusta el modo de redimensionamiento de las columnas
             dataGridABMTarjetas.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            dataGridABMTarjetas.RowHeadersVisible = false;
 
             // Las celdas no se puede modificar
             dataGridABMTarjetas.ReadOnly = true;
