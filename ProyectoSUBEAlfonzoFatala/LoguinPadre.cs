@@ -22,6 +22,6 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
         }
 
-    
+
     }
 }

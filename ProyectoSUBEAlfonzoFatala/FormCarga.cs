@@ -46,16 +46,16 @@ namespace ProyectoSUBEAlfonzoFatala
             string monto = txtMonto.Text;
             int numero;
 
-            if (IsNumeric(monto) )
+            if (IsNumeric(monto))
             {
                 numero = Convert.ToInt32(monto);
 
-                if (numero < 6000) 
+                if (numero < 6000)
                 {
                     // El contenido es un número válido
                     txtMonto.BackColor = System.Drawing.Color.GreenYellow;
                     montoCheck = true;
-                    
+
                 }
             }
             else
@@ -240,8 +240,12 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        #endregion    
+        #endregion
 
+        private void FormCarga_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

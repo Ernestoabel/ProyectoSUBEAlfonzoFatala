@@ -34,9 +34,12 @@
             lblUsuario = new Label();
             txtUsuario = new TextBox();
             panel1 = new Panel();
-            lblLoguin = new Label();
+            pictureBox3 = new PictureBox();
+            pictureBox2 = new PictureBox();
             pictureBox1 = new PictureBox();
             panel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).BeginInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -44,7 +47,8 @@
             // 
             lblPassword.AutoSize = true;
             lblPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblPassword.Location = new Point(288, 125);
+            lblPassword.ForeColor = SystemColors.WindowText;
+            lblPassword.Location = new Point(297, 136);
             lblPassword.Name = "lblPassword";
             lblPassword.RightToLeft = RightToLeft.Yes;
             lblPassword.Size = new Size(82, 21);
@@ -54,17 +58,18 @@
             // txtPassword
             // 
             txtPassword.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtPassword.Location = new Point(376, 125);
+            txtPassword.Location = new Point(385, 133);
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
-            txtPassword.Size = new Size(235, 29);
+            txtPassword.Size = new Size(226, 29);
             txtPassword.TabIndex = 12;
             // 
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            lblUsuario.Location = new Point(288, 68);
+            lblUsuario.ForeColor = SystemColors.WindowText;
+            lblUsuario.Location = new Point(297, 87);
             lblUsuario.Name = "lblUsuario";
             lblUsuario.RightToLeft = RightToLeft.Yes;
             lblUsuario.Size = new Size(40, 21);
@@ -74,39 +79,50 @@
             // txtUsuario
             // 
             txtUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            txtUsuario.Location = new Point(376, 68);
+            txtUsuario.Location = new Point(392, 84);
             txtUsuario.Name = "txtUsuario";
-            txtUsuario.Size = new Size(235, 29);
+            txtUsuario.Size = new Size(219, 29);
             txtUsuario.TabIndex = 10;
             // 
             // panel1
             // 
-            panel1.BackColor = SystemColors.ActiveCaption;
-            panel1.Controls.Add(lblLoguin);
+            panel1.BackColor = Color.FromArgb(0, 132, 196);
+            panel1.Controls.Add(pictureBox3);
+            panel1.Controls.Add(pictureBox2);
             panel1.Controls.Add(pictureBox1);
             panel1.Dock = DockStyle.Left;
             panel1.Location = new Point(0, 0);
             panel1.Name = "panel1";
-            panel1.Size = new Size(200, 330);
+            panel1.Size = new Size(200, 440);
             panel1.TabIndex = 9;
             // 
-            // lblLoguin
+            // pictureBox3
             // 
-            lblLoguin.AutoSize = true;
-            lblLoguin.Font = new Font("Segoe UI", 24F, FontStyle.Bold, GraphicsUnit.Point);
-            lblLoguin.Location = new Point(38, 22);
-            lblLoguin.Name = "lblLoguin";
-            lblLoguin.Size = new Size(123, 45);
-            lblLoguin.TabIndex = 1;
-            lblLoguin.Text = "Loguin";
+            pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
+            pictureBox3.Location = new Point(27, 12);
+            pictureBox3.Name = "pictureBox3";
+            pictureBox3.Size = new Size(146, 85);
+            pictureBox3.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox3.TabIndex = 3;
+            pictureBox3.TabStop = false;
+            // 
+            // pictureBox2
+            // 
+            pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
+            pictureBox2.Location = new Point(51, 375);
+            pictureBox2.Name = "pictureBox2";
+            pictureBox2.Size = new Size(94, 38);
+            pictureBox2.SizeMode = PictureBoxSizeMode.Zoom;
+            pictureBox2.TabIndex = 2;
+            pictureBox2.TabStop = false;
             // 
             // pictureBox1
             // 
             pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
-            pictureBox1.Location = new Point(12, 86);
+            pictureBox1.Location = new Point(12, 103);
             pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(171, 201);
-            pictureBox1.SizeMode = PictureBoxSizeMode.StretchImage;
+            pictureBox1.Size = new Size(171, 266);
+            pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
             pictureBox1.TabIndex = 0;
             pictureBox1.TabStop = false;
             // 
@@ -114,8 +130,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = Color.Silver;
-            ClientSize = new Size(720, 330);
+            BackColor = Color.LightGray;
+            ClientSize = new Size(739, 440);
             Controls.Add(lblPassword);
             Controls.Add(txtPassword);
             Controls.Add(lblUsuario);
@@ -126,7 +142,8 @@
             StartPosition = FormStartPosition.CenterScreen;
             Text = "LoguinPadre";
             panel1.ResumeLayout(false);
-            panel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox3).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox2).EndInit();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
@@ -138,7 +155,8 @@
         private Label lblUsuario;
         public TextBox txtUsuario;
         private Panel panel1;
-        private Label lblLoguin;
         private PictureBox pictureBox1;
+        private PictureBox pictureBox2;
+        private PictureBox pictureBox3;
     }
 }

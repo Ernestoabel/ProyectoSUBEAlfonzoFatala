@@ -2300,3 +2300,15 @@ System.ArgumentException: Delegate to an instance method cannot have null 'this'
    at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
    at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 193
 
+20/11/2023 18:56:32 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
+
+20/11/2023 19:03:00 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
+

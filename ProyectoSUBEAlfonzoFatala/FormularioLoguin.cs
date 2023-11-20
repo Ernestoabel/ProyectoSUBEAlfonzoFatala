@@ -180,7 +180,8 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 pasarObjeto += inicio.RecivirObjeto;
                 pasarObjeto.Invoke(usuario);
-            }catch (Exception ex)
+            }
+            catch (Exception ex)
             {
                 CatchError.LogError(nameof(FormInicio), nameof(SuscribirEvento), "Error en el metodo", ex);
             }
@@ -192,7 +193,8 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 pasarObjeto -= inicio.RecivirObjeto;
 
-            }catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 CatchError.LogError(nameof(FormInicio), nameof(DesuscribirEvento), "Error en el metodo", ex);
             }
@@ -241,6 +243,17 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        private void btnUsuarioArgentino_Click(object sender, EventArgs e)
+        {
+            txtUsuario.Text = "45393559";
+            txtPassword.Text = "7777";
+        }
+
+        private void btnUsuarioExtranjero_Click(object sender, EventArgs e)
+        {
+            txtUsuario.Text = "90000000";
+            txtPassword.Text = "1234";
+        }
 
     }
 }
