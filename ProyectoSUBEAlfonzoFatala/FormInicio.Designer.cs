@@ -119,11 +119,11 @@
             chbTema.FlatAppearance.MouseDownBackColor = Color.Transparent;
             chbTema.FlatAppearance.MouseOverBackColor = Color.Transparent;
             chbTema.FlatStyle = FlatStyle.Flat;
-            chbTema.Font = new Font("Consolas", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
+            chbTema.Font = new Font("Trebuchet MS", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             chbTema.Image = (Image)resources.GetObject("chbTema.Image");
             chbTema.Location = new Point(12, 49);
             chbTema.Name = "chbTema";
-            chbTema.Size = new Size(156, 32);
+            chbTema.Size = new Size(150, 32);
             chbTema.TabIndex = 5;
             chbTema.Text = "modo sovietico";
             chbTema.TextAlign = ContentAlignment.BottomCenter;

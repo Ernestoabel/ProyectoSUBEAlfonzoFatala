@@ -18,7 +18,7 @@ namespace ProyectoSUBEAlfonzoFatala
         public FormAdminMensajes()
         {
             InitializeComponent();
-            
+
         }
 
 
@@ -53,7 +53,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Ajusta el modo de redimensionamiento de las columnas
             this.dataGridMensajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
-            
+
             this.dataGridMensajes.Columns["Indice"].ReadOnly = true;
             this.dataGridMensajes.Columns["Mensaje"].ReadOnly = true;
             //this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
@@ -72,7 +72,7 @@ namespace ProyectoSUBEAlfonzoFatala
             dataTable.Columns.Add("Indice", typeof(int));
             dataTable.Columns.Add("Mensaje", typeof(string));
             dataTable.Columns.Add("Confirmar", typeof(bool)); // Agregar columna para el booleano
-            
+
             foreach (var dict in listaMostrarMensajes)
             {
                 foreach (var kvp in dict)
@@ -112,7 +112,8 @@ namespace ProyectoSUBEAlfonzoFatala
                         // Guarda los cambios en el archivo XML
                         ArchivoMensaje.GuardarMensajesBajaEnArchivo(listaMostrarMensajes);
                     }
-                } catch (Exception ex)
+                }
+                catch (Exception ex)
                 {
                     CatchError.LogError(nameof(FormAdminMensajes), nameof(FormAdminMensajes_Load), "Error en el evento", ex);
                 }

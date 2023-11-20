@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormAdministrador));
             menuStrip1 = new MenuStrip();
             usuariosToolStripMenuItem = new ToolStripMenuItem();
             tarjetasToolStripMenuItem = new ToolStripMenuItem();
@@ -49,22 +50,25 @@
             // 
             // usuariosToolStripMenuItem
             // 
+            usuariosToolStripMenuItem.Image = (Image)resources.GetObject("usuariosToolStripMenuItem.Image");
             usuariosToolStripMenuItem.Name = "usuariosToolStripMenuItem";
-            usuariosToolStripMenuItem.Size = new Size(101, 29);
+            usuariosToolStripMenuItem.Size = new Size(117, 29);
             usuariosToolStripMenuItem.Text = "Usuarios";
             usuariosToolStripMenuItem.Click += usuariosToolStripMenuItem_Click;
             // 
             // tarjetasToolStripMenuItem
             // 
+            tarjetasToolStripMenuItem.Image = (Image)resources.GetObject("tarjetasToolStripMenuItem.Image");
             tarjetasToolStripMenuItem.Name = "tarjetasToolStripMenuItem";
-            tarjetasToolStripMenuItem.Size = new Size(91, 29);
+            tarjetasToolStripMenuItem.Size = new Size(107, 29);
             tarjetasToolStripMenuItem.Text = "Tarjetas";
             tarjetasToolStripMenuItem.Click += tarjetasToolStripMenuItem_Click;
             // 
             // mensajesToolStripMenuItem1
             // 
+            mensajesToolStripMenuItem1.Image = (Image)resources.GetObject("mensajesToolStripMenuItem1.Image");
             mensajesToolStripMenuItem1.Name = "mensajesToolStripMenuItem1";
-            mensajesToolStripMenuItem1.Size = new Size(105, 29);
+            mensajesToolStripMenuItem1.Size = new Size(121, 29);
             mensajesToolStripMenuItem1.Text = "Mensajes";
             mensajesToolStripMenuItem1.Click += mensajesToolStripMenuItem1_Click;
             // 
@@ -72,6 +76,8 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
             Controls.Add(menuStrip1);
             MainMenuStrip = menuStrip1;

@@ -20,6 +20,8 @@ namespace ProyectoSUBEAlfonzoFatala
         private TextBox txtBusqueda;
         private Label lblBusqueda;
         private CheckBox chkActivarBusqueda;
+
+
         public FormABMUsuarios()
         {
             InitializeComponent();
@@ -92,31 +94,45 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
+           
+            Usuario usuario = (Usuario)dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
+
+            VentanaEmergenteAdmin ve = new VentanaEmergenteAdmin(usuario.Nombre,"¿Desea modificar la clave");
+            ve.ShowDialog();
+
+            if (ve.DialogResult == DialogResult.OK)
             {
-                string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
+                {
+                    string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
+                    if (usuario is UsuarioSinTarjeta)
+                    {
+                        UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
+                        usuarioACambiar.Clave = nuevaClave;
+                    }
+                    else if (usuario is UsuarioArgentino)
+                    {
+                        UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
+                        usuarioACambiar.Clave = nuevaClave;
+                    }
+                    else if (usuario is UsuarioExtranjero)
+                    {
+                        UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
+                        usuarioACambiar.Clave = nuevaClave;
+                    }
+                    else if (usuario is UsuarioAdministrador)
+                    {
+                        VentanaEmergenteAdmin ventana = new VentanaEmergenteAdmin(usuario.Nombre, "No se pudo modificar clave");
+                        ventana.ShowDialog();
+                    }
 
-                object usuario = dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
-                if (usuario is UsuarioSinTarjeta)
-                {
-                    UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
                 }
-                else if (usuario is UsuarioArgentino)
-                {
-                    UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioExtranjero)
-                {
-                    UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioAdministrador)
-                {
-                    MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-
+            }
+            else if (ve.DialogResult == DialogResult.Cancel)
+            {
+                // Restaurar el valor original si se cancela
+                string claveOriginal = usuario.Clave;
+                dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = claveOriginal;
             }
 
         }
@@ -129,6 +145,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
+            
             //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -194,7 +211,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
                             ///Esto no esta andando
                             //UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja);
-                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja.Nombre,usuarioTarjetaBaja.Apellido,usuarioTarjetaBaja.Dni,usuarioTarjetaBaja.Clave);
+                            UsuarioSinTarjeta usuarioSinTarjeta = new UsuarioSinTarjeta(usuarioTarjetaBaja.Nombre, usuarioTarjetaBaja.Apellido, usuarioTarjetaBaja.Dni, usuarioTarjetaBaja.Clave);
                             Listados.listaUsuarios.RemoveAt(index);
                             Listados.listaUsuarios.Add(usuarioSinTarjeta);
                             UsuarioSinTarjeta.InsertarElementoSQL(usuarioSinTarjeta);

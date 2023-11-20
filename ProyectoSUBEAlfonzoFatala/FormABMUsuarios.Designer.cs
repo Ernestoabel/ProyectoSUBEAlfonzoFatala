@@ -44,18 +44,27 @@
             // 
             // btnGuardar
             // 
+            btnGuardar.BackColor = Color.Blue;
+            btnGuardar.BackgroundImageLayout = ImageLayout.None;
+            btnGuardar.FlatAppearance.BorderColor = Color.Black;
+            btnGuardar.FlatAppearance.BorderSize = 2;
+            btnGuardar.FlatStyle = FlatStyle.Popup;
+            btnGuardar.Font = new Font("Microsoft YaHei UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point);
+            btnGuardar.ForeColor = Color.WhiteSmoke;
             btnGuardar.Location = new Point(12, 38);
             btnGuardar.Name = "btnGuardar";
+            btnGuardar.RightToLeft = RightToLeft.Yes;
             btnGuardar.Size = new Size(156, 32);
             btnGuardar.TabIndex = 1;
-            btnGuardar.Text = "Guardar cambios";
-            btnGuardar.UseVisualStyleBackColor = true;
+            btnGuardar.Text = "Guardar Cambios";
+            btnGuardar.UseVisualStyleBackColor = false;
             btnGuardar.Click += btnGuardar_Click;
             // 
             // FormABMUsuarios
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.Honeydew;
             ClientSize = new Size(800, 450);
             Controls.Add(btnGuardar);
             Controls.Add(dataGridUsuarios);

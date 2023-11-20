@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormABMTarjetas));
             dataGridABMTarjetas = new DataGridView();
             rdArgentinas = new RadioButton();
             rdExtranjeras = new RadioButton();
@@ -45,32 +46,47 @@
             // 
             // rdArgentinas
             // 
+            rdArgentinas.Appearance = Appearance.Button;
             rdArgentinas.AutoSize = true;
-            rdArgentinas.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            rdArgentinas.Location = new Point(198, 65);
+            rdArgentinas.BackColor = SystemColors.Control;
+            rdArgentinas.BackgroundImageLayout = ImageLayout.Zoom;
+            rdArgentinas.CheckAlign = ContentAlignment.MiddleCenter;
+            rdArgentinas.FlatStyle = FlatStyle.Flat;
+            rdArgentinas.Font = new Font("Microsoft Tai Le", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            rdArgentinas.ForeColor = SystemColors.ActiveCaptionText;
+            rdArgentinas.Image = (Image)resources.GetObject("rdArgentinas.Image");
+            rdArgentinas.ImageAlign = ContentAlignment.MiddleLeft;
+            rdArgentinas.Location = new Point(173, 55);
             rdArgentinas.Name = "rdArgentinas";
-            rdArgentinas.Size = new Size(172, 25);
+            rdArgentinas.Size = new Size(204, 43);
             rdArgentinas.TabIndex = 1;
-            rdArgentinas.TabStop = true;
-            rdArgentinas.Text = "Tarjetas argentinas";
-            rdArgentinas.UseVisualStyleBackColor = true;
+            rdArgentinas.Text = "Tarjetas Argentinas";
+            rdArgentinas.TextAlign = ContentAlignment.MiddleCenter;
+            rdArgentinas.TextImageRelation = TextImageRelation.ImageBeforeText;
+            rdArgentinas.UseVisualStyleBackColor = false;
             // 
             // rdExtranjeras
             // 
+            rdExtranjeras.Appearance = Appearance.Button;
             rdExtranjeras.AutoSize = true;
-            rdExtranjeras.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            rdExtranjeras.Location = new Point(395, 65);
+            rdExtranjeras.BackColor = SystemColors.Control;
+            rdExtranjeras.BackgroundImageLayout = ImageLayout.Zoom;
+            rdExtranjeras.Font = new Font("Microsoft Tai Le", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            rdExtranjeras.Image = (Image)resources.GetObject("rdExtranjeras.Image");
+            rdExtranjeras.Location = new Point(406, 55);
             rdExtranjeras.Name = "rdExtranjeras";
-            rdExtranjeras.Size = new Size(176, 25);
+            rdExtranjeras.Size = new Size(204, 41);
             rdExtranjeras.TabIndex = 2;
-            rdExtranjeras.TabStop = true;
-            rdExtranjeras.Text = "Tarjetas extranjeras";
-            rdExtranjeras.UseVisualStyleBackColor = true;
+            rdExtranjeras.Text = "Tarjetas Extranjeras";
+            rdExtranjeras.TextAlign = ContentAlignment.MiddleCenter;
+            rdExtranjeras.TextImageRelation = TextImageRelation.ImageBeforeText;
+            rdExtranjeras.UseVisualStyleBackColor = false;
             // 
             // FormABMTarjetas
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(53, 53, 53);
             ClientSize = new Size(800, 450);
             Controls.Add(rdExtranjeras);
             Controls.Add(rdArgentinas);

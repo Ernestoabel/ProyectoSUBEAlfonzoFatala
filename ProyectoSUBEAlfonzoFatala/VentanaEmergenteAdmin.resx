@@ -117,36 +117,4 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="rdArgentinas.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAWxJREFUWEdj
-        GAWjgFwQuuo/c+n628qFq+6o0AuD7APZC3UCBJStvjOxZOWtX6Wrbv+nNwbZC7If4pBVd1qwKaI3BrmD
-        oXTVnfvYJOmP79wHOgabxMDgUcfgwoPLMQsOPfo/WDDDu3fv/pOLH106AKZPzi0B09e2z0CRJxWT7RiQ
-        Q0B4b7PP/zOT/f5vyDMDO4YSB5HlGJhD9jU4/T9Sp///+hTz/1emOv0/1+8Il8OmjxAm2zE311X8P9tl
-        /P/tOqf/f/Z7guldpQbgkMKmhxhMlmNAUQGKlot9pv+/bvEAO+bZXDcwHxZd2PQRwmSHzKmZ6f/Pdhj/
-        vzfH+v/neeH/3651/n99pgs4xLDpIQaTHTIg+vbSqP83plmA0wwo7YBChe5pBoRh2RmURkAJ+cy0aIoc
-        AsJkOwaEYSEEchilDgHhwVUCY6sjBgqPOgYXHmyOGURt4EHVOwB3VwZLvwkGBk2PchSMAqIBAwMA+zV5
-        3EtCji0AAAAASUVORK5CYII=
-</value>
-  </data>
-  <data name="rdExtranjeras.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAACMAAAAjCAYAAAAe2bNZAAAABGdBTUEAALGPC/xhBQAAAzdJREFUWEfd
-        WL1u1EAQtmKfxAtARcFb2EZCpKWwfVABkVCUF0BKm8YFRSTq1PT0SFCQa3gEGq5BvESKFIT51t/aO+u/
-        9R1HwSeNfDc7Mzve+dldR/8B6qMkL57GafkyycrzJKsu8Yzz4hX4GKfg4RDn1ZtVVn6UiW+E7ibod5IW
-        nyBP1b+HOCtPkrz8PjDpPImeOPWapvbAk2f3k7T8PDhJVl7HWXElIbpYpeUZnjLx1wG5hsQO7NHyMqzS
-        IhMjW8/oj1VenkWPnz+gmMIqK04d2W+Qd/6DtrBL8TDQkVvP0DmHR5Fk62NX5162fgQ9lyd0G+4QQuOs
-        iCTsr6ZCwiD59dPqgoxDom/sdPxtUMjcHIGBKH3xkENBwOSuQ3FWfTADYkc5hByaArK+FQYtWBEXOneK
-        DdkR7Ln2UaUc6sMr39kccYF8wSr4YRKqKWIAu+2YzEe2BhpUKyRVQHYQmKhWVxFFFITfVtlgY2RnNQKm
-        fBcAK2J1LYEHJymiAPtWDvOSbSF7jdPix/rIGKweQjTmgILYtzpCN2ov8xLrmuxgWF04Q9YsMI/VU4Vi
-        dtvWYHVFdgu8LSukHnrzTjfcmWYroZ7s/mQbY06XrC7INmiSs9h048ZhlQ+2gpatjOxlnc2ucnkeMQPY
-        9Mg2EF5tx3yCU2M9ZQ7N5mr1qkuyp1fGvjWp9v77pHrKFEZXhic2M4BYkq36hw0BeFiRvlN6VXQTNGFW
-        +YbctLrIWbJFcaSa3F0YhslugRA1YVofk2Xg794eGafkOVxNfp9J8up9M4lK3KAQuKs5QTjr2N+6zwBu
-        Bx4id4mnILJOwhebxrkmZB2/o4EOLDHUe5OnUJxSbBZ60n74/Fwb3JsAtWvn1Rc4EboiFu5kZCnIar1r
-        55BTH9l9iKETR9BPrFmIThsiOEV2C69Q7o7y8i2HhrHrSa+fuDpEi096BjuegacqD/rKkdAzMLDL7cBN
-        XDfPoGf5pAW3A4IOBd+bVBWhTzUHqP3vTS0QMieHPJIbJVo6b5RTt0kQciQ0NFMwt4Z97tpTt4BdgQaF
-        jimTzH2FkJU40FeIPvh9pjkhSoLy+wx2f1N5/+D7zGERRX8A/3fFNnYNDP8AAAAASUVORK5CYII=
-</value>
-  </data>
 </root>
