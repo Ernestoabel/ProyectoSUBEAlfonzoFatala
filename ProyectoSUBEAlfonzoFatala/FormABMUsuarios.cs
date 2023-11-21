@@ -20,8 +20,6 @@ namespace ProyectoSUBEAlfonzoFatala
         private TextBox txtBusqueda;
         private Label lblBusqueda;
         private CheckBox chkActivarBusqueda;
-        string tarjeta;
-
         public FormABMUsuarios()
         {
             InitializeComponent();
@@ -30,7 +28,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
 
         }
-        
+        string tarjeta;
 
         /// <summary>
         /// Metodo de interfaz para darle estilo al datagrid
@@ -61,6 +59,9 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             dataGridUsuarios.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            dataGridUsuarios.RowHeadersVisible = false;
+            dataGridUsuarios.AllowUserToResizeRows = false;
+
             // Habilita la edición para la columna de la clave
             dataGridUsuarios.Columns["Nombre"].ReadOnly = true;
             dataGridUsuarios.Columns["Apellido"].ReadOnly = true;
@@ -86,42 +87,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
             // Refresca la vista para que se aplique el estilo y se muestre la columna IdSubeArgentina
             dataGridUsuarios.Refresh();
-            DataGridViewButtonColumn btnCambiarClave = new DataGridViewButtonColumn();
-            btnCambiarClave.HeaderText = "Cambiar Clave";
-            btnCambiarClave.Name = "btnCambiarClave";
-            btnCambiarClave.Text = "Cambiar";
-            btnCambiarClave.UseColumnTextForButtonValue = true;
-            dataGridUsuarios.Columns.Add(btnCambiarClave);
-        }
-
-        private void dataGridUsuarios_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.ColumnIndex == dataGridUsuarios.Columns["btnCambiarClave"].Index && e.RowIndex >= 0)
-            {
-                dataGridUsuarios.Rows[e.RowIndex].Cells["Clave"].Value = "";
-                string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
-
-                object usuario = dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
-                if (usuario is UsuarioSinTarjeta)
-                {
-                    UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioArgentino)
-                {
-                    UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioExtranjero)
-                {
-                    UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
-                    usuarioACambiar.Clave = nuevaClave;
-                }
-                else if (usuario is UsuarioAdministrador)
-                {
-                    MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
         }
 
         /// <summary>
@@ -131,14 +96,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void dataGridUsuarios_CellValueChanged(object sender, DataGridViewCellEventArgs e)
         {
-
-            // Usuario usuario = (Usuario)dataGridUsuarios.Rows[e.RowIndex].DataBoundItem;
-
-            //VentanaEmergenteAdmin ve = new VentanaEmergenteAdmin(usuario.Nombre,"¿Desea modificar la clave");
-            //ve.ShowDialog();
-
-            //if (ve.DialogResult == DialogResult.OK)
-            //{
             if (e.ColumnIndex == dataGridUsuarios.Columns["Clave"].Index && e.RowIndex >= 0)
             {
                 string nuevaClave = dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString();
@@ -165,13 +122,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
 
             }
-            // }
-            //else if (ve.DialogResult == DialogResult.Cancel)
-            // {
-            // Restaurar el valor original si se cancela
-            //string claveOriginal = usuario.Clave;
-              //  dataGridUsuarios.Rows[e.RowIndex].Cells[e.ColumnIndex].Value = claveOriginal;
-           // }
 
         }
 
@@ -183,7 +133,6 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-            
             //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
             MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
@@ -283,6 +232,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private void InitializeBusquedaControls()
         {
+            // TextBox
             txtBusqueda = new TextBox();
             txtBusqueda.Location = new Point(356, 45); // el primero es la posicion horizontal y el segundo la vertical
             txtBusqueda.Size = new Size(200, 20);
@@ -371,7 +321,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 this.Controls.Add(lblBusqueda);
             }
         }
-    
 
     }
 }

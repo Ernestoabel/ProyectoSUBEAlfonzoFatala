@@ -52,6 +52,10 @@ namespace ProyectoSUBEAlfonzoFatala
             // Las celdas no se puede modificar
             dataGridABMTarjetas.ReadOnly = true;
 
+            dataGridABMTarjetas.RowHeadersVisible = false;
+            dataGridABMTarjetas.AllowUserToResizeRows = false;
+            dataGridABMTarjetas.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+
             dataGridABMTarjetas.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
             //dataGridABMTarjetas.Columns["Viajes"].Visible = false;
 

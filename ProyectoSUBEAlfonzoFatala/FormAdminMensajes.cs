@@ -54,10 +54,13 @@ namespace ProyectoSUBEAlfonzoFatala
             // Ajusta el modo de redimensionamiento de las columnas
             this.dataGridMensajes.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
 
+            this.dataGridMensajes.RowHeadersVisible = false;
+            this.dataGridMensajes.AllowUserToResizeRows = false;
+
             this.dataGridMensajes.Columns["Indice"].ReadOnly = true;
             this.dataGridMensajes.Columns["Mensaje"].ReadOnly = true;
-            //this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
-            //this.dataGridMensajes.Columns["Confirmar"].Width = 80;
+            this.dataGridMensajes.Columns["Confirmar"].ReadOnly = false;
+            this.dataGridMensajes.Columns["Confirmar"].Width = 80;
 
             this.dataGridMensajes.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
 

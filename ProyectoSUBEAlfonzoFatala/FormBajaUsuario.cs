@@ -54,12 +54,11 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (UsuarioSinTarjetaException)
             {
-                MessageBox.Show("El usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnBajaTarjetaUsuario.Enabled = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CatchError.LogError(nameof(FormBajaUsuario), nameof(TraerUsuario), "Error en el metodo", ex);
             }
         }
         private void btnBajaTarjetaUsuario_Click(object sender, EventArgs e)

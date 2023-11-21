@@ -38,6 +38,7 @@
             lblApellido = new Label();
             lblIdTarjeta = new Label();
             lblDni = new Label();
+            lblSaldo = new Label();
             ((System.ComponentModel.ISupportInitialize)pbTarjeta).BeginInit();
             SuspendLayout();
             // 
@@ -95,7 +96,7 @@
             // 
             pbTarjeta.BackColor = Color.Transparent;
             pbTarjeta.Image = (Image)resources.GetObject("pbTarjeta.Image");
-            pbTarjeta.Location = new Point(359, 112);
+            pbTarjeta.Location = new Point(346, 102);
             pbTarjeta.Name = "pbTarjeta";
             pbTarjeta.Size = new Size(365, 258);
             pbTarjeta.SizeMode = PictureBoxSizeMode.Zoom;
@@ -150,6 +151,16 @@
             lblDni.TabIndex = 11;
             lblDni.Text = "xx xxx xxx";
             // 
+            // lblSaldo
+            // 
+            lblSaldo.AutoSize = true;
+            lblSaldo.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSaldo.ForeColor = SystemColors.ActiveCaption;
+            lblSaldo.Location = new Point(559, 271);
+            lblSaldo.Name = "lblSaldo";
+            lblSaldo.Size = new Size(0, 30);
+            lblSaldo.TabIndex = 12;
+            // 
             // FormCargarSaldo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -158,6 +169,7 @@
             BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(791, 424);
             ControlBox = false;
+            Controls.Add(lblSaldo);
             Controls.Add(lblDni);
             Controls.Add(lblIdTarjeta);
             Controls.Add(lblApellido);
@@ -188,5 +200,6 @@
         private Label lblApellido;
         private Label lblIdTarjeta;
         private Label lblDni;
+        private Label lblSaldo;
     }
 }

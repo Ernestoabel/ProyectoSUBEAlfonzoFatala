@@ -52,29 +52,37 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void viajesToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            // Primer hilo
-            await Task.Run(() =>
+            formViajes = new FormViajesPrueba();
+            if (usuarioLogueado is not UsuarioSinTarjeta)
             {
+                // Primer hilo
+                await Task.Run(() =>
+                {
                 this.pasarObjeto += formViajes.TraerUsuario;
                 this.pasarObjeto.Invoke(usuarioLogueado);
-            });
+                });
 
-            // Segundo hilo después de un retraso
-            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+                // Segundo hilo después de un retraso
+                await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
-            // Operaciones en el hilo principal (interfaz de usuario)
-            this.Invoke((MethodInvoker)delegate
+                // Operaciones en el hilo principal (interfaz de usuario)
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // Segundo hilo
+                    this.pasarObjeto -= formViajes.TraerUsuario;
+
+                    // Operaciones adicionales si es necesario
+                    formViajes.TopLevel = false;
+                    formViajes.FormBorderStyle = FormBorderStyle.None;
+                    formViajes.Dock = DockStyle.Fill;
+                    this.Controls.Add(formViajes);
+                    formViajes.Show();
+                });
+            }
+            else
             {
-                // Segundo hilo
-                this.pasarObjeto -= formViajes.TraerUsuario;
-
-                // Operaciones adicionales si es necesario
-                formViajes.TopLevel = false;
-                formViajes.FormBorderStyle = FormBorderStyle.None;
-                formViajes.Dock = DockStyle.Fill;
-                this.Controls.Add(formViajes);
-                formViajes.Show();
-            });
+                viajesToolStripMenuItem.Enabled = false;
+            }
 
         }
 
@@ -87,26 +95,21 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             if (e.ClickedItem != viajesToolStripMenuItem)
             {
-                try
-                {
-                    formViajes.Hide();
-                }
-                catch (Exception) { }
-
+                formViajes.Close();
             }
             if (e.ClickedItem != consultaTiToolStripMenuItem)
             {
-                formTitularidad.Hide();
+                formTitularidad.Close();
             }
             if (e.ClickedItem != bajaToolStripMenuItem)
             {
-                formBaja.Hide();
+                formBaja.Close();
             }
             if (e.ClickedItem != iNICIARSESIONToolStripMenuItem)
             {
-                formCargarSaldo.Hide();
+                formCargarSaldo.Close();
             }
-            
+
 
         }
 
@@ -129,6 +132,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void consultaTiToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            formTitularidad = new FormTitularidad();
             // Primer hilo
             await Task.Run(() =>
             {
@@ -145,7 +149,6 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Segundo hilo
                 this.pasarObjeto -= formTitularidad.TraerUsuario;
 
-                // Operaciones adicionales si es necesario
                 formTitularidad.TopLevel = false;
                 formTitularidad.FormBorderStyle = FormBorderStyle.None;
                 formTitularidad.Dock = DockStyle.Fill;
@@ -177,6 +180,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void bajaToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            formBaja = new FormBajaUsuario();
             await Task.Run(() =>
             {
                 this.pasarObjeto += formBaja.TraerUsuario;
@@ -186,7 +190,7 @@ namespace ProyectoSUBEAlfonzoFatala
             // Segundo hilo después de un retraso
             await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
-            if(usuarioLogueado is not UsuarioSinTarjeta)
+            if (usuarioLogueado is not UsuarioSinTarjeta)
             {
                 // Operaciones en el hilo principal (interfaz de usuario)
                 this.Invoke((MethodInvoker)delegate
@@ -194,7 +198,6 @@ namespace ProyectoSUBEAlfonzoFatala
                     // Segundo hilo
                     this.pasarObjeto -= formBaja.TraerUsuario;
 
-                    // Operaciones adicionales si es necesario
                     formBaja.TopLevel = false;
                     formBaja.FormBorderStyle = FormBorderStyle.None;
                     formBaja.Dock = DockStyle.Fill;
@@ -252,7 +255,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             /// Cargar sube
             /// 
-
+            formCargarSaldo = new FormCargarSaldo();
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
 
@@ -272,7 +275,6 @@ namespace ProyectoSUBEAlfonzoFatala
                     // Segundo hilo
                     this.pasarObjeto -= formCargarSaldo.TraerUsuario;
 
-                    // Operaciones adicionales si es necesario
                     formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
                     formCargarSaldo.Dock = DockStyle.Fill;
                     formCargarSaldo.MdiParent = this;
@@ -285,8 +287,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
                 DesabilitarEntradaUsuarioConTarjeta();
                 iNICIARSESIONToolStripMenuItem.Enabled = false;
-                
-                
+
+
             }
 
         }

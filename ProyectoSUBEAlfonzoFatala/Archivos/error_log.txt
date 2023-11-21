@@ -2360,3 +2360,85 @@ System.ArgumentException: Delegate to an instance method cannot have null 'this'
    at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
    at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
 
+21/11/2023 09:32:52 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:32:53 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:32:54 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:32:55 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:32:57 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:32:58 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 5.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:33:02 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 96
+
+21/11/2023 09:36:39 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
+
+21/11/2023 09:36:40 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
+
+21/11/2023 09:36:41 - Error en FormInicio.DesuscribirEvento: Error en el metodo
+System.ArgumentException: Delegate to an instance method cannot have null 'this'.
+   at System.MulticastDelegate.ThrowNullThisInDelegateToInstance()
+   at System.MulticastDelegate.CtorClosed(Object target, IntPtr methodPtr)
+   at ProyectoSUBEAlfonzoFatala.FormularioLoguin.DesuscribirEvento(FormInicio inicio) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormularioLoguin.cs:line 194
+
+21/11/2023 10:07:46 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 3.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+21/11/2023 10:07:47 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+21/11/2023 10:07:48 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 5.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+21/11/2023 10:07:48 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+21/11/2023 10:07:50 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+21/11/2023 10:07:51 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+

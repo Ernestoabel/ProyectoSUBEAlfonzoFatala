@@ -70,9 +70,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     }
                 }
             }
-            catch (UsuarioSinTarjetaException ex)
+            catch (UsuarioSinTarjetaException)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 btnViajar.Enabled = false;
                 btnViajarx5.Enabled = false;
             }

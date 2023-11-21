@@ -46,7 +46,6 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
-                MessageBox.Show("Usted no tiene tarjeta", "Usted no tiene tarjeta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                 btnCargar.Enabled = false;
             }
         }
@@ -91,7 +90,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (Exception ex)
             {
-                MessageBox.Show(ex.Message, "Error al mostrar el saldo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                CatchError.LogError(nameof(FormCargarSaldo), nameof(btnVerSaldo_Click), "Error en el boton", ex);
             }
 
         }
@@ -104,6 +103,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private void FormCargarSaldo_Load(object sender, EventArgs e)
         {
             this.insertarDatos(usuarioLogueado);
+
         }
         #endregion
 
@@ -121,7 +121,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblApellido.Text = usuarioLogueado.Apellido.ToString();
                 lblDni.Text = usuarioLogueado.Dni.ToString();
                 lblIdTarjeta.Text = usuarioLogueado.IdSubeArgentina.ToString();
-                //lblSaldo.Text = usuarioLogueado.TarjetaNacional.Saldo.ToString();
+                lblSaldo.BackColor = Color.Transparent;
+                lblSaldo.Text = "$" + tarjetaNacional.Saldo.ToString();
             }
             else if (usuario is UsuarioExtranjero)
             {
@@ -130,7 +131,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblApellido.Text = usuarioLogueado.Apellido.ToString();
                 lblDni.Text = usuarioLogueado.Dni.ToString();
                 lblIdTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
-                // lblSaldo.Text = usuarioLogueado.TarjetaInternacional.Saldo.ToString();
+                lblSaldo.BackColor = Color.Transparent;
+                lblSaldo.Text = "$" + tarjetaInternacional.Saldo.ToString();
             }
         }
 
@@ -177,13 +179,13 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (UsuarioSinTarjetaException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CatchError.LogError(nameof(UsuarioSinTarjetaException), nameof(TraerUsuario), "Error en el metodo", ex);
                 btnCargar.Enabled = false;
                 btnVerSaldo.Enabled = false;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                CatchError.LogError(nameof(FormCargarSaldo), nameof(TraerUsuario), "Error en el metodo", ex);
             }
         }
 
