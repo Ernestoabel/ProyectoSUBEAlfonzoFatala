@@ -46,6 +46,7 @@
             lblTitulo.Size = new Size(138, 22);
             lblTitulo.TabIndex = 0;
             lblTitulo.Text = "Saldo Acreditado";
+            lblTitulo.Visible = false;
             // 
             // lblSaldoDisponible
             // 
@@ -79,6 +80,7 @@
             lblSaldoAcreditado.Size = new Size(79, 30);
             lblSaldoAcreditado.TabIndex = 3;
             lblSaldoAcreditado.Text = "450.00";
+            lblSaldoAcreditado.Visible = false;
             // 
             // btnOk
             // 
@@ -101,6 +103,7 @@
             lblSignoPesos2.Size = new Size(25, 30);
             lblSignoPesos2.TabIndex = 5;
             lblSignoPesos2.Text = "$";
+            lblSignoPesos2.Visible = false;
             // 
             // VentanaEmergenteSaldo
             // 

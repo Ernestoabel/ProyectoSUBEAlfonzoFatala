@@ -51,12 +51,14 @@
             txtPassword.Location = new Point(376, 133);
             txtPassword.PlaceholderText = "Ingrese su Contraseña";
             txtPassword.Size = new Size(264, 29);
+            txtPassword.TabIndex = 2;
             // 
             // txtUsuario
             // 
             txtUsuario.Location = new Point(376, 87);
             txtUsuario.PlaceholderText = "Ingrese su Documento";
             txtUsuario.Size = new Size(264, 29);
+            txtUsuario.TabIndex = 1;
             // 
             // btnIngresar
             // 
@@ -67,7 +69,7 @@
             btnIngresar.Location = new Point(297, 178);
             btnIngresar.Name = "btnIngresar";
             btnIngresar.Size = new Size(171, 42);
-            btnIngresar.TabIndex = 14;
+            btnIngresar.TabIndex = 3;
             btnIngresar.Text = "Ingresar";
             btnIngresar.UseVisualStyleBackColor = false;
             btnIngresar.Click += btnIngresar_Click;
@@ -81,7 +83,7 @@
             btnCancelar.Location = new Point(297, 228);
             btnCancelar.Name = "btnCancelar";
             btnCancelar.Size = new Size(343, 42);
-            btnCancelar.TabIndex = 15;
+            btnCancelar.TabIndex = 5;
             btnCancelar.Text = "Cancelar";
             btnCancelar.UseVisualStyleBackColor = false;
             btnCancelar.Click += btnCancelar_Click;
@@ -95,7 +97,7 @@
             btnAdministrador.Location = new Point(297, 287);
             btnAdministrador.Name = "btnAdministrador";
             btnAdministrador.Size = new Size(289, 40);
-            btnAdministrador.TabIndex = 16;
+            btnAdministrador.TabIndex = 6;
             btnAdministrador.Text = "Usuario administrador";
             btnAdministrador.UseVisualStyleBackColor = false;
             btnAdministrador.Click += btnAdministrador_Click;
@@ -109,7 +111,7 @@
             btnAlta.Location = new Point(474, 178);
             btnAlta.Name = "btnAlta";
             btnAlta.Size = new Size(166, 42);
-            btnAlta.TabIndex = 17;
+            btnAlta.TabIndex = 4;
             btnAlta.Text = "Registrarse";
             btnAlta.UseVisualStyleBackColor = false;
             btnAlta.Click += btnAlta_Click;
@@ -134,7 +136,7 @@
             btnUsuarioArgentino.Location = new Point(297, 333);
             btnUsuarioArgentino.Name = "btnUsuarioArgentino";
             btnUsuarioArgentino.Size = new Size(289, 36);
-            btnUsuarioArgentino.TabIndex = 19;
+            btnUsuarioArgentino.TabIndex = 7;
             btnUsuarioArgentino.Text = "Usuario nacional";
             btnUsuarioArgentino.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnUsuarioArgentino.UseVisualStyleBackColor = false;
@@ -150,7 +152,7 @@
             btnUsuarioExtranjero.Location = new Point(297, 375);
             btnUsuarioExtranjero.Name = "btnUsuarioExtranjero";
             btnUsuarioExtranjero.Size = new Size(289, 38);
-            btnUsuarioExtranjero.TabIndex = 20;
+            btnUsuarioExtranjero.TabIndex = 8;
             btnUsuarioExtranjero.Text = "Usuario extranjero";
             btnUsuarioExtranjero.TextImageRelation = TextImageRelation.ImageBeforeText;
             btnUsuarioExtranjero.UseVisualStyleBackColor = false;
@@ -158,6 +160,7 @@
             // 
             // pbAdmin
             // 
+            pbAdmin.BackColor = Color.Transparent;
             pbAdmin.Image = (Image)resources.GetObject("pbAdmin.Image");
             pbAdmin.Location = new Point(592, 288);
             pbAdmin.Name = "pbAdmin";
@@ -168,6 +171,7 @@
             // 
             // pbNacional
             // 
+            pbNacional.BackColor = Color.Transparent;
             pbNacional.Image = (Image)resources.GetObject("pbNacional.Image");
             pbNacional.Location = new Point(592, 333);
             pbNacional.Name = "pbNacional";
@@ -178,6 +182,7 @@
             // 
             // pbExtranjero
             // 
+            pbExtranjero.BackColor = Color.Transparent;
             pbExtranjero.Image = (Image)resources.GetObject("pbExtranjero.Image");
             pbExtranjero.Location = new Point(592, 374);
             pbExtranjero.Name = "pbExtranjero";
@@ -188,6 +193,7 @@
             // 
             // pictureBox4
             // 
+            pictureBox4.BackColor = Color.Transparent;
             pictureBox4.Image = (Image)resources.GetObject("pictureBox4.Image");
             pictureBox4.Location = new Point(413, 12);
             pictureBox4.Name = "pictureBox4";
@@ -201,6 +207,8 @@
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.LightGray;
+            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(739, 440);
             Controls.Add(pictureBox4);
             Controls.Add(pbExtranjero);

@@ -47,7 +47,7 @@
             btnCargar.BackgroundImage = (Image)resources.GetObject("btnCargar.BackgroundImage");
             btnCargar.BackgroundImageLayout = ImageLayout.Stretch;
             btnCargar.FlatStyle = FlatStyle.Flat;
-            btnCargar.Location = new Point(83, 138);
+            btnCargar.Location = new Point(126, 163);
             btnCargar.Name = "btnCargar";
             btnCargar.Size = new Size(68, 60);
             btnCargar.TabIndex = 0;
@@ -60,7 +60,7 @@
             btnVerSaldo.BackgroundImage = (Image)resources.GetObject("btnVerSaldo.BackgroundImage");
             btnVerSaldo.BackgroundImageLayout = ImageLayout.Stretch;
             btnVerSaldo.FlatStyle = FlatStyle.Flat;
-            btnVerSaldo.Location = new Point(83, 248);
+            btnVerSaldo.Location = new Point(126, 273);
             btnVerSaldo.Name = "btnVerSaldo";
             btnVerSaldo.Size = new Size(68, 60);
             btnVerSaldo.TabIndex = 1;
@@ -73,7 +73,7 @@
             lblCargarSaldo.BackColor = Color.Transparent;
             lblCargarSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblCargarSaldo.ForeColor = Color.White;
-            lblCargarSaldo.Location = new Point(74, 205);
+            lblCargarSaldo.Location = new Point(117, 230);
             lblCargarSaldo.Name = "lblCargarSaldo";
             lblCargarSaldo.Size = new Size(122, 24);
             lblCargarSaldo.TabIndex = 2;
@@ -85,7 +85,7 @@
             lblVerSaldo.BackColor = Color.Transparent;
             lblVerSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblVerSaldo.ForeColor = Color.White;
-            lblVerSaldo.Location = new Point(74, 311);
+            lblVerSaldo.Location = new Point(117, 336);
             lblVerSaldo.Name = "lblVerSaldo";
             lblVerSaldo.Size = new Size(94, 24);
             lblVerSaldo.TabIndex = 3;
@@ -95,7 +95,7 @@
             // 
             pbTarjeta.BackColor = Color.Transparent;
             pbTarjeta.Image = (Image)resources.GetObject("pbTarjeta.Image");
-            pbTarjeta.Location = new Point(367, 12);
+            pbTarjeta.Location = new Point(359, 112);
             pbTarjeta.Name = "pbTarjeta";
             pbTarjeta.Size = new Size(365, 258);
             pbTarjeta.SizeMode = PictureBoxSizeMode.Zoom;
@@ -108,7 +108,7 @@
             lblNombre.BackColor = Color.FromArgb(4, 124, 179);
             lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblNombre.ForeColor = Color.White;
-            lblNombre.Location = new Point(397, 145);
+            lblNombre.Location = new Point(389, 245);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(86, 23);
             lblNombre.TabIndex = 7;
@@ -120,7 +120,7 @@
             lblApellido.BackColor = Color.FromArgb(4, 124, 179);
             lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblApellido.ForeColor = Color.White;
-            lblApellido.Location = new Point(499, 145);
+            lblApellido.Location = new Point(491, 245);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(88, 23);
             lblApellido.TabIndex = 8;
@@ -132,7 +132,7 @@
             lblIdTarjeta.BackColor = Color.FromArgb(4, 124, 179);
             lblIdTarjeta.Font = new Font("Tahoma", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblIdTarjeta.ForeColor = Color.White;
-            lblIdTarjeta.Location = new Point(397, 205);
+            lblIdTarjeta.Location = new Point(389, 305);
             lblIdTarjeta.Name = "lblIdTarjeta";
             lblIdTarjeta.Size = new Size(48, 18);
             lblIdTarjeta.TabIndex = 10;
@@ -144,7 +144,7 @@
             lblDni.BackColor = Color.FromArgb(4, 124, 179);
             lblDni.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblDni.ForeColor = Color.White;
-            lblDni.Location = new Point(397, 179);
+            lblDni.Location = new Point(389, 279);
             lblDni.Name = "lblDni";
             lblDni.Size = new Size(99, 19);
             lblDni.TabIndex = 11;

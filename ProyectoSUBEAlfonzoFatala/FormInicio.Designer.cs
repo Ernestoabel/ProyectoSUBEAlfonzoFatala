@@ -65,7 +65,7 @@
             // logueateToolStripMenuItem
             // 
             logueateToolStripMenuItem.Name = "logueateToolStripMenuItem";
-            logueateToolStripMenuItem.Size = new Size(151, 26);
+            logueateToolStripMenuItem.Size = new Size(180, 26);
             logueateToolStripMenuItem.Text = "Logueate";
             logueateToolStripMenuItem.Click += logueateToolStripMenuItem_Click;
             // 

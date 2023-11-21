@@ -37,13 +37,15 @@
             lbApellido = new Label();
             lbDNI = new Label();
             lbTarjeta = new Label();
+            pictureBox1 = new PictureBox();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // txtNombre
             // 
             txtNombre.BorderStyle = BorderStyle.None;
             txtNombre.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            txtNombre.Location = new Point(190, 69);
+            txtNombre.Location = new Point(190, 179);
             txtNombre.Name = "txtNombre";
             txtNombre.Size = new Size(228, 36);
             txtNombre.TabIndex = 0;
@@ -52,7 +54,7 @@
             // 
             txtApellido.BorderStyle = BorderStyle.None;
             txtApellido.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            txtApellido.Location = new Point(190, 111);
+            txtApellido.Location = new Point(190, 230);
             txtApellido.Name = "txtApellido";
             txtApellido.Size = new Size(228, 36);
             txtApellido.TabIndex = 1;
@@ -61,7 +63,7 @@
             // 
             TxtDNI.BorderStyle = BorderStyle.None;
             TxtDNI.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            TxtDNI.Location = new Point(190, 153);
+            TxtDNI.Location = new Point(190, 283);
             TxtDNI.Name = "TxtDNI";
             TxtDNI.Size = new Size(228, 36);
             TxtDNI.TabIndex = 2;
@@ -70,7 +72,7 @@
             // 
             txtTarjeta.BorderStyle = BorderStyle.None;
             txtTarjeta.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            txtTarjeta.Location = new Point(190, 195);
+            txtTarjeta.Location = new Point(190, 340);
             txtTarjeta.Name = "txtTarjeta";
             txtTarjeta.Size = new Size(228, 36);
             txtTarjeta.TabIndex = 3;
@@ -78,9 +80,10 @@
             // lbNombre
             // 
             lbNombre.AutoSize = true;
-            lbNombre.BackColor = Color.Transparent;
+            lbNombre.BackColor = Color.DimGray;
             lbNombre.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbNombre.Location = new Point(40, 68);
+            lbNombre.ForeColor = SystemColors.Control;
+            lbNombre.Location = new Point(40, 178);
             lbNombre.Name = "lbNombre";
             lbNombre.Size = new Size(123, 37);
             lbNombre.TabIndex = 4;
@@ -89,9 +92,10 @@
             // lbApellido
             // 
             lbApellido.AutoSize = true;
-            lbApellido.BackColor = Color.Transparent;
+            lbApellido.BackColor = Color.DimGray;
             lbApellido.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbApellido.Location = new Point(40, 110);
+            lbApellido.ForeColor = SystemColors.ControlLight;
+            lbApellido.Location = new Point(40, 229);
             lbApellido.Name = "lbApellido";
             lbApellido.Size = new Size(126, 37);
             lbApellido.TabIndex = 5;
@@ -100,9 +104,10 @@
             // lbDNI
             // 
             lbDNI.AutoSize = true;
-            lbDNI.BackColor = Color.Transparent;
+            lbDNI.BackColor = Color.DimGray;
             lbDNI.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbDNI.Location = new Point(40, 152);
+            lbDNI.ForeColor = SystemColors.ControlLight;
+            lbDNI.Location = new Point(40, 282);
             lbDNI.Name = "lbDNI";
             lbDNI.Size = new Size(67, 37);
             lbDNI.TabIndex = 6;
@@ -111,22 +116,32 @@
             // lbTarjeta
             // 
             lbTarjeta.AutoSize = true;
-            lbTarjeta.BackColor = Color.Transparent;
+            lbTarjeta.BackColor = Color.DimGray;
             lbTarjeta.Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point);
-            lbTarjeta.Location = new Point(40, 194);
+            lbTarjeta.ForeColor = SystemColors.ControlLightLight;
+            lbTarjeta.Location = new Point(40, 339);
             lbTarjeta.Name = "lbTarjeta";
             lbTarjeta.Size = new Size(106, 37);
             lbTarjeta.TabIndex = 7;
             lbTarjeta.Text = "Tarjeta";
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(3, 7);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(796, 145);
+            pictureBox1.TabIndex = 8;
+            pictureBox1.TabStop = false;
+            // 
             // FormTitularidad
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            BackColor = SystemColors.ScrollBar;
-            BackgroundImage = (Image)resources.GetObject("$this.BackgroundImage");
-            BackgroundImageLayout = ImageLayout.Zoom;
+            BackColor = Color.DimGray;
+            BackgroundImageLayout = ImageLayout.Stretch;
             ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(lbTarjeta);
             Controls.Add(lbDNI);
             Controls.Add(lbApellido);
@@ -138,6 +153,7 @@
             Name = "FormTitularidad";
             Text = "FormTitularidad";
             Load += FormTitularidad_Load_1;
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -152,5 +168,6 @@
         private Label lbApellido;
         private Label lbDNI;
         private Label lbTarjeta;
+        private PictureBox pictureBox1;
     }
 }

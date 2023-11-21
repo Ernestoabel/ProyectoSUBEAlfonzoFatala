@@ -34,6 +34,7 @@
             mySqlCommand1 = new MySqlConnector.MySqlCommand();
             btnViajarx5 = new Button();
             lblMensaje = new Label();
+            btnCancelar = new Button();
             ((System.ComponentModel.ISupportInitialize)dtgViajes).BeginInit();
             SuspendLayout();
             // 
@@ -47,12 +48,15 @@
             // 
             // btnViajar
             // 
-            btnViajar.Location = new Point(281, 36);
+            btnViajar.BackColor = Color.Beige;
+            btnViajar.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnViajar.ForeColor = Color.Indigo;
+            btnViajar.Location = new Point(363, 38);
             btnViajar.Name = "btnViajar";
             btnViajar.Size = new Size(203, 31);
             btnViajar.TabIndex = 1;
-            btnViajar.Text = "Viajar!!!";
-            btnViajar.UseVisualStyleBackColor = true;
+            btnViajar.Text = "Viaje Corto";
+            btnViajar.UseVisualStyleBackColor = false;
             btnViajar.Click += btnViajar_Click;
             // 
             // mySqlCommand1
@@ -64,12 +68,15 @@
             // 
             // btnViajarx5
             // 
-            btnViajarx5.Location = new Point(503, 36);
+            btnViajarx5.BackColor = Color.Beige;
+            btnViajarx5.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnViajarx5.ForeColor = Color.Indigo;
+            btnViajarx5.Location = new Point(572, 38);
             btnViajarx5.Name = "btnViajarx5";
             btnViajarx5.Size = new Size(203, 31);
             btnViajarx5.TabIndex = 2;
-            btnViajarx5.Text = "Viajar x5!!!";
-            btnViajarx5.UseVisualStyleBackColor = true;
+            btnViajarx5.Text = "Viaje Largo";
+            btnViajarx5.UseVisualStyleBackColor = false;
             btnViajarx5.Click += btnViajarx5_Click;
             // 
             // lblMensaje
@@ -81,11 +88,26 @@
             lblMensaje.Size = new Size(0, 21);
             lblMensaje.TabIndex = 3;
             // 
+            // btnCancelar
+            // 
+            btnCancelar.BackColor = Color.Indigo;
+            btnCancelar.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCancelar.ForeColor = SystemColors.ControlLightLight;
+            btnCancelar.Location = new Point(572, 75);
+            btnCancelar.Name = "btnCancelar";
+            btnCancelar.Size = new Size(203, 31);
+            btnCancelar.TabIndex = 4;
+            btnCancelar.Text = "Cancelar";
+            btnCancelar.UseVisualStyleBackColor = false;
+            btnCancelar.Click += btnCancelar_Click;
+            // 
             // FormViajesPrueba
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = Color.FromArgb(53, 53, 106);
             ClientSize = new Size(800, 450);
+            Controls.Add(btnCancelar);
             Controls.Add(lblMensaje);
             Controls.Add(btnViajarx5);
             Controls.Add(btnViajar);
@@ -105,5 +127,6 @@
         private MySqlConnector.MySqlCommand mySqlCommand1;
         private Button btnViajarx5;
         private Label lblMensaje;
+        private Button btnCancelar;
     }
 }

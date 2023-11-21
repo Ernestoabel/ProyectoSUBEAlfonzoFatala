@@ -63,13 +63,30 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (usuarioLogueado is UsuarioArgentino)
                 {
                     this.TraerUsuario(usuarioLogueado);
-                    MessageBox.Show($"Su saldo es de {tarjetaNacional.Saldo}");
+                    string saldo = $" ${tarjetaNacional.Saldo}";
+                    // MessageBox.Show($"Su saldo es de {tarjetaNacional.Saldo}");
 
+                    VentanaEmergenteSaldo ve = new VentanaEmergenteSaldo(saldo);
+                    ve.Show();
+
+                    if (ve.DialogResult == DialogResult.OK)
+                    {
+                        ve.Close();
+                    }
                 }
                 else if (usuarioLogueado is UsuarioExtranjero)
                 {
                     this.TraerUsuario(usuarioLogueado);
-                    MessageBox.Show($"Su saldo es de {tarjetaInternacional.Saldo}");
+
+                    string saldo = $" ${tarjetaInternacional.Saldo}";
+
+                    VentanaEmergenteSaldo ve = new VentanaEmergenteSaldo(saldo);
+                    ve.ShowDialog();
+
+                    if (ve.DialogResult == DialogResult.OK)
+                    {
+                        ve.Close();
+                    }
                 }
             }
             catch (Exception ex)
@@ -78,7 +95,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
 
         }
-        
+
         /// <summary>
         /// evento load
         /// </summary>
@@ -88,7 +105,7 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             this.insertarDatos(usuarioLogueado);
         }
-#endregion
+        #endregion
 
         #region Metodos
         /// <summary>
@@ -140,7 +157,7 @@ namespace ProyectoSUBEAlfonzoFatala
                         ///trae la tarjeta por el dni, en la lista de tarjeta
                         int idTarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
                         tarjetaNacional = TarjetaNacional.listaTarjetasNacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        
+
 
                     }
 
@@ -154,7 +171,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     {
                         int idTarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
                         tarjetaInternacional = TarjetaInternacional.listaTarjetasIntenacionales.FirstOrDefault(tarjeta => tarjeta.Id == idTarjeta);
-                        
+
                     }
                 }
             }
@@ -169,7 +186,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        
+
     }
     #endregion
 

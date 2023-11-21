@@ -79,9 +79,13 @@ namespace ProyectoSUBEAlfonzoFatala
                 TxtDNI.Text = usuarioLogueado.Dni.ToString();
                 txtTarjeta.Text = usuarioLogueado.IdSubeExtranjero.ToString();
             }
+            txtNombre.ReadOnly = true;
+            txtApellido.ReadOnly = true;
+            TxtDNI.ReadOnly = true;
+            txtTarjeta.ReadOnly = true;
         }
 
-     
+
 
     }
 }

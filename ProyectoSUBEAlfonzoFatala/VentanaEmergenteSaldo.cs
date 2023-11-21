@@ -12,7 +12,7 @@ namespace ProyectoSUBEAlfonzoFatala
 {
     public partial class VentanaEmergenteSaldo : Form
     {
-        
+
         private string saldoActual;
         private string saldoAcreditado;
 
@@ -22,7 +22,13 @@ namespace ProyectoSUBEAlfonzoFatala
             this.saldoActual = saldoActual;
             this.saldoAcreditado = saldoAcreditado;
         }
-        
+        public VentanaEmergenteSaldo(string saldoActual)
+        {
+            InitializeComponent();
+            this.saldoActual = saldoActual;
+            //this.saldoAcreditado = saldoAcreditado;
+        }
+
         /// <summary>
         /// Evento para corroborar el dialog
         /// </summary>
@@ -40,8 +46,23 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void VentanaEmergenteSaldo_Load(object sender, EventArgs e)
         {
+            InicializarVentana();
+        }
+
+        /// <summary>
+        /// Inicializa el evento load segun la sobrecarga
+        /// 
+        /// </summary>
+        private void InicializarVentana()
+        {
+           
             lblSaldoDisponible.Text = this.saldoActual;
-            lblSaldoAcreditado.Text = this.saldoAcreditado;
+
+            // Verificar si hay saldo acreditado (solo en caso de la primera sobrecarga)
+            if (!string.IsNullOrEmpty(saldoAcreditado))
+            {
+                lblSaldoAcreditado.Text = this.saldoAcreditado;
+            }
         }
 
     }

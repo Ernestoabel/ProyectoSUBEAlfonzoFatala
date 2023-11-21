@@ -8,4 +8,8 @@
     <Mensaje>El usuario 30555191 con la tarjeta 1089 quiere la baja</Mensaje>
     <confirmacion>false</confirmacion>
   </BajaData>
+  <BajaData Indice="3">
+    <Mensaje>El usuario 45393559 con la tarjeta 1271 quiere la baja</Mensaje>
+    <confirmacion>false</confirmacion>
+  </BajaData>
 </ArrayOfBajaData>

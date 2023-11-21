@@ -46,6 +46,7 @@
             // lblPassword
             // 
             lblPassword.AutoSize = true;
+            lblPassword.BackColor = Color.Transparent;
             lblPassword.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblPassword.ForeColor = SystemColors.WindowText;
             lblPassword.Location = new Point(297, 136);
@@ -67,6 +68,7 @@
             // lblUsuario
             // 
             lblUsuario.AutoSize = true;
+            lblUsuario.BackColor = Color.Transparent;
             lblUsuario.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblUsuario.ForeColor = SystemColors.WindowText;
             lblUsuario.Location = new Point(297, 87);

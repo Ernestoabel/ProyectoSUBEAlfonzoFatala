@@ -106,6 +106,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 formCargarSaldo.Hide();
             }
+            
 
         }
 
@@ -118,7 +119,6 @@ namespace ProyectoSUBEAlfonzoFatala
         {
             formLogin.Show();
             this.Close();
-
         }
 
         /// <summary>
@@ -186,19 +186,50 @@ namespace ProyectoSUBEAlfonzoFatala
             // Segundo hilo después de un retraso
             await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
-            // Operaciones en el hilo principal (interfaz de usuario)
-            this.Invoke((MethodInvoker)delegate
+            if(usuarioLogueado is not UsuarioSinTarjeta)
             {
-                // Segundo hilo
-                this.pasarObjeto -= formBaja.TraerUsuario;
+                // Operaciones en el hilo principal (interfaz de usuario)
+                this.Invoke((MethodInvoker)delegate
+                {
+                    // Segundo hilo
+                    this.pasarObjeto -= formBaja.TraerUsuario;
 
-                // Operaciones adicionales si es necesario
-                formBaja.TopLevel = false;
-                formBaja.FormBorderStyle = FormBorderStyle.None;
-                formBaja.Dock = DockStyle.Fill;
-                this.Controls.Add(formBaja);
-                formBaja.Show();
-            });
+                    // Operaciones adicionales si es necesario
+                    formBaja.TopLevel = false;
+                    formBaja.FormBorderStyle = FormBorderStyle.None;
+                    formBaja.Dock = DockStyle.Fill;
+                    this.Controls.Add(formBaja);
+                    formBaja.Show();
+                });
+            }
+            else
+            {
+                DesabilitarEntradaUsuarioSinTarjeta();
+                bajaToolStripMenuItem.Enabled = false;
+            }
+
+        }
+
+        private static void DesabilitarEntradaUsuarioSinTarjeta()
+        {
+            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta();
+            ve.ShowDialog();
+
+            if (ve.DialogResult == DialogResult.OK)
+            {
+                ve.Close();
+            }
+        }
+
+        private static void DesabilitarEntradaUsuarioConTarjeta()
+        {
+            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta("Usted Tiene Tarjeta", "Usted no necesita comprar una tarjeta, puede cargarla! Yendo a Inicio/Cargala.");
+            ve.ShowDialog();
+
+            if (ve.DialogResult == DialogResult.OK)
+            {
+                ve.Close();
+            }
         }
 
         private void cOMPRARToolStripMenuItem_Click(object sender, EventArgs e)
@@ -212,7 +243,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
-                MessageBox.Show("Usted ya tiene tarjeta", "Usted tiene tarjeta", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                DesabilitarEntradaUsuarioConTarjeta();
                 cOMPRARToolStripMenuItem.Enabled = false;
             }
         }
@@ -251,8 +282,11 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
-                MessageBox.Show("Usted no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+
+                DesabilitarEntradaUsuarioConTarjeta();
                 iNICIARSESIONToolStripMenuItem.Enabled = false;
+                
+                
             }
 
         }
