@@ -38,8 +38,11 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnCancelarRegistro_Click(object sender, EventArgs e)
         {
             this.Close();
-            FormInicio form = new FormInicio();
-            form.Show();
+            //usuarioLogueado.TieneTarjeta = false;
+            FormInicio inicio = new FormInicio();
+            this.pasarObjeto += inicio.RecivirObjeto;
+            this.pasarObjeto.Invoke(usuarioLogueado);
+            inicio.Show();
         }
 
         /// <summary>
@@ -169,22 +172,27 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void txtDocumento_TextChanged(object sender, EventArgs e)
         {
-            btnContinuar.Enabled = HabilitarContinuarClave();
             string dni = txtDocumento.Text;
 
-           if (int.Parse(dni[0].ToString()) < 9)
+            if (string.IsNullOrEmpty(dni))
             {
-                // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
-                rdoArgentino.Checked = true;
-                rdoExtranjero.Enabled = false;
+                rdoArgentino.Checked = false;
                 rdoExtranjero.Checked = false;
+            }
+            else if (dni.Length == 8)
+            {
+                rdoArgentino.Checked = true; // Es nacional
+                rdoExtranjero.Checked = false;
+            }
+            else if (dni.Length == 9)
+            {
+                rdoExtranjero.Checked = true; // Es extranjero
+                rdoArgentino.Checked = false;
             }
             else
             {
-                // El DNI tiene 9 dígitos, por lo que se considera "Extranjero"
                 rdoArgentino.Checked = false;
-                rdoArgentino.Enabled = false;
-                rdoExtranjero.Checked = true;
+                rdoExtranjero.Checked = false;
             }
         }
 

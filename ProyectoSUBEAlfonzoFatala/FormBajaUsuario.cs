@@ -12,6 +12,7 @@ using static Entidades.Listados;
 using System.Xml.Serialization;
 using static Entidades.ArchivoMensaje;
 using System.Net.Mail;
+using System.Runtime.CompilerServices;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -25,33 +26,45 @@ namespace ProyectoSUBEAlfonzoFatala
         const string Usuario = "proyectosube.ps@gmail.com";
         const string Password = "rasz wqyj tmhn oguf";
         string rutaGiph = "C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif";
+        Usuario usuario = new Usuario();
 
         public FormBajaUsuario()
         {
             InitializeComponent();
         }
 
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(object usuarioLogueado)
         {
             try
             {
-                if (usuario is UsuarioSinTarjeta)
+                if (usuarioLogueado is UsuarioSinTarjeta)
                 {
                     throw new UsuarioSinTarjetaException();
                 }
-                else if (usuario is UsuarioArgentino usuarioArgentino)
+                else if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
                     mensaje = $"El usuario {usuarioArgentino.Dni} con la tarjeta {usuarioArgentino.IdSubeArgentina} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioArgentino.Dni);
                     tarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+
+                    usuario.Nombre = usuarioArgentino.Nombre;
+                    usuario.Apellido = usuarioArgentino.Apellido;
+                    usuario.Dni = usuarioArgentino.Dni;
+
                 }
-                else if (usuario is UsuarioExtranjero usuarioExtranjero)
+                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
                     mensaje = $"El usuario {usuarioExtranjero.Dni} con la tarjeta {usuarioExtranjero.IdSubeExtranjero} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioExtranjero.Dni);
                     tarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
+
+                    usuario.Nombre = usuarioExtranjero.Nombre;
+                    usuario.Apellido = usuarioExtranjero.Apellido;
+                    usuario.Dni = usuarioExtranjero.Dni;
+
+
                 }
             }
             catch (UsuarioSinTarjetaException)
@@ -95,12 +108,14 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="para"></param>
         /// <param name="asunto"></param>
         /// <param name="error"></param>
-        public static async Task<bool> EnviarCorreoAsync(StringBuilder mensaje, DateTime FechaEnvio, string de, string para, string asunto)
+        public static async Task<bool> EnviarCorreoAsync(StringBuilder mensaje, DateTime FechaEnvio, string de, string para, string asunto, Usuario usuario)
         {
             try
             {
                 mensaje.Append(Environment.NewLine);
-                mensaje.Append(string.Format("Este correo ha sido enviado el día {0:dd:/MM/yyyy} a las {0:HH:mm:ss} hs : \n\n", FechaEnvio));
+                mensaje.Append(string.Format("\nEste correo ha sido enviado el día {0:dd:/MM/yyyy} a las {0:HH:mm:ss} hs.\n", FechaEnvio));
+                mensaje.Append(Environment.NewLine);
+                mensaje.Append(string.Format($"Usuario:\nNombre:{usuario.Nombre} {usuario.Apellido}, DNI:{usuario.Dni}, Email: {de}"));
                 mensaje.Append(Environment.NewLine);
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(de);
@@ -199,7 +214,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             mensajeBuilder.Append(txtMensaje.Text.Trim());
 
-            bool correoEnviado = await EnviarCorreoAsync(mensajeBuilder, DateTime.Now, txtDe.Text.Trim(), "proyectosube.ps@gmail.com", txtAsunto.Text.Trim());
+            bool correoEnviado = await EnviarCorreoAsync(mensajeBuilder, DateTime.Now, txtDe.Text.Trim(), "proyectosube.ps@gmail.com", txtAsunto.Text.Trim(), usuario);
 
             if (correoEnviado)
             {

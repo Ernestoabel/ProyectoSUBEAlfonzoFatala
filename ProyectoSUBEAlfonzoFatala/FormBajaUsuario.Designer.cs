@@ -68,7 +68,7 @@
             btnBajaTarjetaUsuario.Location = new Point(59, 280);
             btnBajaTarjetaUsuario.Name = "btnBajaTarjetaUsuario";
             btnBajaTarjetaUsuario.Size = new Size(272, 65);
-            btnBajaTarjetaUsuario.TabIndex = 1;
+            btnBajaTarjetaUsuario.TabIndex = 6;
             btnBajaTarjetaUsuario.Text = "Mandar mensaje";
             btnBajaTarjetaUsuario.TextImageRelation = TextImageRelation.TextBeforeImage;
             toolTip1.SetToolTip(btnBajaTarjetaUsuario, "La solicitud de la baja de tarjeta Sube, se realizará mediante un *mensaje enviado al administrador de los usuarios. ");
@@ -105,7 +105,7 @@
             btnCorreo.Location = new Point(59, 354);
             btnCorreo.Name = "btnCorreo";
             btnCorreo.Size = new Size(272, 65);
-            btnCorreo.TabIndex = 5;
+            btnCorreo.TabIndex = 7;
             btnCorreo.Text = "Enviar Correo";
             btnCorreo.TextImageRelation = TextImageRelation.TextBeforeImage;
             toolTip1.SetToolTip(btnCorreo, "Envia un correo detallando a la administración, para solucionar un error en específico.");
@@ -118,7 +118,7 @@
             txtDe.Name = "txtDe";
             txtDe.PlaceholderText = "ingrese su email";
             txtDe.Size = new Size(175, 23);
-            txtDe.TabIndex = 6;
+            txtDe.TabIndex = 1;
             txtDe.Visible = false;
             // 
             // txtAsunto
@@ -127,7 +127,7 @@
             txtAsunto.Name = "txtAsunto";
             txtAsunto.PlaceholderText = "Ej: cambio tarjeta";
             txtAsunto.Size = new Size(175, 23);
-            txtAsunto.TabIndex = 7;
+            txtAsunto.TabIndex = 3;
             txtAsunto.Visible = false;
             // 
             // txtPara
@@ -136,7 +136,7 @@
             txtPara.Name = "txtPara";
             txtPara.PlaceholderText = "vuelva a ingresar su mail";
             txtPara.Size = new Size(175, 23);
-            txtPara.TabIndex = 8;
+            txtPara.TabIndex = 2;
             txtPara.Visible = false;
             // 
             // txtMensaje
@@ -146,7 +146,7 @@
             txtMensaje.Name = "txtMensaje";
             txtMensaje.PlaceholderText = "comentarios al administrador";
             txtMensaje.Size = new Size(175, 116);
-            txtMensaje.TabIndex = 9;
+            txtMensaje.TabIndex = 4;
             txtMensaje.Visible = false;
             // 
             // lblDe
@@ -205,7 +205,7 @@
             btnEnviarEmail.Location = new Point(400, 398);
             btnEnviarEmail.Name = "btnEnviarEmail";
             btnEnviarEmail.Size = new Size(365, 40);
-            btnEnviarEmail.TabIndex = 14;
+            btnEnviarEmail.TabIndex = 5;
             btnEnviarEmail.Text = "Enviar Email";
             btnEnviarEmail.TextImageRelation = TextImageRelation.ImageBeforeText;
             toolTip1.SetToolTip(btnEnviarEmail, "Corrobore que los datos esten ingresados correctamente.");

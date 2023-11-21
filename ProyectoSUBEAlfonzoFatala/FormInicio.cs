@@ -81,6 +81,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
+                DesabilitarEntradaUsuarioSinTarjeta();
                 viajesToolStripMenuItem.Enabled = false;
             }
 
@@ -277,17 +278,30 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Segundo hilo después de un retraso
                 await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
-                // Operaciones en el hilo principal (interfaz de usuario)
-                this.Invoke((MethodInvoker)delegate
+                try
                 {
-                    // Segundo hilo
-                    this.pasarObjeto -= formCargarSaldo.TraerUsuario;
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        // Segundo hilo
+                        this.pasarObjeto -= formCargarSaldo.TraerUsuario;
 
-                    formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
-                    formCargarSaldo.Dock = DockStyle.Fill;
-                    formCargarSaldo.MdiParent = this;
-                    formCargarSaldo.Show();
-                });
+                        formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
+                        formCargarSaldo.Dock = DockStyle.Fill;
+                        formCargarSaldo.MdiParent = this;
+                        formCargarSaldo.Show();
+                    });
+                // Operaciones en el hilo principal (interfaz de usuario)
+
+                }
+                catch(System.ObjectDisposedException ex)
+                {
+                    CatchError.LogError(nameof(FormInicio), nameof(iNICIARSESIONToolStripMenuItem), "Error al iniciar sesion ", ex);
+                }
+                catch (Exception ex)
+                {
+                    CatchError.LogError(nameof(FormInicio), nameof(iNICIARSESIONToolStripMenuItem), "Error al iniciar sesion ", ex);
+                }
+                
 
             }
             else
