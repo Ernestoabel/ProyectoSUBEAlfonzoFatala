@@ -56,7 +56,7 @@ namespace ProyectoSUBEAlfonzoFatala
             BorrarMensajeError();
             if (ValidarCampos())
             {
-                MessageBox.Show("Datos ingresados correctamente");
+                //MessageBox.Show("Datos ingresados correctamente");
 
                 contador++;
 
@@ -76,7 +76,7 @@ namespace ProyectoSUBEAlfonzoFatala
             {
 
                 GuardarDatos();
-                MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
+                //MessageBox.Show($"Bienvenido {nuevoUsuarioRegistrado.Nombre}! ");
                 //this.Hide();
                 UsuarioSinTarjeta usuario = nuevoUsuarioRegistrado;
                 MostrarUsuarioEnControles(usuario);
@@ -371,8 +371,17 @@ namespace ProyectoSUBEAlfonzoFatala
         private void MostrarUsuarioEnControles(Usuario usuario)
         {
             string informacion = $"Nombre: {usuario.Nombre}\nApellido: {usuario.Apellido}\nDNI: {usuario.Dni}\nClave: {usuario.Clave}\nTieneTarjeta: {(usuario.TieneTarjeta ? "Sí" : "No")}";
+            string nombre = $"{usuario.Nombre} {usuario.Apellido}";
 
-            MessageBox.Show(informacion, "Datos del Usuario Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            VentanaBienvenida bienvenida = new VentanaBienvenida(nombre);
+            bienvenida.ShowDialog();
+
+            if(bienvenida.DialogResult == DialogResult.OK)
+            {
+                bienvenida.Close();
+
+            }
+           // MessageBox.Show(informacion, "Datos del Usuario Registrado", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>

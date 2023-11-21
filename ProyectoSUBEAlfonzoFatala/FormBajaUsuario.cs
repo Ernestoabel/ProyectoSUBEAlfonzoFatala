@@ -24,6 +24,8 @@ namespace ProyectoSUBEAlfonzoFatala
         int tarjeta;
         const string Usuario = "proyectosube.ps@gmail.com";
         const string Password = "rasz wqyj tmhn oguf";
+        string rutaGiph = "C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif";
+
         public FormBajaUsuario()
         {
             InitializeComponent();
@@ -111,7 +113,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 smtp.Credentials = new System.Net.NetworkCredential(Usuario, Password);
                 smtp.EnableSsl = true;
 
-                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado();
+                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado("C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif", "Enviando Email..");
                 enviandoCorreo.Show();
 
                 await Task.Delay(5000); // Retraso de 5 segundos
@@ -142,7 +144,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private void HacerControlersVisibles(bool visible)
         {
-            if(visible)
+            if (visible)
             {
                 txtAsunto.Visible = true;
                 txtDe.Visible = true;
@@ -177,7 +179,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 txtMensaje.Visible = false;
                 btnEnviarEmail.Visible = false;
             }
-           
+
         }
 
         /// <summary>
@@ -190,7 +192,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void btnEnviarEmail_Click(object sender, EventArgs e)
         {
-            
+
             bool visible = false;
 
             StringBuilder mensajeBuilder = new StringBuilder();
@@ -199,7 +201,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             bool correoEnviado = await EnviarCorreoAsync(mensajeBuilder, DateTime.Now, txtDe.Text.Trim(), "proyectosube.ps@gmail.com", txtAsunto.Text.Trim());
 
-            if (correoEnviado ) 
+            if (correoEnviado)
             {
                 ///logica para cargar el mensaje en el admin
             }

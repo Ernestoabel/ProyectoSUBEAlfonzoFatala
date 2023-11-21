@@ -179,7 +179,12 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void btnViajarx5_Click(object sender, EventArgs e)
         {
-            await Task.Run(() => ViajarCincoVeces()).ConfigureAwait(false);
+            await Task.Run(() =>
+            {
+                ViajarCincoVeces().ConfigureAwait(false);
+
+            });
+
         }
 
         /// <summary>
@@ -197,8 +202,11 @@ namespace ProyectoSUBEAlfonzoFatala
 
                     if (haySaldo)
                     {
+                        string condicion = $"Id = {tarjetaNacional.Id}";
+                        tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
                         listaViajes.Add(nuevoViaje);
                         Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
+                 
                     }
                     else
                     {
@@ -214,6 +222,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
                     if (haySaldo)
                     {
+                        string condicion = $"Id = {tarjetaInternacional.Id}";
+                        tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
                         listaViajes.Add(nuevoViaje);
                         Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
 
@@ -242,6 +252,8 @@ namespace ProyectoSUBEAlfonzoFatala
             {
                 // Crear un nuevo origen del token de cancelación antes de iniciar el bucle
                 cancellationTokenSource = new CancellationTokenSource();
+                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado("C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\viajeCorto.gif","Viajando...");
+                enviandoCorreo.Show();
 
                 try
                 {
@@ -261,10 +273,13 @@ namespace ProyectoSUBEAlfonzoFatala
                         nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
                         lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
                         lblMensaje.ForeColor = Color.White;
-                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+                        decimal saldoARestar = nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(saldoARestar);
 
                         if (haySaldo)
                         {
+                            string condicion = $"Id = {tarjetaNacional.Id}";
+                            tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
                             listaViajes.Add(nuevoViaje);
                             Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioArgentino.IdSubeArgentina));
                         }
@@ -282,10 +297,13 @@ namespace ProyectoSUBEAlfonzoFatala
                         nuevoViaje.ValorBoleto = nuevoViaje.ValorBoleto * factorCosto;
                         lblMensaje.Text = "Usted viajo: " + randomDelay * 10 + "Km con costo por: " + nuevoViaje.ValorBoleto;
                         lblMensaje.ForeColor = Color.White;
-                        bool haySaldo = tarjetaNacional.RestarSaldo(nuevoViaje.ValorBoleto);
+                        decimal saldoARestar = nuevoViaje.ValorBoleto;
+                        bool haySaldo = tarjetaNacional.RestarSaldo(saldoARestar);
 
                         if (haySaldo)
                         {
+                            string condicion = $"Id = {tarjetaInternacional.Id}";
+                            tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
                             listaViajes.Add(nuevoViaje);
                             Viajes.InsertarViajeSQL(nuevoViaje, int.Parse(usuarioExtranjero.IdSubeExtranjero));
                         }
@@ -308,9 +326,11 @@ namespace ProyectoSUBEAlfonzoFatala
                     // La excepción se lanza si se cancela la operación
                     lblMensaje.ForeColor = Color.White;
                     lblMensaje.Text = "Se cancelo el viaje";
+                    //enviandoCorreo.Close();
                 }
                 finally
                 {
+                    enviandoCorreo.Close();
                     // Limpiar el token de cancelación después de la ejecución
                     cancellationTokenSource.Dispose();
                     cancellationTokenSource = null;

@@ -213,6 +213,10 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Metodo para setaear la ventana personalizada
+        /// sin sobrecarga
+        /// </summary>
         private static void DesabilitarEntradaUsuarioSinTarjeta()
         {
             VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta();
@@ -224,9 +228,13 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        /// metodo para desabilitar los movimientos del usuario 
+        /// que ya tiene ese dominio
+        /// </summary>
         private static void DesabilitarEntradaUsuarioConTarjeta()
         {
-            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta("Usted Tiene Tarjeta", "Usted no necesita comprar una tarjeta, puede cargarla! Yendo a Inicio/Cargala.");
+            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta("Usted Tiene Tarjeta", "Usted no necesita comprar una tarjeta,\r\n\r\n puede cargarla! Yendo a Inicio/Cargala.");
             ve.ShowDialog();
 
             if (ve.DialogResult == DialogResult.OK)
@@ -285,7 +293,7 @@ namespace ProyectoSUBEAlfonzoFatala
             else
             {
 
-                DesabilitarEntradaUsuarioConTarjeta();
+                DesabilitarEntradaUsuarioSinTarjeta();
                 iNICIARSESIONToolStripMenuItem.Enabled = false;
 
 

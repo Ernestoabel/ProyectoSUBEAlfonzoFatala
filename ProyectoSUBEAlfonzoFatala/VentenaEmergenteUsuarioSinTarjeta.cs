@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Entidades;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -38,7 +39,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void Inicializarlos()
         {
-            
+            //string mensaje = r"El usuario no tiene una tarjeta a su nombre,\r\n\r\npuede Comprarla yendo a Mi Sube/Comprarla."
             // Verificar si hay saldo acreditado (solo en caso de la primera sobrecarga)
             if (!string.IsNullOrEmpty(solucion) && !string.IsNullOrEmpty(titulo))
             {
