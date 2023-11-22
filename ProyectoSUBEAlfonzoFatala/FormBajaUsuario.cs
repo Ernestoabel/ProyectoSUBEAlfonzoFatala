@@ -13,6 +13,7 @@ using System.Xml.Serialization;
 using static Entidades.ArchivoMensaje;
 using System.Net.Mail;
 using System.Runtime.CompilerServices;
+using Tulpep.NotificationWindow;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -25,7 +26,8 @@ namespace ProyectoSUBEAlfonzoFatala
         int tarjeta;
         const string Usuario = "proyectosube.ps@gmail.com";
         const string Password = "rasz wqyj tmhn oguf";
-        string rutaGiph = "C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif";
+        string rutaGiph = @"..\..\..\Assets\enviandoEmail.gif";
+        //string rutaGiph = "C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif";
         Usuario usuario = new Usuario();
 
         public FormBajaUsuario()
@@ -84,7 +86,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     ArchivoMensaje.listaBajas.Add(new Dictionary<int, BajaData> { { indice, new BajaData { Indice = indice, Mensaje = mensaje } } });
                     ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
-                    lblMensaje.Text = "El mensaje fue enviado";
+                    // lblMensaje.Text = "El mensaje fue enviado";
+                    PopUpMensajeEnviado("Mensaje Enviado", "El mensaje fue enviado con exito");
                 }
                 else
                 {
@@ -93,7 +96,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (Exception)
             {
-                lblMensaje.Text = "Esta tarjeta ya pidio la baja";
+                PopUpMensajeEnviado("Baja solicitada", "El usuario tiene una baja pendiente de respuesta");
             }
         }
 
@@ -128,7 +131,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 smtp.Credentials = new System.Net.NetworkCredential(Usuario, Password);
                 smtp.EnableSsl = true;
 
-                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado("C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif", "Enviando Email..");
+                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado(@"..\..\..\Assets\enviandoEmail.gif", "Enviando Email..");
                 enviandoCorreo.Show();
 
                 await Task.Delay(5000); // Retraso de 5 segundos
@@ -137,6 +140,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     smtp.Send(mail);
                 });
                 enviandoCorreo.Close();
+                PopUpMensajeEnviado("Correo Enviado", "El correo fue enviado al admin");
                 return true; // El correo se envió exitosamente
             }
             catch (Exception ex)
@@ -223,6 +227,30 @@ namespace ProyectoSUBEAlfonzoFatala
 
             HacerControlersVisibles(visible);
         }
+
+        /// <summary>
+        /// pop up mensajes
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="subtitulo"></param>
+        private static void PopUpMensajeEnviado(string titulo, string subtitulo)
+        {
+            string rutaImagen = @"..\..\..\Assets\EnviarEmail.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(40, 167, 69);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
+
+
     }
 }
 

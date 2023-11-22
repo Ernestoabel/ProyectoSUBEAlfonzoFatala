@@ -10,6 +10,7 @@ using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProyectoSUBEAlfonzoFatala
@@ -20,6 +21,7 @@ namespace ProyectoSUBEAlfonzoFatala
         private bool contraseñaCheck;
         private bool montoCheck;
         Action<Usuario> pasarObjeto;
+        private string saldo;
 
         private decimal saldoEnTarjeta;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
@@ -32,6 +34,12 @@ namespace ProyectoSUBEAlfonzoFatala
             btnAcreditarSaldo.Enabled = false;
             contraseñaCheck = false;
             montoCheck = false;
+        }
+
+        public string devolverDato
+        {
+            get { return saldo; }
+            set { saldo = value; }
         }
 
         #region Eventos
@@ -92,6 +100,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     tarjetaNacional.ActualizarEnBaseDeDatos(condicion);
                     TarjetaNacional.GenerarFacturaPDF(tarjetaNacional, saldoAcreditado);
 
+                    devolverDato = tarjetaNacional.Saldo.ToString();
+
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
 
@@ -118,6 +128,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
                     tarjetaInternacional.ActualizarEnBaseDeDatos(condicion);
                     TarjetaInternacional.GenerarFacturaPDF(tarjetaInternacional, saldoAcreditado);
+
+                    devolverDato = tarjetaInternacional.Saldo.ToString();
 
                     VentanaEmergenteSaldo ventanaEmergenteSaldo = new VentanaEmergenteSaldo(saldoActual, saldoAcreditado);
                     ventanaEmergenteSaldo.ShowDialog();
@@ -232,15 +244,34 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (UsuarioSinTarjetaException ex)
             {
-                MessageBox.Show(ex.Message, "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PopUpUsuarioError("Error", "Usuario sin tarjeta");
                 btnAcreditarSaldo.Enabled = false;
             }
             catch (Exception)
             {
-                MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                PopUpUsuarioError("Error", "sucedio un error desconocido");
+                // MessageBox.Show("Ocurrio un error", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         #endregion
+
+        private static void PopUpUsuarioError(string titulo, string subtitulo)
+        {
+
+            string rutaImagen = @"..\..\..\Assets\errorLogueo.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(220, 53, 69);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
 
         private void FormCarga_Load(object sender, EventArgs e)
         {

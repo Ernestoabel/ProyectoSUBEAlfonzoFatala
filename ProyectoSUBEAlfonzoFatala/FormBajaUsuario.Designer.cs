@@ -71,7 +71,7 @@
             btnBajaTarjetaUsuario.TabIndex = 6;
             btnBajaTarjetaUsuario.Text = "Mandar mensaje";
             btnBajaTarjetaUsuario.TextImageRelation = TextImageRelation.TextBeforeImage;
-            toolTip1.SetToolTip(btnBajaTarjetaUsuario, "La solicitud de la baja de tarjeta Sube, se realizará mediante un *mensaje enviado al administrador de los usuarios. ");
+            toolTip1.SetToolTip(btnBajaTarjetaUsuario, "Envia una solicitud de Baja al administrador de los usuarios mediante el sistema.");
             btnBajaTarjetaUsuario.UseVisualStyleBackColor = false;
             btnBajaTarjetaUsuario.Click += btnBajaTarjetaUsuario_Click;
             // 
@@ -108,7 +108,7 @@
             btnCorreo.TabIndex = 7;
             btnCorreo.Text = "Enviar Correo";
             btnCorreo.TextImageRelation = TextImageRelation.TextBeforeImage;
-            toolTip1.SetToolTip(btnCorreo, "Envia un correo detallando a la administración, para solucionar un error en específico.");
+            toolTip1.SetToolTip(btnCorreo, "Envia un email detallando a la administración un error en específico.");
             btnCorreo.UseVisualStyleBackColor = false;
             btnCorreo.Click += btnCorreo_Click;
             // 

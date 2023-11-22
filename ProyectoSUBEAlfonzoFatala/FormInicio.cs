@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Windows.Forms;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -31,6 +32,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             configuraciones = new Configuraciones();
             ConfiguracionInicial();
+            //formCargarSaldo.
 
         }
 
@@ -189,7 +191,7 @@ namespace ProyectoSUBEAlfonzoFatala
             });
 
             // Segundo hilo después de un retraso
-            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+           await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
@@ -315,18 +317,6 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
-        private void chkCheckedCh(object sender, EventArgs e)
-        {
-            string rutaImagenUncheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineRadioButtonUnchecked.png");
-            string rutaImagenCheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineCheckCircleOutline.png");
-            CheckBox checkBox = sender as CheckBox;
-
-            if (checkBox.Checked)
-                checkBox.Image = Image.FromFile(rutaImagenUncheck);
-            else
-                checkBox.Image = Image.FromFile(rutaImagenCheck);
-        }
-
         /// <summary>
         /// Evento para cambiar el tema de la aplicacion
         /// </summary>
@@ -337,23 +327,19 @@ namespace ProyectoSUBEAlfonzoFatala
             string rutaImagenUncheck = @"..\..\..\Assets\IcBaselineRadioButtonUnchecked.png";
             string rutaImagenCheck = @"..\..\..\Assets\IcBaselineCheckCircleOutline.png";
 
-            CheckBox checkBox = sender as CheckBox;
-
-            if (checkBox.Checked)
-            {
-                checkBox.Image = Image.FromFile(rutaImagenCheck);
-            }
-            else
-            {
-                checkBox.Image = Image.FromFile(rutaImagenUncheck);
-            }
+           // CheckBox checkBox = sender as CheckBox;
 
             if (!chbTema.Checked)
             {
+                
+                chbTema.Image = Image.FromFile(rutaImagenUncheck);
+                chbTema.BackColor = Color.Transparent;
                 configuraciones.ConfiguracionNacional();
             }
             else
             {
+                chbTema.Image = Image.FromFile(rutaImagenCheck);
+                chbTema.BackColor = Color.Transparent;
                 configuraciones.ConfiguracionSovietical();
             }
             BackgroundImage = Image.FromFile(configuraciones.ImagenFondo);
@@ -361,6 +347,16 @@ namespace ProyectoSUBEAlfonzoFatala
             menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
 
 
+        }
+
+        /// <summary>
+        /// obtiene el estado del check
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool ObtenerEstadoCheckBox()
+        {
+            return chbTema.Checked;
         }
 
         /// <summary>

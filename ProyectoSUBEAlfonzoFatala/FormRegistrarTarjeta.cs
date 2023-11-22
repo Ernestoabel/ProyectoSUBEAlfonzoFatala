@@ -13,6 +13,7 @@ using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.TaskbarClock;
 
 namespace ProyectoSUBEAlfonzoFatala
@@ -22,6 +23,8 @@ namespace ProyectoSUBEAlfonzoFatala
 
         public Usuario usuarioLogueado;
         Action<Usuario> pasarObjeto;
+        private Action<bool> EstadoCheckBoxChanged;
+
         public FormRegistrarTarjeta(Usuario usuario)
         {
             InitializeComponent();
@@ -119,12 +122,29 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
-                MessageBox.Show("Error los datos no coinciden. Reingreselos. Muchas Gracias");
+                PopUpError();
+                //MessageBox.Show("Error los datos no coinciden. Reingreselos. Muchas Gracias");
             }
         }
         #endregion
 
         #region Metodos
+
+        private static void PopUpError()
+        {
+            string rutaImagen = @"..\..\..\Assets\errorLogueo.png";
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(220, 53, 69);
+            popup.TitleText = "Error de Logueo";
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = "Error los datos no coinciden. Reingreselos. Muchas Gracias";
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
 
         /// <summary>
         ///  Permite habilitar el boton continuar si los datos fueron ingresados
@@ -170,31 +190,60 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        /// 
         private void txtDocumento_TextChanged(object sender, EventArgs e)
         {
+            btnContinuar.Enabled = HabilitarContinuarClave();
             string dni = txtDocumento.Text;
 
-            if (string.IsNullOrEmpty(dni))
+            try
             {
-                rdoArgentino.Checked = false;
-                rdoExtranjero.Checked = false;
+                if (int.Parse(dni[0].ToString()) < 9 && dni.Length == 8)
+                {
+                    // El DNI tiene 8 dígitos, por lo que se considera "Argentino"
+                    rdoArgentino.Checked = true;
+                    rdoExtranjero.Enabled = false;
+                    rdoExtranjero.Checked = false;
+                }
+                else if ((int.Parse(dni[0].ToString()) >= 9))
+                {
+                    // El DNI tiene 9 dígitos, por lo que se considera "Extranjero"
+                    rdoArgentino.Checked = false;
+                    rdoArgentino.Enabled = false;
+                    rdoExtranjero.Checked = true;
+                }
+
             }
-            else if (dni.Length == 8)
-            {
-                rdoArgentino.Checked = true; // Es nacional
-                rdoExtranjero.Checked = false;
-            }
-            else if (dni.Length == 9)
-            {
-                rdoExtranjero.Checked = true; // Es extranjero
-                rdoArgentino.Checked = false;
-            }
-            else
-            {
-                rdoArgentino.Checked = false;
-                rdoExtranjero.Checked = false;
+            catch(Exception ex) 
+            { 
+                
             }
         }
+        //private void txtDocumento_TextChanged(object sender, EventArgs e)
+        //{
+        //    string dni = txtDocumento.Text;
+
+        //    if (string.IsNullOrEmpty(dni))
+        //    {
+        //        rdoArgentino.Checked = false;
+        //        rdoExtranjero.Checked = false;
+        //    }
+        //    else if (dni.Length == 8)
+        //    {
+        //        rdoArgentino.Checked = true; // Es nacional
+        //        rdoExtranjero.Checked = false;
+        //    }
+        //    else if (dni.Length == 9)
+        //    {
+        //        rdoExtranjero.Checked = true; // Es extranjero
+        //        rdoArgentino.Checked = false;
+        //    }
+        //    else
+        //    {
+        //        rdoArgentino.Checked = false;
+        //        rdoExtranjero.Checked = false;
+        //    }
+        //}
 
         /// <summary>
         /// Evento creado para verificar claves

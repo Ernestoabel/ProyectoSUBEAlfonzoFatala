@@ -16,8 +16,7 @@ namespace ProyectoSUBEAlfonzoFatala
         Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
-
-
+       
 
         public FormCargarSaldo()
         {
@@ -27,6 +26,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+       
 
         #region Eventos
 
@@ -40,6 +40,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
+               
                 FormCarga formCarga = new FormCarga();
                 formCarga.TraerUsuario(usuarioLogueado);
                 formCarga.Dock = DockStyle.Fill;
@@ -136,6 +137,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblSaldo.BackColor = Color.Transparent;
                 lblSaldo.Text = "$" + tarjetaInternacional.Saldo.ToString();
             }
+            
+           
         }
 
         /// <summary>

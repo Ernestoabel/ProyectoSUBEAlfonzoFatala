@@ -9,6 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -118,7 +119,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
                 else if (usuario is UsuarioAdministrador)
                 {
-                    MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    // MessageBox.Show("No puede cambiar su clave", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PopUpUsuarioError("Error", "Usted es administrador no puede cambiar su clave");
                 }
 
             }
@@ -133,8 +135,51 @@ namespace ProyectoSUBEAlfonzoFatala
         private void btnGuardar_Click(object sender, EventArgs e)
         {
             Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-            MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            PopUpGuardado();
+            //MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        /// <summary>
+        /// Exito en el guardado popup nugget 
+        /// </summary>
+        private static void PopUpGuardado()
+        {
+            string rutaImagen = @"..\..\..\Assets\cambiosGuardados.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(40, 167, 69);
+            popup.TitleText = "Cambios Guardados";
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = "Cambios actualizados en la base de datos.";
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
+
+        /// <summary>
+        /// setea el error con mensajes
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="subtitulo"></param>
+        private static void PopUpUsuarioError(string titulo, string subtitulo)
+        {
+
+            string rutaImagen = @"..\..\..\Assets\errorLogueo.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(220, 53, 69);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
         }
 
         /// <summary>
@@ -162,16 +207,20 @@ namespace ProyectoSUBEAlfonzoFatala
                 }
                 else
                 {
-                    MessageBox.Show("Este usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    //MessageBox.Show("Este usuario no tiene tarjeta", "Error", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    PopUpUsuarioError("Usuario sin tarjeta", "Seleccione un usuario con tarjeta para dar de baja");
                     bandera = false;
                 }
 
                 if (bandera)
                 {
-                    DialogResult result = MessageBox.Show("Quiere dar de baja la Tarjeta: " + tarjeta, "Baja de tarjeta",
-                                                          MessageBoxButtons.YesNo, MessageBoxIcon.Information);
+                    //DialogResult result = MessageBox.Show("Quiere dar de baja la Tarjeta: " + tarjeta, "Baja de tarjeta",
+                    //                                    MessageBoxButtons.YesNo, MessageBoxIcon.Information)
+                    
+                    VentanaEmergenteAdmin ventanaEmergenteAdmin = new VentanaEmergenteAdmin($"id: {tarjeta}", "  Desea dar de baja la \n\r    tarjeta: "+tarjeta+" ?");
+                    ventanaEmergenteAdmin.ShowDialog();
 
-                    if (result == DialogResult.Yes)
+                    if (ventanaEmergenteAdmin.DialogResult == DialogResult.Yes)
                     {
                         if (usuario is UsuarioArgentino)
                         {
@@ -208,7 +257,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
                         }
                     }
-                    else if (result == DialogResult.No)
+                    else if (ventanaEmergenteAdmin.DialogResult == DialogResult.No)
                     {
 
                     }

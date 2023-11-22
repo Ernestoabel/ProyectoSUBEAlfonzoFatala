@@ -76,7 +76,7 @@
             // 
             // btnCancelar
             // 
-            btnCancelar.BackColor = Color.OrangeRed;
+            btnCancelar.BackColor = Color.DarkRed;
             btnCancelar.FlatStyle = FlatStyle.Popup;
             btnCancelar.Font = new Font("Segoe UI", 14F, FontStyle.Bold, GraphicsUnit.Point);
             btnCancelar.ForeColor = Color.White;
@@ -104,10 +104,10 @@
             // 
             // btnAlta
             // 
-            btnAlta.BackColor = Color.MidnightBlue;
+            btnAlta.BackColor = Color.AliceBlue;
             btnAlta.FlatStyle = FlatStyle.Popup;
             btnAlta.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnAlta.ForeColor = Color.White;
+            btnAlta.ForeColor = Color.MidnightBlue;
             btnAlta.Location = new Point(474, 178);
             btnAlta.Name = "btnAlta";
             btnAlta.Size = new Size(166, 42);
@@ -128,7 +128,7 @@
             // 
             // btnUsuarioArgentino
             // 
-            btnUsuarioArgentino.BackColor = Color.LightSlateGray;
+            btnUsuarioArgentino.BackColor = Color.CadetBlue;
             btnUsuarioArgentino.BackgroundImageLayout = ImageLayout.Center;
             btnUsuarioArgentino.FlatStyle = FlatStyle.Popup;
             btnUsuarioArgentino.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -144,7 +144,7 @@
             // 
             // btnUsuarioExtranjero
             // 
-            btnUsuarioExtranjero.BackColor = Color.LightSlateGray;
+            btnUsuarioExtranjero.BackColor = Color.DarkSlateBlue;
             btnUsuarioExtranjero.BackgroundImageLayout = ImageLayout.Center;
             btnUsuarioExtranjero.FlatStyle = FlatStyle.Popup;
             btnUsuarioExtranjero.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);

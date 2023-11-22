@@ -10,6 +10,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -157,11 +158,13 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (ClaveInvalidaException)
             {
-                lblError.Text = "La clave ingresada es incorrecta";
+                PopUpError();
             }
             catch (Exception)
             {
-                lblError.Text = "Error de logueo";
+                //lblError.Text = "Error de logueo";
+                PopUpError();
+
             }
             finally
             {
@@ -169,6 +172,27 @@ namespace ProyectoSUBEAlfonzoFatala
             }
 
         }
+
+        /// <summary>
+        /// Metodo que usa la nuget Notification Popup
+        /// configurado en el error de logueo
+        /// </summary>
+        private static void PopUpError()
+        {
+            string rutaImagen = @"..\..\..\Assets\errorLogueo.png";
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(220, 53, 69);
+            popup.TitleText = "Error de Logueo";
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = "Verifique que los datos esten bien ingresados";
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
+
         /// <summary>
         /// Metodos para utilizar delegados
         /// </summary>
