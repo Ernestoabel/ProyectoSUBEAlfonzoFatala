@@ -106,16 +106,19 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioSinTarjeta.ModificarClaveSQL(usuarioACambiar.Dni,usuarioACambiar.Clave);
                 }
                 else if (usuario is UsuarioArgentino)
                 {
                     UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioArgentino.ModificarClaveSQL(usuarioACambiar.Dni, usuarioACambiar.Clave);
                 }
                 else if (usuario is UsuarioExtranjero)
                 {
                     UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioExtranjero.ModificarClaveSQL(usuarioACambiar.Dni, usuarioACambiar.Clave);
                 }
                 else if (usuario is UsuarioAdministrador)
                 {
