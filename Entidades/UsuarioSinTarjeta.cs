@@ -145,5 +145,31 @@ namespace Entidades
             }
 
         }
+
+        public static void ModificarClaveSQL(string dni, string nuevaClave)
+        {
+            try
+            {
+                ConexionSQL.Conectar(); // Abre la conexión
+
+                using (MySqlCommand cmd = new MySqlCommand())
+                {
+                    cmd.Connection = ConexionSQL.mysqlConexion;
+                    cmd.CommandText = $"UPDATE usuariosintarjeta SET clave = @nuevaClave WHERE dni = {dni}";
+
+                    cmd.Parameters.Clear(); // Limpia los parámetros antes de usarlos nuevamente.
+                    cmd.Parameters.AddWithValue("@nuevaClave", nuevaClave);
+                    cmd.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                CatchError.LogError(nameof(UsuarioSinTarjeta), nameof(ModificarClaveSQL), "Error al modificar la clave en la base de datos", ex);
+            }
+            finally
+            {
+                ConexionSQL.mysqlConexion.Close();
+            }
+        }
     }
 }

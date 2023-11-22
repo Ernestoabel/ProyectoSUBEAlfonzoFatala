@@ -31,6 +31,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             configuraciones = new Configuraciones();
             ConfiguracionInicial();
+            this.IsMdiContainer = true;
 
         }
 
@@ -276,7 +277,8 @@ namespace ProyectoSUBEAlfonzoFatala
                     this.pasarObjeto -= formCargarSaldo.TraerUsuario;
 
                     formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
-                    formCargarSaldo.Dock = DockStyle.Fill;
+                    formCargarSaldo.Dock = DockStyle.None; // Cambia a None
+                    formCargarSaldo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right; // Ajusta las propiedades Anchor
                     formCargarSaldo.MdiParent = this;
                     formCargarSaldo.Show();
                 });
@@ -351,5 +353,6 @@ namespace ProyectoSUBEAlfonzoFatala
             menuStrip1.BackColor = Color.FromName(configuraciones.ColorFondo);
             menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
         }
+
     }
 }

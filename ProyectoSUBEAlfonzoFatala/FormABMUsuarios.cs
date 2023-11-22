@@ -105,16 +105,20 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioSinTarjeta.ModificarClaveSQL(usuarioACambiar.Dni,usuarioACambiar.Clave.ToString());
+
                 }
                 else if (usuario is UsuarioArgentino)
                 {
                     UsuarioArgentino usuarioACambiar = (UsuarioArgentino)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioArgentino.ModificarClaveSQL(usuarioACambiar.Dni, usuarioACambiar.Clave.ToString());
                 }
                 else if (usuario is UsuarioExtranjero)
                 {
                     UsuarioExtranjero usuarioACambiar = (UsuarioExtranjero)usuario;
                     usuarioACambiar.Clave = nuevaClave;
+                    UsuarioExtranjero.ModificarClaveSQL(usuarioACambiar.Dni, usuarioACambiar.Clave.ToString());
                 }
                 else if (usuario is UsuarioAdministrador)
                 {
@@ -132,9 +136,6 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private void btnGuardar_Click(object sender, EventArgs e)
         {
-            Listados.GuardarEnArchivo(Listados.listaUsuarios, "usuarios.json");
-            //Listados.GuardarUsuariosEnArchivo(Listados.listaUsuarios);
-            MessageBox.Show("Cambios guardados", "Ok", MessageBoxButtons.OK, MessageBoxIcon.Information);
         }
 
         /// <summary>

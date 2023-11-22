@@ -2442,3 +2442,33 @@ System.InvalidCastException: Unable to cast object of type 'System.DBNull' to ty
 System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
    at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
 
+22/11/2023 12:11:42 - Error en UsuarioSinTarjeta.ModificarClaveSQL: Error al modificar la clave en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@dni' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.UsuarioSinTarjeta.ModificarClaveSQL(Int32 dni, String nuevaClave) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioSinTarjeta.cs:line 163
+
+22/11/2023 12:15:47 - Error en UsuarioArgentino.ModificarClaveSQL: Error al modificar la clave en la base de datos
+MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered during command execution.
+ ---> MySql.Data.MySqlClient.MySqlException (0x80004005): Parameter '@dni' must be defined.
+   at MySql.Data.MySqlClient.Statement.SerializeParameterAsync(MySqlParameterCollection parameters, MySqlPacket packet, String parmName, Int32 parameterIndex, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.InternalBindParametersAsync(String sql, MySqlParameterCollection parameters, MySqlPacket packet, Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.BindParametersAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.Statement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.PreparableStatement.ExecuteAsync(Boolean execAsync)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteReaderAsync(CommandBehavior behavior, Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQueryAsync(Boolean execAsync, CancellationToken cancellationToken)
+   at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
+   at Entidades.UsuarioArgentino.ModificarClaveSQL(Int32 dni, String nuevaClave) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioArgentino.cs:line 167
+
