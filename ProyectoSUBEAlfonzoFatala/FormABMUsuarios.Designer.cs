@@ -41,6 +41,7 @@
             dataGridUsuarios.RowTemplate.Height = 25;
             dataGridUsuarios.Size = new Size(776, 352);
             dataGridUsuarios.TabIndex = 0;
+            dataGridUsuarios.CellMouseEnter += dataGridUsuarios_CellMouseEnter;
             // 
             // btnGuardar
             // 

@@ -21,6 +21,9 @@ namespace ProyectoSUBEAlfonzoFatala
         private TextBox txtBusqueda;
         private Label lblBusqueda;
         private CheckBox chkActivarBusqueda;
+        private bool mensajeMostrado = false;
+        private bool mensajeBajaMostrado = false;
+
         public FormABMUsuarios()
         {
             InitializeComponent();
@@ -106,7 +109,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     UsuarioSinTarjeta usuarioACambiar = (UsuarioSinTarjeta)usuario;
                     usuarioACambiar.Clave = nuevaClave;
-                    UsuarioSinTarjeta.ModificarClaveSQL(usuarioACambiar.Dni,usuarioACambiar.Clave);
+                    UsuarioSinTarjeta.ModificarClaveSQL(usuarioACambiar.Dni, usuarioACambiar.Clave);
                 }
                 else if (usuario is UsuarioArgentino)
                 {
@@ -219,8 +222,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     //DialogResult result = MessageBox.Show("Quiere dar de baja la Tarjeta: " + tarjeta, "Baja de tarjeta",
                     //                                    MessageBoxButtons.YesNo, MessageBoxIcon.Information)
-                    
-                    VentanaEmergenteAdmin ventanaEmergenteAdmin = new VentanaEmergenteAdmin($"id: {tarjeta}", "  Desea dar de baja la \n\r    tarjeta: "+tarjeta+" ?");
+
+                    VentanaEmergenteAdmin ventanaEmergenteAdmin = new VentanaEmergenteAdmin($"id: {tarjeta}", "  Desea dar de baja la \n\r    tarjeta: " + tarjeta + " ?");
                     ventanaEmergenteAdmin.ShowDialog();
 
                     if (ventanaEmergenteAdmin.DialogResult == DialogResult.Yes)
@@ -372,6 +375,43 @@ namespace ProyectoSUBEAlfonzoFatala
                 this.Controls.Add(txtBusqueda);
                 this.Controls.Add(lblBusqueda);
             }
+        }
+
+        private void dataGridUsuarios_CellMouseEnter(object sender, DataGridViewCellEventArgs e)
+        {
+            if (e.RowIndex >= 0 && e.ColumnIndex >= 0)
+            {
+                // Verificar la columna específica en la que deseas mostrar el mensaje
+                if (!mensajeMostrado && dataGridUsuarios.Columns[e.ColumnIndex].Name == "Clave")
+                { 
+                    PopUpInformacion("Cambiar Clave", "Haga solo un click para cambiar la clave de usuario");
+                    mensajeMostrado = true;
+                }
+                else if (!mensajeBajaMostrado && dataGridUsuarios.Columns[e.ColumnIndex].Name == "Nombre")
+                {
+                    PopUpInformacion("Dar de baja", "Haga dos clicks para dar de baja el usuario");
+                }
+
+            }
+        }
+
+        private static void PopUpInformacion(string titulo, string subtitulo)
+        {
+
+            string rutaImagen = @"..\..\..\Assets\info.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(8, 145, 178);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+
         }
 
     }
