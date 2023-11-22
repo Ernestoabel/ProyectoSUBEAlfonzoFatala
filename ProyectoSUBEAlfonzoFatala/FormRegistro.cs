@@ -10,6 +10,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Tulpep.NotificationWindow;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace ProyectoSUBEAlfonzoFatala
@@ -497,8 +498,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 if (usuario.Dni == dniBuscado)
                 {
                     dniEncontrado = true;
-                    
-                    MessageBox.Show("El usuario ya está registrado. No se puede registrar nuevamente.", "Usuario Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    PopUpUsuarioError("Usuario Existente", "El usuario ya está registrado. No se puede registrar nuevamente");
+                    //MessageBox.Show("El usuario ya está registrado. No se puede registrar nuevamente.", "Usuario Existente", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     txtDni.Clear();
                     break; 
                 }
@@ -518,6 +519,29 @@ namespace ProyectoSUBEAlfonzoFatala
             errorProviderRegistro.SetError(txtClave, "");
             errorProviderRegistro.SetError(txtRepetirClave, "");
 
+        }
+        /// <summary>
+        /// el usuario ya esta registrado asi que
+        /// le informa que no puede colocarlo
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="subtitulo"></param>
+        private static void PopUpUsuarioError(string titulo, string subtitulo)
+        {
+
+            string rutaImagen = @"..\..\..\Assets\errorLogueo.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(220, 53, 69);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
         }
 
         #endregion
