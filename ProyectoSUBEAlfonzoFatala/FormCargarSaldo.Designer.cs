@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormCargarSaldo));
             btnCargar = new Button();
             btnVerSaldo = new Button();
@@ -39,32 +40,45 @@
             lblIdTarjeta = new Label();
             lblDni = new Label();
             lblSaldo = new Label();
+            pictureBox1 = new PictureBox();
+            toolTip1 = new ToolTip(components);
             ((System.ComponentModel.ISupportInitialize)pbTarjeta).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // btnCargar
             // 
             btnCargar.BackColor = Color.White;
-            btnCargar.BackgroundImage = (Image)resources.GetObject("btnCargar.BackgroundImage");
-            btnCargar.BackgroundImageLayout = ImageLayout.Stretch;
+            btnCargar.BackgroundImageLayout = ImageLayout.Zoom;
             btnCargar.FlatStyle = FlatStyle.Flat;
-            btnCargar.Location = new Point(126, 163);
+            btnCargar.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCargar.ForeColor = Color.FromArgb(0, 64, 64);
+            btnCargar.Image = (Image)resources.GetObject("btnCargar.Image");
+            btnCargar.Location = new Point(50, 165);
             btnCargar.Name = "btnCargar";
-            btnCargar.Size = new Size(68, 60);
+            btnCargar.Size = new Size(164, 60);
             btnCargar.TabIndex = 0;
+            btnCargar.Text = "Cargar";
+            btnCargar.TextImageRelation = TextImageRelation.TextBeforeImage;
+            toolTip1.SetToolTip(btnCargar, "Acredite el saldo deseado, ingresando el monto y su pin de sube.");
             btnCargar.UseVisualStyleBackColor = false;
             btnCargar.Click += btnCargar_Click;
             // 
             // btnVerSaldo
             // 
             btnVerSaldo.BackColor = Color.White;
-            btnVerSaldo.BackgroundImage = (Image)resources.GetObject("btnVerSaldo.BackgroundImage");
             btnVerSaldo.BackgroundImageLayout = ImageLayout.Stretch;
             btnVerSaldo.FlatStyle = FlatStyle.Flat;
-            btnVerSaldo.Location = new Point(126, 273);
+            btnVerSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            btnVerSaldo.ForeColor = Color.FromArgb(0, 64, 64);
+            btnVerSaldo.Image = (Image)resources.GetObject("btnVerSaldo.Image");
+            btnVerSaldo.Location = new Point(50, 285);
             btnVerSaldo.Name = "btnVerSaldo";
-            btnVerSaldo.Size = new Size(68, 60);
+            btnVerSaldo.Size = new Size(164, 60);
             btnVerSaldo.TabIndex = 1;
+            btnVerSaldo.Text = "  Ver Saldo";
+            btnVerSaldo.TextImageRelation = TextImageRelation.ImageBeforeText;
+            toolTip1.SetToolTip(btnVerSaldo, "Podra ver el saldo actual de su tarjeta.\r\n");
             btnVerSaldo.UseVisualStyleBackColor = false;
             btnVerSaldo.Click += btnVerSaldo_Click;
             // 
@@ -72,11 +86,11 @@
             // 
             lblCargarSaldo.AutoSize = true;
             lblCargarSaldo.BackColor = Color.Transparent;
-            lblCargarSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblCargarSaldo.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblCargarSaldo.ForeColor = Color.White;
-            lblCargarSaldo.Location = new Point(117, 230);
+            lblCargarSaldo.Location = new Point(93, 228);
             lblCargarSaldo.Name = "lblCargarSaldo";
-            lblCargarSaldo.Size = new Size(122, 24);
+            lblCargarSaldo.Size = new Size(82, 18);
             lblCargarSaldo.TabIndex = 2;
             lblCargarSaldo.Text = "Cargar Saldo";
             // 
@@ -84,11 +98,11 @@
             // 
             lblVerSaldo.AutoSize = true;
             lblVerSaldo.BackColor = Color.Transparent;
-            lblVerSaldo.Font = new Font("Trebuchet MS", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
+            lblVerSaldo.Font = new Font("Trebuchet MS", 9.75F, FontStyle.Regular, GraphicsUnit.Point);
             lblVerSaldo.ForeColor = Color.White;
-            lblVerSaldo.Location = new Point(117, 336);
+            lblVerSaldo.Location = new Point(102, 348);
             lblVerSaldo.Name = "lblVerSaldo";
-            lblVerSaldo.Size = new Size(94, 24);
+            lblVerSaldo.Size = new Size(61, 18);
             lblVerSaldo.TabIndex = 3;
             lblVerSaldo.Text = "Ver Saldo";
             // 
@@ -96,7 +110,7 @@
             // 
             pbTarjeta.BackColor = Color.Transparent;
             pbTarjeta.Image = (Image)resources.GetObject("pbTarjeta.Image");
-            pbTarjeta.Location = new Point(346, 102);
+            pbTarjeta.Location = new Point(337, 108);
             pbTarjeta.Name = "pbTarjeta";
             pbTarjeta.Size = new Size(365, 258);
             pbTarjeta.SizeMode = PictureBoxSizeMode.Zoom;
@@ -109,7 +123,7 @@
             lblNombre.BackColor = Color.FromArgb(4, 124, 179);
             lblNombre.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblNombre.ForeColor = Color.White;
-            lblNombre.Location = new Point(389, 245);
+            lblNombre.Location = new Point(380, 251);
             lblNombre.Name = "lblNombre";
             lblNombre.Size = new Size(86, 23);
             lblNombre.TabIndex = 7;
@@ -121,7 +135,7 @@
             lblApellido.BackColor = Color.FromArgb(4, 124, 179);
             lblApellido.Font = new Font("Tahoma", 14.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblApellido.ForeColor = Color.White;
-            lblApellido.Location = new Point(491, 245);
+            lblApellido.Location = new Point(482, 251);
             lblApellido.Name = "lblApellido";
             lblApellido.Size = new Size(88, 23);
             lblApellido.TabIndex = 8;
@@ -133,7 +147,7 @@
             lblIdTarjeta.BackColor = Color.FromArgb(4, 124, 179);
             lblIdTarjeta.Font = new Font("Tahoma", 11.25F, FontStyle.Bold, GraphicsUnit.Point);
             lblIdTarjeta.ForeColor = Color.White;
-            lblIdTarjeta.Location = new Point(389, 305);
+            lblIdTarjeta.Location = new Point(380, 311);
             lblIdTarjeta.Name = "lblIdTarjeta";
             lblIdTarjeta.Size = new Size(48, 18);
             lblIdTarjeta.TabIndex = 10;
@@ -145,7 +159,7 @@
             lblDni.BackColor = Color.FromArgb(4, 124, 179);
             lblDni.Font = new Font("Tahoma", 12F, FontStyle.Bold, GraphicsUnit.Point);
             lblDni.ForeColor = Color.White;
-            lblDni.Location = new Point(389, 279);
+            lblDni.Location = new Point(380, 285);
             lblDni.Name = "lblDni";
             lblDni.Size = new Size(99, 19);
             lblDni.TabIndex = 11;
@@ -154,21 +168,30 @@
             // lblSaldo
             // 
             lblSaldo.AutoSize = true;
+            lblSaldo.BackColor = Color.FromArgb(4, 124, 179);
             lblSaldo.Font = new Font("Segoe UI", 16F, FontStyle.Bold, GraphicsUnit.Point);
             lblSaldo.ForeColor = SystemColors.ActiveCaption;
-            lblSaldo.Location = new Point(559, 271);
+            lblSaldo.Location = new Point(550, 146);
             lblSaldo.Name = "lblSaldo";
             lblSaldo.Size = new Size(0, 30);
             lblSaldo.TabIndex = 12;
+            // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
+            pictureBox1.Location = new Point(4, 4);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(782, 98);
+            pictureBox1.TabIndex = 13;
+            pictureBox1.TabStop = false;
             // 
             // FormCargarSaldo
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(53, 53, 53);
-            BackgroundImageLayout = ImageLayout.Stretch;
-            ClientSize = new Size(791, 424);
-            ControlBox = false;
+            ClientSize = new Size(800, 450);
+            Controls.Add(pictureBox1);
             Controls.Add(lblSaldo);
             Controls.Add(lblDni);
             Controls.Add(lblIdTarjeta);
@@ -179,12 +202,12 @@
             Controls.Add(lblCargarSaldo);
             Controls.Add(btnVerSaldo);
             Controls.Add(btnCargar);
-            FormBorderStyle = FormBorderStyle.None;
             Name = "FormCargarSaldo";
             StartPosition = FormStartPosition.CenterParent;
             Text = "FormCargarSaldo";
             Load += FormCargarSaldo_Load;
             ((System.ComponentModel.ISupportInitialize)pbTarjeta).EndInit();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -201,5 +224,7 @@
         private Label lblIdTarjeta;
         private Label lblDni;
         private Label lblSaldo;
+        private PictureBox pictureBox1;
+        private ToolTip toolTip1;
     }
 }

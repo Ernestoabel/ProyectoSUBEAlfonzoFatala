@@ -12,6 +12,8 @@ using static Entidades.Listados;
 using System.Xml.Serialization;
 using static Entidades.ArchivoMensaje;
 using System.Net.Mail;
+using System.Runtime.CompilerServices;
+using Tulpep.NotificationWindow;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -24,32 +26,47 @@ namespace ProyectoSUBEAlfonzoFatala
         int tarjeta;
         const string Usuario = "proyectosube.ps@gmail.com";
         const string Password = "rasz wqyj tmhn oguf";
+        string rutaGiph = @"..\..\..\Assets\enviandoEmail.gif";
+        //string rutaGiph = "C:\\Users\\Usuario\\source\\repos\\ProyectoSUBEAlfonzoFatala\\ProyectoSUBEAlfonzoFatala\\Assets\\enviandoEmail.gif";
+        Usuario usuario = new Usuario();
+
         public FormBajaUsuario()
         {
             InitializeComponent();
         }
 
-        public void TraerUsuario(object usuario)
+        public void TraerUsuario(object usuarioLogueado)
         {
             try
             {
-                if (usuario is UsuarioSinTarjeta)
+                if (usuarioLogueado is UsuarioSinTarjeta)
                 {
                     throw new UsuarioSinTarjetaException();
                 }
-                else if (usuario is UsuarioArgentino usuarioArgentino)
+                else if (usuarioLogueado is UsuarioArgentino usuarioArgentino)
                 {
                     mensaje = $"El usuario {usuarioArgentino.Dni} con la tarjeta {usuarioArgentino.IdSubeArgentina} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioArgentino.Dni);
                     tarjeta = int.Parse(usuarioArgentino.IdSubeArgentina);
+
+                    usuario.Nombre = usuarioArgentino.Nombre;
+                    usuario.Apellido = usuarioArgentino.Apellido;
+                    usuario.Dni = usuarioArgentino.Dni;
+
                 }
-                else if (usuario is UsuarioExtranjero usuarioExtranjero)
+                else if (usuarioLogueado is UsuarioExtranjero usuarioExtranjero)
                 {
                     mensaje = $"El usuario {usuarioExtranjero.Dni} con la tarjeta {usuarioExtranjero.IdSubeExtranjero} quiere la baja";
                     indice = ArchivoMensaje.obtenerUltimoIndiceListaMensajes(ArchivoMensaje.listaBajas);
                     dni = int.Parse(usuarioExtranjero.Dni);
                     tarjeta = int.Parse(usuarioExtranjero.IdSubeExtranjero);
+
+                    usuario.Nombre = usuarioExtranjero.Nombre;
+                    usuario.Apellido = usuarioExtranjero.Apellido;
+                    usuario.Dni = usuarioExtranjero.Dni;
+
+
                 }
             }
             catch (UsuarioSinTarjetaException)
@@ -69,7 +86,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 {
                     ArchivoMensaje.listaBajas.Add(new Dictionary<int, BajaData> { { indice, new BajaData { Indice = indice, Mensaje = mensaje } } });
                     ArchivoMensaje.GuardarMensajesBajaEnArchivo(ArchivoMensaje.listaBajas);
-                    lblMensaje.Text = "El mensaje fue enviado";
+                    // lblMensaje.Text = "El mensaje fue enviado";
+                    PopUpMensajeEnviado("Mensaje Enviado", "El mensaje fue enviado con exito");
                 }
                 else
                 {
@@ -78,7 +96,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             catch (Exception)
             {
-                lblMensaje.Text = "Esta tarjeta ya pidio la baja";
+                PopUpMensajeEnviado("Baja solicitada", "El usuario tiene una baja pendiente de respuesta");
             }
         }
 
@@ -93,12 +111,14 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="para"></param>
         /// <param name="asunto"></param>
         /// <param name="error"></param>
-        public static async Task<bool> EnviarCorreoAsync(StringBuilder mensaje, DateTime FechaEnvio, string de, string para, string asunto)
+        public static async Task<bool> EnviarCorreoAsync(StringBuilder mensaje, DateTime FechaEnvio, string de, string para, string asunto, Usuario usuario)
         {
             try
             {
                 mensaje.Append(Environment.NewLine);
-                mensaje.Append(string.Format("Este correo ha sido enviado el día {0:dd:/MM/yyyy} a las {0:HH:mm:ss} hs : \n\n", FechaEnvio));
+                mensaje.Append(string.Format("\nEste correo ha sido enviado el día {0:dd:/MM/yyyy} a las {0:HH:mm:ss} hs.\n", FechaEnvio));
+                mensaje.Append(Environment.NewLine);
+                mensaje.Append(string.Format($"Usuario:\nNombre:{usuario.Nombre} {usuario.Apellido}, DNI:{usuario.Dni}, Email: {de}"));
                 mensaje.Append(Environment.NewLine);
                 MailMessage mail = new MailMessage();
                 mail.From = new MailAddress(de);
@@ -111,7 +131,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 smtp.Credentials = new System.Net.NetworkCredential(Usuario, Password);
                 smtp.EnableSsl = true;
 
-                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado();
+                VentanaEmergenteCorreoEnviado enviandoCorreo = new VentanaEmergenteCorreoEnviado(@"..\..\..\Assets\enviandoEmail.gif", "Enviando Email..");
                 enviandoCorreo.Show();
 
                 await Task.Delay(5000); // Retraso de 5 segundos
@@ -120,6 +140,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     smtp.Send(mail);
                 });
                 enviandoCorreo.Close();
+                PopUpMensajeEnviado("Correo Enviado", "El correo fue enviado al admin");
                 return true; // El correo se envió exitosamente
             }
             catch (Exception ex)
@@ -142,7 +163,7 @@ namespace ProyectoSUBEAlfonzoFatala
         /// </summary>
         private void HacerControlersVisibles(bool visible)
         {
-            if(visible)
+            if (visible)
             {
                 txtAsunto.Visible = true;
                 txtDe.Visible = true;
@@ -177,7 +198,7 @@ namespace ProyectoSUBEAlfonzoFatala
                 txtMensaje.Visible = false;
                 btnEnviarEmail.Visible = false;
             }
-           
+
         }
 
         /// <summary>
@@ -190,22 +211,46 @@ namespace ProyectoSUBEAlfonzoFatala
         /// <param name="e"></param>
         private async void btnEnviarEmail_Click(object sender, EventArgs e)
         {
-            
+
             bool visible = false;
 
             StringBuilder mensajeBuilder = new StringBuilder();
 
             mensajeBuilder.Append(txtMensaje.Text.Trim());
 
-            bool correoEnviado = await EnviarCorreoAsync(mensajeBuilder, DateTime.Now, txtDe.Text.Trim(), "proyectosube.ps@gmail.com", txtAsunto.Text.Trim());
+            bool correoEnviado = await EnviarCorreoAsync(mensajeBuilder, DateTime.Now, txtDe.Text.Trim(), "proyectosube.ps@gmail.com", txtAsunto.Text.Trim(), usuario);
 
-            if (correoEnviado ) 
+            if (correoEnviado)
             {
                 ///logica para cargar el mensaje en el admin
             }
 
             HacerControlersVisibles(visible);
         }
+
+        /// <summary>
+        /// pop up mensajes
+        /// </summary>
+        /// <param name="titulo"></param>
+        /// <param name="subtitulo"></param>
+        private static void PopUpMensajeEnviado(string titulo, string subtitulo)
+        {
+            string rutaImagen = @"..\..\..\Assets\EnviarEmail.png";
+
+            PopupNotifier popup = new PopupNotifier();
+            popup.Image = Image.FromFile(rutaImagen);
+            popup.BodyColor = Color.FromArgb(40, 167, 69);
+            popup.TitleText = titulo;
+            popup.TitleColor = Color.White;
+            popup.TitleFont = new Font("Century Gothic", 15, FontStyle.Bold);
+
+            popup.ContentText = subtitulo;
+            popup.ContentColor = Color.White;
+            popup.ContentFont = new Font("Century Gothic", 12);
+            popup.Popup();
+        }
+
+
     }
 }
 

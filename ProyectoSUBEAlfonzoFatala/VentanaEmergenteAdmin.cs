@@ -23,12 +23,12 @@ namespace ProyectoSUBEAlfonzoFatala
 
         private void btnConfirmar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.OK;
+            DialogResult = DialogResult.Yes;
         }
 
         private void btnCancelar_Click(object sender, EventArgs e)
         {
-            DialogResult = DialogResult.Cancel;
+            DialogResult = DialogResult.No;
         }
 
         private void VentanaEmergenteAdmin_Load(object sender, EventArgs e)
@@ -36,5 +36,6 @@ namespace ProyectoSUBEAlfonzoFatala
             lblUsuario.Text = this.nombreUsuario;
             lblTitulo.Text = this.nombreTitulo;
         }
+
     }
 }

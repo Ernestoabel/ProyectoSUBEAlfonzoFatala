@@ -61,13 +61,18 @@
             // 
             // btnBajaTarjetaUsuario
             // 
+            btnBajaTarjetaUsuario.BackColor = Color.White;
+            btnBajaTarjetaUsuario.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnBajaTarjetaUsuario.ForeColor = Color.OliveDrab;
+            btnBajaTarjetaUsuario.Image = (Image)resources.GetObject("btnBajaTarjetaUsuario.Image");
             btnBajaTarjetaUsuario.Location = new Point(59, 280);
             btnBajaTarjetaUsuario.Name = "btnBajaTarjetaUsuario";
             btnBajaTarjetaUsuario.Size = new Size(272, 65);
-            btnBajaTarjetaUsuario.TabIndex = 1;
+            btnBajaTarjetaUsuario.TabIndex = 6;
             btnBajaTarjetaUsuario.Text = "Mandar mensaje";
-            toolTip1.SetToolTip(btnBajaTarjetaUsuario, "La solicitud de la baja de Tarjeta Sube asociada al usuario, se realizará mediante un mensaje enviado al administrador de los usuarios. ");
-            btnBajaTarjetaUsuario.UseVisualStyleBackColor = true;
+            btnBajaTarjetaUsuario.TextImageRelation = TextImageRelation.TextBeforeImage;
+            toolTip1.SetToolTip(btnBajaTarjetaUsuario, "Envia una solicitud de Baja al administrador de los usuarios mediante el sistema.");
+            btnBajaTarjetaUsuario.UseVisualStyleBackColor = false;
             btnBajaTarjetaUsuario.Click += btnBajaTarjetaUsuario_Click;
             // 
             // lblMensaje
@@ -93,13 +98,18 @@
             // 
             // btnCorreo
             // 
+            btnCorreo.BackColor = Color.DarkOliveGreen;
+            btnCorreo.Font = new Font("Trebuchet MS", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            btnCorreo.ForeColor = SystemColors.ControlLightLight;
+            btnCorreo.Image = (Image)resources.GetObject("btnCorreo.Image");
             btnCorreo.Location = new Point(59, 354);
             btnCorreo.Name = "btnCorreo";
             btnCorreo.Size = new Size(272, 65);
-            btnCorreo.TabIndex = 5;
+            btnCorreo.TabIndex = 7;
             btnCorreo.Text = "Enviar Correo";
-            toolTip1.SetToolTip(btnCorreo, "Envia un correo detallando a la administracion, para solucionar un erro en especifico.");
-            btnCorreo.UseVisualStyleBackColor = true;
+            btnCorreo.TextImageRelation = TextImageRelation.TextBeforeImage;
+            toolTip1.SetToolTip(btnCorreo, "Envia un email detallando a la administración un error en específico.");
+            btnCorreo.UseVisualStyleBackColor = false;
             btnCorreo.Click += btnCorreo_Click;
             // 
             // txtDe
@@ -108,16 +118,16 @@
             txtDe.Name = "txtDe";
             txtDe.PlaceholderText = "ingrese su email";
             txtDe.Size = new Size(175, 23);
-            txtDe.TabIndex = 6;
+            txtDe.TabIndex = 1;
             txtDe.Visible = false;
             // 
             // txtAsunto
             // 
             txtAsunto.Location = new Point(400, 369);
             txtAsunto.Name = "txtAsunto";
-            txtAsunto.PlaceholderText = "cambio tarjeta";
+            txtAsunto.PlaceholderText = "Ej: cambio tarjeta";
             txtAsunto.Size = new Size(175, 23);
-            txtAsunto.TabIndex = 7;
+            txtAsunto.TabIndex = 3;
             txtAsunto.Visible = false;
             // 
             // txtPara
@@ -126,7 +136,7 @@
             txtPara.Name = "txtPara";
             txtPara.PlaceholderText = "vuelva a ingresar su mail";
             txtPara.Size = new Size(175, 23);
-            txtPara.TabIndex = 8;
+            txtPara.TabIndex = 2;
             txtPara.Visible = false;
             // 
             // txtMensaje
@@ -136,7 +146,7 @@
             txtMensaje.Name = "txtMensaje";
             txtMensaje.PlaceholderText = "comentarios al administrador";
             txtMensaje.Size = new Size(175, 116);
-            txtMensaje.TabIndex = 9;
+            txtMensaje.TabIndex = 4;
             txtMensaje.Visible = false;
             // 
             // lblDe
@@ -146,9 +156,9 @@
             lblDe.ForeColor = SystemColors.ControlLightLight;
             lblDe.Location = new Point(400, 254);
             lblDe.Name = "lblDe";
-            lblDe.Size = new Size(27, 18);
+            lblDe.Size = new Size(50, 18);
             lblDe.TabIndex = 10;
-            lblDe.Text = "De:";
+            lblDe.Text = "Correo:";
             lblDe.Visible = false;
             // 
             // lblPara
@@ -158,9 +168,9 @@
             lblPara.ForeColor = SystemColors.ControlLightLight;
             lblPara.Location = new Point(400, 301);
             lblPara.Name = "lblPara";
-            lblPara.Size = new Size(35, 18);
+            lblPara.Size = new Size(109, 18);
             lblPara.TabIndex = 11;
-            lblPara.Text = "Para:";
+            lblPara.Text = "Confirmar Correo:";
             lblPara.Visible = false;
             // 
             // lblAsunto
@@ -195,8 +205,10 @@
             btnEnviarEmail.Location = new Point(400, 398);
             btnEnviarEmail.Name = "btnEnviarEmail";
             btnEnviarEmail.Size = new Size(365, 40);
-            btnEnviarEmail.TabIndex = 14;
+            btnEnviarEmail.TabIndex = 5;
             btnEnviarEmail.Text = "Enviar Email";
+            btnEnviarEmail.TextImageRelation = TextImageRelation.ImageBeforeText;
+            toolTip1.SetToolTip(btnEnviarEmail, "Corrobore que los datos esten ingresados correctamente.");
             btnEnviarEmail.UseVisualStyleBackColor = false;
             btnEnviarEmail.Visible = false;
             btnEnviarEmail.Click += btnEnviarEmail_Click;

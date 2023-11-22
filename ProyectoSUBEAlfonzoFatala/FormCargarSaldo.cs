@@ -16,15 +16,17 @@ namespace ProyectoSUBEAlfonzoFatala
         Usuario usuarioLogueado;
         TarjetaNacional tarjetaNacional = new TarjetaNacional();
         TarjetaInternacional tarjetaInternacional = new TarjetaInternacional();
+       
 
         public FormCargarSaldo()
         {
             InitializeComponent();
-            TopLevel = false;
+            //TopLevel = false;
             CenterToParent();
 
         }
 
+       
 
         #region Eventos
 
@@ -38,6 +40,7 @@ namespace ProyectoSUBEAlfonzoFatala
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
+               
                 FormCarga formCarga = new FormCarga();
                 formCarga.TraerUsuario(usuarioLogueado);
                 formCarga.Dock = DockStyle.Fill;
@@ -66,7 +69,7 @@ namespace ProyectoSUBEAlfonzoFatala
                     // MessageBox.Show($"Su saldo es de {tarjetaNacional.Saldo}");
 
                     VentanaEmergenteSaldo ve = new VentanaEmergenteSaldo(saldo);
-                    ve.Show();
+                    ve.ShowDialog();
 
                     if (ve.DialogResult == DialogResult.OK)
                     {
@@ -134,6 +137,8 @@ namespace ProyectoSUBEAlfonzoFatala
                 lblSaldo.BackColor = Color.Transparent;
                 lblSaldo.Text = "$" + tarjetaInternacional.Saldo.ToString();
             }
+            
+           
         }
 
         /// <summary>

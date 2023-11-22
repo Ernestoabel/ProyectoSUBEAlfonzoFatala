@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using System.Text;
 using System.Windows.Forms;
 using System;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
 
 namespace ProyectoSUBEAlfonzoFatala
 {
@@ -31,7 +32,7 @@ namespace ProyectoSUBEAlfonzoFatala
             InitializeComponent();
             configuraciones = new Configuraciones();
             ConfiguracionInicial();
-            this.IsMdiContainer = true;
+            //formCargarSaldo.
 
         }
 
@@ -82,6 +83,7 @@ namespace ProyectoSUBEAlfonzoFatala
             }
             else
             {
+                DesabilitarEntradaUsuarioSinTarjeta();
                 viajesToolStripMenuItem.Enabled = false;
             }
 
@@ -189,7 +191,7 @@ namespace ProyectoSUBEAlfonzoFatala
             });
 
             // Segundo hilo después de un retraso
-            await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
+           await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
             if (usuarioLogueado is not UsuarioSinTarjeta)
             {
@@ -214,6 +216,10 @@ namespace ProyectoSUBEAlfonzoFatala
 
         }
 
+        /// <summary>
+        /// Metodo para setaear la ventana personalizada
+        /// sin sobrecarga
+        /// </summary>
         private static void DesabilitarEntradaUsuarioSinTarjeta()
         {
             VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta();
@@ -225,9 +231,13 @@ namespace ProyectoSUBEAlfonzoFatala
             }
         }
 
+        /// <summary>
+        /// metodo para desabilitar los movimientos del usuario 
+        /// que ya tiene ese dominio
+        /// </summary>
         private static void DesabilitarEntradaUsuarioConTarjeta()
         {
-            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta("Usted Tiene Tarjeta", "Usted no necesita comprar una tarjeta, puede cargarla! Yendo a Inicio/Cargala.");
+            VentenaEmergenteUsuarioSinTarjeta ve = new VentenaEmergenteUsuarioSinTarjeta("Usted Tiene Tarjeta", "Usted no necesita comprar una tarjeta,\r\n\r\n puede cargarla! Yendo a Inicio/Cargala.");
             ve.ShowDialog();
 
             if (ve.DialogResult == DialogResult.OK)
@@ -270,41 +280,41 @@ namespace ProyectoSUBEAlfonzoFatala
                 // Segundo hilo después de un retraso
                 await Task.Delay(1000); // Puedes ajustar el tiempo de retraso según tus necesidades
 
-                // Operaciones en el hilo principal (interfaz de usuario)
-                this.Invoke((MethodInvoker)delegate
+                try
                 {
-                    // Segundo hilo
-                    this.pasarObjeto -= formCargarSaldo.TraerUsuario;
+                    this.Invoke((MethodInvoker)delegate
+                    {
+                        // Segundo hilo
+                        this.pasarObjeto -= formCargarSaldo.TraerUsuario;
 
-                    formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
-                    formCargarSaldo.Dock = DockStyle.None; // Cambia a None
-                    formCargarSaldo.Anchor = AnchorStyles.Top | AnchorStyles.Left | AnchorStyles.Bottom | AnchorStyles.Right; // Ajusta las propiedades Anchor
-                    formCargarSaldo.MdiParent = this;
-                    formCargarSaldo.Show();
-                });
+                        formCargarSaldo.FormBorderStyle = FormBorderStyle.None;
+                        formCargarSaldo.Dock = DockStyle.Fill;
+                        formCargarSaldo.MdiParent = this;
+                        formCargarSaldo.Show();
+                    });
+                // Operaciones en el hilo principal (interfaz de usuario)
+
+                }
+                catch(System.ObjectDisposedException ex)
+                {
+                    CatchError.LogError(nameof(FormInicio), nameof(iNICIARSESIONToolStripMenuItem), "Error al iniciar sesion ", ex);
+                }
+                catch (Exception ex)
+                {
+                    CatchError.LogError(nameof(FormInicio), nameof(iNICIARSESIONToolStripMenuItem), "Error al iniciar sesion ", ex);
+                }
+                
 
             }
             else
             {
 
-                DesabilitarEntradaUsuarioConTarjeta();
+                DesabilitarEntradaUsuarioSinTarjeta();
                 iNICIARSESIONToolStripMenuItem.Enabled = false;
 
 
             }
 
-        }
-
-        private void chkCheckedCh(object sender, EventArgs e)
-        {
-            string rutaImagenUncheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineRadioButtonUnchecked.png");
-            string rutaImagenCheck = Path.Combine(Application.StartupPath, "Assets", "IcBaselineCheckCircleOutline.png");
-            CheckBox checkBox = sender as CheckBox;
-
-            if (checkBox.Checked)
-                checkBox.Image = Image.FromFile(rutaImagenUncheck);
-            else
-                checkBox.Image = Image.FromFile(rutaImagenCheck);
         }
 
         /// <summary>
@@ -317,23 +327,19 @@ namespace ProyectoSUBEAlfonzoFatala
             string rutaImagenUncheck = @"..\..\..\Assets\IcBaselineRadioButtonUnchecked.png";
             string rutaImagenCheck = @"..\..\..\Assets\IcBaselineCheckCircleOutline.png";
 
-            CheckBox checkBox = sender as CheckBox;
-
-            if (checkBox.Checked)
-            {
-                checkBox.Image = Image.FromFile(rutaImagenCheck);
-            }
-            else
-            {
-                checkBox.Image = Image.FromFile(rutaImagenUncheck);
-            }
+           // CheckBox checkBox = sender as CheckBox;
 
             if (!chbTema.Checked)
             {
+                
+                chbTema.Image = Image.FromFile(rutaImagenUncheck);
+                chbTema.BackColor = Color.Transparent;
                 configuraciones.ConfiguracionNacional();
             }
             else
             {
+                chbTema.Image = Image.FromFile(rutaImagenCheck);
+                chbTema.BackColor = Color.Transparent;
                 configuraciones.ConfiguracionSovietical();
             }
             BackgroundImage = Image.FromFile(configuraciones.ImagenFondo);
@@ -341,6 +347,16 @@ namespace ProyectoSUBEAlfonzoFatala
             menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
 
 
+        }
+
+        /// <summary>
+        /// obtiene el estado del check
+        /// 
+        /// </summary>
+        /// <returns></returns>
+        public bool ObtenerEstadoCheckBox()
+        {
+            return chbTema.Checked;
         }
 
         /// <summary>
@@ -353,6 +369,5 @@ namespace ProyectoSUBEAlfonzoFatala
             menuStrip1.BackColor = Color.FromName(configuraciones.ColorFondo);
             menuStrip1.Font = new Font(configuraciones.FuenteTexto, 12);
         }
-
     }
 }
