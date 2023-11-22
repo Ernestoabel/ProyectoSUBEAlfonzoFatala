@@ -2472,3 +2472,31 @@ MySql.Data.MySqlClient.MySqlException (0x80004005): Fatal error encountered duri
    at MySql.Data.MySqlClient.MySqlCommand.ExecuteNonQuery()
    at Entidades.UsuarioArgentino.ModificarClaveSQL(Int32 dni, String nuevaClave) in C:\Users\usuario\source\repos\ProyectoSUBEAlfonzoFatala\Entidades\UsuarioArgentino.cs:line 167
 
+22/11/2023 13:11:47 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 4.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+22/11/2023 13:11:48 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 5.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+22/11/2023 13:11:48 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 6.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+22/11/2023 13:11:49 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.InvalidCastException: Unable to cast object of type 'System.DBNull' to type 'System.Int32'.
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+
+22/11/2023 13:11:50 - Error en FormAdminMensajes.FormAdminMensajes_Load: Error en el evento
+System.IndexOutOfRangeException: There is no row at position 7.
+   at System.Data.RBTree`1.GetNodeByIndex(Int32 userIndex)
+   at System.Data.DataRowCollection.get_Item(Int32 index)
+   at ProyectoSUBEAlfonzoFatala.FormAdminMensajes.<>c__DisplayClass3_0.<FormAdminMensajes_Load>b__0(Object sender, DataGridViewCellEventArgs e) in C:\Users\Usuario\source\repos\ProyectoSUBEAlfonzoFatala\ProyectoSUBEAlfonzoFatala\FormAdminMensajes.cs:line 99
+

@@ -34,6 +34,8 @@
             // 
             // dataGridMensajes
             // 
+            dataGridMensajes.AllowUserToAddRows = false;
+            dataGridMensajes.CellBorderStyle = DataGridViewCellBorderStyle.Sunken;
             dataGridMensajes.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dataGridMensajes.Location = new Point(12, 68);
             dataGridMensajes.Name = "dataGridMensajes";
